@@ -18,50 +18,35 @@ class GemsPlay(commands.Cog):
         return(None)
 
 
-    #
-    # @commands.command(pass_context=True)
-    # async def daily(self, ctx):
-    #     """Récupère ta récompense journalière!"""
-    #     #=======================================================================
-    #     # Initialisation des variables générales de la fonction
-    #     #=======================================================================
-    #     ID = ctx.author.id
-    #     DailyTime = sql.valueAtNumber(ID, "DailyTime", "daily")
-    #     DailyMult = sql.valueAtNumber(ID, "DailyMult", "daily")
-    #     jour = dt.date.today()
-    #     #=======================================================================
-    #     # Détermination du daily
-    #     #=======================================================================
-    #     if DailyTime == str(jour - dt.timedelta(days=1)):
-    #         sql.updateField(ID, "DailyTime", str(jour), "daily")
-    #         sql.updateField(ID, "DailyMult", DailyMult + 1, "daily")
-    #         if DailyMult >= 60:
-    #             bonus = 500
-    #         elif DailyMult >= 30:
-    #             bonus = 200
-    #         else:
-    #             bonus = 125
-    #         gain = 100 + bonus*DailyMult
-    #         sql.addGems(ID, gain)
-    #         msg = "Récompense journalière! Tu as gagné 100:gem:`gems`"
-    #         msg += "\nNouvelle série: `{}`, Bonus: {} :gem:`gems`".format(DailyMult, bonus*DailyMult)
-    #         lvl.addxp(ID, 10*(DailyMult/2), "gems")
-    #         if DailyMult%30 == 0:
-    #             m = (DailyMult//30)*5
-    #             sql.addSpinelles(ID, m)
-    #             msg+="\nBravo pour c'est {0} jours consécutifs :confetti_ball:! Tu as mérité {1}<:spinelle:{2}>`spinelles`".format(DailyMult, m, GF.get_idmoji("spinelle"))
-    #
-    #     elif DailyTime == str(jour):
-    #         msg = "Tu as déja reçu ta récompense journalière aujourd'hui. Reviens demain pour gagner plus de :gem:`gems`"
-    #     else:
-    #         sql.add(ID, "DailyMult", 1, "daily")
-    #         sql.add(ID, "DailyTime", str(jour), "daily")
-    #         msg = "Récompense journalière! Tu as gagné 100 :gem:`gems`"
-    #         lvl.addxp(ID, 10, "gems")
-    #     await ctx.channel.send(msg)
-    #
-    #
-    #
+
+    @commands.command(pass_context=True)
+    async def daily(self, ctx):
+        """Récupère ta récompense journalière!"""
+        #=======================================================================
+        # Initialisation des variables générales de la fonction
+        #=======================================================================
+        ID = ctx.author.id
+        ge.socket.send_string(gg.std_send_command("daily", ID, ge.name_pl))
+
+        #  Get the reply.
+        socks = dict(ge.poll.poll(ge.REQUEST_TIMEOUT))
+        if socks.get(ge.socket) == zmq.POLLIN:
+            message = gg.std_receive_command(ge.socket.recv())
+            msg = message['msg']
+        else:
+            msg = "Aucune réponse du serveur"
+            # Socket is confused. Close and remove it.
+            ge.socket.setsockopt(zmq.LINGER, 0)
+            ge.socket.close()
+            ge.poll.unregister(ge.socket)
+            # Create new connection
+            ge.socket = ge.context.socket(zmq.REQ)
+            ge.socket.connect(ge.SERVER_ENDPOINT)
+            ge.poll.register(ge.socket, zmq.POLLIN)
+        await ctx.channel.send(msg)
+
+
+
     # @commands.command(pass_context=True)
     # async def bank(self, ctx, ARG = None, ARG2 = None):
     #     """Compte épargne"""
@@ -210,52 +195,31 @@ class GemsPlay(commands.Cog):
     #             msg = "Il te faut attendre :clock2:`{}h {}m {}s` avant d'épargner à nouveau !".format(timeH,timeM,timeS)
     #         await ctx.channel.send(msg)
     #         return
-    #
-    #
-    #
-    # @commands.command(pass_context=True)
-    # async def stealing(self, ctx, name = None):
-    #     """**[nom]** | Vole des :gem:`gems` aux autres joueurs!"""
-    #     ID = ctx.author.id
-    #     if sql.spam(ID, GF.couldown_14h, "stealing", "gems") and name != None:
-    #         ID_Vol = sql.nom_ID(name)
-    #         # Calcul du pourcentage
-    #         if ID_Vol == wel.idBaBot or ID_Vol == wel.idGetGems:
-    #             R = r.randint(1,6)
-    #         else:
-    #             R = "05"
-    #         P = float("0.0{}".format(R))
-    #         try:
-    #             Solde = sql.valueAtNumber(ID_Vol, "gems", "gems")
-    #             gain = int(Solde*P)
-    #             if r.randint(0,9) == 0:
-    #                 sql.add(ID, "DiscordCop Arrestation", 1, "statgems")
-    #                 if int(sql.addGems(ID, int(gain/4))) >= 100:
-    #                     msg = "Vous avez été attrapés par un DiscordCop vous avez donc payé une amende de **{}** :gem:`gems`".format(int(gain/4))
-    #                 else:
-    #                     sql.updateField(ID, "gems", 100, "gems")
-    #                     msg = "Vous avez été attrapés par un DiscordCop mais vous avez trop peu de :gem:`gems` pour payer l'intégralité de l'amende! Votre compte est maintenant de 100 :gem:`gems`"
-    #             else:
-    #                 sql.addGems(ID, gain)
-    #                 sql.addGems(ID_Vol, -gain)
-    #                 # Message
-    #                 msg = "Tu viens de voler {n} :gem:`gems` à {nom}".format(n=gain, nom=name)
-    #                 print("Gems >> {author} viens de voler {n} gems à {nom}".format(n=gain, nom=name, author=ctx.author.name))
-    #             sql.updateComTime(ID, "stealing", "gems")
-    #             lvl.addxp(ID, 1, "gems")
-    #         except:
-    #             msg = "Ce joueur est introuvable!"
-    #     else:
-    #         ComTime = sql.valueAtNumber(ID, "stealing", "gems_com_time")
-    #         time = float(ComTime) - (t.time()-GF.couldown_14h)
-    #         timeH = int(time / 60 / 60)
-    #         time = time - timeH * 3600
-    #         timeM = int(time / 60)
-    #         timeS = int(time - timeM * 60)
-    #         msg = "Il te faut attendre :clock2:`{}h {}m {}s` avant de pourvoir voler des :gem:`gems` à nouveau!".format(timeH,timeM,timeS)
-    #         if sql.spam(ID, GF.couldown_14h, "stealing", "gems"):
-    #             msg = "Tu peux voler des :gem:`gems`"
-    #     await ctx.channel.send(msg)
+
+
+
+    @commands.command(pass_context=True)
+    async def stealing(self, ctx, name = None):
+        """**[nom]** | Vole des :gem:`gems` aux autres joueurs!"""
+        ID = ctx.author.id
+        ge.socket.send_string(gg.std_send_command("stealing", ID, ge.name_pl, name))
+
+        #  Get the reply.
+        socks = dict(ge.poll.poll(ge.REQUEST_TIMEOUT))
+        if socks.get(ge.socket) == zmq.POLLIN:
+            message = gg.std_receive_command(ge.socket.recv())
+            msg = message['msg']
+        else:
+            msg = "Aucune réponse du serveur"
+            # Socket is confused. Close and remove it.
+            ge.socket.setsockopt(zmq.LINGER, 0)
+            ge.socket.close()
+            ge.poll.unregister(ge.socket)
+            # Create new connection
+            ge.socket = ge.context.socket(zmq.REQ)
+            ge.socket.connect(ge.SERVER_ENDPOINT)
+            ge.poll.register(ge.socket, zmq.POLLIN)
+        await ctx.channel.send(msg)
 
 
 
