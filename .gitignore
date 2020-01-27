@@ -127,3 +127,8 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+help/cogs.txt
+help/help.txt
+core/time.json
+core/co.json
+*.psd
