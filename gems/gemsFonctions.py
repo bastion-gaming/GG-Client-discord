@@ -2,10 +2,8 @@ import discord
 import random as r
 import time as t
 import datetime as dt
-from DB import TinyDB as DB, SQLite as sql
 import json
-from core import welcome as wel
-from gems import gemsItems as GI, gemsStats as GS
+from core import gestion as ge
 from discord.ext import commands
 from discord.ext.commands import Bot
 from discord.utils import get

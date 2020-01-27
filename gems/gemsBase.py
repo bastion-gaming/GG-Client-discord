@@ -3,9 +3,8 @@ import discord
 import random as r
 import time as t
 import datetime as dt
-from DB import SQLite as sql, TinyDB as DB
-from core import welcome as wel, level as lvl
-from gems import gemsFonctions as GF, gemsItems as GI, gemsStats as GS
+from core import gestion as ge
+from gems import gemsFonctions as GF
 from discord.ext import commands
 from discord.ext.commands import bot
 from discord.utils import get

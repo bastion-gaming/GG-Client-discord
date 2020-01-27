@@ -4,6 +4,8 @@ from discord.ext.commands import Bot
 from discord.utils import get
 import asyncio
 import aiohttp
+from core import gestion as ge, utils
+from gems import gemsFonctions as GF
 
 # initialisation des variables.
 DEFAUT_PREFIX = "!"
@@ -25,6 +27,8 @@ async def on_ready():
 	print('\nGet Gems - Client Discord '+VERSION)
 	GF.setglobalguild(client.get_guild(utils.ServIDmoji))
 	print('------\n')
+	ge.ZMQ()
+	print('------\n')
 
 ####################### Commande help.py #######################
 
@@ -36,10 +40,10 @@ client.load_extension('core.utils')
 
 ####################### Stat ####################################
 
-@client.event
-async def on_message(message):
-	await lvl.checklevel(message, "gems")
-	await client.process_commands(message)
+# @client.event
+# async def on_message(message):
+# 	await lvl.checklevel(message, "gems")
+# 	await client.process_commands(message)
 
 ####################### Commande gems.py #######################
 

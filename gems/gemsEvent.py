@@ -2,10 +2,8 @@ import discord
 import random as r
 import time as t
 import datetime as dt
-from DB import TinyDB as DB, SQLite as sql
+from core import gestion as ge
 from gems import gemsFonctions as GF
-from core import level as lvl
-from multimedia import images
 from discord.ext import commands
 from discord.ext.commands import bot
 from discord.utils import get

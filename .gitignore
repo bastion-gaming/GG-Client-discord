@@ -132,3 +132,4 @@ help/help.txt
 core/time.json
 core/co.json
 *.psd
+token/token.txt
