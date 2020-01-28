@@ -52,44 +52,28 @@ class GemsBase(commands.Cog):
 
 
 
-    # @commands.command(pass_context=True)
-    # async def bal(self, ctx, nom = None):
-    #     """**[nom]** | Êtes vous riche ou pauvre ?"""
-    #     ID = ctx.author.id
-    #     if sql.spam(ID, GF.couldown_4s, "bal", "gems"):
-    #         #print(nom)
-    #         if nom != None:
-    #             ID = sql.nom_ID(nom)
-    #             nom = ctx.guild.get_member(ID)
-    #             nom = nom.name
-    #         else:
-    #             nom = ctx.author.name
-    #         solde = sql.valueAtNumber(ID, "gems", "gems")
-    #         title = "Compte principal de {}".format(nom)
-    #         msg = discord.Embed(title = title,color= 13752280, description = "")
-    #         desc = "{} :gem:`gems`\n".format(solde)
-    #         soldeSpinelles = sql.valueAtNumber(ID,"spinelles", "gems")
-    #         if soldeSpinelles > 0:
-    #             desc+= "{0} <:spinelle:{1}>`spinelles`".format(soldeSpinelles, GF.get_idmoji("spinelle"))
-    #         msg.add_field(name="**_Balance_**", value=desc, inline=False)
-    #         lvlValue = sql.valueAtNumber(ID, "lvl", "gems")
-    #         xp = sql.valueAtNumber(ID, "xp", "gems")
-    #         # Niveaux part
-    #         for x in lvl.objetXPgems:
-    #             if lvlValue == x.level:
-    #                 desc = "XP: `{0}/{1}`".format(xp,x.somMsg)
-    #         msg.add_field(name="**_Niveau_: {0}**".format(lvlValue), value=desc, inline=False)
-    #         sql.updateComTime(ID, "bal", "gems")
-    #         await ctx.channel.send(embed = msg)
-    #         # Message de réussite dans la console
-    #         print("Gems >> Balance de {} affichée".format(nom))
-    #         return
-    #     else:
-    #         msg = "Il faut attendre "+str(GF.couldown_4s)+" secondes entre chaque commande !"
-    #     await ctx.channel.send(msg)
-    #
-    #
-    #
+    @commands.command(pass_context=True)
+    async def bal(self, ctx):
+        """Êtes vous riche ou pauvre ?"""
+        ID = ctx.author.id
+        nom = ctx.author.name
+        ge.socket.send_string(gg.std_send_command("bal", ID, ge.name_pl))
+        desc = GF.msg_recv()
+        try:
+            title = "Compte principal de {}".format(nom)
+            msg = discord.Embed(title = title,color= 13752280, description = "")
+            msg.add_field(name="**_Balance_**", value=desc[0], inline=False)
+
+            msg.add_field(name=desc[1], value=desc[2], inline=False)
+            await ctx.channel.send(embed = msg)
+            # Message de réussite dans la console
+            print("Gems >> Balance de {} affichée".format(nom))
+            return
+        except:
+            await ctx.channel.send(desc)
+
+
+
     # @commands.command(pass_context=True)
     # async def baltop(self, ctx, n = None, m = None):
     #     """**_{filtre}_ [nombre]** | Classement des joueurs (10 premiers par défaut)"""

@@ -4,7 +4,7 @@ from discord.ext.commands import Bot
 from discord.utils import get
 import asyncio
 import aiohttp
-from core import gestion as ge, utils
+from core import gestion as ge, utils, level as lvl
 from gems import gemsFonctions as GF
 
 # initialisation des variables.
@@ -40,10 +40,11 @@ client.load_extension('core.utils')
 
 ####################### Stat ####################################
 
-# @client.event
-# async def on_message(message):
-#     await lvl.checklevel(message, "gems")
-#     await client.process_commands(message)
+@client.event
+async def on_message(message):
+    if not (message.author.bot) and message.content.startswith(PREFIX):
+        await lvl.checklevel(message)
+        await client.process_commands(message)
 
 ####################### Commande gems.py #######################
 

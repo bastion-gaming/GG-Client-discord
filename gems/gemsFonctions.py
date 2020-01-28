@@ -87,9 +87,28 @@ def msg_recv():
         ge.socket = ge.context.socket(zmq.REQ)
         ge.socket.connect(ge.SERVER_ENDPOINT)
         ge.poll.register(ge.socket, zmq.POLLIN)
-    msg = msg.replace("\\n", "\n")
+    try:
+        for x in range(0, len(msg)-1):
+            msg[x] = msg[x].replace("\\n", "\n")
+    except:
+        try:
+            msg = msg.replace("\\n", "\n")
+        except:
+            a = False
+    msg = msg_idmoji(msg)
     return msg
 
+
+def msg_idmoji(msg):
+    TupleIdmoji = globalguild.emojis
+    for y in TupleIdmoji:
+        test = "{idmoji["+ y.name +"]}"
+        try:
+            for x in range(0, len(msg)-1):
+                msg[x] = msg[x].replace(test, str(get_idmoji(y.name)))
+        except:
+            msg = msg.replace(test, str(get_idmoji(y.name)))
+    return msg
 
 
 # def recette(ctx):
