@@ -87,6 +87,7 @@ def msg_recv():
         ge.socket = ge.context.socket(zmq.REQ)
         ge.socket.connect(ge.SERVER_ENDPOINT)
         ge.poll.register(ge.socket, zmq.POLLIN)
+    msg = msg.replace("\\n", "\n")
     return msg
 
 
