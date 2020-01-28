@@ -1,14 +1,13 @@
 import discord
+from discord.ext import commands
+from discord.ext.commands import bot
+from discord.utils import get
 import random as r
 import time as t
 import datetime as dt
 from gems import gemsFonctions as GF
 from core import gestion as ge
-from discord.ext import commands
-from discord.ext.commands import bot
-from discord.utils import get
 from operator import itemgetter
-import zmq
 import gg_lib as gg
 
 
@@ -27,22 +26,7 @@ class GemsPlay(commands.Cog):
         #=======================================================================
         ID = ctx.author.id
         ge.socket.send_string(gg.std_send_command("daily", ID, ge.name_pl))
-
-        #  Get the reply.
-        socks = dict(ge.poll.poll(ge.REQUEST_TIMEOUT))
-        if socks.get(ge.socket) == zmq.POLLIN:
-            message = gg.std_receive_command(ge.socket.recv())
-            msg = message['msg']
-        else:
-            msg = "Aucune réponse du serveur"
-            # Socket is confused. Close and remove it.
-            ge.socket.setsockopt(zmq.LINGER, 0)
-            ge.socket.close()
-            ge.poll.unregister(ge.socket)
-            # Create new connection
-            ge.socket = ge.context.socket(zmq.REQ)
-            ge.socket.connect(ge.SERVER_ENDPOINT)
-            ge.poll.register(ge.socket, zmq.POLLIN)
+        msg = GF.msg_recv()
         await ctx.channel.send(msg)
 
 
@@ -203,22 +187,7 @@ class GemsPlay(commands.Cog):
         """**[nom]** | Vole des :gem:`gems` aux autres joueurs!"""
         ID = ctx.author.id
         ge.socket.send_string(gg.std_send_command("stealing", ID, ge.name_pl, name))
-
-        #  Get the reply.
-        socks = dict(ge.poll.poll(ge.REQUEST_TIMEOUT))
-        if socks.get(ge.socket) == zmq.POLLIN:
-            message = gg.std_receive_command(ge.socket.recv())
-            msg = message['msg']
-        else:
-            msg = "Aucune réponse du serveur"
-            # Socket is confused. Close and remove it.
-            ge.socket.setsockopt(zmq.LINGER, 0)
-            ge.socket.close()
-            ge.poll.unregister(ge.socket)
-            # Create new connection
-            ge.socket = ge.context.socket(zmq.REQ)
-            ge.socket.connect(ge.SERVER_ENDPOINT)
-            ge.poll.register(ge.socket, zmq.POLLIN)
+        msg = GF.msg_recv()
         await ctx.channel.send(msg)
 
 
@@ -229,22 +198,7 @@ class GemsPlay(commands.Cog):
         """Commets un crime et gagne des :gem:`gems` Attention au DiscordCop!"""
         ID = ctx.author.id
         ge.socket.send_string(gg.std_send_command("crime", ID, ge.name_pl))
-
-        #  Get the reply.
-        socks = dict(ge.poll.poll(ge.REQUEST_TIMEOUT))
-        if socks.get(ge.socket) == zmq.POLLIN:
-            message = gg.std_receive_command(ge.socket.recv())
-            msg = message['msg']
-        else:
-            msg = "Aucune réponse du serveur"
-            # Socket is confused. Close and remove it.
-            ge.socket.setsockopt(zmq.LINGER, 0)
-            ge.socket.close()
-            ge.poll.unregister(ge.socket)
-            # Create new connection
-            ge.socket = ge.context.socket(zmq.REQ)
-            ge.socket.connect(ge.SERVER_ENDPOINT)
-            ge.poll.register(ge.socket, zmq.POLLIN)
+        msg = GF.msg_recv()
         await ctx.channel.send(msg)
 
 

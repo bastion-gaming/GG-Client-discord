@@ -22,13 +22,13 @@ client.remove_command("help")
 # Au démarrage du Bot.
 @client.event
 async def on_ready():
-	print('Connecté avec le nom : {0.user}'.format(client))
-	print('PREFIX = '+str(PREFIX))
-	print('\nGet Gems - Client Discord '+VERSION)
-	GF.setglobalguild(client.get_guild(utils.ServIDmoji))
-	print('------\n')
-	ge.ZMQ()
-	print('------\n')
+    print('Connecté avec le nom : {0.user}'.format(client))
+    print('PREFIX = '+str(PREFIX))
+    print('\nGet Gems - Client Discord '+VERSION)
+    GF.setglobalguild(client.get_guild(utils.ServIDmoji))
+    print('------\n')
+    ge.ZMQ()
+    print('------\n')
 
 ####################### Commande help.py #######################
 
@@ -42,8 +42,8 @@ client.load_extension('core.utils')
 
 # @client.event
 # async def on_message(message):
-# 	await lvl.checklevel(message, "gems")
-# 	await client.process_commands(message)
+#     await lvl.checklevel(message, "gems")
+#     await client.process_commands(message)
 
 ####################### Commande gems.py #######################
 
