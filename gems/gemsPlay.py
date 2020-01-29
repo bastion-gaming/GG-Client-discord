@@ -25,7 +25,9 @@ class GemsPlay(commands.Cog):
         # Initialisation des variables générales de la fonction
         #=======================================================================
         ID = ctx.author.id
-        ge.socket.send_string(gg.std_send_command("daily", ID, ge.name_pl))
+        param = dict()
+        param["ID"] = ID
+        ge.socket.send_string(gg.std_send_command("daily", ID, ge.name_pl, param))
         msg = GF.msg_recv()
         await ctx.channel.send(msg)
 
@@ -180,24 +182,24 @@ class GemsPlay(commands.Cog):
     #         await ctx.channel.send(msg)
     #         return
 
-
-
     @commands.command(pass_context=True)
-    async def stealing(self, ctx, name = None):
+    async def stealing(self, ctx, name=None):
         """**[nom]** | Vole des :gem:`gems` aux autres joueurs!"""
         ID = ctx.author.id
-        ge.socket.send_string(gg.std_send_command("stealing", ID, ge.name_pl, name))
+        param = dict()
+        param["ID"] = ID
+        param["name"] = name
+        ge.socket.send_string(gg.std_send_command("stealing", ID, ge.name_pl, param))
         msg = GF.msg_recv()
         await ctx.channel.send(msg)
-
-
-
 
     @commands.command(pass_context=True)
     async def crime(self, ctx):
         """Commets un crime et gagne des :gem:`gems` Attention au DiscordCop!"""
         ID = ctx.author.id
-        ge.socket.send_string(gg.std_send_command("crime", ID, ge.name_pl))
+        param = dict()
+        param["ID"] = ID
+        ge.socket.send_string(gg.std_send_command("crime", ID, ge.name_pl, param))
         msg = GF.msg_recv()
         await ctx.channel.send(msg)
 
