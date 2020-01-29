@@ -6,11 +6,12 @@ from discord.utils import get
 ServIDmoji = 634317171496976395
 
 client = discord.Client()
-VERSION = open("core/version.txt").read().replace("\n","")
+VERSION = open("core/version.txt").read().replace("\n", "")
+
 
 class Utils(commands.Cog):
 
-    def __init__(self,ctx):
+    def __init__(self, ctx):
         return(None)
 
     @commands.command(pass_context=True)
@@ -18,7 +19,7 @@ class Utils(commands.Cog):
             """
             Permet d'avoir la version du bot.
             """
-            msg = "Je suis en version : **" +str(VERSION)+"**."
+            msg = "Je suis en version : **" + str(VERSION) + "**."
             await ctx.channel.send(msg)
 
     @commands.command(pass_context=True)
@@ -55,4 +56,4 @@ class Utils(commands.Cog):
 
 def setup(bot):
     bot.add_cog(Utils(bot))
-    open("help/cogs.txt","a").write("Utils\n")
+    open("help/cogs.txt", "a").write("Utils\n")

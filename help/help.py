@@ -5,20 +5,21 @@ from discord.ext import commands
 from discord.ext.commands import bot
 from discord.utils import get
 
+
 class Helpme(commands.Cog):
 
-    def __init__(self,bot):
-        self.PREFIX = open("core/prefix.txt","r").read().replace("\n","")
+    def __init__(self, bot):
+        self.PREFIX = open("core/prefix.txt", "r").read().replace("\n", "")
         self.bot = bot
 
     @commands.command(pass_context=True)
     async def help(self, ctx, nameElem = None):
         """Affiche ce message !"""
         d_help = "Liste de toutes les fonctions utilisable avec le prefix {}".format(self.PREFIX)
-        msg = discord.Embed(title = "Fonction disponible",color= 9576994, description = d_help)
+        msg = discord.Embed(title = "Fonction disponible", color= 9576994, description = d_help)
         arg = ""
 
-        COGS = open("help/cogs.txt","r").read()
+        COGS = open("help/cogs.txt", "r").read()
         COGS = COGS.split('\n')
         COGS.pop()
 
@@ -57,6 +58,7 @@ class Helpme(commands.Cog):
                 arg += "\n• "+str(COG)
             msg.add_field(name="Liste des modules", value=arg, inline=False)
             await ctx.send(embed = msg, delete_after = 60)
+
 
 def setup(bot):
     bot.add_cog(Helpme(bot))

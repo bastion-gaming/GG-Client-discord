@@ -1,5 +1,5 @@
 import yaml
-import time
+
 
 def std_send_command(name_c, name_p, name_pl, param_c = None):
     """
@@ -37,7 +37,8 @@ def std_receive_command(send):
     """
     return yaml.safe_load(send)
 
-#def std_log(type = "INFO", str):
+
+# def std_log(type = "INFO", str):
 #    """
 #    ||| WIP |||
 #    Ecrit les log
@@ -45,10 +46,11 @@ def std_receive_command(send):
 #    params:
 #    str type => ERROR ,WARNING ,INFO
 #    str str => message a affiché
-
+#
 #    return:
 #    str res => [hh:mm:ss] TYPE : str
 #    """
+
 
 def std_answer_command(name_c, name_p, name_pl, msg = None):
     """

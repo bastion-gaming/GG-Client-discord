@@ -10,12 +10,12 @@ from gems import gemsFonctions as GF
 # initialisation des variables.
 DEFAUT_PREFIX = "!"
 
-VERSION = open("core/version.txt").read().replace("\n","")
-TOKEN = open("token/token.txt", "r").read().replace("\n","")
-PREFIX = open("core/prefix.txt","r").read().replace("\n","")
+VERSION = open("core/version.txt").read().replace("\n", "")
+TOKEN = open("token/token.txt", "r").read().replace("\n", "")
+PREFIX = open("core/prefix.txt", "r").read().replace("\n", "")
 client = commands.Bot(command_prefix = "{0}".format(PREFIX))
-NONE = open("help/cogs.txt","w")
-NONE = open("help/help.txt","w")
+NONE = open("help/cogs.txt", "w")
+NONE = open("help/help.txt", "w")
 
 client.remove_command("help")
 
@@ -39,6 +39,7 @@ client.load_extension('help.help')
 client.load_extension('core.utils')
 
 ####################### Stat ####################################
+
 
 @client.event
 async def on_message(message):

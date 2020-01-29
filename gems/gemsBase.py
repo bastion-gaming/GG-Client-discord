@@ -12,21 +12,19 @@ from operator import itemgetter
 import json
 import gg_lib as gg
 
-PREFIX = open("core/prefix.txt","r").read().replace("\n","")
+PREFIX = open("core/prefix.txt", "r").read().replace("\n", "")
+
 
 class GemsBase(commands.Cog):
 
-    def __init__(self,ctx):
+    def __init__(self, ctx):
         return(None)
-
-
 
     @commands.command(pass_context=True)
     async def tuto(self, ctx):
         """Affiche le tutoriel !"""
-        ID = ctx.author.id
         desc = "Le but du jeu est de gagner le plus de :gem:`gems` possible.\n\n"
-        msg = discord.Embed(title = "Tutoriel Get Gems!",color= 13752280, description = desc)
+        msg = discord.Embed(title = "Tutoriel Get Gems!", color= 13752280, description = desc)
         desc = "`{0}begin` | Permet de créer son compte joueur et d'obtenir son starter Kit!\n••••••••••••\n".format(PREFIX)
         desc += "`{0}bal` | Permet de voir son nombre de :gem:`gems`\n••••••••••••\n".format(PREFIX)
         desc += "`{0}buy` | Permet d'acheter les items vendu au marché\n••••••••••••\n".format(PREFIX)
@@ -38,9 +36,6 @@ class GemsBase(commands.Cog):
         msg.add_field(name="Pour cela tu as les commandes:", value=desc, inline=False)
         await ctx.channel.send(embed = msg)
 
-
-
-
     @commands.command(pass_context=True)
     async def begin(self, ctx):
         """Pour créer son compte joueur et obtenir son starter Kit!"""
@@ -48,9 +43,6 @@ class GemsBase(commands.Cog):
         ge.socket.send_string(gg.std_send_command("begin", ID, ge.name_pl))
         msg = GF.msg_recv()
         await ctx.channel.send(msg)
-
-
-
 
     @commands.command(pass_context=True)
     async def bal(self, ctx):
@@ -61,7 +53,7 @@ class GemsBase(commands.Cog):
         desc = GF.msg_recv()
         try:
             title = "Compte principal de {}".format(nom)
-            msg = discord.Embed(title = title,color= 13752280, description = "")
+            msg = discord.Embed(title = title, color= 13752280, description = "")
             msg.add_field(name="**_Balance_**", value=desc[0], inline=False)
 
             msg.add_field(name=desc[1], value=desc[2], inline=False)
@@ -71,8 +63,6 @@ class GemsBase(commands.Cog):
             return
         except:
             await ctx.channel.send(desc)
-
-
 
     # @commands.command(pass_context=True)
     # async def baltop(self, ctx, n = None, m = None):

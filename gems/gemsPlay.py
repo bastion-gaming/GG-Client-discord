@@ -2,34 +2,26 @@ import discord
 from discord.ext import commands
 from discord.ext.commands import bot
 from discord.utils import get
-import random as r
-import time as t
-import datetime as dt
 from gems import gemsFonctions as GF
 from core import gestion as ge
-from operator import itemgetter
 import gg_lib as gg
 
 
 class GemsPlay(commands.Cog):
 
-    def __init__(self,ctx):
+    def __init__(self, ctx):
         return(None)
-
-
 
     @commands.command(pass_context=True)
     async def daily(self, ctx):
         """Récupère ta récompense journalière!"""
-        #=======================================================================
+        # =======================================================================
         # Initialisation des variables générales de la fonction
-        #=======================================================================
+        # =======================================================================
         ID = ctx.author.id
         ge.socket.send_string(gg.std_send_command("daily", ID, ge.name_pl))
         msg = GF.msg_recv()
         await ctx.channel.send(msg)
-
-
 
     # @commands.command(pass_context=True)
     # async def bank(self, ctx, ARG = None, ARG2 = None):
@@ -180,8 +172,6 @@ class GemsPlay(commands.Cog):
     #         await ctx.channel.send(msg)
     #         return
 
-
-
     @commands.command(pass_context=True)
     async def stealing(self, ctx, name = None):
         """**[nom]** | Vole des :gem:`gems` aux autres joueurs!"""
@@ -190,9 +180,6 @@ class GemsPlay(commands.Cog):
         msg = GF.msg_recv()
         await ctx.channel.send(msg)
 
-
-
-
     @commands.command(pass_context=True)
     async def crime(self, ctx):
         """Commets un crime et gagne des :gem:`gems` Attention au DiscordCop!"""
@@ -200,8 +187,6 @@ class GemsPlay(commands.Cog):
         ge.socket.send_string(gg.std_send_command("crime", ID, ge.name_pl))
         msg = GF.msg_recv()
         await ctx.channel.send(msg)
-
-
 
     # @commands.command(pass_context=True)
     # async def gamble(self, ctx,valeur):

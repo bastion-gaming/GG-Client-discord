@@ -1,25 +1,17 @@
-import discord
-import random as r
-import time as t
-import datetime as dt
-import json
 from core import gestion as ge
-from discord.ext import commands
-from discord.ext.commands import Bot
-from discord.utils import get
-from operator import itemgetter
 import zmq
 import gg_lib as gg
 
 
 global globalguild
 
+
 def setglobalguild(guild):
     global globalguild
     globalguild = guild
 
 
-#========== Couldown pour la fonction antispam ==========
+# ========== Couldown pour la fonction antispam ==========
 couldown_72h = 86400*3
 couldown_48h = 86400*2
 couldown_36h = 86400 + 86400/2
@@ -102,7 +94,7 @@ def msg_recv():
 def msg_idmoji(msg):
     TupleIdmoji = globalguild.emojis
     for y in TupleIdmoji:
-        test = "{idmoji["+ y.name +"]}"
+        test = "{idmoji[" + y.name + "]}"
         try:
             for x in range(0, len(msg)-1):
                 msg[x] = msg[x].replace(test, str(get_idmoji(y.name)))
