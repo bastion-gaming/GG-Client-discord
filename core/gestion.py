@@ -23,6 +23,17 @@ def permission(ctx, grade):
     return False
 
 
+def nom_ID(nom):
+    """Convertis un nom en ID discord """
+    if len(nom) == 21:
+        ID = int(nom[2:20])
+    elif len(nom) == 22:
+        ID = int(nom[3:21])
+    else:
+        ID = -1
+    return(ID)
+
+
 context = zmq.Context(1)
 
 #  Socket to talk to server

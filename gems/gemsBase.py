@@ -47,12 +47,19 @@ class GemsBase(commands.Cog):
         await ctx.channel.send(msg)
 
     @commands.command(pass_context=True)
-    async def bal(self, ctx):
+    async def bal(self, ctx, nom = None):
         """Êtes vous riche ou pauvre ?"""
         ID = ctx.author.id
-        nom = ctx.author.name
         param = dict()
         param["ID"] = ID
+        if nom is None:
+            nom = ctx.author.name
+            param["nomID"] = ID
+        else:
+            IDname = ge.nom_ID(nom)
+            param["nomID"] = IDname
+            nom = ctx.guild.get_member(IDname)
+            nom = nom.name
         ge.socket.send_string(gg.std_send_command("bal", ID, ge.name_pl, param))
         desc = GF.msg_recv()
         try:
