@@ -80,7 +80,7 @@ def msg_recv():
         ge.socket.connect(ge.SERVER_ENDPOINT)
         ge.poll.register(ge.socket, zmq.POLLIN)
     try:
-        for x in range(0, len(msg)-1):
+        for x in range(0, len(msg)):
             msg[x] = msg[x].replace("\\n", "\n")
     except:
         try:
@@ -96,7 +96,7 @@ def msg_idmoji(msg):
     for y in TupleIdmoji:
         test = "{idmoji[" + y.name + "]}"
         try:
-            for x in range(0, len(msg)-1):
+            for x in range(0, len(msg)):
                 msg[x] = msg[x].replace(test, str(get_idmoji(y.name)))
         except:
             msg = msg.replace(test, str(get_idmoji(y.name)))
