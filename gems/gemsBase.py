@@ -40,7 +40,9 @@ class GemsBase(commands.Cog):
     async def begin(self, ctx):
         """Pour créer son compte joueur et obtenir son starter Kit!"""
         ID = ctx.author.id
-        ge.socket.send_string(gg.std_send_command("begin", ID, ge.name_pl))
+        param = dict()
+        param["ID"] = ID
+        ge.socket.send_string(gg.std_send_command("begin", ID, ge.name_pl, param))
         msg = GF.msg_recv()
         await ctx.channel.send(msg)
 
@@ -49,7 +51,9 @@ class GemsBase(commands.Cog):
         """Êtes vous riche ou pauvre ?"""
         ID = ctx.author.id
         nom = ctx.author.name
-        ge.socket.send_string(gg.std_send_command("bal", ID, ge.name_pl))
+        param = dict()
+        param["ID"] = ID
+        ge.socket.send_string(gg.std_send_command("bal", ID, ge.name_pl, param))
         desc = GF.msg_recv()
         try:
             title = "Compte principal de {}".format(nom)
