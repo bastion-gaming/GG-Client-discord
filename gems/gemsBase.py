@@ -287,101 +287,24 @@ class GemsBase(commands.Cog):
 
         await ctx.channel.send(desc[1])
 
-    # @commands.command(pass_context=True)
-    # async def give(self, ctx, nom, item, nb = None):
-    #     """**[nom] [item] [nombre]** | Donner des items à vos amis !"""
-    #     ID = ctx.author.id
-    #     name = ctx.author.name
-    #     checkLB = False
-    #     if item == "bank_upgrade":
-    #         await ctx.channel.send("Tu ne peux pas donner cette item!")
-    #         return False
-    #     if sql.spam(ID,GF.couldown_4s, "give", "gems"):
-    #         try:
-    #             if nb == None:
-    #                 nb = 1
-    #             else:
-    #                 nb = int(nb)
-    #             if nb < 0 and nb != -1:
-    #                 sql.addGems(ID, -100)
-    #                 msg = ":no_entry: Anti-cheat! Je vous met un amende de 100 :gem:`gems` pour avoir essayé de tricher !"
-    #                 slq.add(ID, "DiscordCop Amende", 1, "statgems")
-    #                 await ctx.channel.send(msg)
-    #                 return "anticheat"
-    #             elif nb > 0:
-    #                 ID_recu = sql.nom_ID(nom)
-    #                 Nom_recu = ctx.guild.get_member(ID_recu).name
-    #                 for lootbox in GF.objetBox:
-    #                     if item == lootbox.nom:
-    #                         checkLB = True
-    #                         itemLB = lootbox.nom
-    #                         item = "lootbox_{}".format(lootbox.nom)
-    #                 nbItem = int(sql.valueAtNumber(ID, item, "inventory"))
-    #                 if nbItem >= nb and nb > 0:
-    #                     if GF.testInvTaille(ID_recu):
-    #                         sql.add(ID, item, -nb, "inventory")
-    #                         sql.add(ID_recu, item, nb, "inventory")
-    #                         if checkLB:
-    #                             msg = "{0} donne {1} <:gem_lootbox:{3}>`{2}` à {4} !".format(name,nb,itemLB,GF.get_idmoji(itemLB),Nom_recu)
-    #                         else:
-    #                             for c in GF.objetItem:
-    #                                 if c.nom == item:
-    #                                     if c.type == "emoji":
-    #                                         msg = "{0} donne {1} :{2}:`{2}` à {3} !".format(name, nb, item, Nom_recu)
-    #                                     else:
-    #                                         msg = "{0} donne {1} <:gem_{2}:{3}>`{2}` à {4} !".format(name,nb,item,GF.get_idmoji(item),Nom_recu)
-    #                             for c in GF.objetOutil:
-    #                                 if c.nom == item:
-    #                                     if c.type == "emoji":
-    #                                         msg = "{0} donne {1} :{2}:`{2}` à {3} !".format(name, nb, item, Nom_recu)
-    #                                     else:
-    #                                         msg = "{0} donne {1} <:gem_{2}:{3}>`{2}` à {4} !".format(name,nb,item,GF.get_idmoji(item),Nom_recu)
-    #                         # Message de réussite dans la console
-    #                         print("Gems >> {0} a donné {1} {2} à {3}".format(name, nb, item, Nom_recu))
-    #                     else:
-    #                         msg = "L'inventaire de {} est plein".format(Nom_recu)
-    #                 else:
-    #                     msg = "{0} n'a pas assez pour donner à {1} !".format(name, Nom_recu)
-    #
-    #             elif nb == -1:
-    #                 ID_recu = sql.nom_ID(nom)
-    #                 Nom_recu = ctx.guild.get_member(ID_recu).name
-    #                 nbItem = int(sql.valueAtNumber(ID, item, "inventory"))
-    #                 if nb > 0:
-    #                     if GF.testInvTaille(ID_recu):
-    #                         sql.add(ID, item, -nb, "inventory")
-    #                         sql.add(ID_recu, item, nb, "inventory")
-    #                         for c in GF.objetItem:
-    #                             if c.nom == item:
-    #                                 if c.type == "emoji":
-    #                                     msg = "{0} donne {1} :{2}:`{2}` à {3} !".format(name, nb, item, Nom_recu)
-    #                                 else:
-    #                                     msg = "{0} donne {1} <:gem_{2}:{3}>`{2}` à {4} !".format(name,nb,item,GF.get_idmoji(item),Nom_recu)
-    #                         for c in GF.objetOutil:
-    #                             if c.nom == item:
-    #                                 if c.type == "emoji":
-    #                                     msg = "{0} donne {1} :{2}:`{2}` à {3} !".format(name, nb, item, Nom_recu)
-    #                                 else:
-    #                                     msg = "{0} donne {1} <:gem_{2}:{3}>`{2}` à {4} !".format(name,nb,item,GF.get_idmoji(item),Nom_recu)
-    #                         # Message de réussite dans la console
-    #                         print("Gems >> {0} a donné {1} {2} à {3}".format(name, nb, item, Nom_recu))
-    #                     else:
-    #                         msg = "L'inventaire de {} est plein".format(Nom_recu)
-    #                 else:
-    #                     msg = "{0} n'a pas assez pour donner à {1} !".format(name, Nom_recu)
-    #
-    #             else :
-    #                 msg = "Tu ne peux pas donner une somme négative ! N'importe quoi enfin !"
-    #             sql.updateComTime(ID, "give", "gems")
-    #         except ValueError:
-    #             msg = "La commande est mal formulée"
-    #             pass
-    #     else:
-    #         msg = "Il faut attendre "+str(GF.couldown_4s)+" secondes entre chaque commande !"
-    #     await ctx.channel.send(msg)
-    #
-    #
-    #
+    @commands.command(pass_context=True)
+    async def give(self, ctx, nom, item, nb = None):
+        """**[nom] [item] [nombre]** | Donner des items à vos amis !"""
+        ID = ctx.author.id
+        param = dict()
+        param["platform"] = "discord"
+        param["ID"] = ID
+        param["nom"] = ctx.author.name
+        param["ID_recu"] = ge.nom_ID(nom)
+        param["Nom_recu"] = ctx.guild.get_member(param["ID_recu"]).name
+        param["item"] = item
+        param["nb"] = nb
+
+        ge.socket.send_string(gg.std_send_command("give", ID, ge.name_pl, param))
+        desc = GF.msg_recv()
+
+        await ctx.channel.send(desc[1])
+
     # @commands.command(pass_context=True)
     # async def forge(self, ctx, item = None, nb = 1):
     #     """**[item] [nombre]** | Permet de concevoir des items spécifiques"""
