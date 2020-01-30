@@ -134,81 +134,22 @@ class GemsBase(commands.Cog):
 
         await ctx.channel.send(desc[1])
 
+    @commands.command(pass_context=True)
+    async def sell(self, ctx, item, nb = 1):
+        """**[item] [nombre]** | Permet de vendre vos items !"""
+        ID = ctx.author.id
+        param = dict()
+        param["ID"] = ID
+        param["nb"] = nb
+        param["item"] = item
+
+        ge.socket.send_string(gg.std_send_command("sell", ID, ge.name_pl, param))
+        desc = GF.msg_recv()
+
+        await ctx.channel.send(desc[1])
+
     # @commands.command(pass_context=True)
-    # async def sell (self, ctx,item,nb = 1):
-    #     """**[item] [nombre]** | Permet de vendre vos items !"""
-    #     ID = ctx.author.id
-    #     if sql.spam(ID,GF.couldown_4s, "sell", "gems"):
-    #         nbItem = sql.valueAtNumber(ID, item, "inventory")
-    #         if int(nb) == -1:
-    #             nb = nbItem
-    #         nb = int(nb)
-    #         if nbItem >= nb and nb > 0:
-    #             test = True
-    #             for c in GF.objetItem:
-    #                 if item == c.nom:
-    #                     test = False
-    #                     gain = c.vente*nb
-    #                     if c.type != "spinelle":
-    #                         sql.addGems(ID, gain)
-    #                         argent = ":gem:`gems`"
-    #                     else:
-    #                         sql.addSpinelles(ID, gain)
-    #                         argent = "<:spinelle:{}>`spinelles`".format(GF.get_idmoji("spinelle"))
-    #                     if c.type != "emoji":
-    #                         msg ="Tu as vendu {0} <:gem_{1}:{3}>`{1}` pour {2} {4} !".format(nb, item, gain, GF.get_idmoji(c.nom), argent)
-    #                         # Message de réussite dans la console
-    #                         print("Gems >> {} a vendu {} {}".format(ctx.author.name, nb, item))
-    #                     else:
-    #                         msg ="Tu as vendu {0} :{1}:`{1}` pour {2} {3} !".format(nb, item, gain, argent)
-    #                         # Message de réussite dans la console
-    #                         print("Gems >> {} a vendu {} {}".format(ctx.author.name, nb, item))
-    #
-    #             for c in GF.objetOutil:
-    #                 if item == c.nom:
-    #                     test = False
-    #                     gain = c.vente*nb
-    #                     if c.type != "spinelle":
-    #                         sql.addGems(ID, gain)
-    #                         argent = ":gem:`gems`"
-    #                     else:
-    #                         sql.addSpinelles(ID, gain)
-    #                         argent = "<:spinelle:{}>`spinelles`".format(GF.get_idmoji("spinelle"))
-    #                     msg ="Tu as vendu {0} <:gem_{1}:{3}>`{1}` pour {2} {4} !".format(nb, item, gain, GF.get_idmoji(c.nom), argent)
-    #                     if nbItem == 1:
-    #                         if sql.valueAt(ID, item, "durability") != 0:
-    #                             sql.add(ID, item, -1, "durability")
-    #                     # Message de réussite dans la console
-    #                     print("Gems >> {} a vendu {} {}".format(ctx.author.name, nb, item))
-    #                     break
-    #
-    #             sql.add(ID, item, -nb, "inventory")
-    #             if test:
-    #                 msg = "Cette objet n'existe pas"
-    #         else:
-    #             msg = "Tu n'as pas assez de `{i}`. Il t'en reste : {nb}".format(i=item, nb=str(sql.valueAtNumber(ID, item, "inventory")))
-    #             for c in GF.objetItem:
-    #                 if c.nom == item:
-    #                     if c.type == "emoji":
-    #                         msg = "Tu n'as pas assez de :{i}:`{i}`. Il t'en reste : {nb}".format(i=item, nb=str(sql.valueAtNumber(ID, item, "inventory")))
-    #                     else:
-    #                         msg = "Tu n'as pas assez de <:gem_{i}:{idmoji}>`{i}`. Il t'en reste : {nb}".format(i=item, nb=str(sql.valueAtNumber(ID, item, "inventory")), idmoji=GF.get_idmoji(c.nom))
-    #             for c in GF.objetOutil:
-    #                 if c.nom == item:
-    #                     if c.type == "bank":
-    #                         msg = "Tu ne peux pas vendre tes <:gem_{i}:{idmoji}>`{i}`".format(idmoji=GF.get_idmoji(c.nom), i=item)
-    #                     else:
-    #                         msg = "Tu n'as pas assez de <:gem_{i}:{idmoji}>`{i}`. Il t'en reste : {nb}".format(i=item, nb=str(sql.valueAtNumber(ID, item, "inventory")), idmoji=GF.get_idmoji(c.nom))
-    #
-    #         sql.updateComTime(ID, "sell", "gems")
-    #     else:
-    #         msg = "Il faut attendre "+str(GF.couldown_4s)+" secondes entre chaque commande !"
-    #     await ctx.channel.send(msg)
-    #
-    #
-    #
-    # @commands.command(pass_context=True)
-    # async def inv (self, ctx, fct = None, type = None):
+    # async def inv(self, ctx, fct = None, type = None):
     #     """**[nom de la poche]** | Permet de voir ce que vous avez dans le ventre !"""
     #     ID = ctx.author.id
     #     nom = ctx.author.name
@@ -332,7 +273,7 @@ class GemsBase(commands.Cog):
     #
     #
     # @commands.command(pass_context=True)
-    # async def market (self, ctx, fct = None, type = None):
+    # async def market(self, ctx, fct = None, type = None):
     #     """**[stand]** | Permet de voir tout les objets que l'on peux acheter ou vendre !"""
     #     ID = ctx.author.id
     #     jour = dt.date.today()
@@ -787,7 +728,7 @@ class GemsBase(commands.Cog):
     #
     #
     # @commands.command(pass_context=True)
-    # async def pay (self, ctx, nom, gain):
+    # async def pay(self, ctx, nom, gain):
     #     """**[nom] [gain]** | Donner de l'argent à vos amis !"""
     #     ID = ctx.author.id
     #     name = ctx.author.name
