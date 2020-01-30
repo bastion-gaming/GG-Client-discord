@@ -23,7 +23,7 @@ class GemsPlay(commands.Cog):
         param["ID"] = ID
         ge.socket.send_string(gg.std_send_command("daily", ID, ge.name_pl, param))
         msg = GF.msg_recv()
-        await ctx.channel.send(msg)
+        await ctx.channel.send(msg[1])
 
     # @commands.command(pass_context=True)
     # async def bank(self, ctx, ARG = None, ARG2 = None):
@@ -183,7 +183,7 @@ class GemsPlay(commands.Cog):
         param["name"] = name
         ge.socket.send_string(gg.std_send_command("stealing", ID, ge.name_pl, param))
         msg = GF.msg_recv()
-        await ctx.channel.send(msg)
+        await ctx.channel.send(msg[1])
 
     @commands.command(pass_context=True)
     async def crime(self, ctx):
@@ -193,7 +193,7 @@ class GemsPlay(commands.Cog):
         param["ID"] = ID
         ge.socket.send_string(gg.std_send_command("crime", ID, ge.name_pl, param))
         msg = GF.msg_recv()
-        await ctx.channel.send(msg)
+        await ctx.channel.send(msg[1])
 
     # @commands.command(pass_context=True)
     # async def gamble(self, ctx,valeur):
