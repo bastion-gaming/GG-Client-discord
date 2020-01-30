@@ -6,12 +6,13 @@ import gg_lib as gg
 
 async def checklevel(message):
     ID = message.author.id
+    nom = message.author.name
     ge.socket.send_string(gg.std_send_command("level", ID, ge.name_pl))
     desc = GF.msg_recv()
-    if desc != "" and desc[1] != "Aucune réponse du serveur" and desc[1] != "Aucun compte utilisateur n'a été trouvé":
+    if desc[0] == "Level UP":
         title = "Level UP | Get Gems"
-        desc[1] = desc[1].replace("{PlayerName}", message.author.name)
-        msg = discord.Embed(title = title, color= 6466585, description = desc[1])
+        lvl_desc = ":tada: {0} {1}".format(nom, desc[1])
+        msg = discord.Embed(title = title, color= 6466585, description = lvl_desc)
         msg.set_thumbnail(url=message.author.avatar_url)
         await message.channel.send(embed = msg)
     return False
