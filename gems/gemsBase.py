@@ -51,13 +51,12 @@ class GemsBase(commands.Cog):
         """Êtes vous riche ou pauvre ?"""
         ID = ctx.author.id
         param = dict()
-        param["ID"] = ID
         if nom is None:
             nom = ctx.author.name
-            param["nomID"] = ID
+            param["ID"] = ID
         else:
             IDname = ge.nom_ID(nom)
-            param["nomID"] = IDname
+            param["ID"] = IDname
             nom = ctx.guild.get_member(IDname)
             nom = nom.name
         ge.socket.send_string(gg.std_send_command("bal", ID, ge.name_pl, param))
