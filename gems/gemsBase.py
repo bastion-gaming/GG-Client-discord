@@ -642,44 +642,24 @@ class GemsBase(commands.Cog):
     #     else:
     #         msg = "Il faut attendre "+str(GF.couldown_4s)+" secondes entre chaque commande !"
     #         await ctx.channel.send(msg)
-    #
-    #
-    #
-    # @commands.command(pass_context=True)
-    # async def pay(self, ctx, nom, gain):
-    #     """**[nom] [gain]** | Donner de l'argent à vos amis !"""
-    #     ID = ctx.author.id
-    #     name = ctx.author.name
-    #     if sql.spam(ID,GF.couldown_4s, "pay", "gems"):
-    #         try:
-    #             if int(gain) > 0:
-    #                 gain = int(gain)
-    #                 don = -gain
-    #                 ID_recu = sql.nom_ID(nom)
-    #                 Nom_recu = ctx.guild.get_member(ID_recu).name
-    #                 solde = int(sql.valueAtNumber(ID, "gems", "gems"))
-    #                 if solde >= gain:
-    #                     # print(ID_recu)
-    #                     sql.addGems(ID_recu, gain)
-    #                     sql.addGems(ID,don)
-    #                     msg = "{0} donne {1} :gem:`gems` à {2} !".format(name,gain,Nom_recu)
-    #                     # Message de réussite dans la console
-    #                     print("Gems >> {} a donné {} Gems à {}".format(name,gain,Nom_recu))
-    #                 else:
-    #                     msg = "{0} n'a pas assez pour donner {1} :gem:`gems` à {2} !".format(name, gain, Nom_recu)
-    #
-    #                 sql.updateComTime(ID, "pay", "gems")
-    #             else :
-    #                 msg = "Tu ne peux pas donner une somme négative ! N'importe quoi enfin !"
-    #         except ValueError:
-    #             msg = "La commande est mal formulée"
-    #             pass
-    #     else:
-    #         msg = "Il faut attendre "+str(GF.couldown_4s)+" secondes entre chaque commande !"
-    #     await ctx.channel.send(msg)
-    #
-    #
-    #
+
+    @commands.command(pass_context=True)
+    async def pay(self, ctx, nom, gain):
+        """**[nom] [gain]** | Donner de l'argent à vos amis !"""
+        ID = ctx.author.id
+        param = dict()
+        param["platform"] = "discord"
+        param["ID"] = ID
+        param["nom"] = ctx.author.name
+        param["ID_recu"] = ge.nom_ID(nom)
+        param["Nom_recu"] = ctx.guild.get_member(param["ID_recu"]).name
+        param["gain"] = gain
+
+        ge.socket.send_string(gg.std_send_command("pay", ID, ge.name_pl, param))
+        desc = GF.msg_recv()
+
+        await ctx.channel.send(desc[1])
+
     # @commands.command(pass_context=True)
     # async def give(self, ctx, nom, item, nb = None):
     #     """**[nom] [item] [nombre]** | Donner des items à vos amis !"""
