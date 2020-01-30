@@ -77,73 +77,17 @@ class GemsPlay(commands.Cog):
         msg = GF.msg_recv()
         await ctx.channel.send(msg[1])
 
-    # @commands.command(pass_context=True)
-    # async def gamble(self, ctx,valeur):
-    #     """**[valeur]** | Avez vous l'ame d'un parieur ?"""
-    #     valeur = int(valeur)
-    #     ID = ctx.author.id
-    #     gems = sql.valueAtNumber(ID, "gems", "gems")
-    #     if valeur < 0:
-    #         msg = ":no_entry: Anti-cheat! Je vous met un amende de 100 :gem:`gems` pour avoir essayé de tricher !"
-    #         slq.add(ID, "DiscordCop Amende", 1, "statgems")
-    #         if gems > 100 :
-    #             sql.addGems(ID, -100)
-    #         else :
-    #             sql.addGems(ID, -gems)
-    #         await ctx.channel.send(msg)
-    #         return
-    #     elif valeur > 0 and gems >= valeur:
-    #         if sql.spam(ID,GF.couldown_8s, "gamble", "gems"):
-    #             if r.randint(0,3) == 0:
-    #                 gain = valeur*3
-    #                 # l'espérence est de 0 sur la gamble
-    #                 msg = "{1} {0} :gem:`gems`".format(gain, GF.message_gamble[r.randint(0,4)])
-    #                 sql.add(ID, "Gamble Win", 1, "statgems")
-    #                 for x in GF.objetTrophy:
-    #                     if x.nom == "Gamble Jackpot":
-    #                         jackpot = x.mingem
-    #                     elif x.nom == "Super Gamble Jackpot":
-    #                         superjackpot = x.mingem
-    #                     elif x.nom == "Hyper Gamble Jackpot":
-    #                         hyperjackpot = x.mingem
-    #                 if gain >= jackpot and gain < superjackpot:
-    #                     sql.add(ID, "Gamble Jackpot", 1, "trophy")
-    #                     msg += "\nFélicitation! Tu as l'ame d'un parieur, nous t'offrons le prix :trophy:`Gamble Jackpot`."
-    #                 elif gain >= superjackpot and gain < hyperjackpot:
-    #                     sql.add(ID, "Super Gamble Jackpot", 1, "trophy")
-    #                     msg += "\nFélicitation! Tu as l'ame d'un parieur, nous t'offrons le prix :trophy::trophy:`Super Gamble Jackpot`."
-    #                 elif gain >= hyperjackpot:
-    #                     sql.add(ID, "Hyper Gamble Jackpot", 1, "trophy")
-    #                     msg += "\nFélicitation! Tu as l'ame d'un parieur, nous t'offrons le prix :trophy::trophy::trophy:`Hyper Gamble Jackpot`."
-    #                 sql.addGems(ID, gain)
-    #                 D = r.randint(0,20)
-    #                 if D == 0:
-    #                     sql.add(ID, "lootbox_legendarygems", 1, "inventory")
-    #                     msg += "\nTu as trouvé une **Loot Box Gems Légendaire**! Utilise la commande `boxes open legendarygems` pour l'ouvrir"
-    #                 elif D >= 19:
-    #                     sql.add(ID, "lootbox_raregems", 1, "inventory")
-    #                     msg += "\nTu as trouvé une **Loot Box Gems Rare**! Utilise la commande `boxes open raregems` pour l'ouvrir"
-    #                 elif D >= 8 and D <= 12:
-    #                     sql.add(ID, "lootbox_commongems", 1, "inventory")
-    #                     msg += "\nTu as trouvé une **Loot Box Gems Common**! Utilise la commande `boxes open commongems` pour l'ouvrir"
-    #             else:
-    #                 val = 0-valeur
-    #                 sql.addGems(ID,val)
-    #                 sql.addGems(wel.idBaBot, int(valeur))
-    #                 msg = "Dommage tu as perdu {} :gem:`gems`".format(valeur)
-    #
-    #             sql.updateComTime(ID, "gamble", "gems")
-    #             lvl.addxp(ID, 1, "gems")
-    #         else:
-    #             msg = "Il faut attendre "+str(GF.couldown_8s)+" secondes entre chaque commande !"
-    #     elif gems < valeur:
-    #         msg = "Tu n'as pas assez de :gem:`gems` en banque"
-    #     else:
-    #         msg = "La valeur rentré est incorrect"
-    #     await ctx.channel.send(msg)
-    #
-    #
-    #
+    @commands.command(pass_context=True)
+    async def gamble(self, ctx, valeur):
+        """**[valeur]** | Avez vous l'ame d'un parieur ?"""
+        ID = ctx.author.id
+        param = dict()
+        param["ID"] = ID
+        param["valeur"] = valeur
+        ge.socket.send_string(gg.std_send_command("gamble", ID, ge.name_pl, param))
+        msg = GF.msg_recv()
+        await ctx.channel.send(msg[1])
+
     # @commands.command(pass_context=True)
     # async def mine(self, ctx):
     #     """Minez compagnons !!"""
