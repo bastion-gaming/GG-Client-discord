@@ -305,131 +305,25 @@ class GemsBase(commands.Cog):
 
         await ctx.channel.send(desc[1])
 
-    # @commands.command(pass_context=True)
-    # async def forge(self, ctx, item = None, nb = 1):
-    #     """**[item] [nombre]** | Permet de concevoir des items spécifiques"""
-    #     ID = ctx.author.id
-    #     if sql.spam(ID,GF.couldown_4s, "forge", "gems"):
-    #         if GF.testInvTaille(ID):
-    #             #-------------------------------------
-    #             # Affichage des recettes disponible
-    #             if item == None:
-    #                 msg = GF.recette(ctx)
-    #                 await ctx.channel.send(embed = msg)
-    #                 # Message de réussite dans la console
-    #                 print("Gems >> {} a afficher les recettes".format(ctx.author.name))
-    #                 return
-    #             #-------------------------------------
-    #             else:
-    #                 for c in GF.objetRecette:
-    #                     if item == c.nom:
-    #                         nb = int(nb)
-    #                         nb1 = nb*c.nb1
-    #                         nb2 = nb*c.nb2
-    #                         nb3 = nb*c.nb3
-    #                         nb4 = nb*c.nb4
-    #                         if c.item1 != "" and c.item2 != "" and c.item3 != "" and c.item4 != "":
-    #                             if sql.valueAtNumber(ID, c.item1, "inventory") >= nb1 and sql.valueAtNumber(ID, c.item2, "inventory") >= nb2 and sql.valueAtNumber(ID, c.item3, "inventory") >= nb3 and sql.valueAtNumber(ID, c.item4, "inventory") >= nb4:
-    #                                 sql.add(ID, c.nom, nb, "inventory")
-    #                                 sql.add(ID, c.item1, -1*nb1, "inventory")
-    #                                 sql.add(ID, c.item2, -1*nb2, "inventory")
-    #                                 sql.add(ID, c.item3, -1*nb3, "inventory")
-    #                                 sql.add(ID, c.item4, -1*nb4, "inventory")
-    #                                 msg = "Bravo, tu as réussi à forger {0} <:gem_{1}:{2}>`{1}` !".format(nb, c.nom, GF.get_idmoji(c.nom))
-    #                                 print("Gems >> {0} a forgé {1} {2}".format(ctx.author.name, nb, c.nom))
-    #                                 Durability = sql.valueAtNumber(ID, c.nom, "durability")
-    #                                 if Durability == 0:
-    #                                     for x in GF.objetOutil:
-    #                                         if x.nom == c.nom:
-    #                                             sql.add(ID, x.nom, x.durabilite, "durability")
-    #                             else:
-    #                                 msg = ""
-    #                                 if sql.valueAtNumber(ID, c.item1, "inventory") < nb1:
-    #                                     nbmissing = (sql.valueAtNumber(ID, c.item1, "inventory") - nb1)*-1
-    #                                     msg += "Il te manque {0} <:gem_{1}:{2}>`{1}`\n".format(nbmissing, c.item1, GF.get_idmoji(c.item1))
-    #                                 if sql.valueAtNumber(ID, c.item2, "inventory") < nb2:
-    #                                     nbmissing = (sql.valueAtNumber(ID, c.item2, "inventory") - nb2)*-1
-    #                                     msg += "Il te manque {0} <:gem_{1}:{2}>`{1}`\n".format(nbmissing, c.item2, GF.get_idmoji(c.item2))
-    #                                 if sql.valueAtNumber(ID, c.item3, "inventory") < nb3:
-    #                                     nbmissing = (sql.valueAtNumber(ID, c.item3, "inventory") - nb3)*-1
-    #                                     msg += "Il te manque {0} <:gem_{1}:{2}>`{1}`\n".format(nbmissing, c.item3, GF.get_idmoji(c.item3))
-    #                                 if sql.valueAtNumber(ID, c.item4, "inventory") < nb4:
-    #                                     nbmissing = (sql.valueAtNumber(ID, c.item4, "inventory") - nb4)*-1
-    #                                     msg += "Il te manque {0} <:gem_{1}:{2}>`{1}`\n".format(nbmissing, c.item4, GF.get_idmoji(c.item4))
-    #
-    #                         elif c.item1 != "" and c.item2 != "" and c.item3 != "":
-    #                             if sql.valueAtNumber(ID, c.item1, "inventory") >= nb1 and sql.valueAtNumber(ID, c.item2, "inventory") >= nb2 and sql.valueAtNumber(ID, c.item3, "inventory") >= nb3:
-    #                                 sql.add(ID, c.nom, nb, "inventory")
-    #                                 sql.add(ID, c.item1, -1*nb1, "inventory")
-    #                                 sql.add(ID, c.item2, -1*nb2, "inventory")
-    #                                 sql.add(ID, c.item3, -1*nb3, "inventory")
-    #                                 msg = "Bravo, tu as réussi à forger {0} <:gem_{1}:{2}>`{1}` !".format(nb, c.nom, GF.get_idmoji(c.nom))
-    #                                 print("Gems >> {0} a forgé {1} {2}".format(ctx.author.name, nb, c.nom))
-    #                                 Durability = sql.valueAtNumber(ID, c.nom, "durability")
-    #                                 if Durability == 0:
-    #                                     for x in GF.objetOutil:
-    #                                         if x.nom == c.nom:
-    #                                             sql.add(ID, x.nom, x.durabilite, "durability")
-    #                             else:
-    #                                 msg = ""
-    #                                 if sql.valueAtNumber(ID, c.item1, "inventory") < nb1:
-    #                                     nbmissing = (sql.valueAtNumber(ID, c.item1, "inventory") - nb1)*-1
-    #                                     msg += "Il te manque {0} <:gem_{1}:{2}>`{1}`\n".format(nbmissing, c.item1, GF.get_idmoji(c.item1))
-    #                                 if sql.valueAtNumber(ID, c.item2, "inventory") < nb2:
-    #                                     nbmissing = (sql.valueAtNumber(ID, c.item2, "inventory") - nb2)*-1
-    #                                     msg += "Il te manque {0} <:gem_{1}:{2}>`{1}`\n".format(nbmissing, c.item2, GF.get_idmoji(c.item2))
-    #                                 if sql.valueAtNumber(ID, c.item3, "inventory") < nb3:
-    #                                     nbmissing = (sql.valueAtNumber(ID, c.item3, "inventory") - nb3)*-1
-    #                                     msg += "Il te manque {0} <:gem_{1}:{2}>`{1}`\n".format(nbmissing, c.item3, GF.get_idmoji(c.item3))
-    #
-    #                         elif c.item1 != "" and c.item2 != "":
-    #                             if sql.valueAtNumber(ID, c.item1, "inventory") >= nb1 and sql.valueAtNumber(ID, c.item2, "inventory") >= nb2:
-    #                                 sql.add(ID, c.nom, nb, "inventory")
-    #                                 sql.add(ID, c.item1, -1*nb1, "inventory")
-    #                                 sql.add(ID, c.item2, -1*nb2, "inventory")
-    #                                 msg = "Bravo, tu as réussi à forger {0} <:gem_{1}:{2}>`{1}` !".format(nb, c.nom, GF.get_idmoji(c.nom))
-    #                                 print("Gems >> {0} a forgé {1} {2}".format(ctx.author.name, nb, c.nom))
-    #                                 Durability = sql.valueAtNumber(ID, c.nom, "durability")
-    #                                 if Durability == 0:
-    #                                     for x in GF.objetOutil:
-    #                                         if x.nom == c.nom:
-    #                                             sql.add(ID, x.nom, x.durabilite, "durability")
-    #                             else:
-    #                                 msg = ""
-    #                                 if sql.valueAtNumber(ID, c.item1, "inventory") < nb1:
-    #                                     nbmissing = (sql.valueAtNumber(ID, c.item1, "inventory") - nb1)*-1
-    #                                     msg += "Il te manque {0} <:gem_{1}:{2}>`{1}`\n".format(nbmissing, c.item1, GF.get_idmoji(c.item1))
-    #                                 if sql.valueAtNumber(ID, c.item2, "inventory") < nb2:
-    #                                     nbmissing = (sql.valueAtNumber(ID, c.item2, "inventory") - nb2)*-1
-    #                                     msg += "Il te manque {0} <:gem_{1}:{2}>`{1}`\n".format(nbmissing, c.item2, GF.get_idmoji(c.item2))
-    #
-    #                         elif c.item1 != "":
-    #                             if sql.valueAtNumber(ID, c.item1, "inventory") >= nb1:
-    #                                 sql.add(ID, c.nom, nb, "inventory")
-    #                                 sql.add(ID, c.item1, -1*nb1, "inventory")
-    #                                 msg = "Bravo, tu as réussi à forger {0} <:gem_{1}:{2}>`{1}` !".format(nb, c.nom, GF.get_idmoji(c.nom))
-    #                                 print("Gems >> {0} a forgé {1} {2}".format(ctx.author.name, nb, c.nom))
-    #                                 Durability = sql.valueAtNumber(ID, c.nom, "durability")
-    #                                 if Durability == 0:
-    #                                     for x in GF.objetOutil:
-    #                                         if x.nom == c.nom:
-    #                                             sql.add(ID, x.nom, x.durabilite, "durability")
-    #                             else:
-    #                                 nbmissing = (sql.valueAtNumber(ID, c.item1, "inventory") - nb1)*-1
-    #                                 msg = "Il te manque {0} <:gem_{1}:{2}>`{1}`".format(nbmissing, c.item1, GF.get_idmoji(c.item1))
-    #                         await ctx.channel.send(msg)
-    #                         return True
-    #                     else:
-    #                         msg = "Aucun recette disponible pour forger cette item !"
-    #             sql.updateComTime(ID, "forge", "gems")
-    #         else:
-    #             msg = "Ton inventaire est plein"
-    #     else:
-    #         msg = "Il faut attendre "+str(GF.couldown_4s)+" secondes entre chaque commande !"
-    #     await ctx.channel.send(msg)
-    #
-    #
-    #
+    @commands.command(pass_context=True)
+    async def forge(self, ctx, item = None, nb = 1):
+        """**[item] [nombre]** | Permet de concevoir des items spécifiques"""
+        ID = ctx.author.id
+        param = dict()
+        param["ID"] = ID
+        param["item"] = item
+        param["nb"] = nb
+
+        ge.socket.send_string(gg.std_send_command("forge", ID, ge.name_pl, param))
+        desc = GF.msg_recv()
+
+        if item == None:
+            msg = discord.Embed(title = "Recettes", color= 15778560, description = desc[1])
+            await ctx.channel.send(embed = msg)
+            return True
+        else:
+            await ctx.channel.send(desc[1])
+
     # @commands.command(pass_context=True)
     # async def trophy(self, ctx, nom = None):
     #     """**[nom]** | Liste de vos trophées !"""
