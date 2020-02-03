@@ -57,6 +57,8 @@ client.load_extension('gems.gemsGuild')
 
 client.load_extension('gems.gemsEvent')
 
+client.load_extension('gems.gemsAdmin')
+
 ####################### Lancemement du bot ######################
 
 client.run(TOKEN)
