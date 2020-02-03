@@ -400,44 +400,6 @@ class GemsGuild(commands.Cog):
     #     await ctx.channel.send(msg)
     #
     #
-    # @commands.command(pass_context=True)
-    # async def convert(self, ctx, nb = None):
-    #     """**[Nombre de spinelle]** | Convertisseur :gem:`gems` :left_right_arrow: `spinelles` (250 000 pour 1)"""
-    #     n = 250000
-    #     ID = ctx.author.id
-    #     balGems = sql.valueAtNumber(ID, "gems", "gems")
-    #     balspinelle = sql.valueAtNumber(ID, "spinelles", "gems")
-    #     max = balGems // n
-    #     if nb != None:
-    #         try:
-    #             nb = int(nb)
-    #         except:
-    #             await ctx.channel.send("Erreur! Nombre de <:spinelle:{idmoji}>`spinelles` incorrect".format(idmoji=GF.get_idmoji("spinelle")))
-    #             return 404
-    #         if nb < 0:
-    #             if balspinelle >= -nb:
-    #                 max = nb
-    #             else:
-    #                 await ctx.channel.send("Tu n'as pas assez de <:spinelle:{idmoji}>`spinelles`".format(idmoji=GF.get_idmoji("spinelle")))
-    #                 return False
-    #         elif nb <= max:
-    #             max = nb
-    #         else:
-    #             await ctx.channel.send("Tu n'as pas assez de :gem:`gems`")
-    #             return False
-    #     else:
-    #         if max == 0:
-    #             await ctx.channel.send("Tu n'as pas assez de :gem:`gems`")
-    #             return False
-    #     sql.addGems(ID, -(max*n))
-    #     sql.addSpinelles(ID, max)
-    #     if max > 0:
-    #         await ctx.channel.send("Convertion terminée! Ton compte a été crédité de {nb} <:spinelle:{idmoji}>`spinelles`".format(nb=max, idmoji=GF.get_idmoji("spinelle")))
-    #     elif max < 0:
-    #         await ctx.channel.send("Convertion terminée! Ton compte a été débité de {nb} <:spinelle:{idmoji}>`spinelles`".format(nb=-max, idmoji=GF.get_idmoji("spinelle")))
-    #     else:
-    #         await ctx.channel.send("Aucune convertion effectuée")
-
 
 
 def setup(bot):

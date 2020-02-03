@@ -129,6 +129,25 @@ class GemsPlay(commands.Cog):
         msg = GF.msg_recv()
         await ctx.channel.send(msg[1])
 
+    @commands.command(pass_context=True)
+    async def boxes(self, ctx, fct = None, name = None):
+        """**open [nom]** | Ouverture de Loot Box"""
+        ID = ctx.author.id
+        param = dict()
+        param["ID"] = ID
+        param["fct"] = fct
+        param["name"] = name
+        ge.socket.send_string(gg.std_send_command("boxes", ID, ge.name_pl, param))
+        msg = GF.msg_recv()
+
+        if msg[0] == "OK":
+            titre = msg[2]
+            desc = msg[1]
+            msg = discord.Embed(title = "Loot Box | {}".format(titre), color= 13752280, description = desc)
+            await ctx.channel.send(embed = msg)
+        else:
+            await ctx.channel.send(msg[1])
+
     #
     #
     #
@@ -489,94 +508,6 @@ class GemsPlay(commands.Cog):
     #     else:
     #         msg = "Il faut attendre "+str(GF.couldown_4s)+" secondes entre chaque commande !"
     #         await ctx.channel.send(msg)
-    #
-    #
-    #
-    # @commands.command(pass_context=True)
-    # async def boxes(self, ctx, fct = None, name = None):
-    #     """**open [nom]** | Ouverture de Loot Box"""
-    #     ID = ctx.author.id
-    #
-    #     if fct == "open":
-    #         if name != None:
-    #             for lootbox in GF.objetBox:
-    #                 if name == "lootbox_{}".format(lootbox.nom):
-    #                     name = lootbox.nom
-    #             if sql.valueAtNumber(ID, "lootbox_{}".format(name), "inventory") > 0:
-    #                 if name == "gift":
-    #                     for lootbox in GF.objetBox:
-    #                         if name == lootbox.nom:
-    #                             titre = lootbox.titre
-    #                             gain = r.randint(lootbox.min, lootbox.max)
-    #                             sql.add(ID, "lootbox_{}".format(lootbox.nom), -1, "inventory")
-    #
-    #                             sql.addGems(ID, gain)
-    #                             desc = "{} :gem:`gems`\n".format(gain)
-    #                             if r.randint(0,6) == 0:
-    #                                 nb = r.randint(-2, 3)
-    #                                 if nb < 1:
-    #                                     nb = 1
-    #                                 sql.addSpinelles(ID, nb)
-    #                                 desc += "{nombre} <:spinelle:{idmoji}>`spinelle`\n".format(idmoji=GF.get_idmoji("spinelle"), nombre=nb)
-    #                             for x in GF.objetItem:
-    #                                 if r.randint(0,10) <= 1:
-    #                                     if x.nom == "hyperpack":
-    #                                         nbgain = 1
-    #                                     else:
-    #                                         nbgain = r.randint(3, 8)
-    #                                     sql.add(ID, x.nom, nbgain, "inventory")
-    #                                     if x.type != "emoji":
-    #                                         desc += "\n<:gem_{0}:{2}>`{0}` x{1}".format(x.nom, nbgain, GF.get_idmoji(x.nom))
-    #                                     else:
-    #                                         desc += "\n:{0}:`{0}` x{1}".format(x.nom, nbgain)
-    #                             msg = discord.Embed(title = "Loot Box | {}".format(titre),color= 13752280, description = desc)
-    #                             print("Gems >> {} a ouvert une Loot Box de Noel".format(ctx.author.name))
-    #                             await ctx.channel.send(embed = msg)
-    #                             return True
-    #                 elif name == "gift_heart":
-    #                     for lootbox in GF.objetBox:
-    #                         if name == lootbox.nom:
-    #                             titre = lootbox.titre
-    #                             for x in GF.objetItem:
-    #                                 if r.randint(0,15) >= 14:
-    #                                     if x.nom == "hyperpack":
-    #                                         nbgain = r.randint(1,2)
-    #                                     else:
-    #                                         nbgain = r.randint(4, 10)
-    #                                     sql.add(ID, x.nom, nbgain, "inventory")
-    #                                     if x.type != "emoji":
-    #                                         desc += "\n<:gem_{0}:{2}>`{0}` x{1}".format(x.nom, nbgain, GF.get_idmoji(x.nom))
-    #                                     else:
-    #                                         desc += "\n:{0}:`{0}` x{1}".format(x.nom, nbgain)
-    #                             msg = discord.Embed(title = "Loot Box | {}".format(titre),color= 13752280, description = desc)
-    #                             print("Gems >> {} a ouvert une Loot Box de la Saint Valentin".format(ctx.author.name))
-    #                             await ctx.channel.send(embed = msg)
-    #                             return True
-    #                 else:
-    #                     for lootbox in GF.objetBox:
-    #                         if name == lootbox.nom:
-    #                             gain = r.randint(lootbox.min, lootbox.max)
-    #                             titre = lootbox.titre
-    #
-    #                             sql.addGems(ID, gain)
-    #                             sql.add(ID, "lootbox_{}".format(lootbox.nom), -1, "inventory")
-    #                             desc = "{} :gem:`gems`".format(gain)
-    #                             msg = discord.Embed(title = "Loot Box | {}".format(titre),color= 13752280, description = desc)
-    #                             print("Gems >> {} a ouvert une Loot Box".format(ctx.author.name))
-    #                             await ctx.channel.send(embed = msg)
-    #                             return True
-    #
-    #                 await ctx.channel.send("Cette box n'existe pas!")
-    #                 return False
-    #             else:
-    #                 msg = "Tu ne possèdes pas cette Loot Box"
-    #         else:
-    #             msg = "Commande `boxes open` incomplète"
-    #     elif fct == None:
-    #         msg = "Commande `boxes` incomplète"
-    #     else:
-    #         msg = "Commande `boxes` invalide"
-    #     await ctx.channel.send(msg)
 
 
 def setup(bot):

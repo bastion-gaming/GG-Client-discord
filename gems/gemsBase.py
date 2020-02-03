@@ -324,6 +324,19 @@ class GemsBase(commands.Cog):
         else:
             await ctx.channel.send(desc[1])
 
+    @commands.command(pass_context=True)
+    async def convert(self, ctx, nb = None):
+        """**[Nombre de spinelle]** | Convertisseur :gem:`gems` :left_right_arrow: `spinelles` (250 000 pour 1)"""
+        ID = ctx.author.id
+        param = dict()
+        param["ID"] = ID
+        param["nb"] = nb
+
+        ge.socket.send_string(gg.std_send_command("convert", ID, ge.name_pl, param))
+        desc = GF.msg_recv()
+
+        await ctx.channel.send(desc[1])
+
     # @commands.command(pass_context=True)
     # async def trophy(self, ctx, nom = None):
     #     """**[nom]** | Liste de vos trophées !"""
