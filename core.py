@@ -6,6 +6,7 @@ import asyncio
 import aiohttp
 from core import gestion as ge, utils, level as lvl
 from gems import gemsFonctions as GF
+import gg_lib as gg
 
 # initialisation des variables.
 DEFAUT_PREFIX = "!"
@@ -38,8 +39,24 @@ client.load_extension('help.help')
 
 client.load_extension('core.utils')
 
-####################### Stat ####################################
 
+####################### Welcome ####################################
+
+@client.event
+async def on_guild_join(guild):
+    if guild.system_channel != None:
+        systemchannel = guild.system_channel
+    else:
+        systemchannel = 0
+    # sql.new(guild.id, "Guild")
+    param = dict()
+    param["IDGuild"] = guild.id
+    ge.socket.send_string(gg.std_send_command("NewServer", guild.id, ge.name_pl, param))
+    GF.msg_recv()
+    await systemchannel.send('Bonjour {}!'.format(guild.name))
+
+
+####################### Stat ####################################
 
 @client.event
 async def on_message(message):
@@ -53,7 +70,7 @@ client.load_extension('gems.gemsBase')
 
 client.load_extension('gems.gemsPlay')
 
-client.load_extension('gems.gemsGuild')
+# client.load_extension('gems.gemsGuild')
 
 client.load_extension('gems.gemsEvent')
 

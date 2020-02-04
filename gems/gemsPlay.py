@@ -1,7 +1,6 @@
 import discord
 from discord.ext import commands
 from discord.ext.commands import bot
-from discord.utils import get
 from gems import gemsFonctions as GF
 from core import gestion as ge
 import gg_lib as gg
@@ -21,6 +20,7 @@ class GemsPlay(commands.Cog):
         ID = ctx.author.id
         param = dict()
         param["ID"] = ID
+        param["IDGuild"] = ctx.guild.id
         ge.socket.send_string(gg.std_send_command("daily", ID, ge.name_pl, param))
         msg = GF.msg_recv()
         await ctx.channel.send(msg[1])
@@ -34,6 +34,7 @@ class GemsPlay(commands.Cog):
         ID = ctx.author.id
         param = dict()
         param["ID"] = ID
+        param["IDGuild"] = ctx.guild.id
         param["ARG"] = ARG
         param["ARG2"] = ARG2
 
@@ -62,6 +63,7 @@ class GemsPlay(commands.Cog):
         ID = ctx.author.id
         param = dict()
         param["ID"] = ID
+        param["IDGuild"] = ctx.guild.id
         param["name"] = name
         ge.socket.send_string(gg.std_send_command("stealing", ID, ge.name_pl, param))
         msg = GF.msg_recv()
@@ -73,6 +75,7 @@ class GemsPlay(commands.Cog):
         ID = ctx.author.id
         param = dict()
         param["ID"] = ID
+        param["IDGuild"] = ctx.guild.id
         ge.socket.send_string(gg.std_send_command("crime", ID, ge.name_pl, param))
         msg = GF.msg_recv()
         await ctx.channel.send(msg[1])
@@ -83,6 +86,7 @@ class GemsPlay(commands.Cog):
         ID = ctx.author.id
         param = dict()
         param["ID"] = ID
+        param["IDGuild"] = ctx.guild.id
         param["valeur"] = valeur
         ge.socket.send_string(gg.std_send_command("gamble", ID, ge.name_pl, param))
         msg = GF.msg_recv()
@@ -94,6 +98,7 @@ class GemsPlay(commands.Cog):
         ID = ctx.author.id
         param = dict()
         param["ID"] = ID
+        param["IDGuild"] = ctx.guild.id
         ge.socket.send_string(gg.std_send_command("mine", ID, ge.name_pl, param))
         msg = GF.msg_recv()
         await ctx.channel.send(msg[1])
@@ -104,6 +109,7 @@ class GemsPlay(commands.Cog):
         ID = ctx.author.id
         param = dict()
         param["ID"] = ID
+        param["IDGuild"] = ctx.guild.id
         ge.socket.send_string(gg.std_send_command("dig", ID, ge.name_pl, param))
         msg = GF.msg_recv()
         await ctx.channel.send(msg[1])
@@ -114,6 +120,7 @@ class GemsPlay(commands.Cog):
         ID = ctx.author.id
         param = dict()
         param["ID"] = ID
+        param["IDGuild"] = ctx.guild.id
         ge.socket.send_string(gg.std_send_command("fish", ID, ge.name_pl, param))
         msg = GF.msg_recv()
         await ctx.channel.send(msg[1])
@@ -124,6 +131,7 @@ class GemsPlay(commands.Cog):
         ID = ctx.author.id
         param = dict()
         param["ID"] = ID
+        param["IDGuild"] = ctx.guild.id
         param["imise"] = imise
         ge.socket.send_string(gg.std_send_command("slots", ID, ge.name_pl, param))
         msg = GF.msg_recv()
@@ -135,6 +143,7 @@ class GemsPlay(commands.Cog):
         ID = ctx.author.id
         param = dict()
         param["ID"] = ID
+        param["IDGuild"] = ctx.guild.id
         param["fct"] = fct
         param["name"] = name
         ge.socket.send_string(gg.std_send_command("boxes", ID, ge.name_pl, param))
@@ -143,8 +152,43 @@ class GemsPlay(commands.Cog):
         if msg[0] == "OK":
             titre = msg[2]
             desc = msg[1]
-            msg = discord.Embed(title = "Loot Box | {}".format(titre), color= 13752280, description = desc)
-            await ctx.channel.send(embed = msg)
+            MsgEmbed = discord.Embed(title = "Loot Box | {}".format(titre), color= 13752280, description = desc)
+            await ctx.channel.send(embed = MsgEmbed)
+        else:
+            await ctx.channel.send(msg[1])
+
+    @commands.command(pass_context=True)
+    async def hothouse(self, ctx, fct = None, arg = None, arg2 = None):
+        """**[harvest / plant]** {_n° plantation / item à planter_} | Plantons compagnons !!"""
+        ID = ctx.author.id
+        param = dict()
+        param["ID"] = ID
+        param["IDGuild"] = ctx.guild.id
+        param["fct"] = fct
+        param["arg"] = arg
+        param["arg2"] = arg2
+        ge.socket.send_string(gg.std_send_command("hothouse", ID, ge.name_pl, param))
+        msg = GF.msg_recv()
+
+        if msg[0] == "OK":
+            nbplanting = msg[1]
+            desc = "Voici tes plantations.\nUtilisé `hothouse plant seed` pour planter une <:gem_seed:{0}>`seed`".format(GF.get_idmoji("seed"))
+            MsgEmbed = discord.Embed(title = "La serre", color= 6466585, description = desc)
+            k = len(msg)
+            i = 2
+            while i < k:
+                j = (i-2)/2
+                if j % 10 == 0 and j != nbplanting and j!= 0:
+                    if j // 10 == 1:
+                        await ctx.channel.send(embed = MsgEmbed)
+                    else:
+                        await ctx.channel.send(embed = MsgEmbed, delete_after = 90)
+                    MsgEmbed = discord.Embed(title = "La serre | Partie {}".format(int((j//10)+1)), color= 6466585, description = "Voici tes plantation.")
+                    MsgEmbed.add_field(name="Plantation n°{}".format(msg[i]), value=msg[i+1], inline=False)
+                else:
+                    MsgEmbed.add_field(name="Plantation n°{}".format(msg[i]), value=msg[i+1], inline=False)
+                i += 2
+            await ctx.channel.send(embed = MsgEmbed)
         else:
             await ctx.channel.send(msg[1])
 

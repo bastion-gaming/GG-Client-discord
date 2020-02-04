@@ -1,15 +1,8 @@
-import os
 import discord
-import random as r
-import time as t
-import datetime as dt
 from core import gestion as ge
 from gems import gemsFonctions as GF
 from discord.ext import commands
 from discord.ext.commands import bot
-from discord.utils import get
-from operator import itemgetter
-import json
 import gg_lib as gg
 
 PREFIX = open("core/prefix.txt", "r").read().replace("\n", "")
@@ -42,6 +35,7 @@ class GemsBase(commands.Cog):
         ID = ctx.author.id
         param = dict()
         param["ID"] = ID
+        param["IDGuild"] = ctx.guild.id
         ge.socket.send_string(gg.std_send_command("begin", ID, ge.name_pl, param))
         msg = GF.msg_recv()
         await ctx.channel.send(msg)
@@ -51,6 +45,7 @@ class GemsBase(commands.Cog):
         """Êtes vous riche ou pauvre ?"""
         ID = ctx.author.id
         param = dict()
+        param["IDGuild"] = ctx.guild.id
         if nom is None:
             nom = ctx.author.name
             param["ID"] = ID
@@ -80,12 +75,13 @@ class GemsBase(commands.Cog):
         ID = ctx.author.id
         param = dict()
         param["ID"] = ID
+        param["IDGuild"] = ctx.guild.id
         try:
             if n == None:
                 n = 10
             else:
                 n = int(n)
-            filtre = "spinelles"
+            filtre = "gems"
         except:
             if m == None:
                 filtre = n
@@ -126,6 +122,7 @@ class GemsBase(commands.Cog):
         ID = ctx.author.id
         param = dict()
         param["ID"] = ID
+        param["IDGuild"] = ctx.guild.id
         param["nb"] = nb
         param["item"] = item
 
@@ -140,6 +137,7 @@ class GemsBase(commands.Cog):
         ID = ctx.author.id
         param = dict()
         param["ID"] = ID
+        param["IDGuild"] = ctx.guild.id
         param["nb"] = nb
         param["item"] = item
 
@@ -155,6 +153,7 @@ class GemsBase(commands.Cog):
         nom = ctx.author.name
         param = dict()
         param["ID"] = ID
+        param["IDGuild"] = ctx.guild.id
         if fct is not None:
             fct = fct.lower()
         param["fct"] = fct
@@ -196,6 +195,7 @@ class GemsBase(commands.Cog):
         ID = ctx.author.id
         param = dict()
         param["ID"] = ID
+        param["IDGuild"] = ctx.guild.id
         if fct is not None:
             fct = fct.lower()
         param["fct"] = fct
@@ -277,6 +277,7 @@ class GemsBase(commands.Cog):
         param = dict()
         param["platform"] = "discord"
         param["ID"] = ID
+        param["IDGuild"] = ctx.guild.id
         param["nom"] = ctx.author.name
         param["ID_recu"] = ge.nom_ID(nom)
         param["Nom_recu"] = ctx.guild.get_member(param["ID_recu"]).name
@@ -294,6 +295,7 @@ class GemsBase(commands.Cog):
         param = dict()
         param["platform"] = "discord"
         param["ID"] = ID
+        param["IDGuild"] = ctx.guild.id
         param["nom"] = ctx.author.name
         param["ID_recu"] = ge.nom_ID(nom)
         param["Nom_recu"] = ctx.guild.get_member(param["ID_recu"]).name
@@ -311,6 +313,7 @@ class GemsBase(commands.Cog):
         ID = ctx.author.id
         param = dict()
         param["ID"] = ID
+        param["IDGuild"] = ctx.guild.id
         param["item"] = item
         param["nb"] = nb
 
@@ -324,18 +327,22 @@ class GemsBase(commands.Cog):
         else:
             await ctx.channel.send(desc[1])
 
-    @commands.command(pass_context=True)
-    async def convert(self, ctx, nb = None):
-        """**[Nombre de spinelle]** | Convertisseur :gem:`gems` :left_right_arrow: `spinelles` (250 000 pour 1)"""
-        ID = ctx.author.id
-        param = dict()
-        param["ID"] = ID
-        param["nb"] = nb
-
-        ge.socket.send_string(gg.std_send_command("convert", ID, ge.name_pl, param))
-        desc = GF.msg_recv()
-
-        await ctx.channel.send(desc[1])
+    # ==============================
+    # ===== Commande désactivé =====
+    # ==============================
+    # @commands.command(pass_context=True)
+    # async def convert(self, ctx, nb = None):
+    #     """**[Nombre de spinelle]** | Convertisseur :gem:`gems` :left_right_arrow: `spinelles` (250 000 pour 1)"""
+    #     ID = ctx.author.id
+    #     param = dict()
+    #     param["ID"] = ID
+    #     param["IDGuild"] = ctx.guild.id
+    #     param["nb"] = nb
+    #
+    #     ge.socket.send_string(gg.std_send_command("convert", ID, ge.name_pl, param))
+    #     desc = GF.msg_recv()
+    #
+    #     await ctx.channel.send(desc[1])
 
     # @commands.command(pass_context=True)
     # async def trophy(self, ctx, nom = None):
