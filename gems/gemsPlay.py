@@ -192,240 +192,39 @@ class GemsPlay(commands.Cog):
         else:
             await ctx.channel.send(msg[1])
 
-    #
-    #
-    #
-    # @commands.command(pass_context=True)
-    # async def hothouse(self, ctx, fct = None, arg = None, arg2 = None):
-    #     """**[harvest / plant]** {_n° plantation / item à planter_} | Plantons compagnons !!"""
-    #     ID = ctx.author.id
-    #     maxplanting = 50
-    #     if sql.spam(ID,GF.couldown_4s, "hothouse", "gems"):
-    #         nbplanting = int(sql.valueAtNumber(ID, "planting_plan", "inventory")) + 1
-    #         if nbplanting >= maxplanting:
-    #             nbplanting = maxplanting
-    #         msg = discord.Embed(title = "La serre",color= 6466585, description = "Voici tes plantations.\nUtilisé `hothouse plant seed` pour planter une <:gem_seed:{0}>`seed`".format(GF.get_idmoji("seed")))
-    #         desc = ""
-    #         i = 1
-    #         sql.updateComTime(ID, "hothouse", "gems")
-    #         if fct == None or fct == "harvest":
-    #             if  arg != None:
-    #                 if int(arg) <= nbplanting:
-    #                     nbplanting = int(arg)
-    #                 else:
-    #                     msg = "Tu n'as pas assez de plantations ou cette plantation n'est pas disponible!"
-    #                     await ctx.channel.send(msg)
-    #                     return 404
-    #             while i <= nbplanting:
-    #                 data = []
-    #                 valuePlanting = sql.valueAt(ID, i, "hothouse")
-    #                 if valuePlanting != 0:
-    #                     valueTime = float(valuePlanting[0])
-    #                     valueItem = valuePlanting[1]
-    #                 else:
-    #                     valueTime = 0
-    #                     valueItem = ""
-    #                 if valueItem == "cacao":
-    #                     couldown = GF.couldown_4h
-    #                 else:
-    #                     couldown = GF.couldown_6h
-    #                 if valueTime == 0:
-    #                     desc = "Cette plantation est vide!"
-    #                 else:
-    #                     PlantingTime = float(valueTime)
-    #                     InstantTime = t.time()
-    #                     time = PlantingTime - (InstantTime-couldown)
-    #                     if time <= 0:
-    #                         De = r.randint(1,15)
-    #                         jour = dt.date.today()
-    #                         if valueItem == "seed" or valueItem == "":
-    #                             if (jour.month == 10 and jour.day >= 23) or (jour.month == 11 and jour.day <= 10): #Special Halloween
-    #                                 if De <= 2:
-    #                                     nbHarvest = r.randint(1, 2)
-    #                                     item = "oak"
-    #                                 elif De > 2 and De <= 7:
-    #                                     nbHarvest = r.randint(2, 4)
-    #                                     item = "pumpkin"
-    #                                 elif De > 7 and De <= 10:
-    #                                     nbHarvest = r.randint(1, 2)
-    #                                     item = "spruce"
-    #                                 elif De > 10 and De <= 12:
-    #                                     nbHarvest = r.randint(1, 2)
-    #                                     item = "palm"
-    #                                 elif De > 12 and De <= 14:
-    #                                     nbHarvest = r.randint(4,10)
-    #                                     item = "wheat"
-    #                                 elif De > 14:
-    #                                     nbHarvest = r.randint(6,12)
-    #                                     item = "grapes"
-    #                             else:
-    #                                 if De <= 5:
-    #                                     nbHarvest = r.randint(1, 2)
-    #                                     item = "oak"
-    #                                 elif De > 5 and De <= 9:
-    #                                     nbHarvest = r.randint(1, 2)
-    #                                     item = "spruce"
-    #                                 elif De > 9 and De <= 12:
-    #                                     nbHarvest = r.randint(1, 2)
-    #                                     item = "palm"
-    #                                 elif De > 12 and De <= 14:
-    #                                     nbHarvest = r.randint(4,10)
-    #                                     item = "wheat"
-    #                                 elif De > 14:
-    #                                     nbHarvest = r.randint(6,12)
-    #                                     item = "grapes"
-    #                         elif valueItem == "cacao":
-    #                             nbHarvest = r.randint(1,4)
-    #                             item = "chocolate"
-    #                         data = []
-    #                         data.append(0)
-    #                         data.append("")
-    #                         sql.add(ID, item, nbHarvest, "inventory")
-    #                         sql.updateField(ID, i, data, "hothouse")
-    #                         if item == "grapes":
-    #                             desc = "Ta plantation à fini de pousser, en la coupant tu gagnes {2} :{1}:`{1}`".format(GF.get_idmoji(item), item, nbHarvest)
-    #                         else:
-    #                             desc = "Ta plantation à fini de pousser, en la coupant tu gagnes {2} <:gem_{1}:{0}>`{1}`".format(GF.get_idmoji(item), item, nbHarvest)
-    #                         lvl.addxp(ID, 1, "gems")
-    #                         if i > 1:
-    #                             if sql.valueAtNumber(ID, "planting_plan", "inventory") > 0:
-    #                                 if sql.valueAt(ID, "planting_plan", "durability") == 0:
-    #                                     for c in GF.objetOutil:
-    #                                         if c.nom == "planting_plan":
-    #                                             sql.add(ID, "planting_plan", c.durabilite, "durability")
-    #                                 sql.add(ID, "planting_plan", -1, "durability")
-    #                                 if sql.valueAt(ID, "planting_plan", "durability")[0] <= 0:
-    #                                     for c in GF.objetOutil:
-    #                                         if c.nom == "planting_plan":
-    #                                             sql.add(ID, "planting_plan", c.durabilite, "durability")
-    #                                     sql.add(ID, "planting_plan", -1, "inventory")
-    #
-    #                     else:
-    #                         timeH = int(time / 60 / 60)
-    #                         time = time - timeH * 3600
-    #                         timeM = int(time / 60)
-    #                         timeS = int(time - timeM * 60)
-    #                         desc = "<:gem_{3}:{4}>`{3}` | Ta plantation aura fini de pousser dans :clock2:`{0}h {1}m {2}s`".format(timeH,timeM,timeS,valueItem,GF.get_idmoji(valueItem))
-    #                 if i % 10 == 0 and i != nbplanting:
-    #                     if i // 10 == 1:
-    #                         await ctx.channel.send(embed = msg)
-    #                     else:
-    #                         await ctx.channel.send(embed = msg, delete_after = 90)
-    #                     msg = discord.Embed(title = "La serre | Partie {}".format((i//10)+1),color= 6466585, description = "Voici tes plantation.")
-    #                     msg.add_field(name="Plantation n°{}".format(i), value=desc, inline=False)
-    #                 else:
-    #                     msg.add_field(name="Plantation n°{}".format(i), value=desc, inline=False)
-    #                 i += 1
-    #         elif fct == "plant":
-    #             if sql.valueAtNumber(wel.idBaBot, "DailyMult", "daily") == 1:
-    #                 await ctx.channel.send("Plantations endommagées! Un violent orage :cloud_lightning: à détruit tes plantations\nTes plantations seront réparrées au plus vite")
-    #                 return False
-    #             if arg != "seed" and arg != "cacao":
-    #                 arg = "seed"
-    #             if arg2 != None:
-    #                 try:
-    #                     arg2 = int(arg2)
-    #                 except:
-    #                     return 404
-    #                 if arg2 > nbplanting:
-    #                     msg = "Tu n'as pas assez de plantations ou cette plantation n'est pas disponible!"
-    #                     await ctx.channel.send(msg)
-    #                     return 404
-    #                 elif int(arg2) < 0:
-    #                     sql.addGems(ID, -100)
-    #                     lvl.addxp(ID, -10, "gems")
-    #                     msg = ":no_entry: Anti-cheat! Je vous met un amende de 100 :gem:`gems` pour avoir essayé de tricher !"
-    #                     slq.add(ID, "DiscordCop Amende", 1, "statgems")
-    #                     await ctx.channel.send(msg)
-    #                     return "anticheat"
-    #                 data = []
-    #                 valuePlanting = sql.valueAt(ID, i, "hothouse")
-    #                 if valuePlanting != 0:
-    #                     valueTime = float(valuePlanting[0])
-    #                     valueItem = valuePlanting[1]
-    #                 else:
-    #                     valueTime = 0
-    #                     valueItem = ""
-    #                 if valueItem == "cacao":
-    #                     couldown = "4h"
-    #                 else:
-    #                     couldown = "6h"
-    #                 if valueTime == 0:
-    #                     PlantingItemValue = sql.valueAtNumber(ID, arg, "inventory")
-    #                     if PlantingItemValue >= 1:
-    #                         data = []
-    #                         data.append(str(t.time()))
-    #                         data.append(arg)
-    #                         sql.add(ID, arg2, data, "hothouse")
-    #                         sql.add(ID, arg, -1, "inventory")
-    #                         desc = "<:gem_{0}:{1}>`{0}` plantée. Elle aura fini de pousser dans :clock2:`{2}`".format(arg, GF.get_idmoji(arg), couldown)
-    #                     else:
-    #                         desc = "Tu n'as pas de <:gem_{0}:{1}>`{0}` à planter dans ton inventaire".format(arg, GF.get_idmoji(arg))
-    #                 else:
-    #                     desc = "Tu as déjà planté une <:gem_{0}:{1}>`{0}` dans cette plantation".format(valueItem, GF.get_idmoji(valueItem))
-    #                 msg.add_field(name="Plantation n°{}".format(arg2), value=desc, inline=False)
-    #             else:
-    #                 j = 0
-    #                 while i <= nbplanting:
-    #                     data = []
-    #                     valuePlanting = sql.valueAt(ID, i, "hothouse")
-    #                     if valuePlanting != 0:
-    #                         valueTime = float(valuePlanting[0])
-    #                         valueItem = valuePlanting[1]
-    #                     else:
-    #                         valueTime = 0
-    #                         valueItem = ""
-    #                     PlantingItemValue = sql.valueAtNumber(ID, arg, "inventory")
-    #                     if valueItem == "cacao" or (valueItem == "" and arg == "cacao"):
-    #                         couldown = "4h"
-    #                     else:
-    #                         couldown = "6h"
-    #                     if valueTime == 0:
-    #                         if PlantingItemValue >= 1:
-    #                             data = []
-    #                             data.append(str(t.time()))
-    #                             data.append(arg)
-    #                             sql.add(ID, i, data, "hothouse")
-    #                             sql.add(ID, arg, -1, "inventory")
-    #                             desc = "<:gem_{0}:{1}>`{0}` plantée. Elle aura fini de pousser dans :clock2:`{2}`".format(arg, GF.get_idmoji(arg), couldown)
-    #                         else:
-    #                             desc = "Tu n'as pas de <:gem_{0}:{1}>`{0}` à planter dans ton inventaire".format(arg, GF.get_idmoji(arg))
-    #                             if j == 0:
-    #                                 j = -1
-    #                                 if arg == "seed":
-    #                                     arg = "cacao"
-    #                                 else:
-    #                                     arg = "seed"
-    #                             if i > 15 and j == 1:
-    #                                 await ctx.channel.send(embed = msg)
-    #                                 await ctx.channel.send(desc)
-    #                                 return 0
-    #                     else:
-    #                         desc = "Tu as déjà planté une <:gem_{0}:{1}>`{0}` dans cette plantation".format(valueItem, GF.get_idmoji(valueItem))
-    #                     if i % 10 == 0 and i != nbplanting:
-    #                         if i // 10 == 1:
-    #                             await ctx.channel.send(embed = msg)
-    #                         else:
-    #                             await ctx.channel.send(embed = msg, delete_after = 90)
-    #                         msg = discord.Embed(title = "La serre | Partie {}".format((i//10)+1),color= 6466585, description = "Voici vos plantations.".format(GF.get_idmoji("seed")))
-    #                         msg.add_field(name="Plantation n°{}".format(i), value=desc, inline=False)
-    #                     else:
-    #                         msg.add_field(name="Plantation n°{}".format(i), value=desc, inline=False)
-    #                     if j == -1:
-    #                         j = 1
-    #                     else:
-    #                         i += 1
-    #         else:
-    #             msg = "Fonction inconnu"
-    #             await ctx.channel.send(msg)
-    #             return False
-    #         if nbplanting // 10 == 0:
-    #             await ctx.channel.send(embed = msg)
-    #         else:
-    #             await ctx.channel.send(embed = msg, delete_after = 90)
-    #     else:
-    #         msg = "Il faut attendre "+str(GF.couldown_4s)+" secondes entre chaque commande !"
-    #         await ctx.channel.send(msg)
+    @commands.command(pass_context=True)
+    async def ferment(self, ctx, item = None):
+        """**{grapes/wheat}** | Cave de fermentation. Alcool illimité !!"""
+        ID = ctx.author.id
+        param = dict()
+        param["ID"] = ID
+        param["IDGuild"] = ctx.guild.id
+        param["item"] = item
+        ge.socket.send_string(gg.std_send_command("ferment", ID, ge.name_pl, param))
+        msg = GF.msg_recv()
+
+        if msg[0] == "OK":
+            nbplanting = msg[1]
+            desc = "Voici tes plantations.\nUtilisé `hothouse plant seed` pour planter une <:gem_seed:{0}>`seed`".format(GF.get_idmoji("seed"))
+            MsgEmbed = discord.Embed(title = "La cave", color= 6466585, description = desc)
+            k = len(msg)
+            i = 2
+            while i < k:
+                j = (i-2)/2
+                if j % 10 == 0 and j != nbplanting and j!= 0:
+                    if j // 10 == 1:
+                        await ctx.channel.send(embed = MsgEmbed)
+                    else:
+                        await ctx.channel.send(embed = MsgEmbed, delete_after = 90)
+                    MsgEmbed = discord.Embed(title = "La cave | Partie {}".format(int((j//10)+1)), color= 6466585, description = "Voici vos barrils.")
+                    MsgEmbed.add_field(name="Barril n°{}".format(msg[i]), value=msg[i+1], inline=False)
+                else:
+                    MsgEmbed.add_field(name="Barril n°{}".format(msg[i]), value=msg[i+1], inline=False)
+                i += 2
+            await ctx.channel.send(embed = MsgEmbed)
+        else:
+            await ctx.channel.send(msg[1])
+
     #
     #
     #
