@@ -1,9 +1,11 @@
 import discord
 from core import gestion as ge
-from gems import gemsFonctions as GF
+from gems import gemsFonctions as GF, gemsStats as GS
 from discord.ext import commands
 from discord.ext.commands import bot
 import gg_lib as gg
+import os
+import datetime as dt
 
 PREFIX = open("core/prefix.txt", "r").read().replace("\n", "")
 
@@ -327,6 +329,51 @@ class GemsBase(commands.Cog):
         else:
             await ctx.channel.send(desc[1])
 
+    @commands.command(pass_context=True)
+    async def graphbourse(self, ctx, item, mois = None, annee = None, type = None):
+        """**[item] [mois] [année]** | Historique de la bourse par item"""
+        ID = ctx.author.id
+        now = dt.datetime.now()
+
+        if item.lower() == "all":
+            if type == None:
+                type = str(now.month)
+            if annee == None:
+                annee = str(now.year)
+            temp = type
+            type = mois.lower()
+            mois = annee
+            annee = temp
+            param = dict()
+            param["ID"] = ID
+            param["IDGuild"] = ctx.guild.id
+            param["type"] = type
+
+            ge.socket.send_string(gg.std_send_command("listobjet", ID, ge.name_pl, param))
+            msg = GF.msg_recv()
+
+            if msg[0] == "NOK":
+                await ctx.channel.send(msg[1])
+            else:
+                for one in msg[1]:
+                    graph = GS.create_graph(ctx, one, annee, mois)
+                    if graph == "404":
+                        await ctx.send("Aucune données n'a été trouvée!")
+                    else:
+                        await ctx.send(file=discord.File("cache/{}".format(graph)))
+                        os.remove("cache/{}".format(graph))
+        else:
+            if mois == None:
+                mois = str(now.month)
+            if annee == None:
+                annee = str(now.year)
+            graph = GS.create_graph(ctx, item, annee, mois)
+            if graph == "404":
+                await ctx.send("Aucune données n'a été trouvée!")
+            else:
+                await ctx.send(file=discord.File("cache/{}".format(graph)))
+                os.remove("cache/{}".format(graph))
+
     # ==============================
     # ===== Commande désactivé =====
     # ==============================
@@ -414,65 +461,6 @@ class GemsBase(commands.Cog):
     #     else:
     #         msg = "Il faut attendre "+str(GF.couldown_6s)+" secondes entre chaque commande !"
     #         await ctx.channel.send(msg)
-    #
-    #
-    #
-    # @commands.command(pass_context=True)
-    # async def graphbourse(self, ctx, item, mois = None, annee = None, type = None):
-    #     """**[item] [mois] [année]** | Historique de la bourse par item"""
-    #     ID = ctx.author.id
-    #     now = dt.datetime.now()
-    #
-    #     if item.lower() == "all":
-    #         if type == None:
-    #             type = str(now.month)
-    #         if annee == None:
-    #             annee = str(now.year)
-    #         temp = type
-    #         type = mois.lower()
-    #         mois = temp
-    #         if type == "item" or type == "items":
-    #             for c in GF.objetItem:
-    #                 check = False
-    #                 for x in GI.exception:
-    #                     if x == c.nom:
-    #                         check = True
-    #                 for x in GF.ObjetEventEnd:
-    #                     if x == c.nom:
-    #                         check = True
-    #                 if not check:
-    #                     graph = GS.create_graph(c.nom, annee, mois)
-    #                     if graph == "404":
-    #                         await ctx.send("Aucune données n'a été trouvée!")
-    #                     else:
-    #                         await ctx.send(file=discord.File("cache/{}".format(graph)))
-    #                         os.remove("cache/{}".format(graph))
-    #         elif type == "outil" or type == "outils":
-    #             for c in GF.objetOutil:
-    #                 check = False
-    #                 for x in GI.exception:
-    #                     if x == c.nom:
-    #                         check = True
-    #                 if c.type != "bank" and check == False:
-    #                     graph = GS.create_graph(c.nom, annee, mois)
-    #                     if graph == "404":
-    #                         await ctx.send("Aucune données n'a été trouvée!")
-    #                     else:
-    #                         await ctx.send(file=discord.File("cache/{}".format(graph)))
-    #                         os.remove("cache/{}".format(graph))
-    #         else:
-    #             await ctx.send("Commande mal formulée")
-    #     else:
-    #         if mois == None:
-    #             mois = str(now.month)
-    #         if annee == None:
-    #             annee = str(now.year)
-    #         graph = GS.create_graph(item, annee, mois)
-    #         if graph == "404":
-    #             await ctx.send("Aucune données n'a été trouvée!")
-    #         else:
-    #             await ctx.send(file=discord.File("cache/{}".format(graph)))
-    #             os.remove("cache/{}".format(graph))
 
 
 def setup(bot):
