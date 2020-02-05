@@ -172,13 +172,13 @@ class GemsPlay(commands.Cog):
 
         if msg[0] == "OK":
             nbplanting = msg[1]
-            desc = "Voici tes plantations.\nUtilisé `hothouse plant seed` pour planter une <:gem_seed:{0}>`seed`".format(GF.get_idmoji("seed"))
+            desc = "Voici tes plantations.\nUtilise `hothouse plant seed` pour planter une <:gem_seed:{0}>`seed`".format(GF.get_idmoji("seed"))
             MsgEmbed = discord.Embed(title = "La serre", color= 6466585, description = desc)
             k = len(msg)
             i = 2
             while i < k:
                 j = (i-2)/2
-                if j % 10 == 0 and j != nbplanting and j!= 0:
+                if j % 10 == 0 and j != nbplanting and j != 0:
                     if j // 10 == 1:
                         await ctx.channel.send(embed = MsgEmbed)
                     else:
@@ -205,18 +205,18 @@ class GemsPlay(commands.Cog):
 
         if msg[0] == "OK":
             nbplanting = msg[1]
-            desc = "Voici tes plantations.\nUtilisé `hothouse plant seed` pour planter une <:gem_seed:{0}>`seed`".format(GF.get_idmoji("seed"))
-            MsgEmbed = discord.Embed(title = "La cave", color= 6466585, description = desc)
+            desc = "Voici tes barrils.\nUtilise `ferment grapes` pour obtenir des :wine_glass:`wine_glass`"
+            MsgEmbed = discord.Embed(title = "La cave", color= 14902529, description = desc)
             k = len(msg)
             i = 2
             while i < k:
                 j = (i-2)/2
-                if j % 10 == 0 and j != nbplanting and j!= 0:
+                if j % 10 == 0 and j != nbplanting and j != 0:
                     if j // 10 == 1:
                         await ctx.channel.send(embed = MsgEmbed)
                     else:
                         await ctx.channel.send(embed = MsgEmbed, delete_after = 90)
-                    MsgEmbed = discord.Embed(title = "La cave | Partie {}".format(int((j//10)+1)), color= 6466585, description = "Voici vos barrils.")
+                    MsgEmbed = discord.Embed(title = "La cave | Partie {}".format(int((j//10)+1)), color= 14902529, description = "Voici vos barrils.")
                     MsgEmbed.add_field(name="Barril n°{}".format(msg[i]), value=msg[i+1], inline=False)
                 else:
                     MsgEmbed.add_field(name="Barril n°{}".format(msg[i]), value=msg[i+1], inline=False)
@@ -225,7 +225,40 @@ class GemsPlay(commands.Cog):
         else:
             await ctx.channel.send(msg[1])
 
+    @commands.command(pass_context=True)
+    async def cooking(self, ctx, item = None):
+        """**{potato/pumpkin/chocolate}** | Cuisinons compagnons !!"""
+        ID = ctx.author.id
+        param = dict()
+        param["ID"] = ID
+        param["IDGuild"] = ctx.guild.id
+        param["item"] = item
+        ge.socket.send_string(gg.std_send_command("cooking", ID, ge.name_pl, param))
+        msg = GF.msg_recv()
+
+        if msg[0] == "OK":
+            nbplanting = msg[1]
+            desc = "Voici tes fours.\nUtilise `cooking potato` pour obtenir des <:gem_fries:{0}>`fries`".format(GF.get_idmoji("fries"))
+            MsgEmbed = discord.Embed(title = "La Cuisine", color= 14902529, description = desc)
+            k = len(msg)
+            i = 2
+            while i < k:
+                j = (i-2)/2
+                if j % 10 == 0 and j != nbplanting and j != 0:
+                    if j // 10 == 1:
+                        await ctx.channel.send(embed = MsgEmbed)
+                    else:
+                        await ctx.channel.send(embed = MsgEmbed, delete_after = 90)
+                    MsgEmbed = discord.Embed(title = "La Cuisine | Partie {}".format(int((j//10)+1)), color= 14902529, description = "Voici vos fours.")
+                    MsgEmbed.add_field(name="Four n°{}".format(msg[i]), value=msg[i+1], inline=False)
+                else:
+                    MsgEmbed.add_field(name="Four n°{}".format(msg[i]), value=msg[i+1], inline=False)
+                i += 2
+            await ctx.channel.send(embed = MsgEmbed)
+        else:
+            await ctx.channel.send(msg[1])
+
 
 def setup(bot):
     bot.add_cog(GemsPlay(bot))
-    open("help/cogs.txt","a").write("GemsPlay\n")
+    open("help/cogs.txt", "a").write("GemsPlay\n")
