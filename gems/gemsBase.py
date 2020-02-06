@@ -6,6 +6,7 @@ from discord.ext.commands import bot
 import gg_lib as gg
 import os
 import datetime as dt
+from languages import lang as lang_P
 
 PREFIX = open("core/prefix.txt", "r").read().replace("\n", "")
 
@@ -62,11 +63,12 @@ class GemsBase(commands.Cog):
         ge.socket.send_string(gg.std_send_command("bal", ID, ge.name_pl, param))
         desc = GF.msg_recv()
         if desc[0] == "OK":
-            title = "Compte principal de {}".format(nom)
-            msg = discord.Embed(title = title, color= 13752280, description = desc[1])
-            msg.add_field(name="**_Balance_**", value=desc[2], inline=False)
+            lang = desc[1]
+            title = lang_P.forge_msg(lang, "bal", [nom], False)
+            msg = discord.Embed(title = title, color= 13752280, description = desc[2])
+            msg.add_field(name="**_Balance_**", value=desc[3], inline=False)
 
-            msg.add_field(name=desc[3], value=desc[4], inline=False)
+            msg.add_field(name=desc[4], value=desc[5], inline=False)
             await ctx.channel.send(embed = msg)
             # Message de réussite dans la console
             print("Gems >> Balance de {} affichée".format(nom))
@@ -100,17 +102,19 @@ class GemsBase(commands.Cog):
         desc = GF.msg_recv()
 
         if desc[0] == "OK":
+            lang = desc[1]
             if filtre == "gems" or filtre == "gem" or filtre == "spinelles" or filtre == "spinelle":
-                Titre = "Classement des Joueurs | :gem:`gems`"
+                Titre = lang_P.forge_msg(lang, "baltop", None, False, 0)
                 if filtre == "spinelles" or filtre == "spinelle":
-                    Titre = "Classement des Joueurs | <:spinelle:{idmoji}>`spinelles`".format(idmoji=GF.get_idmoji("spinelle"))
+                    Titre = lang_P.forge_msg(lang, "baltop", [GF.get_idmoji("spinelle")], False, 1)
 
-                msg = discord.Embed(title = Titre, color= 13752280, description = desc[1])
+                msg = discord.Embed(title = Titre, color= 13752280, description = desc[2])
                 # Message de réussite dans la console
                 print("Gems >> {} a afficher le classement des {} premiers joueurs | Filtre: {}".format(ctx.author.name, n, filtre))
 
             elif filtre == "guild" or filtre == "guilde":
-                msg = discord.Embed(title = "Classement des Guildes", color= 13752280, description = desc[1])
+                Titre = lang_P.forge_msg(lang, "baltop", None, False, 2)
+                msg = discord.Embed(title = Titre, color= 13752280, description = desc[2])
                 # Message de réussite dans la console
                 print("Gems >> {} a afficher le classement des {} premières guildes".format(ctx.author.name, n))
 

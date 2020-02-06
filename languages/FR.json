@@ -1,0 +1,10 @@
+{
+  "bal":
+    "Compte principal de {0}",
+  "baltop":
+    [
+      "Classement des Joueurs | :gem:`gems`",
+      "Classement des Joueurs | <:spinelle:{0}>`spinelles`",
+      "Classement des Guildes"
+    ]
+}
