@@ -37,7 +37,6 @@ class GemsBase(commands.Cog):
         ID = ctx.author.id
         param = dict()
         param["ID"] = ID
-        param["IDGuild"] = ctx.guild.id
         ge.socket.send_string(gg.std_send_command("begin", ID, ge.name_pl, param))
         msg = GF.msg_recv()
         await ctx.channel.send(msg)
@@ -47,10 +46,14 @@ class GemsBase(commands.Cog):
         """Êtes vous riche ou pauvre ?"""
         ID = ctx.author.id
         param = dict()
-        param["IDGuild"] = ctx.guild.id
+        param["fct"] = "None"
         if nom is None:
             nom = ctx.author.name
             param["ID"] = ID
+        elif nom == "info":
+            nom = ctx.author.name
+            param["ID"] = ID
+            param["fct"] = "info"
         else:
             IDname = ge.nom_ID(nom)
             param["ID"] = IDname
@@ -60,10 +63,10 @@ class GemsBase(commands.Cog):
         desc = GF.msg_recv()
         if desc[0] == "OK":
             title = "Compte principal de {}".format(nom)
-            msg = discord.Embed(title = title, color= 13752280, description = "")
-            msg.add_field(name="**_Balance_**", value=desc[1], inline=False)
+            msg = discord.Embed(title = title, color= 13752280, description = desc[1])
+            msg.add_field(name="**_Balance_**", value=desc[2], inline=False)
 
-            msg.add_field(name=desc[2], value=desc[3], inline=False)
+            msg.add_field(name=desc[3], value=desc[4], inline=False)
             await ctx.channel.send(embed = msg)
             # Message de réussite dans la console
             print("Gems >> Balance de {} affichée".format(nom))
@@ -77,7 +80,6 @@ class GemsBase(commands.Cog):
         ID = ctx.author.id
         param = dict()
         param["ID"] = ID
-        param["IDGuild"] = ctx.guild.id
         try:
             if n == None:
                 n = 10
@@ -376,6 +378,9 @@ class GemsBase(commands.Cog):
 
     @commands.command(pass_context=True)
     async def lang(self, ctx, langue):
+        """
+        Permet de changer la langue pour un joueur.
+        """
         ID = ctx.author.id
         param = dict()
         param["ID"] = ID

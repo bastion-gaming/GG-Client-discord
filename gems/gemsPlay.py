@@ -20,7 +20,6 @@ class GemsPlay(commands.Cog):
         ID = ctx.author.id
         param = dict()
         param["ID"] = ID
-        param["IDGuild"] = ctx.guild.id
         ge.socket.send_string(gg.std_send_command("daily", ID, ge.name_pl, param))
         msg = GF.msg_recv()
         await ctx.channel.send(msg[1])
@@ -34,7 +33,6 @@ class GemsPlay(commands.Cog):
         ID = ctx.author.id
         param = dict()
         param["ID"] = ID
-        param["IDGuild"] = ctx.guild.id
         param["ARG"] = ARG
         param["ARG2"] = ARG2
 
@@ -63,7 +61,6 @@ class GemsPlay(commands.Cog):
         ID = ctx.author.id
         param = dict()
         param["ID"] = ID
-        param["IDGuild"] = ctx.guild.id
         param["name"] = name
         ge.socket.send_string(gg.std_send_command("stealing", ID, ge.name_pl, param))
         msg = GF.msg_recv()
@@ -75,7 +72,6 @@ class GemsPlay(commands.Cog):
         ID = ctx.author.id
         param = dict()
         param["ID"] = ID
-        param["IDGuild"] = ctx.guild.id
         ge.socket.send_string(gg.std_send_command("crime", ID, ge.name_pl, param))
         msg = GF.msg_recv()
         await ctx.channel.send(msg[1])
@@ -86,7 +82,6 @@ class GemsPlay(commands.Cog):
         ID = ctx.author.id
         param = dict()
         param["ID"] = ID
-        param["IDGuild"] = ctx.guild.id
         param["valeur"] = valeur
         ge.socket.send_string(gg.std_send_command("gamble", ID, ge.name_pl, param))
         msg = GF.msg_recv()
@@ -98,7 +93,6 @@ class GemsPlay(commands.Cog):
         ID = ctx.author.id
         param = dict()
         param["ID"] = ID
-        param["IDGuild"] = ctx.guild.id
         ge.socket.send_string(gg.std_send_command("mine", ID, ge.name_pl, param))
         msg = GF.msg_recv()
         await ctx.channel.send(msg[1])
@@ -109,7 +103,6 @@ class GemsPlay(commands.Cog):
         ID = ctx.author.id
         param = dict()
         param["ID"] = ID
-        param["IDGuild"] = ctx.guild.id
         ge.socket.send_string(gg.std_send_command("dig", ID, ge.name_pl, param))
         msg = GF.msg_recv()
         await ctx.channel.send(msg[1])
@@ -120,7 +113,6 @@ class GemsPlay(commands.Cog):
         ID = ctx.author.id
         param = dict()
         param["ID"] = ID
-        param["IDGuild"] = ctx.guild.id
         ge.socket.send_string(gg.std_send_command("fish", ID, ge.name_pl, param))
         msg = GF.msg_recv()
         await ctx.channel.send(msg[1])
@@ -131,7 +123,6 @@ class GemsPlay(commands.Cog):
         ID = ctx.author.id
         param = dict()
         param["ID"] = ID
-        param["IDGuild"] = ctx.guild.id
         param["imise"] = imise
         ge.socket.send_string(gg.std_send_command("slots", ID, ge.name_pl, param))
         msg = GF.msg_recv()
@@ -143,7 +134,6 @@ class GemsPlay(commands.Cog):
         ID = ctx.author.id
         param = dict()
         param["ID"] = ID
-        param["IDGuild"] = ctx.guild.id
         param["fct"] = fct
         param["name"] = name
         ge.socket.send_string(gg.std_send_command("boxes", ID, ge.name_pl, param))
@@ -163,7 +153,6 @@ class GemsPlay(commands.Cog):
         ID = ctx.author.id
         param = dict()
         param["ID"] = ID
-        param["IDGuild"] = ctx.guild.id
         param["fct"] = fct
         param["arg"] = arg
         param["arg2"] = arg2
@@ -198,7 +187,6 @@ class GemsPlay(commands.Cog):
         ID = ctx.author.id
         param = dict()
         param["ID"] = ID
-        param["IDGuild"] = ctx.guild.id
         param["item"] = item
         ge.socket.send_string(gg.std_send_command("ferment", ID, ge.name_pl, param))
         msg = GF.msg_recv()
@@ -231,7 +219,6 @@ class GemsPlay(commands.Cog):
         ID = ctx.author.id
         param = dict()
         param["ID"] = ID
-        param["IDGuild"] = ctx.guild.id
         param["item"] = item
         ge.socket.send_string(gg.std_send_command("cooking", ID, ge.name_pl, param))
         msg = GF.msg_recv()

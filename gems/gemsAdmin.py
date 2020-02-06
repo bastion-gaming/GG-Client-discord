@@ -22,7 +22,6 @@ class GemsAdmin(commands.Cog):
                 ID = ge.nom_ID(ID)
         param = dict()
         param["ID"] = ID
-        param["IDGuild"] = ctx.guild.id
         param["fct"] = fct
         param["arg2"] = arg2
         param["arg3"] = arg3
