@@ -386,7 +386,7 @@ class GemsBase(commands.Cog):
                 os.remove("cache/{}".format(graph[0]))
 
     @commands.command(pass_context=True)
-    async def lang(self, ctx, langue):
+    async def lang(self, ctx, langue = None):
         """
         Permet de changer la langue pour un joueur.
         """
