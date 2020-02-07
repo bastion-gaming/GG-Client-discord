@@ -4,6 +4,7 @@ from discord.ext.commands import bot
 from gems import gemsFonctions as GF
 from core import gestion as ge
 import gg_lib as gg
+from languages import lang as lang_P
 
 
 class GemsPlay(commands.Cog):
@@ -48,8 +49,8 @@ class GemsPlay(commands.Cog):
             else:
                 title = "Compte épargne de {}".format(ctx.author.name)
             msg = discord.Embed(title = title, color= 13752280, description = "")
-            msg.add_field(name="Balance", value=desc[1], inline=False)
-            msg.add_field(name="Commandes", value=desc[2], inline=False)
+            msg.add_field(name="Balance", value=desc[2], inline=False)
+            msg.add_field(name="Commandes", value=desc[3], inline=False)
             await ctx.channel.send(embed = msg)
 
         else:
@@ -160,22 +161,24 @@ class GemsPlay(commands.Cog):
         msg = GF.msg_recv()
 
         if msg[0] == "OK":
-            nbplanting = msg[1]
-            desc = "Voici tes plantations.\nUtilise `hothouse plant seed` pour planter une <:gem_seed:{0}>`seed`".format(GF.get_idmoji("seed"))
-            MsgEmbed = discord.Embed(title = "La serre", color= 6466585, description = desc)
+            lang = msg[1]
+            nbplanting = msg[2]
+            desc = lang_P.forge_msg(lang, "hothouse", [GF.get_idmoji("seed")], False, 0)
+            titre = lang_P.forge_msg(lang, "hothouse", None, False, 1)
+            MsgEmbed = discord.Embed(title = titre, color= 6466585, description = desc)
             k = len(msg)
-            i = 2
+            i = 3
             while i < k:
-                j = (i-2)/2
+                j = (i-3)/2
                 if j % 10 == 0 and j != nbplanting and j != 0:
                     if j // 10 == 1:
                         await ctx.channel.send(embed = MsgEmbed)
                     else:
                         await ctx.channel.send(embed = MsgEmbed, delete_after = 90)
-                    MsgEmbed = discord.Embed(title = "La serre | Partie {}".format(int((j//10)+1)), color= 6466585, description = "Voici tes plantation.")
-                    MsgEmbed.add_field(name="Plantation n°{}".format(msg[i]), value=msg[i+1], inline=False)
+                    MsgEmbed = discord.Embed(title = lang_P.forge_msg(lang, "hothouse", [int((j//10)+1)], False, 2), color= 6466585, description = "Voici tes plantation.")
+                    MsgEmbed.add_field(name=lang_P.forge_msg(lang, "hothouse", [msg[i]], False, 3), value=msg[i+1], inline=False)
                 else:
-                    MsgEmbed.add_field(name="Plantation n°{}".format(msg[i]), value=msg[i+1], inline=False)
+                    MsgEmbed.add_field(name=lang_P.forge_msg(lang, "hothouse", [msg[i]], False, 3), value=msg[i+1], inline=False)
                 i += 2
             await ctx.channel.send(embed = MsgEmbed)
         else:
@@ -192,22 +195,24 @@ class GemsPlay(commands.Cog):
         msg = GF.msg_recv()
 
         if msg[0] == "OK":
-            nbplanting = msg[1]
-            desc = "Voici tes barrils.\nUtilise `ferment grapes` pour obtenir des :wine_glass:`wine_glass`"
-            MsgEmbed = discord.Embed(title = "La cave", color= 14902529, description = desc)
+            lang = msg[1]
+            nbplanting = msg[2]
+            desc = lang_P.forge_msg(lang, "ferment", None, False, 0)
+            titre = lang_P.forge_msg(lang, "ferment", None, False, 1)
+            MsgEmbed = discord.Embed(title = titre, color= 14902529, description = desc)
             k = len(msg)
-            i = 2
+            i = 3
             while i < k:
-                j = (i-2)/2
+                j = (i-3)/2
                 if j % 10 == 0 and j != nbplanting and j != 0:
                     if j // 10 == 1:
                         await ctx.channel.send(embed = MsgEmbed)
                     else:
                         await ctx.channel.send(embed = MsgEmbed, delete_after = 90)
-                    MsgEmbed = discord.Embed(title = "La cave | Partie {}".format(int((j//10)+1)), color= 14902529, description = "Voici vos barrils.")
-                    MsgEmbed.add_field(name="Barril n°{}".format(msg[i]), value=msg[i+1], inline=False)
+                    MsgEmbed = discord.Embed(title = lang_P.forge_msg(lang, "ferment", [int((j//10)+1)], False, 2), color= 14902529, description = "Voici vos barrils.")
+                    MsgEmbed.add_field(name=lang_P.forge_msg(lang, "ferment", [msg[i]], False, 3), value=msg[i+1], inline=False)
                 else:
-                    MsgEmbed.add_field(name="Barril n°{}".format(msg[i]), value=msg[i+1], inline=False)
+                    MsgEmbed.add_field(name=lang_P.forge_msg(lang, "ferment", [msg[i]], False, 3), value=msg[i+1], inline=False)
                 i += 2
             await ctx.channel.send(embed = MsgEmbed)
         else:
@@ -224,22 +229,24 @@ class GemsPlay(commands.Cog):
         msg = GF.msg_recv()
 
         if msg[0] == "OK":
-            nbplanting = msg[1]
-            desc = "Voici tes fours.\nUtilise `cooking potato` pour obtenir des <:gem_fries:{0}>`fries`".format(GF.get_idmoji("fries"))
-            MsgEmbed = discord.Embed(title = "La Cuisine", color= 14902529, description = desc)
+            lang = msg[1]
+            nbplanting = msg[2]
+            desc = lang_P.forge_msg(lang, "cooking", [GF.get_idmoji("fries")], False, 0)
+            titre = lang_P.forge_msg(lang, "cooking", None, False, 1)
+            MsgEmbed = discord.Embed(title = titre, color= 14902529, description = desc)
             k = len(msg)
-            i = 2
+            i = 3
             while i < k:
-                j = (i-2)/2
+                j = (i-3)/2
                 if j % 10 == 0 and j != nbplanting and j != 0:
                     if j // 10 == 1:
                         await ctx.channel.send(embed = MsgEmbed)
                     else:
                         await ctx.channel.send(embed = MsgEmbed, delete_after = 90)
-                    MsgEmbed = discord.Embed(title = "La Cuisine | Partie {}".format(int((j//10)+1)), color= 14902529, description = "Voici vos fours.")
-                    MsgEmbed.add_field(name="Four n°{}".format(msg[i]), value=msg[i+1], inline=False)
+                    MsgEmbed = discord.Embed(title = lang_P.forge_msg(lang, "cooking", [int((j//10)+1)], False, 2), color= 14902529, description = "Voici vos fours.")
+                    MsgEmbed.add_field(name=lang_P.forge_msg(lang, "cooking", [msg[i]], False, 3), value=msg[i+1], inline=False)
                 else:
-                    MsgEmbed.add_field(name="Four n°{}".format(msg[i]), value=msg[i+1], inline=False)
+                    MsgEmbed.add_field(name=lang_P.forge_msg(lang, "cooking", [msg[i]], False, 3), value=msg[i+1], inline=False)
                 i += 2
             await ctx.channel.send(embed = MsgEmbed)
         else:

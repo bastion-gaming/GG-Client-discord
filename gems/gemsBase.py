@@ -170,28 +170,30 @@ class GemsBase(commands.Cog):
         desc = GF.msg_recv()
 
         if desc[0] == "OK":
-            msg_titre = "Inventaire de {} | Poche principale".format(nom)
-            msg = discord.Embed(title = msg_titre, color= 6466585, description = desc[1])
+            lang = desc[1]
+            msg_titre = lang_P.forge_msg(lang, "inv", [nom], False, 0)
+            msg = discord.Embed(title = msg_titre, color= 6466585, description = desc[2])
             if desc[2] != "None":
-                msg.add_field(name="Outils", value=desc[2], inline=False)
+                msg.add_field(name=lang_P.forge_msg(lang, "categorie", None, False, 0), value=desc[3], inline=False)
             if desc[3] != "None":
-                msg.add_field(name="Spéciaux", value=desc[3], inline=False)
+                msg.add_field(name=lang_P.forge_msg(lang, "categorie", None, False, 1), value=desc[4], inline=False)
             if desc[4] != "None":
-                msg.add_field(name="Items", value=desc[4], inline=False)
+                msg.add_field(name=lang_P.forge_msg(lang, "categorie", None, False, 2), value=desc[5], inline=False)
             if desc[5] != "None":
-                msg.add_field(name="Minerais", value=desc[5], inline=False)
+                msg.add_field(name=lang_P.forge_msg(lang, "categorie", None, False, 3), value=desc[6], inline=False)
             if desc[6] != "None":
-                msg.add_field(name="Poissons", value=desc[6], inline=False)
+                msg.add_field(name=lang_P.forge_msg(lang, "categorie", None, False, 4), value=desc[7], inline=False)
             if desc[7] != "None":
-                msg.add_field(name="Plantes", value=desc[7], inline=False)
+                msg.add_field(name=lang_P.forge_msg(lang, "categorie", None, False, 5), value=desc[8], inline=False)
             if desc[8] != "None":
-                msg.add_field(name="Événement", value=desc[8], inline=False)
+                msg.add_field(name=lang_P.forge_msg(lang, "categorie", None, False, 6), value=desc[9], inline=False)
             if desc[9] != "None":
-                msg.add_field(name="Loot Box", value=desc[9], inline=False)
+                msg.add_field(name=lang_P.forge_msg(lang, "categorie", None, False, 7), value=desc[10], inline=False)
             await ctx.channel.send(embed = msg)
 
         elif desc[0] == "pockets":
-            msg = discord.Embed(title = "Liste des poches de l'inventaire".format(nom), color= 6466585, description = desc[1])
+            lang = desc[1]
+            msg = discord.Embed(title = lang_P.forge_msg(lang, "inv", None, False, 1), color= 6466585, description = desc[2])
             await ctx.channel.send(embed = msg)
 
         else:
@@ -212,67 +214,68 @@ class GemsBase(commands.Cog):
         desc = GF.msg_recv()
 
         if desc[0] == "OK":
+            lang = desc[1]
             if fct != None:
-                msg = discord.Embed(title = "Le marché | {name}".format(name=fct), color= 2461129, description = desc[1])
+                msg = discord.Embed(title = lang_P.forge_msg(lang, "market", [fct], False, 1), color= 2461129, description = desc[2])
             else:
-                msg = discord.Embed(title = "Le marché", color= 2461129, description = desc[1])
+                msg = discord.Embed(title = lang_P.forge_msg(lang, "market", None, False, 0), color= 2461129, description = desc[2])
             if fct == "mobile":
-                msg.add_field(name="Outils", value=desc[2], inline=False)
-                msg.add_field(name="Spéciaux", value=desc[3], inline=False)
-                msg.add_field(name="Minerais", value=desc[4], inline=False)
-                msg.add_field(name="Poissons", value=desc[5], inline=False)
-                msg.add_field(name="Plantes", value=desc[6], inline=False)
+                msg.add_field(name=lang_P.forge_msg(lang, "categorie", None, False, 0), value=desc[3], inline=False)
+                msg.add_field(name=lang_P.forge_msg(lang, "categorie", None, False, 1), value=desc[4], inline=False)
+                msg.add_field(name=lang_P.forge_msg(lang, "categorie", None, False, 3), value=desc[5], inline=False)
+                msg.add_field(name=lang_P.forge_msg(lang, "categorie", None, False, 4), value=desc[6], inline=False)
+                msg.add_field(name=lang_P.forge_msg(lang, "categorie", None, False, 5), value=desc[7], inline=False)
                 if desc[7] != "None":
-                    msg.add_field(name="Items", value=desc[7], inline=False)
+                    msg.add_field(name=lang_P.forge_msg(lang, "categorie", None, False, 2), value=desc[8], inline=False)
                 if desc[8] != "None":
-                    msg.add_field(name="Événement", value=desc[8], inline=False)
+                    msg.add_field(name=lang_P.forge_msg(lang, "categorie", None, False, 6), value=desc[9], inline=False)
                 if desc[9] != "None":
-                    msg.add_field(name="Spinelles <:spinelle:{}>".format(GF.get_idmoji("spinelle")), value=desc[9], inline=False)
+                    msg.add_field(name="Spinelles <:spinelle:{}>".format(GF.get_idmoji("spinelle")), value=desc[10], inline=False)
 
-                msg.add_field(name="Loot Box", value=desc[10], inline=False)
+                msg.add_field(name=lang_P.forge_msg(lang, "categorie", None, False, 7), value=desc[11], inline=False)
                 await ctx.channel.send(embed = msg)
 
             else:
                 if fct == None or fct == "outil" or fct == "outils":
-                    msg.add_field(name="Outils", value=desc[3], inline=True)
-                    msg.add_field(name="Vente | Achat", value=desc[4], inline=True)
-                    msg.add_field(name="Infos", value=desc[5], inline=True)
+                    msg.add_field(name=lang_P.forge_msg(lang, "categorie", None, False, 0), value=desc[4], inline=True)
+                    msg.add_field(name=lang_P.forge_msg(lang, "market", None, False, 2), value=desc[5], inline=True)
+                    msg.add_field(name=lang_P.forge_msg(lang, "market", None, False, 4), value=desc[6], inline=True)
 
                 if fct == None or fct == "outils" or fct == "outil" or fct == "item" or fct == "items" or fct == "minerai" or fct == "minerais" or fct == "poissons" or fct == "fish" or fct == "plantes" or fct == "plants" or fct == "event" or fct == "événements":
                     if desc[6] != "None":
-                        msg.add_field(name="Spéciaux", value=desc[6], inline=True)
-                        msg.add_field(name="Vente | Achat", value=desc[7], inline=True)
-                        msg.add_field(name="Infos", value=desc[8], inline=True)
+                        msg.add_field(name=lang_P.forge_msg(lang, "categorie", None, False, 1), value=desc[7], inline=True)
+                        msg.add_field(name=lang_P.forge_msg(lang, "market", None, False, 2), value=desc[8], inline=True)
+                        msg.add_field(name=lang_P.forge_msg(lang, "market", None, False, 4), value=desc[9], inline=True)
 
                 if fct == None or fct == "minerai" or fct == "minerais":
-                    msg.add_field(name="Minerais", value=desc[9], inline=True)
-                    msg.add_field(name="Vente | Achat", value=desc[10], inline=True)
-                    msg.add_field(name="Infos", value=desc[11], inline=True)
+                    msg.add_field(name=lang_P.forge_msg(lang, "categorie", None, False, 3), value=desc[10], inline=True)
+                    msg.add_field(name=lang_P.forge_msg(lang, "market", None, False, 2), value=desc[11], inline=True)
+                    msg.add_field(name=lang_P.forge_msg(lang, "market", None, False, 4), value=desc[12], inline=True)
 
                 if fct == None or fct == "fish" or fct == "poissons":
-                    msg.add_field(name="Poissons", value=desc[12], inline=True)
-                    msg.add_field(name="Vente | Achat", value=desc[13], inline=True)
-                    msg.add_field(name="Infos", value=desc[14], inline=True)
+                    msg.add_field(name=lang_P.forge_msg(lang, "categorie", None, False, 4), value=desc[13], inline=True)
+                    msg.add_field(name=lang_P.forge_msg(lang, "market", None, False, 2), value=desc[14], inline=True)
+                    msg.add_field(name=lang_P.forge_msg(lang, "market", None, False, 4), value=desc[15], inline=True)
 
                 if fct == None or fct == "plants" or fct == "plantes":
-                    msg.add_field(name="Plantes", value=desc[15], inline=True)
-                    msg.add_field(name="Vente | Achat", value=desc[16], inline=True)
-                    msg.add_field(name="Infos", value=desc[17], inline=True)
+                    msg.add_field(name=lang_P.forge_msg(lang, "categorie", None, False, 5), value=desc[16], inline=True)
+                    msg.add_field(name=lang_P.forge_msg(lang, "market", None, False, 2), value=desc[17], inline=True)
+                    msg.add_field(name=lang_P.forge_msg(lang, "market", None, False, 4), value=desc[18], inline=True)
 
                 if fct == None or fct == "item" or fct == "items":
-                    msg.add_field(name="Items", value=desc[18], inline=True)
-                    msg.add_field(name="Vente | Achat", value=desc[19], inline=True)
-                    msg.add_field(name="Infos", value=desc[20], inline=True)
+                    msg.add_field(name=lang_P.forge_msg(lang, "categorie", None, False, 2), value=desc[19], inline=True)
+                    msg.add_field(name=lang_P.forge_msg(lang, "market", None, False, 2), value=desc[20], inline=True)
+                    msg.add_field(name=lang_P.forge_msg(lang, "market", None, False, 4), value=desc[21], inline=True)
 
                 if fct == None or fct == "event" or fct == "événements":
-                    msg.add_field(name="Événements", value=desc[21], inline=True)
-                    msg.add_field(name="Vente | Achat", value=desc[22], inline=True)
-                    msg.add_field(name="Infos", value=desc[23], inline=True)
+                    msg.add_field(name=lang_P.forge_msg(lang, "categorie", None, False, 6), value=desc[22], inline=True)
+                    msg.add_field(name=lang_P.forge_msg(lang, "market", None, False, 2), value=desc[23], inline=True)
+                    msg.add_field(name=lang_P.forge_msg(lang, "market", None, False, 4), value=desc[24], inline=True)
 
                 if fct == None or fct == "lootbox":
-                    msg.add_field(name="Loot Box", value=desc[24], inline=True)
-                    msg.add_field(name="Achat", value=desc[25], inline=True)
-                    msg.add_field(name="Gain", value=desc[26], inline=True)
+                    msg.add_field(name=lang_P.forge_msg(lang, "categorie", None, False, 7), value=desc[25], inline=True)
+                    msg.add_field(name=lang_P.forge_msg(lang, "market", None, False, 3), value=desc[26], inline=True)
+                    msg.add_field(name=lang_P.forge_msg(lang, "market", None, False, 5), value=desc[27], inline=True)
                 await ctx.channel.send(embed = msg)
 
         else:
@@ -329,7 +332,8 @@ class GemsBase(commands.Cog):
         desc = GF.msg_recv()
 
         if item == None:
-            msg = discord.Embed(title = "Recettes", color= 15778560, description = desc[1])
+            lang = desc[1]
+            msg = discord.Embed(title = lang_P.forge_msg(lang, "recette"), color= 15778560, description = desc[2])
             await ctx.channel.send(embed = msg)
             return True
         else:
@@ -352,7 +356,6 @@ class GemsBase(commands.Cog):
             annee = temp
             param = dict()
             param["ID"] = ID
-            param["IDGuild"] = ctx.guild.id
             param["type"] = type
 
             ge.socket.send_string(gg.std_send_command("listobjet", ID, ge.name_pl, param))
@@ -361,10 +364,11 @@ class GemsBase(commands.Cog):
             if msg[0] == "NOK":
                 await ctx.channel.send(msg[1])
             else:
-                for one in msg[1]:
+                for one in msg[2]:
                     graph = GS.create_graph(ctx, one, annee, mois)
-                    if graph == "404":
-                        await ctx.send("Aucune données n'a été trouvée!")
+                    lang = graph[1]
+                    if graph[0] == "404":
+                        await ctx.send(lang_P.forge_msg(lang, "WarningMsg", None, False, 0))
                     else:
                         await ctx.send(file=discord.File("cache/{}".format(graph)))
                         os.remove("cache/{}".format(graph))
@@ -374,11 +378,12 @@ class GemsBase(commands.Cog):
             if annee == None:
                 annee = str(now.year)
             graph = GS.create_graph(ctx, item, annee, mois)
-            if graph == "404":
-                await ctx.send("Aucune données n'a été trouvée!")
+            lang = graph[1]
+            if graph[0] == "404":
+                await ctx.send(lang_P.forge_msg(lang, "WarningMsg", None, False, 0))
             else:
-                await ctx.send(file=discord.File("cache/{}".format(graph)))
-                os.remove("cache/{}".format(graph))
+                await ctx.send(file=discord.File("cache/{}".format(graph[0])))
+                os.remove("cache/{}".format(graph[0]))
 
     @commands.command(pass_context=True)
     async def lang(self, ctx, langue):

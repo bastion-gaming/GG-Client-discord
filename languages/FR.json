@@ -1,4 +1,8 @@
 {
+  "WarningMsg":
+    [
+      "Aucune données n'a été trouvée!"
+    ],
   "bal":
     "Compte principal de {0}",
   "baltop":
@@ -6,5 +10,58 @@
       "Classement des Joueurs | :gem:`gems`",
       "Classement des Joueurs | <:spinelle:{0}>`spinelles`",
       "Classement des Guildes"
+    ],
+  "categorie":
+    [
+      "Outils",
+      "Spéciaux",
+      "Items",
+      "Minerais",
+      "Poissons",
+      "Plantes",
+      "Événement",
+      "Loot Box",
+    ],
+  "inv":
+    [
+      "Inventaire de {0} | Poche principale",
+      "Liste des poches de l'inventaire"
+    ],
+  "market":
+    [
+      "Le marché",
+      "Le marché | {0}",
+      "Vente | Achat",
+      "Achat",
+      "Infos",
+      "Gain"
+    ],
+  "recette":
+    "Recettes",
+  "hothouse":
+    [
+      "Voici tes plantations.\nUtilise `hothouse plant seed` pour planter une <:gem_seed:{0}>`seed`",
+      "La serre",
+      "La serre | Partie {0}",
+      "Plantation n°{0}"
+    ],
+  "ferment":
+    [
+      "Voici tes barrils.\nUtilise `ferment grapes` pour obtenir des :wine_glass:`wine_glass`",
+      "La cave",
+      "La cave | Partie {}",
+      "Barril n°{}"
+    ],
+  "cooking":
+    [
+      "Voici tes fours.\nUtilise `cooking potato` pour obtenir des <:gem_fries:{0}>`fries`",
+      "La Cuisine",
+      "La Cuisine | Partie {}",
+      "Four n°{}"
+    ],
+  "graphbourse":
+    [
+      "Achat",
+      "Vente"
     ]
 }
