@@ -39,15 +39,20 @@ class GemsPlay(commands.Cog):
 
         ge.socket.send_string(gg.std_send_command("bank", ID, ge.name_pl, param))
         desc = GF.msg_recv()
+        lang = desc[1]
+        N = ctx.guild.get_member(ID)
+        N = N.name
 
         if desc[0] == "bal":
             if ARG2 != None:
                 ID = ge.nom_ID(ARG2)
                 nom = ctx.guild.get_member(ID)
                 ARG2 = nom.name
-                title = "Compte épargne de {}".format(ARG2)
+                title = lang_P.forge_msg(lang, "bank", [N], False)
+                #title = "Compte épargne de {}".format(ARG2)
             else:
-                title = "Compte épargne de {}".format(ctx.author.name)
+                title = lang_P.forge_msg(lang, "bank" ,[N], False)
+                #title = "Compte épargne de {}".format(ctx.author.name)
             msg = discord.Embed(title = title, color= 13752280, description = "")
             msg.add_field(name="Balance", value=desc[2], inline=False)
             msg.add_field(name="Commandes", value=desc[3], inline=False)

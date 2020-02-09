@@ -63,5 +63,7 @@
     [
       "Purchase",
       "Sale"
-    ]
+    ],
+  "bank":
+    "Saving account of {0}"
 }

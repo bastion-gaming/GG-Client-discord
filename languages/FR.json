@@ -63,5 +63,7 @@
     [
       "Achat",
       "Vente"
-    ]
+    ],
+  "bank":
+  "Compte épargne de {0}"
 }
