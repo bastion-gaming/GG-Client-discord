@@ -6,8 +6,6 @@ import matplotlib.pyplot as plt
 import gg_lib as gg
 from languages import lang as lang_P
 
-monthlist = ["FR", ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"], "EN", ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]]
-
 
 def create_graph(ctx, item, year, month):
     ID = ctx.author.id
@@ -24,8 +22,8 @@ def create_graph(ctx, item, year, month):
     if msg[0] == "NOK":
         return ["404", msg[2]]
     else:
-        dataitem = msg[1]
-        lang = msg[2]
+        dataitem = msg[2]
+        lang = msg[1]
     axeX = []
     axeY1 = []
     axeY2 = []
@@ -38,13 +36,7 @@ def create_graph(ctx, item, year, month):
     plt.figure()
     plt.subplot(2, 1, 1)
     plt.plot(axeX, axeY2, color='tab:blue', label=lang_P.forge_msg(lang, "graphbourse", None, False, 0), marker='8')
-    i = 0
-    while i < len(monthlist):
-        if lang == monthlist[i]:
-            monthchoise = monthlist[i+1]
-            i = len(monthlist)
-        i += 1
-    plt.title("{i} | {m} {y}".format(i=item, m=monthchoise[int(month)], y=year))
+    plt.title("{i} | {m} {y}".format(i=item, m=lang_P.forge_msg(lang, "month", None, False, int(month)-1), y=year))
     plt.margins(x=0.02, y=0.1)
     plt.legend()
     plt.subplot(2, 1, 2)

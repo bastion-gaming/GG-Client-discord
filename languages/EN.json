@@ -49,15 +49,15 @@
     [
       "Here are your barrels. \nUse 'ferment grapes' to make :wine_glass:`wine_glass`",
       "Winery",
-      "Winery | Part {}",
-      "Barrel n°{}"
+      "Winery | Part {0}",
+      "Barrel n°{0}"
     ],
   "cooking":
     [
       "Here's your ovens. \nUse the cooking potato to get some <:gem_fries:{0}>`fries`",
       "Kitchen",
-      "Kitchen | Part {}",
-      "Furnace n°{}"
+      "Kitchen | Part {0}",
+      "Furnace n°{0}"
     ],
   "graphbourse":
     [
@@ -65,5 +65,7 @@
       "Sale"
     ],
   "bank":
-    "Saving account of {0}"
+    "Saving account of {0}",
+  "month":
+    ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 }

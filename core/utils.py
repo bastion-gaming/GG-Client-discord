@@ -1,5 +1,5 @@
 import discord
-from discord.ext import commands, tasks
+from discord.ext import commands
 from discord.ext.commands import bot
 from discord.utils import get
 
@@ -53,6 +53,7 @@ class Utils(commands.Cog):
             """
             msg = "Le github du Bot :arrow_right: **https://github.com/bastion-gaming/**."
             await ctx.channel.send(msg)
+
 
 def setup(bot):
     bot.add_cog(Utils(bot))

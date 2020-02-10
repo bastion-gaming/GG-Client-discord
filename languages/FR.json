@@ -49,15 +49,15 @@
     [
       "Voici tes barrils.\nUtilise `ferment grapes` pour obtenir des :wine_glass:`wine_glass`",
       "La cave",
-      "La cave | Partie {}",
-      "Barril n°{}"
+      "La cave | Partie {0}",
+      "Barril n°{0}"
     ],
   "cooking":
     [
       "Voici tes fours.\nUtilise `cooking potato` pour obtenir des <:gem_fries:{0}>`fries`",
       "La Cuisine",
-      "La Cuisine | Partie {}",
-      "Four n°{}"
+      "La Cuisine | Partie {0}",
+      "Four n°{0}"
     ],
   "graphbourse":
     [
@@ -65,5 +65,7 @@
       "Vente"
     ],
   "bank":
-  "Compte épargne de {0}"
+    "Compte épargne de {0}",
+  "month":
+    ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"]
 }

@@ -204,7 +204,7 @@ class GemsPlay(commands.Cog):
             nbplanting = msg[2]
             desc = lang_P.forge_msg(lang, "ferment", None, False, 0)
             titre = lang_P.forge_msg(lang, "ferment", None, False, 1)
-            MsgEmbed = discord.Embed(title = titre, color= 14902529, description = desc)
+            MsgEmbed = discord.Embed(title = titre, color= 9633863, description = desc)
             k = len(msg)
             i = 3
             while i < k:
@@ -214,7 +214,7 @@ class GemsPlay(commands.Cog):
                         await ctx.channel.send(embed = MsgEmbed)
                     else:
                         await ctx.channel.send(embed = MsgEmbed, delete_after = 90)
-                    MsgEmbed = discord.Embed(title = lang_P.forge_msg(lang, "ferment", [int((j//10)+1)], False, 2), color= 14902529, description = "Voici vos barrils.")
+                    MsgEmbed = discord.Embed(title = lang_P.forge_msg(lang, "ferment", [int((j//10)+1)], False, 2), color= 9633863, description = "Voici vos barrils.")
                     MsgEmbed.add_field(name=lang_P.forge_msg(lang, "ferment", [msg[i]], False, 3), value=msg[i+1], inline=False)
                 else:
                     MsgEmbed.add_field(name=lang_P.forge_msg(lang, "ferment", [msg[i]], False, 3), value=msg[i+1], inline=False)

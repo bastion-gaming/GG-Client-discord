@@ -63,7 +63,7 @@ def ZMQ():
         if msg.decode() == "1":
             print("Connected to Get Gems server")
     else:
-        print("Aucune réponse du serveur")
+        print("No reply from the server")
         # Socket is confused. Close and remove it.
         socket.setsockopt(zmq.LINGER, 0)
         socket.close()
