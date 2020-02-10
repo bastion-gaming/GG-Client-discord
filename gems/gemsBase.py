@@ -347,9 +347,9 @@ class GemsBase(commands.Cog):
 
         if item.lower() == "all":
             if type == None:
-                type = str(now.month)
+                type = str(now.year)
             if annee == None:
-                annee = str(now.year)
+                annee = str(now.month)
             temp = type
             type = mois.lower()
             mois = annee
@@ -364,14 +364,14 @@ class GemsBase(commands.Cog):
             if msg[0] == "NOK":
                 await ctx.channel.send(msg[1])
             else:
-                for one in msg[2]:
+                for one in msg[1]:
                     graph = GS.create_graph(ctx, one, annee, mois)
                     lang = graph[1]
                     if graph[0] == "404":
                         await ctx.send(lang_P.forge_msg(lang, "WarningMsg", None, False, 0))
                     else:
-                        await ctx.send(file=discord.File("cache/{}".format(graph)))
-                        os.remove("cache/{}".format(graph))
+                        await ctx.send(file=discord.File("cache/{}".format(graph[0])))
+                        os.remove("cache/{}".format(graph[0]))
         else:
             if mois == None:
                 mois = str(now.month)
