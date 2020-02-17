@@ -68,4 +68,5 @@ def ZMQ():
         socket.setsockopt(zmq.LINGER, 0)
         socket.close()
         poll.unregister(socket)
+        return False
     return True

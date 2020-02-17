@@ -1,9 +1,6 @@
 import discord
-from discord.ext import commands, tasks
+from discord.ext import commands
 from discord.ext.commands import Bot
-from discord.utils import get
-import asyncio
-import aiohttp
 from core import gestion as ge, utils, level as lvl
 from gems import gemsFonctions as GF
 import gg_lib as gg
@@ -23,12 +20,13 @@ client.remove_command("help")
 # Au démarrage du Bot.
 @client.event
 async def on_ready():
+    global GGconnect
     print('Connecté avec le nom : {0.user}'.format(client))
     print('PREFIX = '+str(PREFIX))
     print('\nGet Gems - Client Discord '+VERSION)
     GF.setglobalguild(client.get_guild(utils.ServIDmoji))
     print('------\n')
-    ge.ZMQ()
+    GGconnect = ge.ZMQ()
     print('------\n')
 
 ####################### Commande help.py #######################
@@ -61,7 +59,8 @@ async def on_guild_join(guild):
 @client.event
 async def on_message(message):
     if not (message.author.bot) and message.content.startswith(PREFIX):
-        await lvl.checklevel(message)
+        if GGconnect:
+            await lvl.checklevel(message)
         await client.process_commands(message)
 
 ####################### Commande gems.py #######################
