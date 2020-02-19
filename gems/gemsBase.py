@@ -1,4 +1,5 @@
 import discord
+from operator import itemgetter
 from core import gestion as ge
 from gems import gemsFonctions as GF, gemsStats as GS
 from discord.ext import commands
@@ -400,6 +401,224 @@ class GemsBase(commands.Cog):
 
         await ctx.channel.send(desc[1])
 
+    @commands.command(pass_context=True)
+    async def stats(self, ctx, Nom = None):
+        """
+        Affichage des statistiques du joueur.
+        """
+        ID = ctx.author.id
+        param = dict()
+        param["ID"] = ID
+        if ge.permission(ctx, ge.Inquisiteur):
+            param["nom"] = Nom
+            if Nom == None:
+                Nom = ctx.author.name
+            else:
+                Nom = ctx.guild.get_member(ge.nom_ID(Nom)).name
+        else:
+            param["nom"] = "None"
+            Nom = ctx.author.name
+
+        ge.socket.send_string(gg.std_send_command("stats", ID, ge.name_pl, param))
+        tab = GF.msg_recv()
+        lang = tab[1]
+        if tab[0] == "NOK":
+            await ctx.channel.send(lang_P.forge_msg(lang, "WarningMsg", None, False, 0))
+            return False
+        ltab = len(tab)
+        StatList = []
+        for i in range(2, ltab):
+            tab[i] = tab[i].replace("(", "")
+            tab[i] = tab[i].replace(")", "")
+            tab[i] = tab[i].replace("'", "")
+            tab[i] = tab[i].split(", ")
+            StatList.append((tab[i][0], tab[i][1], tab[i][2]))
+        StatList = sorted(StatList, key=itemgetter(2))
+        StatList = sorted(StatList, key=itemgetter(1))
+        desc = ""           # Statistique non pris en charge
+        descGeneral = ""     # bal, baltop, inv, market, divers
+        descBuy = ""        # buy
+        descSell = ""       # sell
+        descDon = ""        # pay, give
+        descForge = ""      # forge
+        descBank = ""       # bank, stealing, crime, gamble
+        descMine = ""       # mine
+        descDig = ""        # dig
+        descFish = ""       # fish
+        descSlots = ""      # slots
+        descBoxes = ""      # boxes
+        descHothouse = ""   # hothouse
+        descCooking = ""    # cooking
+        descFerment = ""    # ferment
+        for x in StatList:
+            y = x[2].split(" | ")
+            if x[1] == "bal" or x[1] == "inv" or x[1] == "market":
+                if x[2] == x[1]:
+                    descGeneral += "{2} {1} `x{0}`\n\n".format(x[0], x[2], "Utilisation de la commande")
+
+            elif x[1] == "baltop":
+                if x[2] == x[1]:
+                    descGeneral += "{2} {1} `x{0}`\n\n".format(x[0], x[2], "Utilisation de la commande")
+                else:
+                    for i in range(1, len(y)):
+                        descGeneral += y[i] + " "
+                        if i == len(y)-1:
+                            descGeneral += ": `x{0}`\n\n".format(x[0])
+
+            elif x[1] == "buy":
+                if x[2] == x[1]:
+                    descBuy += "{2} {1} `x{0}`\n\n".format(x[0], x[2], "Utilisation de la commande")
+                else:
+                    for i in range(1, len(y)):
+                        descBuy += y[i] + " "
+                        if i == len(y)-1:
+                            descBuy += ": `x{0}`\n\n".format(x[0])
+
+            elif x[1] == "sell":
+                if x[2] == x[1]:
+                    descSell += "{2} {1} `x{0}`\n\n".format(x[0], x[2], "Utilisation de la commande")
+                else:
+                    for i in range(1, len(y)):
+                        descSell += y[i] + " "
+                        if i == len(y)-1:
+                            descSell += ": `x{0}`\n\n".format(x[0])
+
+            elif x[1] == "pay" or x[1] == "give":
+                if x[2] == x[1]:
+                    descDon += "{2} {1} `x{0}`\n\n".format(x[0], x[2], "Utilisation de la commande")
+                else:
+                    for i in range(0, len(y)):
+                        descDon += y[i] + " "
+                        if i == len(y)-1:
+                            descDon += ": `x{0}`\n\n".format(x[0])
+
+            elif x[1] == "forge":
+                if x[2] == x[1]:
+                    descForge += "{2} {1} `x{0}`\n\n".format(x[0], x[2], "Utilisation de la commande")
+                else:
+                    for i in range(1, len(y)):
+                        descForge += y[i] + " "
+                        if i == len(y)-1:
+                            descForge += ": `x{0}`\n\n".format(x[0])
+
+            elif x[1] == "bank" or x[1] == "stealing" or x[1] == "crime" or x[1] == "gamble":
+                if x[2] == x[1]:
+                    descBank += "{2} {1} `x{0}`\n\n".format(x[0], x[2], "Utilisation de la commande")
+                else:
+                    for i in range(0, len(y)):
+                        descBank += y[i] + " "
+                        if i == len(y)-1:
+                            descBank += ": `x{0}`\n\n".format(x[0])
+
+            elif x[1] == "mine":
+                if x[2] == x[1]:
+                    descMine += "{2} {1} `x{0}`\n\n".format(x[0], x[2], "Utilisation de la commande")
+                else:
+                    for i in range(1, len(y)):
+                        descMine += y[i] + " "
+                        if i == len(y)-1:
+                            descMine += ": `x{0}`\n\n".format(x[0])
+
+            elif x[1] == "fish":
+                if x[2] == x[1]:
+                    descFish += "{2} {1} `x{0}`\n\n".format(x[0], x[2], "Utilisation de la commande")
+                else:
+                    for i in range(1, len(y)):
+                        descFish += y[i] + " "
+                        if i == len(y)-1:
+                            descFish += ": `x{0}`\n\n".format(x[0])
+
+            elif x[1] == "dig":
+                if x[2] == x[1]:
+                    descDig += "{2} {1} `x{0}`\n\n".format(x[0], x[2], "Utilisation de la commande")
+                else:
+                    for i in range(1, len(y)):
+                        descDig += y[i] + " "
+                        if i == len(y)-1:
+                            descDig += ": `x{0}`\n\n".format(x[0])
+
+            elif x[1] == "slots":
+                if x[2] == x[1]:
+                    descSlots += "{2} {1} `x{0}`\n\n".format(x[0], x[2], "Utilisation de la commande")
+                else:
+                    for i in range(1, len(y)):
+                        descSlots += y[i] + " "
+                        if i == len(y)-1:
+                            descSlots += ": `x{0}`\n\n".format(x[0])
+
+            elif x[1] == "boxes":
+                if x[2] == x[1]:
+                    descBoxes += "{2} {1} `x{0}`\n\n".format(x[0], x[2], "Utilisation de la commande")
+                else:
+                    for i in range(1, len(y)):
+                        descBoxes += y[i] + " "
+                        if i == len(y)-1:
+                            descBoxes += ": `x{0}`\n\n".format(x[0])
+
+            elif x[1] == "hothouse":
+                if x[2] == x[1]:
+                    descHothouse += "{2} {1} `x{0}`\n\n".format(x[0], x[2], "Utilisation de la commande")
+                else:
+                    for i in range(1, len(y)):
+                        descHothouse += y[i] + " "
+                        if i == len(y)-1:
+                            descHothouse += ": `x{0}`\n\n".format(x[0])
+
+            elif x[1] == "cooking":
+                if x[2] == x[1]:
+                    descCooking += "{2} {1} `x{0}`\n\n".format(x[0], x[2], "Utilisation de la commande")
+                else:
+                    for i in range(1, len(y)):
+                        descCooking += y[i] + " "
+                        if i == len(y)-1:
+                            descCooking += ": `x{0}`\n\n".format(x[0])
+
+            elif x[1] == "ferment":
+                if x[2] == x[1]:
+                    descFerment += "{2} {1} `x{0}`\n\n".format(x[0], x[2], "Utilisation de la commande")
+                else:
+                    for i in range(1, len(y)):
+                        descFerment += y[i] + " "
+                        if i == len(y)-1:
+                            descFerment += ": `x{0}`\n\n".format(x[0])
+
+            else:
+                desc += "\n{1} `x{0}`".format(x[0], x[2])
+
+        msg = discord.Embed(title = "Statistiques de {0}".format(Nom), color= 13752280, description = "")
+        if descGeneral != "":
+            msg.add_field(name="General", value=descGeneral)
+        if descBuy != "":
+            msg.add_field(name="Achat", value=descBuy)
+        if descSell != "":
+            msg.add_field(name="Vente", value=descSell)
+        if descDon != "":
+            msg.add_field(name="Dons", value=descDon)
+        if descForge != "":
+            msg.add_field(name="Forge", value=descForge)
+        if descBank != "":
+            msg.add_field(name="Banque", value=descBank)
+        if descMine != "":
+            msg.add_field(name="Mine", value=descMine)
+        if descFish != "":
+            msg.add_field(name="Pêche", value=descFish)
+        if descDig != "":
+            msg.add_field(name="Escavasion", value=descDig)
+        if descSlots != "":
+            msg.add_field(name="Machine à sous", value=descSlots)
+        if descBoxes != "":
+            msg.add_field(name="Lootbox", value=descBoxes)
+        if descHothouse != "":
+            msg.add_field(name="Serre", value=descHothouse)
+        if descCooking != "":
+            msg.add_field(name="Cuisine", value=descCooking)
+        if descFerment != "":
+            msg.add_field(name="Cave", value=descFerment)
+        if desc != "":
+            msg.add_field(name="Autres", value=desc)
+
+        await ctx.channel.send(embed = msg)
+
     # ==============================
     # ===== Commande désactivé =====
     # ==============================
@@ -416,77 +635,6 @@ class GemsBase(commands.Cog):
     #     desc = GF.msg_recv()
     #
     #     await ctx.channel.send(desc[1])
-
-    # @commands.command(pass_context=True)
-    # async def trophy(self, ctx, nom = None):
-    #     """**[nom]** | Liste de vos trophées !"""
-    #     ID = ctx.author.id
-    #     if sql.spam(ID,GF.couldown_4s, "trophy", "gems"):
-    #         if nom != None:
-    #             ID = sql.nom_ID(nom)
-    #             nom = ctx.guild.get_member(ID)
-    #             nom = nom.name
-    #         else:
-    #             nom = ctx.author.name
-    #         d_trophy = ":trophy:Trophées de {}\n\n".format(nom)
-    #         #-------------------------------------
-    #         # Récupération de la liste des trophées de ID
-    #         # et attribution de nouveau trophée si les conditions sont rempli
-    #         trophy = sql.valueAt(ID, "all", "trophy")
-    #         for c in GF.objetTrophy:
-    #             GF.testTrophy(ID, c.nom)
-    #
-    #         #-------------------------------------
-    #         # Affichage des trophées possédés par ID
-    #         for c in GF.objetTrophy:
-    #             for x in trophy:
-    #                 if c.nom == str(x[1]):
-    #                     if int(x[0]) > 0:
-    #                         d_trophy += "•**{}**\n".format(c.nom)
-    #
-    #         sql.updateComTime(ID, "trophy", "gems")
-    #         msg = discord.Embed(title = "Trophées",color= 6824352, description = d_trophy)
-    #         # Message de réussite dans la console
-    #         print("Gems >> {} a affiché les trophées de {}".format(ctx.author.name,nom))
-    #         await ctx.channel.send(embed = msg)
-    #     else:
-    #         msg = "Il faut attendre "+str(GF.couldown_4s)+" secondes entre chaque commande !"
-    #         await ctx.channel.send(msg)
-    #
-    #
-    #
-    # @commands.command(pass_context=True)
-    # async def trophylist(self, ctx):
-    #     """Liste de tout les trophées disponibles !"""
-    #     ID = ctx.author.id
-    #     d_trophy = "Liste des :trophy:Trophées\n\n"
-    #     if sql.spam(ID,GF.couldown_6s, "trophylist", "gems"):
-    #         #-------------------------------------
-    #         # Affichage des trophées standard
-    #         for c in GF.objetTrophy:
-    #             if c.type != "unique" and c.type != "special":
-    #                 d_trophy += "**{}**: {}\n".format(c.nom, c.desc)
-    #         d_trophy += "▬▬▬▬▬▬▬▬▬▬▬▬▬\n"
-    #         #-------------------------------------
-    #         # Affichage des trophées spéciaux
-    #         for c in GF.objetTrophy:
-    #             if c.type != "unique" and c.type == "special":
-    #                 d_trophy += "**{}**: {}\n".format(c.nom, c.desc)
-    #         d_trophy += "▬▬▬▬▬▬▬▬▬▬▬▬▬\n"
-    #         #-------------------------------------
-    #         # Affichage des trophées uniques
-    #         for c in GF.objetTrophy:
-    #             if c.type == "unique" and c.type != "special":
-    #                 d_trophy += "**{}**: {}\n".format(c.nom, c.desc)
-    #
-    #         sql.updateComTime(ID, "trophylist", "gems")
-    #         msg = discord.Embed(title = "Trophées",color= 6824352, description = d_trophy)
-    #         # Message de réussite dans la console
-    #         print("Gems >> {} a affiché la liste des trophées".format(ctx.author.name))
-    #         await ctx.channel.send(embed = msg)
-    #     else:
-    #         msg = "Il faut attendre "+str(GF.couldown_6s)+" secondes entre chaque commande !"
-    #         await ctx.channel.send(msg)
 
 
 def setup(bot):
