@@ -67,5 +67,30 @@
   "bank":
     "Compte épargne de {0}",
   "month":
-    ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"]
+    ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"],
+  "tuto":
+    [
+      "Tutoriel Get Gems!",
+      "Le but du jeu est de gagner le plus de :gem:`gems` possible.\n\n",
+      "Lien"
+    ],
+  "stats":
+    [
+      "Général",
+      "Achat",
+      "Vente",
+      "Dons",
+      "Forge",
+      "Banque",
+      "Minage",
+      "Pêche",
+      "Excavation",
+      "Machine à sous",
+      "Lootbox",
+      "Serre",
+      "Cuisine",
+      "Cave",
+      "Autres",
+      "Utilisation de la commande"
+    ]
 }

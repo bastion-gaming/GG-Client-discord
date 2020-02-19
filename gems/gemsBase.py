@@ -18,19 +18,15 @@ class GemsBase(commands.Cog):
         return(None)
 
     @commands.command(pass_context=True)
-    async def tuto(self, ctx):
+    async def tutorial(self, ctx, lang = "EN"):
         """Affiche le tutoriel !"""
-        desc = "Le but du jeu est de gagner le plus de :gem:`gems` possible.\n\n"
-        msg = discord.Embed(title = "Tutoriel Get Gems!", color= 13752280, description = desc)
-        desc = "`{0}begin` | Permet de créer son compte joueur et d'obtenir son starter Kit!\n••••••••••••\n".format(PREFIX)
-        desc += "`{0}bal` | Permet de voir son nombre de :gem:`gems`\n••••••••••••\n".format(PREFIX)
-        desc += "`{0}buy` | Permet d'acheter les items vendu au marché\n••••••••••••\n".format(PREFIX)
-        desc += "`{0}crime` | Permet d'effectuer des vols pour récupérer des :gem:`gem`\n••••••••••••\n".format(PREFIX)
-        desc += "`{0}mine` | Permet de récolter des matériaux.\nTu aura besoin d'une <:gem_pickaxe:{1}>`pickaxe` pour miner\n••••••••••••\n".format(PREFIX, GF.get_idmoji("pickaxe"))
-        desc += "`{0}fish` | Permet de pécher des poissons.\nTu aura besoin d'une <:gem_fishingrod:{1}>`fishingrod` pour miner\n••••••••••••\n".format(PREFIX, GF.get_idmoji("fishingrod"))
-        desc += "`{0}sell` | Permet de vendre les matériaux, les poissons, etc contre des :gem:`gems`\n••••••••••••\n".format(PREFIX)
-        desc += "`{0}forge` | Permet de créer des outils à partir des matériaux récoltés\n".format(PREFIX)
-        msg.add_field(name="Pour cela tu as les commandes:", value=desc, inline=False)
+        lang = lang.upper()
+        langlist = ["EN", "FR"]
+        if lang not in langlist:
+            lang = "EN"
+        desc = lang_P.forge_msg(lang, "tuto", None, False, 1)
+        msg = discord.Embed(title = lang_P.forge_msg(lang, "tuto", None, False, 0), color= 13752280, description = desc)
+        msg.add_field(name=lang_P.forge_msg(lang, "tuto", None, False, 2), value="https://bastion-gaming.fr/get-gems/tutorial", inline=False)
         await ctx.channel.send(embed = msg)
 
     @commands.command(pass_context=True)
@@ -454,11 +450,11 @@ class GemsBase(commands.Cog):
             y = x[2].split(" | ")
             if x[1] == "bal" or x[1] == "inv" or x[1] == "market":
                 if x[2] == x[1]:
-                    descGeneral += "{2} {1} `x{0}`\n\n".format(x[0], x[2], "Utilisation de la commande")
+                    descGeneral += "{2} **{1}** `x{0}`\n\n".format(x[0], x[2], lang_P.forge_msg(lang, "stats", None, False, 15))
 
             elif x[1] == "baltop":
                 if x[2] == x[1]:
-                    descGeneral += "{2} {1} `x{0}`\n\n".format(x[0], x[2], "Utilisation de la commande")
+                    descGeneral += "{2} **{1}** `x{0}`\n\n".format(x[0], x[2], lang_P.forge_msg(lang, "stats", None, False, 15))
                 else:
                     for i in range(1, len(y)):
                         descGeneral += y[i] + " "
@@ -467,7 +463,7 @@ class GemsBase(commands.Cog):
 
             elif x[1] == "buy":
                 if x[2] == x[1]:
-                    descBuy += "{2} {1} `x{0}`\n\n".format(x[0], x[2], "Utilisation de la commande")
+                    descBuy += "{2} **{1}** `x{0}`\n\n".format(x[0], x[2], lang_P.forge_msg(lang, "stats", None, False, 15))
                 else:
                     for i in range(1, len(y)):
                         descBuy += y[i] + " "
@@ -476,7 +472,7 @@ class GemsBase(commands.Cog):
 
             elif x[1] == "sell":
                 if x[2] == x[1]:
-                    descSell += "{2} {1} `x{0}`\n\n".format(x[0], x[2], "Utilisation de la commande")
+                    descSell += "{2} **{1}** `x{0}`\n\n".format(x[0], x[2], lang_P.forge_msg(lang, "stats", None, False, 15))
                 else:
                     for i in range(1, len(y)):
                         descSell += y[i] + " "
@@ -485,7 +481,7 @@ class GemsBase(commands.Cog):
 
             elif x[1] == "pay" or x[1] == "give":
                 if x[2] == x[1]:
-                    descDon += "{2} {1} `x{0}`\n\n".format(x[0], x[2], "Utilisation de la commande")
+                    descDon += "{2} **{1}** `x{0}`\n\n".format(x[0], x[2], lang_P.forge_msg(lang, "stats", None, False, 15))
                 else:
                     for i in range(0, len(y)):
                         descDon += y[i] + " "
@@ -494,7 +490,7 @@ class GemsBase(commands.Cog):
 
             elif x[1] == "forge":
                 if x[2] == x[1]:
-                    descForge += "{2} {1} `x{0}`\n\n".format(x[0], x[2], "Utilisation de la commande")
+                    descForge += "{2} **{1}** `x{0}`\n\n".format(x[0], x[2], lang_P.forge_msg(lang, "stats", None, False, 15))
                 else:
                     for i in range(1, len(y)):
                         descForge += y[i] + " "
@@ -503,7 +499,7 @@ class GemsBase(commands.Cog):
 
             elif x[1] == "bank" or x[1] == "stealing" or x[1] == "crime" or x[1] == "gamble":
                 if x[2] == x[1]:
-                    descBank += "{2} {1} `x{0}`\n\n".format(x[0], x[2], "Utilisation de la commande")
+                    descBank += "{2} **{1}** `x{0}`\n\n".format(x[0], x[2], lang_P.forge_msg(lang, "stats", None, False, 15))
                 else:
                     for i in range(0, len(y)):
                         descBank += y[i] + " "
@@ -512,7 +508,7 @@ class GemsBase(commands.Cog):
 
             elif x[1] == "mine":
                 if x[2] == x[1]:
-                    descMine += "{2} {1} `x{0}`\n\n".format(x[0], x[2], "Utilisation de la commande")
+                    descMine += "{2} **{1}** `x{0}`\n\n".format(x[0], x[2], lang_P.forge_msg(lang, "stats", None, False, 15))
                 else:
                     for i in range(1, len(y)):
                         descMine += y[i] + " "
@@ -521,7 +517,7 @@ class GemsBase(commands.Cog):
 
             elif x[1] == "fish":
                 if x[2] == x[1]:
-                    descFish += "{2} {1} `x{0}`\n\n".format(x[0], x[2], "Utilisation de la commande")
+                    descFish += "{2} **{1}** `x{0}`\n\n".format(x[0], x[2], lang_P.forge_msg(lang, "stats", None, False, 15))
                 else:
                     for i in range(1, len(y)):
                         descFish += y[i] + " "
@@ -530,7 +526,7 @@ class GemsBase(commands.Cog):
 
             elif x[1] == "dig":
                 if x[2] == x[1]:
-                    descDig += "{2} {1} `x{0}`\n\n".format(x[0], x[2], "Utilisation de la commande")
+                    descDig += "{2} **{1}** `x{0}`\n\n".format(x[0], x[2], lang_P.forge_msg(lang, "stats", None, False, 15))
                 else:
                     for i in range(1, len(y)):
                         descDig += y[i] + " "
@@ -539,7 +535,7 @@ class GemsBase(commands.Cog):
 
             elif x[1] == "slots":
                 if x[2] == x[1]:
-                    descSlots += "{2} {1} `x{0}`\n\n".format(x[0], x[2], "Utilisation de la commande")
+                    descSlots += "{2} **{1}** `x{0}`\n\n".format(x[0], x[2], lang_P.forge_msg(lang, "stats", None, False, 15))
                 else:
                     for i in range(1, len(y)):
                         descSlots += y[i] + " "
@@ -548,7 +544,7 @@ class GemsBase(commands.Cog):
 
             elif x[1] == "boxes":
                 if x[2] == x[1]:
-                    descBoxes += "{2} {1} `x{0}`\n\n".format(x[0], x[2], "Utilisation de la commande")
+                    descBoxes += "{2} **{1}** `x{0}`\n\n".format(x[0], x[2], lang_P.forge_msg(lang, "stats", None, False, 15))
                 else:
                     for i in range(1, len(y)):
                         descBoxes += y[i] + " "
@@ -557,7 +553,7 @@ class GemsBase(commands.Cog):
 
             elif x[1] == "hothouse":
                 if x[2] == x[1]:
-                    descHothouse += "{2} {1} `x{0}`\n\n".format(x[0], x[2], "Utilisation de la commande")
+                    descHothouse += "{2} **{1}** `x{0}`\n\n".format(x[0], x[2], lang_P.forge_msg(lang, "stats", None, False, 15))
                 else:
                     for i in range(1, len(y)):
                         descHothouse += y[i] + " "
@@ -566,7 +562,7 @@ class GemsBase(commands.Cog):
 
             elif x[1] == "cooking":
                 if x[2] == x[1]:
-                    descCooking += "{2} {1} `x{0}`\n\n".format(x[0], x[2], "Utilisation de la commande")
+                    descCooking += "{2} **{1}** `x{0}`\n\n".format(x[0], x[2], lang_P.forge_msg(lang, "stats", None, False, 15))
                 else:
                     for i in range(1, len(y)):
                         descCooking += y[i] + " "
@@ -575,7 +571,7 @@ class GemsBase(commands.Cog):
 
             elif x[1] == "ferment":
                 if x[2] == x[1]:
-                    descFerment += "{2} {1} `x{0}`\n\n".format(x[0], x[2], "Utilisation de la commande")
+                    descFerment += "{2} **{1}** `x{0}`\n\n".format(x[0], x[2], lang_P.forge_msg(lang, "stats", None, False, 15))
                 else:
                     for i in range(1, len(y)):
                         descFerment += y[i] + " "
@@ -587,35 +583,35 @@ class GemsBase(commands.Cog):
 
         msg = discord.Embed(title = "Statistiques de {0}".format(Nom), color= 13752280, description = "")
         if descGeneral != "":
-            msg.add_field(name="General", value=descGeneral)
+            msg.add_field(name=lang_P.forge_msg(lang, "stats", None, False, 0), value=descGeneral)
         if descBuy != "":
-            msg.add_field(name="Achat", value=descBuy)
+            msg.add_field(name=lang_P.forge_msg(lang, "stats", None, False, 1), value=descBuy)
         if descSell != "":
-            msg.add_field(name="Vente", value=descSell)
+            msg.add_field(name=lang_P.forge_msg(lang, "stats", None, False, 2), value=descSell)
         if descDon != "":
-            msg.add_field(name="Dons", value=descDon)
+            msg.add_field(name=lang_P.forge_msg(lang, "stats", None, False, 3), value=descDon)
         if descForge != "":
-            msg.add_field(name="Forge", value=descForge)
+            msg.add_field(name=lang_P.forge_msg(lang, "stats", None, False, 4), value=descForge)
         if descBank != "":
-            msg.add_field(name="Banque", value=descBank)
+            msg.add_field(name=lang_P.forge_msg(lang, "stats", None, False, 5), value=descBank)
         if descMine != "":
-            msg.add_field(name="Mine", value=descMine)
+            msg.add_field(name=lang_P.forge_msg(lang, "stats", None, False, 6), value=descMine)
         if descFish != "":
-            msg.add_field(name="Pêche", value=descFish)
+            msg.add_field(name=lang_P.forge_msg(lang, "stats", None, False, 7), value=descFish)
         if descDig != "":
-            msg.add_field(name="Escavasion", value=descDig)
+            msg.add_field(name=lang_P.forge_msg(lang, "stats", None, False, 8), value=descDig)
         if descSlots != "":
-            msg.add_field(name="Machine à sous", value=descSlots)
+            msg.add_field(name=lang_P.forge_msg(lang, "stats", None, False, 9), value=descSlots)
         if descBoxes != "":
-            msg.add_field(name="Lootbox", value=descBoxes)
+            msg.add_field(name=lang_P.forge_msg(lang, "stats", None, False, 10), value=descBoxes)
         if descHothouse != "":
-            msg.add_field(name="Serre", value=descHothouse)
+            msg.add_field(name=lang_P.forge_msg(lang, "stats", None, False, 11), value=descHothouse)
         if descCooking != "":
-            msg.add_field(name="Cuisine", value=descCooking)
+            msg.add_field(name=lang_P.forge_msg(lang, "stats", None, False, 12), value=descCooking)
         if descFerment != "":
-            msg.add_field(name="Cave", value=descFerment)
+            msg.add_field(name=lang_P.forge_msg(lang, "stats", None, False, 13), value=descFerment)
         if desc != "":
-            msg.add_field(name="Autres", value=desc)
+            msg.add_field(name=lang_P.forge_msg(lang, "stats", None, False, 14), value=desc)
 
         await ctx.channel.send(embed = msg)
 

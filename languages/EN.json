@@ -67,5 +67,30 @@
   "bank":
     "Saving account of {0}",
   "month":
-    ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+    ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+  "tuto":
+    [
+      "Get Gems tutorial!",
+      "The aim of the game is to win as many :gem:`gems` as possible.\n\n",
+      "Link"
+    ],
+  "stats":
+    [
+      "General",
+      "Purchase",
+      "Sale",
+      "Donations",
+      "Forge",
+      "Bank",
+      "Mining",
+      "Fishing",
+      "Digging",
+      "Slot machine",
+      "Lootbox",
+      "Greenhouse",
+      "Kitchen",
+      "Winery",
+      "Others",
+      "How to use the control"
+    ]
 }
