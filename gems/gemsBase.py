@@ -283,7 +283,6 @@ class GemsBase(commands.Cog):
         """**[nom] [gain]** | Donner de l'argent à vos amis !"""
         ID = ctx.author.id
         param = dict()
-        param["platform"] = "discord"
         param["ID"] = ID
         param["IDGuild"] = ctx.guild.id
         param["nom"] = ctx.author.name
@@ -301,7 +300,6 @@ class GemsBase(commands.Cog):
         """**[nom] [item] [nombre]** | Donner des items à vos amis !"""
         ID = ctx.author.id
         param = dict()
-        param["platform"] = "discord"
         param["ID"] = ID
         param["IDGuild"] = ctx.guild.id
         param["nom"] = ctx.author.name
