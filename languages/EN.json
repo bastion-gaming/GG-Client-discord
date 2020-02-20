@@ -91,6 +91,19 @@
       "Kitchen",
       "Winery",
       "Others",
-      "How to use the control"
+      "How to use the control",
+      "Expenditure",
+      "Gain",
+      "Loss",
+      "Broken _{0}_",
+      "Open lootbox",
+      "number",
+      "saving",
+      "won",
+      "stealing",
+      "collected",
+      "planted",
+      "cooked",
+      "fermented"
     ]
 }

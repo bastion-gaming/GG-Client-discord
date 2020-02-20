@@ -91,6 +91,19 @@
       "Cuisine",
       "Cave",
       "Autres",
-      "Utilisation de la commande"
+      "Utilisation de la commande",
+      "Dépense",
+      "Gain",
+      "Perte",
+      "_{0}_ cassée",
+      "Ouverture lootbox",
+      "nombre",
+      "épargne",
+      "gagné",
+      "vol",
+      "collectée",
+      "plantée",
+      "cuisinée",
+      "fermentée"
     ]
 }
