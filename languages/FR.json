@@ -105,5 +105,9 @@
       "plantée",
       "cuisinée",
       "fermentée"
+    ],
+  "success":
+    [
+      "Liste de vos succès"
     ]
 }
