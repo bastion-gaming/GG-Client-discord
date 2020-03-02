@@ -315,16 +315,16 @@ class GemsBase(commands.Cog):
 
         ge.socket.send_string(gg.std_send_command("success", ID, ge.name_pl, param))
         desc = GF.msg_recv()
-        lang = desc[1]
-        msg = discord.Embed(title = lang_P.forge_msg(lang, "success", None, False, 0), color= 6466585, description = "")
         if desc[0] == "OK":
+            lang = desc[1]
+            msg = discord.Embed(title = lang_P.forge_msg(lang, "success", None, False, 0), color= 6466585, description = "")
             descS = desc[2]
             i = 0
             while i < len(descS):
-                print("Success >> {0} a obtenu le succes {1}".format(ctx.author.name, descS[i]))
+                # print("Success >> {0} a obtenu le succes {1}".format(ctx.author.name, descS[i]))
                 titre = descS[i]
                 desc = descS[i+1]
-                msg.add_field(name=titre, value=desc)
+                msg.add_field(name=titre, value=desc, inline=False)
                 i += 2
             msg.set_thumbnail(url=ctx.author.avatar_url)
             await ctx.channel.send(embed = msg)

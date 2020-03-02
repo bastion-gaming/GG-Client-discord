@@ -18,15 +18,18 @@ async def checklevel(message):
         await message.channel.send(embed = msg)
     elif len(desc) > 2:
         title = "Success"
-        msg = discord.Embed(title = title, color= 6466585, description = "")
-        descS = desc[2]
-        i = 0
-        while i < len(descS):
-            print("Success >> {0} a obtenu le succes {1}".format(nom, descS[i]))
-            titre = descS[i]
-            desc = descS[i+1]
-            msg.add_field(name=titre, value=desc)
-            i += 2
+        descS = ""
+        for i in range(1, len(desc[2])):
+            descS += "{0}\n".format(desc[2][i])
+        msg = discord.Embed(title = title, color= 6466585, description = descS)
+        # descS = desc[2]
+        # i = 0
+        # while i < len(descS):
+        #     print("Success >> {0} a obtenu le succes {1}".format(nom, descS[i]))
+        #     titre = descS[i]
+        #     desc = descS[i+1]
+        #     msg.add_field(name=titre, value=desc)
+        #     i += 2
         msg.set_thumbnail(url=message.author.avatar_url)
         await message.channel.send(embed = msg)
     return False
