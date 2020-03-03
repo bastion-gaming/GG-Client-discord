@@ -2,7 +2,7 @@ import discord
 from discord.ext import commands
 from discord.ext.commands import bot
 
-GGModule = ["gemsbase", "gemsplay", "gemsevent", "gemsguild"]
+GGModule = ["gemsbase", "gemsplay", "gemsevent", "gemsguild", "gemssuccess"]
 GGnom = ["gem", "gems", "gg", "getgems", "get gems"]
 
 class Helpme(commands.Cog):
@@ -51,7 +51,7 @@ class Helpme(commands.Cog):
                         return
         else:
             GGdesc = ""
-            msg.add_field(name="GitHub", value="https://github.com/bastion-gaming/bot-discord/blob/master/help/Help.md", inline=False)
+            # msg.add_field(name="GitHub", value="https://github.com/bastion-gaming/bot-discord/blob/master/help/Help.md", inline=False)
             for COG in COGS:
                 if COG.lower() in GGModule:
                     GGdesc += "\n• {0}".format(COG)

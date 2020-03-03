@@ -6,9 +6,10 @@ from core import gestion as ge
 from gems import gemsFonctions as GF
 from languages import lang as lang_P
 import gg_lib as gg
+import datetime as dt
 
 
-class GemsBase(commands.Cog):
+class GemsSuccess(commands.Cog):
 
     def __init__(self, ctx):
         return(None)
@@ -267,9 +268,10 @@ class GemsBase(commands.Cog):
             else:
                 desc += "\n{1} `x{0}`".format(x[0], x[2])
 
-        msg = discord.Embed(title = "Statistiques de {0} | Gems Base".format(Nom), color= 13752280, description = "")
-        if descGeneral != "":
-            msg.add_field(name=lang_P.forge_msg(lang, "stats", None, False, 0), value=descGeneral)
+        msg = discord.Embed(title = "Statistiques de {0} | Gems Base".format(Nom), color= 13752280, description = "", timestamp=dt.datetime.now())
+        msg.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
+        # if descGeneral != "":
+        #     msg.add_field(name=lang_P.forge_msg(lang, "stats", None, False, 0), value=descGeneral)
         if descBuy != "":
             msg.add_field(name=lang_P.forge_msg(lang, "stats", None, False, 1), value=descBuy)
         if descSell != "":
@@ -282,7 +284,8 @@ class GemsBase(commands.Cog):
             msg.add_field(name=lang_P.forge_msg(lang, "stats", None, False, 14), value=desc)
 
         await ctx.channel.send(embed = msg)
-        msg = discord.Embed(title = "Statistiques de {0} | Gems Play".format(Nom), color= 13752280, description = "")
+        msg = discord.Embed(title = "Statistiques de {0} | Gems Play".format(Nom), color= 13752280, description = "", timestamp=dt.datetime.now())
+        msg.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
         if descBank != "":
             msg.add_field(name=lang_P.forge_msg(lang, "stats", None, False, 5), value=descBank)
         if descMine != "":
@@ -317,7 +320,7 @@ class GemsBase(commands.Cog):
         desc = GF.msg_recv()
         if desc[0] == "OK":
             lang = desc[1]
-            msg = discord.Embed(title = lang_P.forge_msg(lang, "success", None, False, 0), color= 6466585, description = "")
+            msg = discord.Embed(title = lang_P.forge_msg(lang, "success", None, False, 0), color= 6466585, description = "", timestamp=dt.datetime.now())
             descS = desc[2]
             i = 0
             while i < len(descS):
@@ -326,12 +329,13 @@ class GemsBase(commands.Cog):
                 desc = descS[i+1]
                 msg.add_field(name=titre, value=desc, inline=False)
                 i += 2
-            msg.set_thumbnail(url=ctx.author.avatar_url)
+            # msg.set_thumbnail(url=ctx.author.avatar_url)
+            msg.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
             await ctx.channel.send(embed = msg)
         else:
             await ctx.channel.send(desc[1])
 
 
 def setup(bot):
-    bot.add_cog(GemsBase(bot))
-    open("help/cogs.txt", "a").write("GemsBase\n")
+    bot.add_cog(GemsSuccess(bot))
+    open("help/cogs.txt", "a").write("GemsSuccess\n")

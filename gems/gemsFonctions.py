@@ -83,7 +83,12 @@ def msg_recv():
         for x in range(0, len(msg)):
             msg[x] = msg[x].replace("\\n", "\n")
     except:
-        return msg
+        try:
+            for i in range(2, len(msg)):
+                for x in range(0, len(msg[i])):
+                    msg[i][x] = msg[i][x].replace("\\n", "\n")
+        except:
+            return msg
     msg = msg_idmoji(msg)
     return msg
 
@@ -96,5 +101,10 @@ def msg_idmoji(msg):
             for x in range(0, len(msg)):
                 msg[x] = msg[x].replace(test, str(get_idmoji(y.name)))
         except:
-            msg = msg.replace(test, str(get_idmoji(y.name)))
+            try:
+                for i in range(2, len(msg)):
+                    for x in range(0, len(msg[i])):
+                        msg[i][x] = msg[i][x].replace(test, str(get_idmoji(y.name)))
+            except:
+                msg = msg.replace(test, str(get_idmoji(y.name)))
     return msg

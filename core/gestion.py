@@ -29,6 +29,8 @@ def nom_ID(nom):
         ID = int(nom[2:20])
     elif len(nom) == 22:
         ID = int(nom[3:21])
+    elif len(nom) == 18:
+        ID = int(nom)
     else:
         ID = -1
     return(ID)

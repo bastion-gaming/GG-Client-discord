@@ -61,10 +61,11 @@ class GemsBase(commands.Cog):
         if desc[0] == "OK":
             lang = desc[1]
             title = lang_P.forge_msg(lang, "bal", [nom], False)
-            msg = discord.Embed(title = title, color= 13752280, description = desc[2])
+            msg = discord.Embed(title = title, color= 13752280, description = desc[2], timestamp=dt.datetime.now())
             msg.add_field(name="**_Balance_**", value=desc[3], inline=False)
 
             msg.add_field(name=desc[4], value=desc[5], inline=False)
+            msg.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
             await ctx.channel.send(embed = msg)
             # Message de réussite dans la console
             print("Gems >> Balance de {} affichée".format(nom))
@@ -189,7 +190,8 @@ class GemsBase(commands.Cog):
 
         elif desc[0] == "pockets":
             lang = desc[1]
-            msg = discord.Embed(title = lang_P.forge_msg(lang, "inv", None, False, 1), color= 6466585, description = desc[2])
+            msg = discord.Embed(title = lang_P.forge_msg(lang, "inv", None, False, 1), color= 6466585, description = desc[2], timestamp=dt.datetime.now())
+            msg.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
             await ctx.channel.send(embed = msg)
 
         else:
@@ -212,9 +214,10 @@ class GemsBase(commands.Cog):
         if desc[0] == "OK":
             lang = desc[1]
             if fct != None:
-                msg = discord.Embed(title = lang_P.forge_msg(lang, "market", [fct], False, 1), color= 2461129, description = desc[2])
+                msg = discord.Embed(title = lang_P.forge_msg(lang, "market", [fct], False, 1), color= 2461129, description = desc[2], timestamp=dt.datetime.now())
             else:
-                msg = discord.Embed(title = lang_P.forge_msg(lang, "market", None, False, 0), color= 2461129, description = desc[2])
+                msg = discord.Embed(title = lang_P.forge_msg(lang, "market", None, False, 0), color= 2461129, description = desc[2], timestamp=dt.datetime.now())
+            msg.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
             if fct == "mobile":
                 msg.add_field(name=lang_P.forge_msg(lang, "categorie", None, False, 0), value=desc[3], inline=False)
                 msg.add_field(name=lang_P.forge_msg(lang, "categorie", None, False, 1), value=desc[4], inline=False)

@@ -5,6 +5,7 @@ from gems import gemsFonctions as GF
 from core import gestion as ge
 import gg_lib as gg
 from languages import lang as lang_P
+import datetime as dt
 
 
 class GemsPlay(commands.Cog):
@@ -40,8 +41,10 @@ class GemsPlay(commands.Cog):
         ge.socket.send_string(gg.std_send_command("bank", ID, ge.name_pl, param))
         desc = GF.msg_recv()
         lang = desc[1]
-        N = ctx.guild.get_member(ID)
-        N = N.name
+        if ARG2 is not None:
+            N = ctx.guild.get_member(ge.nom_ID(ARG2)).name
+        else:
+            N = ctx.author.name
 
         if desc[0] == "bal":
             if ARG2 != None:
@@ -49,11 +52,12 @@ class GemsPlay(commands.Cog):
                 nom = ctx.guild.get_member(ID)
                 ARG2 = nom.name
                 title = lang_P.forge_msg(lang, "bank", [N], False)
-                #title = "Compte épargne de {}".format(ARG2)
+                # title = "Compte épargne de {}".format(ARG2)
             else:
-                title = lang_P.forge_msg(lang, "bank" ,[N], False)
-                #title = "Compte épargne de {}".format(ctx.author.name)
-            msg = discord.Embed(title = title, color= 13752280, description = "")
+                title = lang_P.forge_msg(lang, "bank", [N], False)
+                # title = "Compte épargne de {}".format(ctx.author.name)
+            msg = discord.Embed(title = title, color= 13752280, description = "", timestamp=dt.datetime.now())
+            msg.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
             msg.add_field(name="Balance", value=desc[2], inline=False)
             msg.add_field(name="Commandes", value=desc[3], inline=False)
             await ctx.channel.send(embed = msg)
@@ -149,6 +153,7 @@ class GemsPlay(commands.Cog):
             titre = msg[2]
             desc = msg[1]
             MsgEmbed = discord.Embed(title = "Loot Box | {}".format(titre), color= 13752280, description = desc)
+            MsgEmbed.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
             await ctx.channel.send(embed = MsgEmbed)
         else:
             await ctx.channel.send(msg[1])
