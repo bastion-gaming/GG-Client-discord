@@ -25,6 +25,8 @@ async def on_ready():
     print('PREFIX = '+str(PREFIX))
     print('\nGet Gems - Client Discord '+VERSION)
     GF.setglobalguild(client.get_guild(utils.ServIDmoji))
+    activity = discord.Activity(type=discord.ActivityType.playing, name="{0}help | bastion-gaming.fr ▶".format(PREFIX))
+    await client.change_presence(status=discord.Status.online, activity=activity)
     print('------\n')
     GGconnect = ge.ZMQ()
     print('------\n')
