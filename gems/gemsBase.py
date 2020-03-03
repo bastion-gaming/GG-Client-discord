@@ -25,7 +25,7 @@ class GemsBase(commands.Cog):
             lang = "EN"
         desc = lang_P.forge_msg(lang, "tuto", None, False, 1)
         msg = discord.Embed(title = lang_P.forge_msg(lang, "tuto", None, False, 0), color= 13752280, description = desc)
-        msg.add_field(name=lang_P.forge_msg(lang, "tuto", None, False, 2), value="https://bastion-gaming.fr/get-gems/tutorial", inline=False)
+        msg.add_field(name=lang_P.forge_msg(lang, "tuto", None, False, 2), value="https://get-gems.bastion-gaming.fr/tutorial", inline=False)
         await ctx.channel.send(embed = msg)
 
     @commands.command(pass_context=True)
@@ -34,6 +34,7 @@ class GemsBase(commands.Cog):
         ID = ctx.author.id
         param = dict()
         param["ID"] = ID
+        param["name"] = ctx.author.name
         ge.socket.send_string(gg.std_send_command("begin", ID, ge.name_pl, param))
         msg = GF.msg_recv()
         await ctx.channel.send(msg)
