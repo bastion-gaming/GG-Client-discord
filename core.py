@@ -48,12 +48,12 @@ async def on_guild_join(guild):
         systemchannel = guild.system_channel
     else:
         systemchannel = 0
-    # sql.new(guild.id, "Guild")
     param = dict()
     param["IDGuild"] = guild.id
+    param["name"] = guild.name
     ge.socket.send_string(gg.std_send_command("NewServer", guild.id, ge.name_pl, param))
     GF.msg_recv()
-    await systemchannel.send('Bonjour {}!'.format(guild.name))
+    await systemchannel.send('Bonjour **{0}**!'.format(guild.name))
 
 
 ####################### Stat ####################################
