@@ -133,8 +133,13 @@ class GemsBase(commands.Cog):
 
         ge.socket.send_string(gg.std_send_command("buy", ID, ge.name_pl, param))
         desc = GF.msg_recv()
-
-        await ctx.channel.send(desc[1])
+        lang = desc[1]
+        if desc[0] == "OK":
+            msg = discord.Embed(title = lang_P.forge_msg(lang, "stats", None, False, 1), color= 13752280, description = desc[2])
+            msg.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
+            await ctx.channel.send(embed = msg)
+        else:
+            await ctx.channel.send(desc[2])
 
     @commands.command(pass_context=True)
     async def sell(self, ctx, item, nb = 1):
@@ -148,8 +153,13 @@ class GemsBase(commands.Cog):
 
         ge.socket.send_string(gg.std_send_command("sell", ID, ge.name_pl, param))
         desc = GF.msg_recv()
-
-        await ctx.channel.send(desc[1])
+        lang = desc[1]
+        if desc[0] == "OK":
+            msg = discord.Embed(title = lang_P.forge_msg(lang, "stats", None, False, 2), color= 13752280, description = desc[2])
+            msg.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
+            await ctx.channel.send(embed = msg)
+        else:
+            await ctx.channel.send(desc[2])
 
     @commands.command(pass_context=True)
     async def inv(self, ctx, fct = None):
@@ -294,8 +304,13 @@ class GemsBase(commands.Cog):
 
         ge.socket.send_string(gg.std_send_command("pay", ID, ge.name_pl, param))
         desc = GF.msg_recv()
-
-        await ctx.channel.send(desc[1])
+        lang = desc[1]
+        if desc[0] == "OK":
+            msg = discord.Embed(title = lang_P.forge_msg(lang, "stats", None, False, 3), color= 13752280, description = desc[2])
+            msg.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
+            await ctx.channel.send(embed = msg)
+        else:
+            await ctx.channel.send(desc[2])
 
     @commands.command(pass_context=True)
     async def give(self, ctx, nom, item, nb = None):
@@ -312,8 +327,13 @@ class GemsBase(commands.Cog):
 
         ge.socket.send_string(gg.std_send_command("give", ID, ge.name_pl, param))
         desc = GF.msg_recv()
-
-        await ctx.channel.send(desc[1])
+        lang = desc[1]
+        if desc[0] == "OK":
+            msg = discord.Embed(title = lang_P.forge_msg(lang, "stats", None, False, 3), color= 13752280, description = desc[2])
+            msg.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
+            await ctx.channel.send(embed = msg)
+        else:
+            await ctx.channel.send(desc[2])
 
     @commands.command(pass_context=True)
     async def forge(self, ctx, item = None, nb = 1):
@@ -327,14 +347,17 @@ class GemsBase(commands.Cog):
 
         ge.socket.send_string(gg.std_send_command("forge", ID, ge.name_pl, param))
         desc = GF.msg_recv()
-
-        if item == None:
-            lang = desc[1]
-            msg = discord.Embed(title = lang_P.forge_msg(lang, "recette"), color= 15778560, description = desc[2])
-            await ctx.channel.send(embed = msg)
-            return True
+        lang = desc[1]
+        if desc[0] == "OK":
+            if item == None:
+                msg = discord.Embed(title = lang_P.forge_msg(lang, "recette"), color= 15778560, description = desc[2])
+                await ctx.channel.send(embed = msg)
+            else:
+                msg = discord.Embed(title = lang_P.forge_msg(lang, "stats", None, False, 4), color= 13752280, description = desc[2])
+                msg.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
+                await ctx.channel.send(embed = msg)
         else:
-            await ctx.channel.send(desc[1])
+            await ctx.channel.send(desc[2])
 
     @commands.command(pass_context=True)
     async def graphbourse(self, ctx, item, mois = None, annee = None, type = None):

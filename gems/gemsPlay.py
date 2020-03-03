@@ -23,8 +23,14 @@ class GemsPlay(commands.Cog):
         param = dict()
         param["ID"] = ID
         ge.socket.send_string(gg.std_send_command("daily", ID, ge.name_pl, param))
-        msg = GF.msg_recv()
-        await ctx.channel.send(msg[1])
+        desc = GF.msg_recv()
+        lang = desc[1]
+        if desc[0] == "OK":
+            msg = discord.Embed(title = lang_P.forge_msg(lang, "titres", None, False, 0), color= 13752280, description = desc[2])
+            msg.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
+            await ctx.channel.send(embed = msg)
+        else:
+            await ctx.channel.send(desc[2])
 
     @commands.command(pass_context=True)
     async def bank(self, ctx, ARG = None, ARG2 = None):
@@ -62,8 +68,18 @@ class GemsPlay(commands.Cog):
             msg.add_field(name="Commandes", value=desc[3], inline=False)
             await ctx.channel.send(embed = msg)
 
+        elif desc[0] == "add":
+            msg = discord.Embed(title = lang_P.forge_msg(lang, "titres", None, False, 4), color= 13752280, description = desc[2], timestamp=dt.datetime.now())
+            msg.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
+            await ctx.channel.send(embed = msg)
+
+        elif desc[0] == "saving":
+            msg = discord.Embed(title = lang_P.forge_msg(lang, "titres", None, False, 5), color= 13752280, description = desc[2], timestamp=dt.datetime.now())
+            msg.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
+            await ctx.channel.send(embed = msg)
+
         else:
-            await ctx.channel.send(desc[1])
+            await ctx.channel.send(desc[2])
 
     @commands.command(pass_context=True)
     async def stealing(self, ctx, name=None):
@@ -73,8 +89,14 @@ class GemsPlay(commands.Cog):
         param["ID"] = ID
         param["name"] = name
         ge.socket.send_string(gg.std_send_command("stealing", ID, ge.name_pl, param))
-        msg = GF.msg_recv()
-        await ctx.channel.send(msg[1])
+        desc = GF.msg_recv()
+        lang = desc[1]
+        if desc[0] == "OK":
+            msg = discord.Embed(title = lang_P.forge_msg(lang, "titres", None, False, 1), color= 13752280, description = desc[2])
+            msg.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
+            await ctx.channel.send(embed = msg)
+        else:
+            await ctx.channel.send(desc[2])
 
     @commands.command(pass_context=True)
     async def crime(self, ctx):
@@ -83,8 +105,14 @@ class GemsPlay(commands.Cog):
         param = dict()
         param["ID"] = ID
         ge.socket.send_string(gg.std_send_command("crime", ID, ge.name_pl, param))
-        msg = GF.msg_recv()
-        await ctx.channel.send(msg[1])
+        desc = GF.msg_recv()
+        lang = desc[1]
+        if desc[0] == "OK":
+            msg = discord.Embed(title = lang_P.forge_msg(lang, "titres", None, False, 2), color= 13752280, description = desc[2])
+            msg.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
+            await ctx.channel.send(embed = msg)
+        else:
+            await ctx.channel.send(desc[2])
 
     @commands.command(pass_context=True)
     async def gamble(self, ctx, valeur):
@@ -94,8 +122,14 @@ class GemsPlay(commands.Cog):
         param["ID"] = ID
         param["valeur"] = valeur
         ge.socket.send_string(gg.std_send_command("gamble", ID, ge.name_pl, param))
-        msg = GF.msg_recv()
-        await ctx.channel.send(msg[1])
+        desc = GF.msg_recv()
+        lang = desc[1]
+        if desc[0] == "OK":
+            msg = discord.Embed(title = lang_P.forge_msg(lang, "titres", None, False, 3), color= 13752280, description = desc[2])
+            msg.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
+            await ctx.channel.send(embed = msg)
+        else:
+            await ctx.channel.send(desc[2])
 
     @commands.command(pass_context=True)
     async def mine(self, ctx):
@@ -104,8 +138,14 @@ class GemsPlay(commands.Cog):
         param = dict()
         param["ID"] = ID
         ge.socket.send_string(gg.std_send_command("mine", ID, ge.name_pl, param))
-        msg = GF.msg_recv()
-        await ctx.channel.send(msg[1])
+        desc = GF.msg_recv()
+        lang = desc[1]
+        if desc[0] == "OK":
+            msg = discord.Embed(title = lang_P.forge_msg(lang, "stats", None, False, 6), color= 13752280, description = desc[2])
+            msg.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
+            await ctx.channel.send(embed = msg)
+        else:
+            await ctx.channel.send(desc[2])
 
     @commands.command(pass_context=True)
     async def dig(self, ctx):
@@ -114,8 +154,14 @@ class GemsPlay(commands.Cog):
         param = dict()
         param["ID"] = ID
         ge.socket.send_string(gg.std_send_command("dig", ID, ge.name_pl, param))
-        msg = GF.msg_recv()
-        await ctx.channel.send(msg[1])
+        desc = GF.msg_recv()
+        lang = desc[1]
+        if desc[0] == "OK":
+            msg = discord.Embed(title = lang_P.forge_msg(lang, "stats", None, False, 8), color= 13752280, description = desc[2])
+            msg.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
+            await ctx.channel.send(embed = msg)
+        else:
+            await ctx.channel.send(desc[2])
 
     @commands.command(pass_context=True)
     async def fish(self, ctx):
@@ -124,8 +170,14 @@ class GemsPlay(commands.Cog):
         param = dict()
         param["ID"] = ID
         ge.socket.send_string(gg.std_send_command("fish", ID, ge.name_pl, param))
-        msg = GF.msg_recv()
-        await ctx.channel.send(msg[1])
+        desc = GF.msg_recv()
+        lang = desc[1]
+        if desc[0] == "OK":
+            msg = discord.Embed(title = lang_P.forge_msg(lang, "stats", None, False, 7), color= 13752280, description = desc[2])
+            msg.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
+            await ctx.channel.send(embed = msg)
+        else:
+            await ctx.channel.send(desc[2])
 
     @commands.command(pass_context=True)
     async def slots(self, ctx, imise = None):
@@ -135,8 +187,14 @@ class GemsPlay(commands.Cog):
         param["ID"] = ID
         param["imise"] = imise
         ge.socket.send_string(gg.std_send_command("slots", ID, ge.name_pl, param))
-        msg = GF.msg_recv()
-        await ctx.channel.send(msg[1])
+        desc = GF.msg_recv()
+        lang = desc[1]
+        if desc[0] == "OK":
+            msg = discord.Embed(title = lang_P.forge_msg(lang, "stats", None, False, 9), color= 13752280, description = desc[2])
+            msg.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
+            await ctx.channel.send(embed = msg)
+        else:
+            await ctx.channel.send(desc[2])
 
     @commands.command(pass_context=True)
     async def boxes(self, ctx, fct = None, name = None):

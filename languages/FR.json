@@ -109,5 +109,14 @@
   "success":
     [
       "Liste de vos succès"
+    ],
+  "titres":
+    [
+      "Récompense journalière",
+      "Voleur",
+      "Crime",
+      "Pari",
+      "Modification du compte épargne",
+      "Épargne"
     ]
 }

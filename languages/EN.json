@@ -109,5 +109,14 @@
   "success":
     [
       "Your success list"
+    ],
+  "titres":
+    [
+      "Daily reward",
+      "Stealing",
+      "Crime",
+      "Gamble",
+      "Changing the savings account",
+      "Saving"
     ]
 }
