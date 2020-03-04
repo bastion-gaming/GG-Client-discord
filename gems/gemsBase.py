@@ -361,20 +361,27 @@ class GemsBase(commands.Cog):
             await ctx.channel.send(desc[2])
 
     @commands.command(pass_context=True)
-    async def graphbourse(self, ctx, item, mois = None, annee = None, type = None):
-        """**[item] [mois] [année]** | Historique de la bourse par item"""
+    async def graphbourse(self, ctx, item, moisD = None, anneeD = None, moisF = None, anneeF = None, type = None):
+        """**[item] {mois début} {année début} {mois fin} {année fin}** | Historique de la bourse par item"""
         ID = ctx.author.id
         now = dt.datetime.now()
 
         if item.lower() == "all":
-            if type == None:
-                type = str(now.year)
-            if annee == None:
-                annee = str(now.month)
-            temp = type
-            type = mois.lower()
-            mois = annee
-            annee = temp
+            if anneeF is not None:
+                temp = type
+            type = moisD.lower()
+            if anneeD is None:
+                anneeD = str(now.year)
+                moisD = str(now.month)
+            else:
+                moisD = anneeD
+                anneeD = moisF
+            if anneeF is None:
+                moisF = str(now.month)
+                anneeF = str(now.year)
+            else:
+                moisF = anneeF
+                anneeF = temp
             param = dict()
             param["ID"] = ID
             param["type"] = type
@@ -386,7 +393,7 @@ class GemsBase(commands.Cog):
                 await ctx.channel.send(msg[1])
             else:
                 for one in msg[1]:
-                    graph = GS.create_graph(ctx, one, annee, mois)
+                    graph = GS.create_graphbourse(ctx, one, anneeD, moisD, anneeF, moisF)
                     lang = graph[1]
                     if graph[0] == "404":
                         await ctx.send(lang_P.forge_msg(lang, "WarningMsg", None, False, 0))
@@ -394,11 +401,15 @@ class GemsBase(commands.Cog):
                         await ctx.send(file=discord.File("cache/{}".format(graph[0])))
                         os.remove("cache/{}".format(graph[0]))
         else:
-            if mois == None:
-                mois = str(now.month)
-            if annee == None:
-                annee = str(now.year)
-            graph = GS.create_graph(ctx, item, annee, mois)
+            if moisD == None:
+                moisD = str(now.month)
+            if anneeD == None:
+                anneeD = str(now.year)
+            if moisF == None:
+                moisF = str(now.month)
+            if anneeF == None:
+                anneeF = str(now.year)
+            graph = GS.create_graphbourse(ctx, item, anneeD, moisD, anneeF, moisF)
             lang = graph[1]
             if graph[0] == "404":
                 await ctx.send(lang_P.forge_msg(lang, "WarningMsg", None, False, 0))

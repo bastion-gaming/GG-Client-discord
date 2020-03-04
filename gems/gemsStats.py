@@ -7,14 +7,16 @@ import gg_lib as gg
 from languages import lang as lang_P
 
 
-def create_graph(ctx, item, year, month):
+def create_graphbourse(ctx, item, yearStart, monthStart, yearEnd, monthEnd):
     ID = ctx.author.id
     now = dt.datetime.now()
     param = dict()
     param["ID"] = ID
     param["item"] = item
-    param["year"] = year
-    param["month"] = month
+    param["yearStart"] = yearStart
+    param["monthStart"] = monthStart
+    param["yearEnd"] = yearEnd
+    param["monthEnd"] = monthEnd
 
     ge.socket.send_string(gg.std_send_command("csv_read", ID, ge.name_pl, param))
     msg = GF.msg_recv()
@@ -36,7 +38,10 @@ def create_graph(ctx, item, year, month):
     plt.figure()
     plt.subplot(2, 1, 1)
     plt.plot(axeX, axeY2, color='tab:blue', label=lang_P.forge_msg(lang, "graphbourse", None, False, 0), marker='8')
-    plt.title("{i} | {m} {y}".format(i=item, m=lang_P.forge_msg(lang, "month", None, False, int(month)-1), y=year))
+    if int(monthStart) == int(monthEnd) and int(yearStart) == int(yearEnd):
+        plt.title("{i}  ▌ {m} {y}".format(i=item, m=lang_P.forge_msg(lang, "month", None, False, int(monthStart)-1), y=yearStart))
+    else:
+        plt.title("{i}  ▌ {m} {y} ▶ {nowM} {nowY}".format(i=item, m=lang_P.forge_msg(lang, "month", None, False, int(monthStart)-1), y=yearStart, nowM=lang_P.forge_msg(lang, "month", None, False, int(monthEnd)-1), nowY=yearEnd))
     plt.margins(x=0.02, y=0.1)
     plt.legend()
     plt.subplot(2, 1, 2)
