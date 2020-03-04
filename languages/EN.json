@@ -104,7 +104,8 @@
       "collected",
       "planted",
       "cooked",
-      "fermented"
+      "fermented",
+      "Maximum single gain"
     ],
   "success":
     [

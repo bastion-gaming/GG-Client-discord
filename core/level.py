@@ -18,7 +18,7 @@ async def checklevel(message):
         msg.set_thumbnail(url=message.author.avatar_url)
         msg.set_footer(text=message.author.name)
         await message.channel.send(embed = msg)
-    elif len(desc) > 2:
+    if len(desc) > 2:
         title = "Success"
         descS = ""
         for i in range(1, len(desc[2])):

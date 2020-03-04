@@ -70,11 +70,11 @@ class GemsSuccess(commands.Cog):
             y = x[2].split(" | ")
             if x[1] == "bal" or x[1] == "inv" or x[1] == "market" or x[1] == "baltop":
                 if x[2] == x[1]:
-                    descGeneral += "{2} **{1}** `x{0}`\n\n".format(x[0], x[2], lang_P.forge_msg(lang, "stats", None, False, 15))
+                    descGeneral += "{2} **{1}** `{0}`\n\n".format(x[0], x[2], lang_P.forge_msg(lang, "stats", None, False, 15))
 
             elif x[1] == "buy":
                 if x[2] == x[1]:
-                    descBuy += "{2} **{1}** `x{0}`\n\n".format(x[0], x[2], lang_P.forge_msg(lang, "stats", None, False, 15))
+                    descBuy += "{2} **{1}** `{0}`\n\n".format(x[0], x[2], lang_P.forge_msg(lang, "stats", None, False, 15))
                 else:
                     for i in range(1, len(y)):
                         if y[i] == "item":
@@ -84,11 +84,11 @@ class GemsSuccess(commands.Cog):
                         else:
                             descBuy += y[i] + " "
                         if i == len(y)-1:
-                            descBuy += ": `x{0}`\n\n".format(x[0])
+                            descBuy += ": `{0}`\n\n".format(x[0])
 
             elif x[1] == "sell":
                 if x[2] == x[1]:
-                    descSell += "{2} **{1}** `x{0}`\n\n".format(x[0], x[2], lang_P.forge_msg(lang, "stats", None, False, 15))
+                    descSell += "{2} **{1}** `{0}`\n\n".format(x[0], x[2], lang_P.forge_msg(lang, "stats", None, False, 15))
                 else:
                     for i in range(1, len(y)):
                         if y[i] == "item":
@@ -98,11 +98,11 @@ class GemsSuccess(commands.Cog):
                         else:
                             descSell += y[i] + " "
                         if i == len(y)-1:
-                            descSell += ": `x{0}`\n\n".format(x[0])
+                            descSell += ": `{0}`\n\n".format(x[0])
 
             elif x[1] == "pay" or x[1] == "give":
                 if x[2] == x[1]:
-                    descDon += "{2} **{1}** `x{0}`\n\n".format(x[0], x[2], lang_P.forge_msg(lang, "stats", None, False, 15))
+                    descDon += "{2} **{1}** `{0}`\n\n".format(x[0], x[2], lang_P.forge_msg(lang, "stats", None, False, 15))
                 else:
                     for i in range(0, len(y)):
                         if x[1] == "give" and y[i] == "item":
@@ -116,11 +116,11 @@ class GemsSuccess(commands.Cog):
                         elif y[i] != "pay" and y[i] != "give":
                             descDon += y[i] + " "
                         if i == len(y)-1:
-                            descDon += ": `x{0}`\n\n".format(x[0])
+                            descDon += ": `{0}`\n\n".format(x[0])
 
             elif x[1] == "forge":
                 if x[2] == x[1]:
-                    descForge += "{2} **{1}** `x{0}`\n\n".format(x[0], x[2], lang_P.forge_msg(lang, "stats", None, False, 15))
+                    descForge += "{2} **{1}** `{0}`\n\n".format(x[0], x[2], lang_P.forge_msg(lang, "stats", None, False, 15))
                 else:
                     for i in range(1, len(y)):
                         if y[i] == "item":
@@ -130,11 +130,11 @@ class GemsSuccess(commands.Cog):
                         else:
                             descForge += y[i] + " "
                         if i == len(y)-1:
-                            descForge += ": `x{0}`\n\n".format(x[0])
+                            descForge += ": `{0}`\n\n".format(x[0])
 
             elif x[1] == "bank" or x[1] == "stealing" or x[1] == "crime" or x[1] == "gamble":
                 if x[2] == x[1] or x[2] == "bank saving":
-                    descBank += "{2} **{1}** `x{0}`\n\n".format(x[0], x[2], lang_P.forge_msg(lang, "stats", None, False, 15))
+                    descBank += "{2} **{1}** `{0}`\n\n".format(x[0], x[2], lang_P.forge_msg(lang, "stats", None, False, 15))
                 else:
                     for i in range(0, len(y)):
                         if x[1] == "bank" and y[i] == "gain":
@@ -144,6 +144,8 @@ class GemsSuccess(commands.Cog):
                         elif x[1] == "gamble":
                             if y[i] == "win":
                                 descBank += "Gamble {0} ".format(lang_P.forge_msg(lang, "stats", None, False, 23))
+                            elif y[i] == "max":
+                                descBank += "{0} ".format(lang_P.forge_msg(lang, "stats", None, False, 29))
                             elif y[i] == "gain" or y[i] == "perte":
                                 if y[i] == "gain":
                                     descBank += "{0} ".format(lang_P.forge_msg(lang, "stats", None, False, 17))
@@ -155,11 +157,11 @@ class GemsSuccess(commands.Cog):
                         elif x[1] != "bank" and x[1] != "crime" and x[1] != "stealing":
                             descBank += y[i] + " "
                         if i == len(y)-1:
-                            descBank += ": `x{0}`\n\n".format(x[0])
+                            descBank += ": `{0}`\n\n".format(x[0])
 
             elif x[1] == "mine":
                 if x[2] == x[1]:
-                    descMine += "{2} **{1}** `x{0}`\n\n".format(x[0], x[2], lang_P.forge_msg(lang, "stats", None, False, 15))
+                    descMine += "{2} **{1}** `{0}`\n\n".format(x[0], x[2], lang_P.forge_msg(lang, "stats", None, False, 15))
                 else:
                     for i in range(1, len(y)):
                         if y[i] == "item":
@@ -169,11 +171,11 @@ class GemsSuccess(commands.Cog):
                         elif y[1] != "broken":
                             descMine += y[i] + " "
                         if i == len(y)-1:
-                            descMine += ": `x{0}`\n\n".format(x[0])
+                            descMine += ": `{0}`\n\n".format(x[0])
 
             elif x[1] == "fish":
                 if x[2] == x[1]:
-                    descFish += "{2} **{1}** `x{0}`\n\n".format(x[0], x[2], lang_P.forge_msg(lang, "stats", None, False, 15))
+                    descFish += "{2} **{1}** `{0}`\n\n".format(x[0], x[2], lang_P.forge_msg(lang, "stats", None, False, 15))
                 else:
                     for i in range(1, len(y)):
                         if y[i] == "item":
@@ -183,11 +185,11 @@ class GemsSuccess(commands.Cog):
                         elif y[1] != "broken":
                             descFish += y[i] + " "
                         if i == len(y)-1:
-                            descFish += ": `x{0}`\n\n".format(x[0])
+                            descFish += ": `{0}`\n\n".format(x[0])
 
             elif x[1] == "dig":
                 if x[2] == x[1]:
-                    descDig += "{2} **{1}** `x{0}`\n\n".format(x[0], x[2], lang_P.forge_msg(lang, "stats", None, False, 15))
+                    descDig += "{2} **{1}** `{0}`\n\n".format(x[0], x[2], lang_P.forge_msg(lang, "stats", None, False, 15))
                 else:
                     for i in range(1, len(y)):
                         if y[i] == "item":
@@ -197,11 +199,11 @@ class GemsSuccess(commands.Cog):
                         elif y[1] != "broken":
                             descDig += y[i] + " "
                         if i == len(y)-1:
-                            descDig += ": `x{0}`\n\n".format(x[0])
+                            descDig += ": `{0}`\n\n".format(x[0])
 
             elif x[1] == "slots":
                 if x[2] == x[1]:
-                    descSlots += "{2} **{1}** `x{0}`\n\n".format(x[0], x[2], lang_P.forge_msg(lang, "stats", None, False, 15))
+                    descSlots += "{2} **{1}** `{0}`\n\n".format(x[0], x[2], lang_P.forge_msg(lang, "stats", None, False, 15))
                 else:
                     for i in range(1, len(y)):
                         if y[i] == "gain":
@@ -211,11 +213,11 @@ class GemsSuccess(commands.Cog):
                         else:
                             descSlots += y[i] + " "
                         if i == len(y)-1:
-                            descSlots += ": `x{0}`\n\n".format(x[0])
+                            descSlots += ": `{0}`\n\n".format(x[0])
 
             elif x[1] == "boxes":
                 if x[2] == x[1]:
-                    descBoxes += "{2} **{1}** `x{0}`\n\n".format(x[0], x[2], lang_P.forge_msg(lang, "stats", None, False, 15))
+                    descBoxes += "{2} **{1}** `{0}`\n\n".format(x[0], x[2], lang_P.forge_msg(lang, "stats", None, False, 15))
                 else:
                     for i in range(1, len(y)):
                         if y[i] == "gain" and y[0] == "boxes":
@@ -227,11 +229,11 @@ class GemsSuccess(commands.Cog):
                         elif y[0] != "lootbox":
                             descBoxes += y[i] + " "
                         if i == len(y)-1:
-                            descBoxes += ": `x{0}`\n\n".format(x[0])
+                            descBoxes += ": `{0}`\n\n".format(x[0])
 
             elif x[1] == "hothouse":
                 if x[2] == x[1]:
-                    descHothouse += "{2} **{1}** `x{0}`\n\n".format(x[0], x[2], lang_P.forge_msg(lang, "stats", None, False, 15))
+                    descHothouse += "{2} **{1}** `{0}`\n\n".format(x[0], x[2], lang_P.forge_msg(lang, "stats", None, False, 15))
                 else:
                     for i in range(1, len(y)):
                         if y[i] == "harvest":
@@ -239,11 +241,11 @@ class GemsSuccess(commands.Cog):
                         elif y[i] == "plant":
                             descHothouse += "{1} {0} ".format(lang_P.forge_msg(lang, "stats", None, False, 26), y[3])
                         if i == len(y)-1:
-                            descHothouse += ": `x{0}`\n\n".format(x[0])
+                            descHothouse += ": `{0}`\n\n".format(x[0])
 
             elif x[1] == "cooking":
                 if x[2] == x[1]:
-                    descCooking += "{2} **{1}** `x{0}`\n\n".format(x[0], x[2], lang_P.forge_msg(lang, "stats", None, False, 15))
+                    descCooking += "{2} **{1}** `{0}`\n\n".format(x[0], x[2], lang_P.forge_msg(lang, "stats", None, False, 15))
                 else:
                     for i in range(1, len(y)):
                         if y[i] == "harvest":
@@ -251,11 +253,11 @@ class GemsSuccess(commands.Cog):
                         elif y[i] == "plant":
                             descCooking += "{1} {0} ".format(lang_P.forge_msg(lang, "stats", None, False, 27), y[3])
                         if i == len(y)-1:
-                            descCooking += ": `x{0}`\n\n".format(x[0])
+                            descCooking += ": `{0}`\n\n".format(x[0])
 
             elif x[1] == "ferment":
                 if x[2] == x[1]:
-                    descFerment += "{2} **{1}** `x{0}`\n\n".format(x[0], x[2], lang_P.forge_msg(lang, "stats", None, False, 15))
+                    descFerment += "{2} **{1}** `{0}`\n\n".format(x[0], x[2], lang_P.forge_msg(lang, "stats", None, False, 15))
                 else:
                     for i in range(1, len(y)):
                         if y[i] == "harvest":
@@ -263,10 +265,10 @@ class GemsSuccess(commands.Cog):
                         elif y[i] == "plant":
                             descFerment += "{1} {0} ".format(lang_P.forge_msg(lang, "stats", None, False, 28), y[3])
                         if i == len(y)-1:
-                            descFerment += ": `x{0}`\n\n".format(x[0])
+                            descFerment += ": `{0}`\n\n".format(x[0])
 
             else:
-                desc += "\n{1} `x{0}`".format(x[0], x[2])
+                desc += "\n{1} `{0}`".format(x[0], x[2])
 
         msg = discord.Embed(title = "Statistiques de {0} | Gems Base".format(Nom), color= 13752280, description = "", timestamp=dt.datetime.now())
         msg.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
