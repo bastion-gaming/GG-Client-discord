@@ -2,7 +2,7 @@ import zmq
 import gg_lib as gg
 import time
 
-name_pl = "discord" # Nom de la plateforme
+name_pl = "get gems" # Nom de la plateforme
 
 REQUEST_TIMEOUT = 2500
 REQUEST_RETRIES = 3

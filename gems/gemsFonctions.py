@@ -70,7 +70,8 @@ def msg_recv():
         message = gg.std_receive_command(ge.socket.recv())
         msg = message['msg']
     else:
-        msg = ["FR", "Aucune réponse du serveur"]
+        # msg = ["Error", "FR", "Aucune réponse du serveur"]
+        msg = ["Error", "EN", "No reply from the server"]
         # Socket is confused. Close and remove it.
         ge.socket.setsockopt(zmq.LINGER, 0)
         ge.socket.close()

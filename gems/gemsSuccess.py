@@ -334,6 +334,8 @@ class GemsSuccess(commands.Cog):
             # msg.set_thumbnail(url=ctx.author.avatar_url)
             msg.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
             await ctx.channel.send(embed = msg)
+        elif desc[0] == "Error":
+            await ctx.channel.send(desc[2])
         else:
             await ctx.channel.send(desc[1])
 
