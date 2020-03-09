@@ -47,7 +47,7 @@ class GemsPlay(commands.Cog):
         ge.socket.send_string(gg.std_send_command("bank", ID, ge.name_pl, param))
         desc = GF.msg_recv()
         lang = desc[1]
-        if ARG2 is not None:
+        if ARG == "bal" and ARG2 is not None:
             N = ctx.guild.get_member(ge.nom_ID(ARG2)).name
         else:
             N = ctx.author.name
