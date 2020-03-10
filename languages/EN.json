@@ -105,7 +105,9 @@
       "planted",
       "cooked",
       "fermented",
-      "Maximum single gain"
+      "Maximum single gain",
+      "Won games",
+      "Lost games"
     ],
   "success":
     [

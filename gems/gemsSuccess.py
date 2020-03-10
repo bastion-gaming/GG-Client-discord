@@ -210,6 +210,10 @@ class GemsSuccess(commands.Cog):
                             descSlots += "{0} ".format(lang_P.forge_msg(lang, "stats", None, False, 17))
                         elif y[i] == "perte":
                             descSlots += "{0} ".format(lang_P.forge_msg(lang, "stats", None, False, 18))
+                        elif y[i] == "win":
+                            descSlots += "{0} ".format(lang_P.forge_msg(lang, "stats", None, False, 30))
+                        elif y[i] == "lose":
+                            descSlots += "{0} ".format(lang_P.forge_msg(lang, "stats", None, False, 31))
                         else:
                             descSlots += y[i] + " "
                         if i == len(y)-1:
