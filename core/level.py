@@ -24,7 +24,7 @@ async def checklevel(message):
             descS = ""
             for i in range(1, len(desc[2])):
                 descS += "{0}\n".format(desc[2][i])
-            msg = discord.Embed(title = title, color= 6466585, description = descS, timestamp=dt.datetime.now())
+            msg = discord.Embed(title = title, color= 6824352, description = descS, timestamp=dt.datetime.now())
             msg.set_thumbnail(url=message.author.avatar_url)
             msg.set_footer(text=message.author.name)
             await message.channel.send(embed = msg)

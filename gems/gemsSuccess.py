@@ -326,7 +326,7 @@ class GemsSuccess(commands.Cog):
         desc = GF.msg_recv()
         if desc[0] == "OK":
             lang = desc[1]
-            msg = discord.Embed(title = lang_P.forge_msg(lang, "success", None, False, 0), color= 6466585, description = "", timestamp=dt.datetime.now())
+            msg = discord.Embed(title = lang_P.forge_msg(lang, "success", None, False, 0), color= 6824352, description = "", timestamp=dt.datetime.now())
             descS = desc[2]
             i = 0
             while i < len(descS):
@@ -336,7 +336,7 @@ class GemsSuccess(commands.Cog):
                 if i % 40 == 0 and i != 0:
                     msg.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
                     await ctx.channel.send(embed = msg)
-                    msg = discord.Embed(title = lang_P.forge_msg(lang, "success", None, False, 0), color= 6466585, description = "", timestamp=dt.datetime.now())
+                    msg = discord.Embed(title = lang_P.forge_msg(lang, "success", None, False, 0), color= 6824352, description = "", timestamp=dt.datetime.now())
                 msg.add_field(name=titre, value=desc, inline=False)
                 i += 2
             # msg.set_thumbnail(url=ctx.author.avatar_url)
