@@ -333,6 +333,10 @@ class GemsSuccess(commands.Cog):
                 # print("Success >> {0} a obtenu le succes {1}".format(ctx.author.name, descS[i]))
                 titre = descS[i]
                 desc = descS[i+1]
+                if i % 40 == 0 and i != 0:
+                    msg.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
+                    await ctx.channel.send(embed = msg)
+                    msg = discord.Embed(title = lang_P.forge_msg(lang, "success", None, False, 0), color= 6466585, description = "", timestamp=dt.datetime.now())
                 msg.add_field(name=titre, value=desc, inline=False)
                 i += 2
             # msg.set_thumbnail(url=ctx.author.avatar_url)
