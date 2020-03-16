@@ -75,7 +75,7 @@ client.load_extension('gems.gemsSuccess')
 
 # client.load_extension('gems.gemsGuild')
 
-client.load_extension('gems.gemsEvent')
+# client.load_extension('gems.gemsEvent')
 
 client.load_extension('gems.gemsAdmin')
 
