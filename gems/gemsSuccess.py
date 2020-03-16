@@ -316,7 +316,7 @@ class GemsSuccess(commands.Cog):
     @commands.command(pass_context=True)
     async def success(self, ctx):
         """
-        Affichage des statistiques du joueur.
+        Affiche la liste de tes succès
         """
         ID = ctx.author.id
         param = dict()

@@ -40,6 +40,19 @@ class GemsBase(commands.Cog):
         await ctx.channel.send(msg)
 
     @commands.command(pass_context=True)
+    async def connect(self, ctx, PlayerID):
+        """**[PlayerID]** | Connecter un compte joueur d'une autre plateforme"""
+        ID = ctx.author.id
+        param = dict()
+        param["ID"] = ID
+        param["PlayerID"] = PlayerID
+        ge.socket.send_string(gg.std_send_command("connect", ID, ge.name_pl, param))
+        desc = GF.msg_recv()
+        # if desc[0] == "OK":
+        #     # A faire
+        await ctx.channel.send(desc[2])
+
+    @commands.command(pass_context=True)
     async def bal(self, ctx, nom = None):
         """Êtes vous riche ou pauvre ?"""
         ID = ctx.author.id
@@ -72,11 +85,11 @@ class GemsBase(commands.Cog):
             print("Gems >> Balance de {} affichée".format(nom))
             return
         else:
-            await ctx.channel.send(desc[1])
+            await ctx.channel.send(desc[2])
 
     @commands.command(pass_context=True)
     async def baltop(self, ctx, n = None, m = None):
-        """**_{filtre}_ [nombre]** | Classement des joueurs (10 premiers par défaut)"""
+        """**_{filtre}_ [nombre]** | Classement des joueurs"""
         ID = ctx.author.id
         param = dict()
         param["ID"] = ID
@@ -120,7 +133,7 @@ class GemsBase(commands.Cog):
                 msg = discord.Embed(title = "Classement", color= 13752280, description = "Erreur! Commande incorrect")
             await ctx.channel.send(embed = msg)
         else:
-            await ctx.channel.send(desc[1])
+            await ctx.channel.send(desc[2])
 
     @commands.command(pass_context=True)
     async def buy(self, ctx, item, nb = 1):
@@ -206,7 +219,7 @@ class GemsBase(commands.Cog):
             await ctx.channel.send(embed = msg)
 
         else:
-            await ctx.channel.send(desc[1])
+            await ctx.channel.send(desc[2])
 
     @commands.command(pass_context=True)
     async def market(self, ctx, fct = None):
@@ -289,7 +302,7 @@ class GemsBase(commands.Cog):
                 await ctx.channel.send(embed = msg)
 
         else:
-            await ctx.channel.send(desc[1])
+            await ctx.channel.send(desc[2])
 
     @commands.command(pass_context=True)
     async def pay(self, ctx, nom, gain):
