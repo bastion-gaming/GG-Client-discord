@@ -5,6 +5,7 @@ from discord.ext.commands import bot
 GGModule = ["gemsbase", "gemsplay", "gemsevent", "gemsguild", "gemssuccess"]
 GGnom = ["gem", "gems", "gg", "getgems", "get gems"]
 
+
 class Helpme(commands.Cog):
 
     def __init__(self, bot):
