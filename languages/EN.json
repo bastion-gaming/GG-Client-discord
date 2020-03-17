@@ -40,7 +40,7 @@
     "Recipes",
   "hothouse":
     [
-      "Here are your seedlings. \nUse hothouse plant seed to plant a <:gem_seed:{0}>`seed`",
+      "Here are your seedlings. \nUse `hothouse seed` to plant a <:gem_seed:{0}>`seed`",
       "Greenhouse",
       "Greenhouse | Part {0}",
       "Planting n°{0}"
@@ -54,7 +54,7 @@
     ],
   "cooking":
     [
-      "Here's your ovens. \nUse the cooking potato to get some <:gem_fries:{0}>`fries`",
+      "Here's your ovens. \nUse the `cooking potato` to get some <:gem_fries:{0}>`fries`",
       "Kitchen",
       "Kitchen | Part {0}",
       "Furnace n°{0}"

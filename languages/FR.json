@@ -40,7 +40,7 @@
     "Recettes",
   "hothouse":
     [
-      "Voici tes plantations.\nUtilise `hothouse plant seed` pour planter une <:gem_seed:{0}>`seed`",
+      "Voici tes plantations.\nUtilise `hothouse seed` pour planter une <:gem_seed:{0}>`seed`",
       "La serre",
       "La serre | Partie {0}",
       "Plantation n°{0}"

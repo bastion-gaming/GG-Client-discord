@@ -217,14 +217,12 @@ class GemsPlay(commands.Cog):
             await ctx.channel.send(msg[1])
 
     @commands.command(pass_context=True)
-    async def hothouse(self, ctx, fct = None, arg = None, arg2 = None):
-        """**[harvest / plant]** {_n° plantation / item à planter_} | Plantons compagnons !!"""
+    async def hothouse(self, ctx, item = None):
+        """**{seed/pumpkin}** | Plantons compagnons !!"""
         ID = ctx.author.id
         param = dict()
         param["ID"] = ID
-        param["fct"] = fct
-        param["arg"] = arg
-        param["arg2"] = arg2
+        param["item"] = item
         ge.socket.send_string(gg.std_send_command("hothouse", ID, ge.name_pl, param))
         msg = GF.msg_recv()
 
