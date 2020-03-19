@@ -37,7 +37,7 @@ class GemsBase(commands.Cog):
         param["name"] = ctx.author.name
         ge.socket.send_string(gg.std_send_command("begin", ID, ge.name_pl, param))
         msg = GF.msg_recv()
-        await ctx.channel.send(msg)
+        await ctx.channel.send(msg[2])
 
     @commands.command(pass_context=True)
     async def connect(self, ctx, PlayerID):
