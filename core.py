@@ -25,11 +25,12 @@ async def on_ready():
     print('PREFIX = '+str(PREFIX))
     print('\nGet Gems - Client Discord '+VERSION)
     GF.setglobalguild(client.get_guild(utils.ServIDmoji))
-    activity = discord.Activity(type=discord.ActivityType.playing, name="{0}help | bastion-gaming.fr ▶".format(PREFIX))
+    print('------\n')
+    GGconnect, nb_saisons = ge.ZMQ()
+    print('------\n')
+    activity = discord.Activity(type=discord.ActivityType.playing, name="{0}help | Season {1}".format(PREFIX, nb_saisons))
     await client.change_presence(status=discord.Status.online, activity=activity)
-    print('------\n')
-    GGconnect = ge.ZMQ()
-    print('------\n')
+
 
 ####################### Commande help.py #######################
 
@@ -81,4 +82,7 @@ client.load_extension('gems.gemsAdmin')
 
 ####################### Lancemement du bot ######################
 
-client.run(TOKEN)
+try:
+    client.run(TOKEN)
+except (KeyboardInterrupt, SystemExit):
+    pass

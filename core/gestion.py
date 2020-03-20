@@ -48,6 +48,7 @@ poll.register(socket, zmq.POLLIN)
 
 def ZMQ():
     context = zmq.Context(1)
+    nb_saison = -1
 
     #  Socket to talk to server
     print("Connecting to Get Gems server…")
@@ -62,8 +63,11 @@ def ZMQ():
     socks = dict(poll.poll(REQUEST_TIMEOUT))
     if socks.get(socket) == zmq.POLLIN:
         msg = socket.recv()
-        if msg.decode() == "1":
-            print("Connected to Get Gems server")
+        msg_DEC = msg.decode().replace(']', '').replace('[', '').split(",")
+        print(msg_DEC)
+        if msg_DEC[0] == '1':
+            print("Connected to Get Gems server and we are in season {}".format(msg_DEC[1]))
+            nb_saison = msg_DEC[1]
     else:
         print("No reply from the server")
         # Socket is confused. Close and remove it.
@@ -71,4 +75,4 @@ def ZMQ():
         socket.close()
         poll.unregister(socket)
         return False
-    return True
+    return True, nb_saison
