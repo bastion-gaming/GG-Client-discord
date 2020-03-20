@@ -15,7 +15,7 @@ class GemsPlay(commands.Cog):
 
     @commands.command(pass_context=True)
     async def daily(self, ctx):
-        """Récupère ta récompense journalière!"""
+        """Get your daily reward!"""
         # =======================================================================
         # Initialisation des variables générales de la fonction
         # =======================================================================
@@ -34,7 +34,7 @@ class GemsPlay(commands.Cog):
 
     @commands.command(pass_context=True)
     async def bank(self, ctx, ARG = None, ARG2 = None):
-        """Compte épargne"""
+        """Savings account"""
         # =======================================================================
         # Initialistation des variables générales de la fonction
         # =======================================================================
@@ -83,7 +83,7 @@ class GemsPlay(commands.Cog):
 
     @commands.command(pass_context=True)
     async def stealing(self, ctx, name=None):
-        """**[nom]** | Vole des :gem:`gems` aux autres joueurs!"""
+        """**[name]** | Steal :gem:`gems` from other players!"""
         ID = ctx.author.id
         param = dict()
         param["ID"] = ID
@@ -100,7 +100,7 @@ class GemsPlay(commands.Cog):
 
     @commands.command(pass_context=True)
     async def crime(self, ctx):
-        """Commets un crime et gagne des :gem:`gems` Attention au DiscordCop!"""
+        """Commit a crime and earn :gem:`gems` Beware of DiscordCop!"""
         ID = ctx.author.id
         param = dict()
         param["ID"] = ID
@@ -116,7 +116,7 @@ class GemsPlay(commands.Cog):
 
     @commands.command(pass_context=True)
     async def gamble(self, ctx, valeur):
-        """**[valeur]** | Avez vous l'ame d'un parieur ?"""
+        """**[value]** | Are you a gambler's man?"""
         ID = ctx.author.id
         param = dict()
         param["ID"] = ID
@@ -133,7 +133,7 @@ class GemsPlay(commands.Cog):
 
     @commands.command(pass_context=True)
     async def mine(self, ctx):
-        """Minez compagnons !!"""
+        """Let's mine, mates!"""
         ID = ctx.author.id
         param = dict()
         param["ID"] = ID
@@ -149,7 +149,7 @@ class GemsPlay(commands.Cog):
 
     @commands.command(pass_context=True)
     async def dig(self, ctx):
-        """Creusons compagnons !!"""
+        """Let's dig, mates!"""
         ID = ctx.author.id
         param = dict()
         param["ID"] = ID
@@ -165,7 +165,7 @@ class GemsPlay(commands.Cog):
 
     @commands.command(pass_context=True)
     async def fish(self, ctx):
-        """Péchons compagnons !!"""
+        """Let us sin mates!"""
         ID = ctx.author.id
         param = dict()
         param["ID"] = ID
@@ -181,7 +181,7 @@ class GemsPlay(commands.Cog):
 
     @commands.command(pass_context=True)
     async def slots(self, ctx, imise = None):
-        """**[mise]** | La machine à sous, la mise minimum est de 10 :gem:`gems`"""
+        """**[bet]** | Slot machine, minimum bet is 10 :gem:`gems`"""
         ID = ctx.author.id
         param = dict()
         param["ID"] = ID
@@ -198,7 +198,7 @@ class GemsPlay(commands.Cog):
 
     @commands.command(pass_context=True)
     async def boxes(self, ctx, fct = None, name = None):
-        """**open [nom]** | Ouverture de Loot Box"""
+        """**open [name]** | Loot Box Opening"""
         ID = ctx.author.id
         param = dict()
         param["ID"] = ID
@@ -218,7 +218,7 @@ class GemsPlay(commands.Cog):
 
     @commands.command(pass_context=True)
     async def hothouse(self, ctx, item = None):
-        """**{seed/pumpkin}** | Plantons compagnons !!"""
+        """**{seed/pumpkin}** | Let's plant mates!"""
         ID = ctx.author.id
         param = dict()
         param["ID"] = ID
@@ -252,7 +252,7 @@ class GemsPlay(commands.Cog):
 
     @commands.command(pass_context=True)
     async def ferment(self, ctx, item = None):
-        """**{grapes/wheat}** | Cave de fermentation. Alcool illimité !!"""
+        """**{grapes/wheat}** | Fermentation winery. Unlimited alcohol!"""
         ID = ctx.author.id
         param = dict()
         param["ID"] = ID
@@ -286,7 +286,7 @@ class GemsPlay(commands.Cog):
 
     @commands.command(pass_context=True)
     async def cooking(self, ctx, item = None):
-        """**{potato/pumpkin/chocolate}** | Cuisinons compagnons !!"""
+        """**{potato/pumpkin/chocolate}** | Let's cook together!"""
         ID = ctx.author.id
         param = dict()
         param["ID"] = ID

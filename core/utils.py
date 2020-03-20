@@ -1,7 +1,6 @@
 import discord
 from discord.ext import commands
 from discord.ext.commands import bot
-from discord.utils import get
 
 ServIDmoji = 634317171496976395
 
@@ -17,7 +16,7 @@ class Utils(commands.Cog):
     @commands.command(pass_context=True)
     async def version(self, ctx):
             """
-            Permet d'avoir la version du bot.
+            Allows to have the version of the bot.
             """
             msg = "Je suis en version : **" + str(VERSION) + "**."
             await ctx.channel.send(msg)
@@ -25,7 +24,7 @@ class Utils(commands.Cog):
     @commands.command(pass_context=True)
     async def site(self, ctx):
             """
-            Permet d'avoir le site de bastion.
+            Allows to have the bastion site.
             """
             msg = "Le site est : **http://www.bastion-gaming.fr/**."
             await ctx.channel.send(msg)
@@ -41,15 +40,15 @@ class Utils(commands.Cog):
     @commands.command(pass_context=True)
     async def twitch(self, ctx):
             """
-            Permet d'avoir le lien du twitch.
+            Allows to have the twitch link.
             """
-            msg = "Notre chaine twitch :arrow_right: **https://www.twitch.tv/bastionlivetv/**."
+            msg = "Notre chaine twitch :arrow_right: **https://www.twitch.tv/bastionautes/**."
             await ctx.channel.send(msg)
 
     @commands.command(pass_context=True)
     async def github(self, ctx):
             """
-            Permet d'avoir le lien du github.
+            Allows to have the link of the github.
             """
             msg = "Le github du Bot :arrow_right: **https://github.com/bastion-gaming/**."
             await ctx.channel.send(msg)
