@@ -15,8 +15,8 @@ class Helpme(commands.Cog):
     @commands.command(pass_context=True)
     async def help(self, ctx, nameElem = None):
         """Affiche ce message !"""
-        d_help = "Liste de toutes les commandes utilisable avec le prefix {}".format(self.PREFIX)
-        msg = discord.Embed(title = "Commandes disponible", color= 9576994, description = d_help)
+        d_help = "List of all commands that can be used with the prefix {}".format(self.PREFIX)
+        msg = discord.Embed(title = "Available orders", color= 9576994, description = d_help)
         desc = ""
         desctemp = ""
 
@@ -73,9 +73,9 @@ class Helpme(commands.Cog):
                     cog = self.bot.get_cog(COG)
                     coms = cog.get_commands()
                     desc += "\n• {0}".format(COG)
-            msg.add_field(name="Modules principaux", value=desc, inline=False)
+            msg.add_field(name="Main modules", value=desc, inline=False)
             if GGdesc != "":
-                msg.add_field(name="Modules Get Gems", value=GGdesc, inline=False)
+                msg.add_field(name="Get Gems modules", value=GGdesc, inline=False)
             await ctx.send(embed = msg)
 
 

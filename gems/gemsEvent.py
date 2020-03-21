@@ -11,7 +11,7 @@ class GemsEvent(commands.Cog):
 
     @commands.command(pass_context=True)
     async def event(self, ctx):
-        """Date des Événements !!"""
+        """Date of Events !"""
         msg = discord.Embed(title = "Evénements", color= 13752280, description = "Date des Evénements !!")
         desc = "26 Octobre :arrow_right: 10 Novembre"
         desc += "\n<:gem_pumpkin:{0}>`pumpkin`".format(GF.get_idmoji("pumpkin"))
