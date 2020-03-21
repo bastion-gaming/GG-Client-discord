@@ -1,10 +1,10 @@
 import discord
 from discord.ext import commands
 from discord.ext.commands import bot
-from discord.utils import get
 
 ServIDmoji = 634317171496976395
-
+nb_saisons = 0
+date_saison = ""
 client = discord.Client()
 VERSION = open("core/version.txt").read().replace("\n", "")
 

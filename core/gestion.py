@@ -1,6 +1,9 @@
 import zmq
 import gg_lib as gg
 import time
+from core import utils
+from apscheduler.schedulers.background import BackgroundScheduler
+from datetime import date
 
 name_pl = "get gems" # Nom de la plateforme
 
@@ -68,6 +71,7 @@ def ZMQ():
         if msg_DEC[0] == '1':
             print("Connected to Get Gems server and we are in season {}".format(msg_DEC[1]))
             nb_saison = msg_DEC[1]
+            date_saison = msg_DEC[2]
     else:
         print("No reply from the server")
         # Socket is confused. Close and remove it.
@@ -75,4 +79,4 @@ def ZMQ():
         socket.close()
         poll.unregister(socket)
         return False
-    return True, nb_saison
+    return True, nb_saison, date_saison
