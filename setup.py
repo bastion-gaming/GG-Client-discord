@@ -19,3 +19,6 @@ install("PyYAML")
 
 # Création de graphiques
 install("matplotlib")
+
+# Gestion des événements
+install("apscheduler")
