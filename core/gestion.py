@@ -1,9 +1,6 @@
 import zmq
 import gg_lib as gg
 import time
-from core import utils
-from apscheduler.schedulers.background import BackgroundScheduler
-from datetime import date
 
 name_pl = "get gems" # Nom de la plateforme
 
