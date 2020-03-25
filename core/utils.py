@@ -19,7 +19,7 @@ class Utils(commands.Cog):
             """
             Allows to have the version of the bot.
             """
-            msg = "Je suis en version : **" + str(VERSION) + "**."
+            msg = "**" + str(VERSION) + "**."
             await ctx.channel.send(msg)
 
     @commands.command(pass_context=True)
@@ -27,7 +27,7 @@ class Utils(commands.Cog):
             """
             Allows to have the bastion site.
             """
-            msg = "Le site est : **http://www.bastion-gaming.fr/**."
+            msg = "**http://www.bastion-gaming.fr/**."
             await ctx.channel.send(msg)
 
     @commands.command(pass_context=True)
@@ -39,19 +39,11 @@ class Utils(commands.Cog):
             await ctx.channel.send(msg)
 
     @commands.command(pass_context=True)
-    async def twitch(self, ctx):
-            """
-            Allows to have the twitch link.
-            """
-            msg = "Notre chaine twitch :arrow_right: **https://www.twitch.tv/bastionautes/**."
-            await ctx.channel.send(msg)
-
-    @commands.command(pass_context=True)
     async def github(self, ctx):
             """
             Allows to have the link of the github.
             """
-            msg = "Le github du Bot :arrow_right: **https://github.com/bastion-gaming/**."
+            msg = "**https://github.com/bastion-gaming/**."
             await ctx.channel.send(msg)
 
 
