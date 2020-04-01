@@ -54,7 +54,7 @@ class GemsBase(commands.Cog):
 
     @commands.command(pass_context=True)
     async def infos(self, ctx, nom = None):
-        """**[name]** | Display player information"""
+        """**{name}** | Display player information"""
         ID = ctx.author.id
         param = dict()
         if nom is None:
@@ -87,7 +87,7 @@ class GemsBase(commands.Cog):
 
     @commands.command(pass_context=True)
     async def bal(self, ctx, nom = None):
-        """Are you rich or poor?"""
+        """**{name}** | Are you rich or poor?"""
         ID = ctx.author.id
         param = dict()
         if nom is None:
@@ -116,7 +116,7 @@ class GemsBase(commands.Cog):
 
     @commands.command(pass_context=True)
     async def baltop(self, ctx, n = None, m = None):
-        """**_{filter}_ [number]** | Player rankings"""
+        """**{filter} {number}** | Player rankings"""
         ID = ctx.author.id
         param = dict()
         param["ID"] = ID
@@ -164,7 +164,7 @@ class GemsBase(commands.Cog):
 
     @commands.command(pass_context=True)
     async def buy(self, ctx, item, nb = 1):
-        """**[item] [number]** | Allows you to purchase items sold at the market"""
+        """**[item] {number}** | Allows you to purchase items sold at the market"""
         ID = ctx.author.id
         param = dict()
         param["ID"] = ID
@@ -184,7 +184,7 @@ class GemsBase(commands.Cog):
 
     @commands.command(pass_context=True)
     async def sell(self, ctx, item, nb = 1):
-        """**[item] [number]** | Allows you to sell your items!"""
+        """**[item] {number}** | Allows you to sell your items!"""
         ID = ctx.author.id
         param = dict()
         param["ID"] = ID
@@ -250,7 +250,7 @@ class GemsBase(commands.Cog):
 
     @commands.command(pass_context=True)
     async def market(self, ctx, fct = None):
-        """**[stand]** | Allows you to see all the items you can buy or sell!"""
+        """**{stand}** | Allows you to see all the items you can buy or sell!"""
         ID = ctx.author.id
         param = dict()
         param["ID"] = ID
@@ -378,7 +378,7 @@ class GemsBase(commands.Cog):
 
     @commands.command(pass_context=True)
     async def forge(self, ctx, item = None, nb = 1):
-        """**[item] [number]** | Allows you to design specific items"""
+        """**{item} {number}** | Allows you to design specific items"""
         ID = ctx.author.id
         param = dict()
         param["ID"] = ID
@@ -459,9 +459,7 @@ class GemsBase(commands.Cog):
 
     @commands.command(pass_context=True)
     async def lang(self, ctx, langue = None):
-        """
-        Allows you to change the language for a player.
-        """
+        """**{language}** | Allows you to change the language for a player."""
         ID = ctx.author.id
         param = dict()
         param["ID"] = ID
