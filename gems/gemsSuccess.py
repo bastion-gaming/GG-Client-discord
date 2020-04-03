@@ -16,9 +16,7 @@ class GemsSuccess(commands.Cog):
 
     @commands.command(pass_context=True)
     async def stats(self, ctx, Nom = None):
-        """
-        Player stats display.
-        """
+        """Player stats display."""
         ID = ctx.author.id
         param = dict()
         param["ID"] = ID
@@ -315,9 +313,7 @@ class GemsSuccess(commands.Cog):
 
     @commands.command(pass_context=True)
     async def success(self, ctx):
-        """
-        View your success list
-        """
+        """View your success list"""
         ID = ctx.author.id
         param = dict()
         param["ID"] = ID

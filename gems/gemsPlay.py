@@ -34,7 +34,7 @@ class GemsPlay(commands.Cog):
 
     @commands.command(pass_context=True)
     async def bank(self, ctx, ARG = None, ARG2 = None):
-        """Savings account"""
+        """**[bal/add/saving] [name/number]** | Savings account"""
         # =======================================================================
         # Initialistation des variables générales de la fonction
         # =======================================================================
@@ -83,7 +83,7 @@ class GemsPlay(commands.Cog):
 
     @commands.command(pass_context=True)
     async def stealing(self, ctx, name=None):
-        """**[name]** | Steal :gem:`gems` from other players!"""
+        """**{name}** | Steal :gem:`gems` from other players!"""
         ID = ctx.author.id
         param = dict()
         param["ID"] = ID
@@ -116,7 +116,7 @@ class GemsPlay(commands.Cog):
 
     @commands.command(pass_context=True)
     async def gamble(self, ctx, valeur):
-        """**[value]** | Are you a gambler's man?"""
+        """**[bet]** | Are you a gambler's man?"""
         ID = ctx.author.id
         param = dict()
         param["ID"] = ID
@@ -181,7 +181,7 @@ class GemsPlay(commands.Cog):
 
     @commands.command(pass_context=True)
     async def slots(self, ctx, imise = None):
-        """**[bet]** | Slot machine, minimum bet is 10 :gem:`gems`"""
+        """**{bet}** | Slot machine, minimum bet is 10 :gem:`gems`"""
         ID = ctx.author.id
         param = dict()
         param["ID"] = ID
@@ -197,12 +197,11 @@ class GemsPlay(commands.Cog):
             await ctx.channel.send(desc[2])
 
     @commands.command(pass_context=True)
-    async def boxes(self, ctx, fct = None, name = None):
-        """**open [name]** | Loot Box Opening"""
+    async def open(self, ctx, name = None):
+        """**[name]** | Loot Box Opening"""
         ID = ctx.author.id
         param = dict()
         param["ID"] = ID
-        param["fct"] = fct
         param["name"] = name
         ge.socket.send_string(gg.std_send_command("boxes", ID, ge.name_pl, param))
         msg = GF.msg_recv()

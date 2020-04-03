@@ -1,4 +1,4 @@
-# gemsPlay 
+# gemsPlay
 ## class GemsPlay(commands.Cog):
 
 ### def __init__(self, ctx):
@@ -21,7 +21,7 @@
 
 ### async def slots(self, ctx, imise = None):
 
-### async def boxes(self, ctx, fct = None, name = None):
+### async def open(self, ctx, name = None):
 
 ### async def hothouse(self, ctx, item = None):
 
@@ -30,4 +30,3 @@
 ### async def cooking(self, ctx, item = None):
 
 ## def setup(bot):
-
