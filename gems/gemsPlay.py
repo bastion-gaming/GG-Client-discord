@@ -180,23 +180,6 @@ class GemsPlay(commands.Cog):
             await ctx.channel.send(desc[2])
 
     @commands.command(pass_context=True)
-    async def slots(self, ctx, imise = None):
-        """**{bet}** | Slot machine, minimum bet is 10 :gem:`gems`"""
-        ID = ctx.author.id
-        param = dict()
-        param["ID"] = ID
-        param["imise"] = imise
-        ge.socket.send_string(gg.std_send_command("slots", ID, ge.name_pl, param))
-        desc = GF.msg_recv()
-        lang = desc[1]
-        if desc[0] == "OK":
-            msg = discord.Embed(title = lang_P.forge_msg(lang, "stats", None, False, 9), color= 13752280, description = desc[2])
-            msg.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
-            await ctx.channel.send(embed = msg)
-        else:
-            await ctx.channel.send(desc[2])
-
-    @commands.command(pass_context=True)
     async def open(self, ctx, name = None):
         """**[name]** | Loot Box Opening"""
         ID = ctx.author.id
