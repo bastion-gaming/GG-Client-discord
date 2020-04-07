@@ -53,6 +53,9 @@ couldown_4s = 4
 # nb de sec nécessaire entre 2 commandes
 
 
+NumberList = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "keycap_ten"]
+
+
 def get_idmoji(nameElem):
     """Version 2.0 | Permet de connaitre l'idmoji de l'item"""
     TupleIdmoji = globalguild.emojis

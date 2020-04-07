@@ -41,8 +41,23 @@ class GemsCasino(commands.Cog):
         desc = GF.msg_recv()
         lang = desc[1]
         if desc[0] == "OK":
-            msg = desc[2]
-            await ctx.channel.send(msg)
+            msgD = desc[2]
+            msg = lang_P.forge_msg(lang, "roulette", [GF.NumberList[int(valeur)//10], GF.NumberList[int(valeur) % 10]], False, 6)
+            e = discord.Embed(title = lang_P.forge_msg(lang, "roulette", None, False, 0), color= 13752280, description = msg)
+
+            msg = "| :{0}::{1}: |".format(GF.NumberList[msgD["VB"]//10], GF.NumberList[msgD["VB"] % 10])
+            e.add_field(name=lang_P.forge_msg(lang, "roulette", None, False, 1), value=msg, inline=False)
+
+            msg = "|"
+            for one in msgD["VM"]:
+                msg += " :{0}::{1}: |".format(GF.NumberList[one//10], GF.NumberList[one % 10])
+            e.add_field(name=lang_P.forge_msg(lang, "roulette", None, False, 2), value=msg, inline=False)
+
+            msg = "{2}\n{0}\n{1}".format(msgD["desc"], lang_P.forge_msg(lang, "roulette", [msgD["gain"]], False, 4), lang_P.forge_msg(lang, "roulette", [int(mise)], False, 5))
+            e.add_field(name=lang_P.forge_msg(lang, "roulette", None, False, 3), value=msg, inline=False)
+
+            e.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
+            await ctx.channel.send(embed = e)
         else:
             await ctx.channel.send(desc[2])
 
