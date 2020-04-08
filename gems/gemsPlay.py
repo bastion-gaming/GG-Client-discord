@@ -115,23 +115,6 @@ class GemsPlay(commands.Cog):
             await ctx.channel.send(desc["desc"])
 
     @commands.command(pass_context=True)
-    async def gamble(self, ctx, valeur):
-        """**[bet]** | Are you a gambler's man?"""
-        ID = ctx.author.id
-        param = dict()
-        param["ID"] = ID
-        param["valeur"] = valeur
-        ge.socket.send_string(gg.std_send_command("gamble", ID, ge.name_pl, param))
-        desc = GF.msg_recv()
-        lang = desc["lang"]
-        if desc["type"] == "OK":
-            msg = discord.Embed(title = lang_P.forge_msg(lang, "titres", None, False, 3), color= 13752280, description = desc["desc"])
-            msg.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
-            await ctx.channel.send(embed = msg)
-        else:
-            await ctx.channel.send(desc["desc"])
-
-    @commands.command(pass_context=True)
     async def mine(self, ctx):
         """Let's mine, mates!"""
         ID = ctx.author.id
