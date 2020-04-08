@@ -73,8 +73,8 @@ def msg_recv():
         message = gg.std_receive_command(ge.socket.recv())
         msg = message['msg']
     else:
-        # msg = ["Error", "FR", "Aucune réponse du serveur"]
-        msg = ["Error", "EN", "No reply from the server"]
+        # msg = {"type": "Error", "lang": "FR", "desc": "Aucune réponse du serveur"}
+        msg = {"type": "Error", "lang": "EN", "desc": "No reply from the server"}
         # Socket is confused. Close and remove it.
         ge.socket.setsockopt(zmq.LINGER, 0)
         ge.socket.close()
@@ -83,32 +83,30 @@ def msg_recv():
         ge.socket = ge.context.socket(zmq.REQ)
         ge.socket.connect(ge.SERVER_ENDPOINT)
         ge.poll.register(ge.socket, zmq.POLLIN)
-    try:
-        for x in range(0, len(msg)):
-            msg[x] = msg[x].replace("\\n", "\n")
-    except:
-        try:
-            for i in range(2, len(msg)):
-                for x in range(0, len(msg[i])):
-                    msg[i][x] = msg[i][x].replace("\\n", "\n")
-        except:
-            return msg
-    msg = msg_idmoji(msg)
-    return msg
 
-
-def msg_idmoji(msg):
+    msg = MEF(msg, "\\n", "\n")
     TupleIdmoji = globalguild.emojis
     for y in TupleIdmoji:
         test = "{idmoji[" + y.name + "]}"
-        try:
-            for x in range(0, len(msg)):
-                msg[x] = msg[x].replace(test, str(get_idmoji(y.name)))
-        except:
-            try:
-                for i in range(2, len(msg)):
-                    for x in range(0, len(msg[i])):
-                        msg[i][x] = msg[i][x].replace(test, str(get_idmoji(y.name)))
-            except:
-                msg = msg.replace(test, str(get_idmoji(y.name)))
+        msg = MEF(msg, test, str(get_idmoji(y.name)))
+    return msg
+
+
+def MEF(msg, source, destination):
+    if type(msg) is dict:
+        for k in msg.keys():
+            if type(msg[k]) is str:
+                msg[k] = msg[k].replace(source, destination)
+            else:
+                MEF(msg[k], source, destination)
+    elif type(msg) is list:
+        for x in range(0, len(msg)):
+            if type(msg[x]) is str:
+                msg[x] = msg[x].replace(source, destination)
+            else:
+                MEF(msg[x], source, destination)
+    elif type(msg) is int:
+        pass
+    else:
+        msg = msg.replace(source, destination)
     return msg

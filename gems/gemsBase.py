@@ -37,7 +37,7 @@ class GemsBase(commands.Cog):
         param["name"] = ctx.author.name
         ge.socket.send_string(gg.std_send_command("begin", ID, ge.name_pl, param))
         msg = GF.msg_recv()
-        await ctx.channel.send(msg[2])
+        await ctx.channel.send(msg["desc"])
 
     @commands.command(pass_context=True)
     async def connect(self, ctx, PlayerID):
@@ -48,9 +48,9 @@ class GemsBase(commands.Cog):
         param["PlayerID"] = PlayerID
         ge.socket.send_string(gg.std_send_command("connect", ID, ge.name_pl, param))
         desc = GF.msg_recv()
-        # if desc[0] == "OK":
+        # if desc["type"] == "OK":
         #     # A faire
-        await ctx.channel.send(desc[2])
+        await ctx.channel.send(desc["desc"])
 
     @commands.command(pass_context=True)
     async def infos(self, ctx, nom = None):
@@ -69,21 +69,21 @@ class GemsBase(commands.Cog):
             param["name"] = nom
         ge.socket.send_string(gg.std_send_command("infos", ID, ge.name_pl, param))
         desc = GF.msg_recv()
-        if desc[0] == "OK":
-            lang = desc[1]
+        if desc["type"] == "OK":
+            lang = desc["lang"]
             title = lang_P.forge_msg(lang, "infos", [nom])
-            msg = discord.Embed(title = title, color= 13752280, description = desc[2], timestamp=dt.datetime.now())
-            msg.add_field(name="**_Balance_**", value=desc[3], inline=False)
+            msg = discord.Embed(title = title, color= 13752280, description = desc["playerid"], timestamp=dt.datetime.now())
+            msg.add_field(name="**_Balance_**", value=desc["balance"], inline=False)
 
-            msg.add_field(name=desc[4], value=desc[5], inline=False)
-            msg.add_field(name=desc[6], value=desc[7], inline=False)
+            msg.add_field(name=desc["lvl"], value=desc["xp"], inline=False)
+            msg.add_field(name=desc["godparent titre"], value=desc["godparent"], inline=False)
             msg.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
             await ctx.channel.send(embed = msg)
             # Message de réussite dans la console
             print("Gems >> Informations de {0} affichée par {1}".format(nom, ctx.author.name))
             return
         else:
-            await ctx.channel.send(desc[2])
+            await ctx.channel.send(desc["desc"])
 
     @commands.command(pass_context=True)
     async def bal(self, ctx, nom = None):
@@ -100,11 +100,11 @@ class GemsBase(commands.Cog):
             nom = nom.name
         ge.socket.send_string(gg.std_send_command("bal", ID, ge.name_pl, param))
         desc = GF.msg_recv()
-        if desc[0] == "OK":
-            lang = desc[1]
+        if desc["type"] == "OK":
+            lang = desc["lang"]
             title = lang_P.forge_msg(lang, "bal", [nom], False)
             msg = discord.Embed(title = title, color= 13752280, description = "", timestamp=dt.datetime.now())
-            msg.add_field(name="**_Balance_**", value=desc[2], inline=False)
+            msg.add_field(name="**_Balance_**", value=desc["balance"], inline=False)
 
             msg.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
             await ctx.channel.send(embed = msg)
@@ -112,7 +112,7 @@ class GemsBase(commands.Cog):
             print("Gems >> Balance de {} affichée".format(nom))
             return
         else:
-            await ctx.channel.send(desc[2])
+            await ctx.channel.send(desc["desc"])
 
     @commands.command(pass_context=True)
     async def baltop(self, ctx, n = None, m = None):
@@ -139,20 +139,20 @@ class GemsBase(commands.Cog):
         ge.socket.send_string(gg.std_send_command("baltop", ID, ge.name_pl, param))
         desc = GF.msg_recv()
 
-        if desc[0] == "OK":
-            lang = desc[1]
+        if desc["type"] == "OK":
+            lang = desc["lang"]
             if filtre == "gems" or filtre == "gem" or filtre == "spinelles" or filtre == "spinelle":
                 Titre = lang_P.forge_msg(lang, "baltop", None, False, 0)
                 if filtre == "spinelles" or filtre == "spinelle":
                     Titre = lang_P.forge_msg(lang, "baltop", [GF.get_idmoji("spinelle")], False, 1)
 
-                msg = discord.Embed(title = Titre, color= 13752280, description = desc[2])
+                msg = discord.Embed(title = Titre, color= 13752280, description = desc["baltop"])
                 # Message de réussite dans la console
                 print("Gems >> {} a afficher le classement des {} premiers joueurs | Filtre: {}".format(ctx.author.name, n, filtre))
 
             elif filtre == "guild" or filtre == "guilde":
                 Titre = lang_P.forge_msg(lang, "baltop", None, False, 2)
-                msg = discord.Embed(title = Titre, color= 13752280, description = desc[2])
+                msg = discord.Embed(title = Titre, color= 13752280, description = desc["baltop"])
                 # Message de réussite dans la console
                 print("Gems >> {} a afficher le classement des {} premières guildes".format(ctx.author.name, n))
 
@@ -160,7 +160,7 @@ class GemsBase(commands.Cog):
                 msg = discord.Embed(title = "Classement", color= 13752280, description = "Erreur! Commande incorrect")
             await ctx.channel.send(embed = msg)
         else:
-            await ctx.channel.send(desc[2])
+            await ctx.channel.send(desc["desc"])
 
     @commands.command(pass_context=True)
     async def buy(self, ctx, item, nb = 1):
@@ -174,13 +174,13 @@ class GemsBase(commands.Cog):
 
         ge.socket.send_string(gg.std_send_command("buy", ID, ge.name_pl, param))
         desc = GF.msg_recv()
-        lang = desc[1]
-        if desc[0] == "OK":
-            msg = discord.Embed(title = lang_P.forge_msg(lang, "stats", None, False, 1), color= 13752280, description = desc[2])
+        lang = desc["lang"]
+        if desc["type"] == "OK":
+            msg = discord.Embed(title = lang_P.forge_msg(lang, "stats", None, False, 1), color= 13752280, description = desc["desc"])
             msg.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
             await ctx.channel.send(embed = msg)
         else:
-            await ctx.channel.send(desc[2])
+            await ctx.channel.send(desc["desc"])
 
     @commands.command(pass_context=True)
     async def sell(self, ctx, item, nb = 1):
@@ -194,13 +194,13 @@ class GemsBase(commands.Cog):
 
         ge.socket.send_string(gg.std_send_command("sell", ID, ge.name_pl, param))
         desc = GF.msg_recv()
-        lang = desc[1]
-        if desc[0] == "OK":
-            msg = discord.Embed(title = lang_P.forge_msg(lang, "stats", None, False, 2), color= 13752280, description = desc[2])
+        lang = desc["lang"]
+        if desc["type"] == "OK":
+            msg = discord.Embed(title = lang_P.forge_msg(lang, "stats", None, False, 2), color= 13752280, description = desc["desc"])
             msg.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
             await ctx.channel.send(embed = msg)
         else:
-            await ctx.channel.send(desc[2])
+            await ctx.channel.send(desc["desc"])
 
     @commands.command(pass_context=True)
     async def inv(self, ctx, fct = None):
@@ -216,37 +216,38 @@ class GemsBase(commands.Cog):
 
         ge.socket.send_string(gg.std_send_command("inv", ID, ge.name_pl, param))
         desc = GF.msg_recv()
+        lang = desc["lang"]
 
-        if desc[0] == "OK":
-            lang = desc[1]
+        if desc["type"] == "OK":
             msg_titre = lang_P.forge_msg(lang, "inv", [nom], False, 0)
-            msg = discord.Embed(title = msg_titre, color= 6466585, description = desc[2])
-            if desc[3] != "None":
-                msg.add_field(name=lang_P.forge_msg(lang, "categorie", None, False, 0), value=desc[3], inline=False)
-            if desc[4] != "None":
-                msg.add_field(name=lang_P.forge_msg(lang, "categorie", None, False, 1), value=desc[4], inline=False)
-            if desc[5] != "None":
-                msg.add_field(name=lang_P.forge_msg(lang, "categorie", None, False, 2), value=desc[5], inline=False)
-            if desc[6] != "None":
-                msg.add_field(name=lang_P.forge_msg(lang, "categorie", None, False, 3), value=desc[6], inline=False)
-            if desc[7] != "None":
-                msg.add_field(name=lang_P.forge_msg(lang, "categorie", None, False, 4), value=desc[7], inline=False)
-            if desc[8] != "None":
-                msg.add_field(name=lang_P.forge_msg(lang, "categorie", None, False, 5), value=desc[8], inline=False)
-            if desc[9] != "None":
-                msg.add_field(name=lang_P.forge_msg(lang, "categorie", None, False, 6), value=desc[9], inline=False)
-            if desc[10] != "None":
-                msg.add_field(name=lang_P.forge_msg(lang, "categorie", None, False, 7), value=desc[10], inline=False)
+            msg = discord.Embed(title = msg_titre, color= 6466585, description = desc["desc"])
+            invD = desc["inv"]
+            for one in invD.keys():
+                if one == "outils":
+                    msg.add_field(name=lang_P.forge_msg(lang, "categorie", None, False, 0), value=invD["outils"], inline=False)
+                elif one == "special":
+                    msg.add_field(name=lang_P.forge_msg(lang, "categorie", None, False, 1), value=invD["special"], inline=False)
+                elif one == "minerai":
+                    msg.add_field(name=lang_P.forge_msg(lang, "categorie", None, False, 3), value=invD["minerai"], inline=False)
+                elif one == "poisson":
+                    msg.add_field(name=lang_P.forge_msg(lang, "categorie", None, False, 4), value=invD["poisson"], inline=False)
+                elif one == "plante":
+                    msg.add_field(name=lang_P.forge_msg(lang, "categorie", None, False, 5), value=invD["plante"], inline=False)
+                elif one == "consommable":
+                    msg.add_field(name=lang_P.forge_msg(lang, "categorie", None, False, 2), value=invD["consommable"], inline=False)
+                elif one == "event":
+                    msg.add_field(name=lang_P.forge_msg(lang, "categorie", None, False, 6), value=invD["event"], inline=False)
+                elif one == "lootbox":
+                    msg.add_field(name=lang_P.forge_msg(lang, "categorie", None, False, 7), value=invD["lootbox"], inline=False)
             await ctx.channel.send(embed = msg)
 
-        elif desc[0] == "pockets":
-            lang = desc[1]
-            msg = discord.Embed(title = lang_P.forge_msg(lang, "inv", None, False, 1), color= 6466585, description = desc[2], timestamp=dt.datetime.now())
+        elif desc["type"] == "pockets":
+            msg = discord.Embed(title = lang_P.forge_msg(lang, "inv", None, False, 1), color= 6466585, description = desc["desc"], timestamp=dt.datetime.now())
             msg.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
             await ctx.channel.send(embed = msg)
 
         else:
-            await ctx.channel.send(desc[2])
+            await ctx.channel.send(desc["desc"])
 
     @commands.command(pass_context=True)
     async def market(self, ctx, fct = None):
@@ -345,13 +346,13 @@ class GemsBase(commands.Cog):
 
         ge.socket.send_string(gg.std_send_command("pay", ID, ge.name_pl, param))
         desc = GF.msg_recv()
-        lang = desc[1]
-        if desc[0] == "OK":
-            msg = discord.Embed(title = lang_P.forge_msg(lang, "stats", None, False, 3), color= 13752280, description = desc[2])
+        lang = desc["lang"]
+        if desc["type"] == "OK":
+            msg = discord.Embed(title = lang_P.forge_msg(lang, "stats", None, False, 3), color= 13752280, description = desc["desc"])
             msg.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
             await ctx.channel.send(embed = msg)
         else:
-            await ctx.channel.send(desc[2])
+            await ctx.channel.send(desc["desc"])
 
     @commands.command(pass_context=True)
     async def give(self, ctx, nom, item, nb = None):
@@ -368,13 +369,13 @@ class GemsBase(commands.Cog):
 
         ge.socket.send_string(gg.std_send_command("give", ID, ge.name_pl, param))
         desc = GF.msg_recv()
-        lang = desc[1]
-        if desc[0] == "OK":
-            msg = discord.Embed(title = lang_P.forge_msg(lang, "stats", None, False, 3), color= 13752280, description = desc[2])
+        lang = desc["lang"]
+        if desc["type"] == "OK":
+            msg = discord.Embed(title = lang_P.forge_msg(lang, "stats", None, False, 3), color= 13752280, description = desc["desc"])
             msg.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
             await ctx.channel.send(embed = msg)
         else:
-            await ctx.channel.send(desc[2])
+            await ctx.channel.send(desc["desc"])
 
     @commands.command(pass_context=True)
     async def forge(self, ctx, item = None, nb = 1):
@@ -388,17 +389,17 @@ class GemsBase(commands.Cog):
 
         ge.socket.send_string(gg.std_send_command("forge", ID, ge.name_pl, param))
         desc = GF.msg_recv()
-        lang = desc[1]
-        if desc[0] == "OK":
+        lang = desc["lang"]
+        if desc["type"] == "OK":
             if item == None:
-                msg = discord.Embed(title = lang_P.forge_msg(lang, "recette"), color= 15778560, description = desc[2])
+                msg = discord.Embed(title = lang_P.forge_msg(lang, "recette"), color= 15778560, description = desc["desc"])
                 await ctx.channel.send(embed = msg)
             else:
-                msg = discord.Embed(title = lang_P.forge_msg(lang, "stats", None, False, 4), color= 13752280, description = desc[2])
+                msg = discord.Embed(title = lang_P.forge_msg(lang, "stats", None, False, 4), color= 13752280, description = desc["desc"])
                 msg.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
                 await ctx.channel.send(embed = msg)
         else:
-            await ctx.channel.send(desc[2])
+            await ctx.channel.send(desc["desc"])
 
     @commands.command(pass_context=True)
     async def graphbourse(self, ctx, item, moisD = None, anneeD = None, moisF = None, anneeF = None, type = None):
@@ -468,7 +469,7 @@ class GemsBase(commands.Cog):
         ge.socket.send_string(gg.std_send_command("lang", ID, ge.name_pl, param))
         desc = GF.msg_recv()
 
-        await ctx.channel.send(desc[1])
+        await ctx.channel.send(desc["desc"])
 
     @commands.command(pass_context=True)
     async def godparent(self, ctx, nom):
@@ -479,11 +480,11 @@ class GemsBase(commands.Cog):
         param["GPID"] = ge.nom_ID(nom)
         ge.socket.send_string(gg.std_send_command("godparent", ID, ge.name_pl, param))
         desc = GF.msg_recv()
-        lang = desc[1]
+        lang = desc["lang"]
         if ID == ge.nom_ID(nom):
             await ctx.channel.send(lang_P.forge_msg(lang, "godparent"))
         else:
-            await ctx.channel.send(desc[2])
+            await ctx.channel.send(desc["desc"])
 
     # ==============================
     # ===== Commande désactivé =====

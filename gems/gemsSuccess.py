@@ -320,10 +320,10 @@ class GemsSuccess(commands.Cog):
 
         ge.socket.send_string(gg.std_send_command("success", ID, ge.name_pl, param))
         desc = GF.msg_recv()
-        if desc[0] == "OK":
-            lang = desc[1]
+        if desc["type"] == "OK":
+            lang = desc["lang"]
             msg = discord.Embed(title = lang_P.forge_msg(lang, "success", None, False, 0), color= 6824352, description = "", timestamp=dt.datetime.now())
-            descS = desc[2]
+            descS = desc["result"]
             i = 0
             while i < len(descS):
                 # print("Success >> {0} a obtenu le succes {1}".format(ctx.author.name, descS[i]))
@@ -338,10 +338,10 @@ class GemsSuccess(commands.Cog):
             # msg.set_thumbnail(url=ctx.author.avatar_url)
             msg.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
             await ctx.channel.send(embed = msg)
-        elif desc[0] == "Error":
-            await ctx.channel.send(desc[2])
+        elif desc["type"] == "Error":
+            await ctx.channel.send(desc["desc"])
         else:
-            await ctx.channel.send(desc[1])
+            await ctx.channel.send(desc["desc"])
 
 
 def setup(bot):

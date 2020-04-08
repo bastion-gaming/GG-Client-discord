@@ -21,13 +21,13 @@ class GemsCasino(commands.Cog):
         param["imise"] = imise
         ge.socket.send_string(gg.std_send_command("slots", ID, ge.name_pl, param))
         desc = GF.msg_recv()
-        lang = desc[1]
-        if desc[0] == "OK":
-            msg = discord.Embed(title = lang_P.forge_msg(lang, "stats", None, False, 9), color= 13752280, description = desc[2])
+        lang = desc["lang"]
+        if desc["type"] == "OK":
+            msg = discord.Embed(title = lang_P.forge_msg(lang, "stats", None, False, 9), color= 13752280, description = desc["desc"])
             msg.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
             await ctx.channel.send(embed = msg)
         else:
-            await ctx.channel.send(desc[2])
+            await ctx.channel.send(desc["desc"])
 
     @commands.command(pass_context=True)
     async def roulette(self, ctx, mise, valeur):
@@ -39,9 +39,9 @@ class GemsCasino(commands.Cog):
         param["mise"] = mise
         ge.socket.send_string(gg.std_send_command("roulette", ID, ge.name_pl, param))
         desc = GF.msg_recv()
-        lang = desc[1]
-        if desc[0] == "OK":
-            msgD = desc[2]
+        lang = desc["lang"]
+        if desc["type"] == "OK":
+            msgD = desc["desc"]
             msg = lang_P.forge_msg(lang, "roulette", [GF.NumberList[int(valeur)//10], GF.NumberList[int(valeur) % 10]], False, 6)
             e = discord.Embed(title = lang_P.forge_msg(lang, "roulette", None, False, 0), color= 13752280, description = msg)
 
@@ -59,7 +59,7 @@ class GemsCasino(commands.Cog):
             e.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
             await ctx.channel.send(embed = e)
         else:
-            await ctx.channel.send(desc[2])
+            await ctx.channel.send(desc["desc"])
 
 
 def setup(bot):
