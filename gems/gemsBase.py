@@ -262,75 +262,114 @@ class GemsBase(commands.Cog):
 
         ge.socket.send_string(gg.std_send_command("market", ID, ge.name_pl, param))
         desc = GF.msg_recv()
+        lang = desc["lang"]
 
-        if desc[0] == "OK":
-            lang = desc[1]
+        if desc["type"] == "OK":
             if fct != None:
-                msg = discord.Embed(title = lang_P.forge_msg(lang, "market", [fct], False, 1), color= 2461129, description = desc[2], timestamp=dt.datetime.now())
+                msg = discord.Embed(title = lang_P.forge_msg(lang, "market", [fct], False, 1), color= 2461129, description = desc["desc"], timestamp=dt.datetime.now())
             else:
-                msg = discord.Embed(title = lang_P.forge_msg(lang, "market", None, False, 0), color= 2461129, description = desc[2], timestamp=dt.datetime.now())
+                msg = discord.Embed(title = lang_P.forge_msg(lang, "market", None, False, 0), color= 2461129, description = desc["desc"], timestamp=dt.datetime.now())
             msg.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
             if fct == "mobile":
-                msg.add_field(name=lang_P.forge_msg(lang, "categorie", None, False, 0), value=desc[3], inline=False)
-                msg.add_field(name=lang_P.forge_msg(lang, "categorie", None, False, 1), value=desc[4], inline=False)
-                msg.add_field(name=lang_P.forge_msg(lang, "categorie", None, False, 3), value=desc[5], inline=False)
-                msg.add_field(name=lang_P.forge_msg(lang, "categorie", None, False, 4), value=desc[6], inline=False)
-                msg.add_field(name=lang_P.forge_msg(lang, "categorie", None, False, 5), value=desc[7], inline=False)
-                if desc[7] != "None":
-                    msg.add_field(name=lang_P.forge_msg(lang, "categorie", None, False, 2), value=desc[8], inline=False)
-                if desc[8] != "None":
-                    msg.add_field(name=lang_P.forge_msg(lang, "categorie", None, False, 6), value=desc[9], inline=False)
-                if desc[9] != "None":
-                    msg.add_field(name="Spinelles <:spinelle:{}>".format(GF.get_idmoji("spinelle")), value=desc[10], inline=False)
+                stands = []
+                StandsMobile = {}
+                for k in desc.keys():
+                    if k not in ["type", "lang", "desc"]:
+                        if "prix" not in k and "info" not in k:
+                            stands.append(k)
+                for one in stands:
+                    Stand = desc[one].split("\n")
+                    StandP = desc["{0} prix".format(one)].split("\n")
+                    StandI = desc["{0} info".format(one)].split("\n")
+                    StandD = ""
+                    for i in range(1, len(Stand)):
+                        StandD += "\n{0}: {1} | {2}".format(Stand[i], StandP[i], StandI[i])
+                    StandsMobile[one] = StandD
+                msg.add_field(name=lang_P.forge_msg(lang, "categorie", None, False, 0), value=StandsMobile["outils"], inline=False)
+                msg.add_field(name=lang_P.forge_msg(lang, "categorie", None, False, 1), value=StandsMobile["special"], inline=False)
+                msg.add_field(name=lang_P.forge_msg(lang, "categorie", None, False, 3), value=StandsMobile["minerai"], inline=False)
+                msg.add_field(name=lang_P.forge_msg(lang, "categorie", None, False, 4), value=StandsMobile["poisson"], inline=False)
+                msg.add_field(name=lang_P.forge_msg(lang, "categorie", None, False, 5), value=StandsMobile["plante"], inline=False)
+                try:
+                    msg.add_field(name=lang_P.forge_msg(lang, "categorie", None, False, 2), value=StandsMobile["items"], inline=False)
+                except KeyError:
+                    pass
+                try:
+                    msg.add_field(name=lang_P.forge_msg(lang, "categorie", None, False, 6), value=StandsMobile["event"], inline=False)
+                except KeyError:
+                    pass
 
-                msg.add_field(name=lang_P.forge_msg(lang, "categorie", None, False, 7), value=desc[11], inline=False)
+                msg.add_field(name=lang_P.forge_msg(lang, "categorie", None, False, 7), value=StandsMobile["lootbox"], inline=False)
                 await ctx.channel.send(embed = msg)
 
             else:
-                if fct == None or fct == "outil" or fct == "outils":
-                    msg.add_field(name=lang_P.forge_msg(lang, "categorie", None, False, 0), value=desc[4], inline=True)
-                    msg.add_field(name=lang_P.forge_msg(lang, "market", None, False, 2), value=desc[5], inline=True)
-                    msg.add_field(name=lang_P.forge_msg(lang, "market", None, False, 4), value=desc[6], inline=True)
+                if fct == None or ("outil" in fct):
+                    try:
+                        msg.add_field(name=lang_P.forge_msg(lang, "categorie", None, False, 0), value=desc["outils"], inline=True)
+                        msg.add_field(name=lang_P.forge_msg(lang, "market", None, False, 2), value=desc["outils prix"], inline=True)
+                        msg.add_field(name=lang_P.forge_msg(lang, "market", None, False, 4), value=desc["outils info"], inline=True)
+                    except KeyError:
+                        pass
 
-                if fct == None or fct == "outils" or fct == "outil" or fct == "item" or fct == "items" or fct == "minerai" or fct == "minerais" or fct == "poissons" or fct == "fish" or fct == "plantes" or fct == "plants" or fct == "event" or fct == "événements":
-                    if desc[6] != "None":
-                        msg.add_field(name=lang_P.forge_msg(lang, "categorie", None, False, 1), value=desc[7], inline=True)
-                        msg.add_field(name=lang_P.forge_msg(lang, "market", None, False, 2), value=desc[8], inline=True)
-                        msg.add_field(name=lang_P.forge_msg(lang, "market", None, False, 4), value=desc[9], inline=True)
+                if fct == None or ("outil" or "item" or "minerai" in fct) or fct == "poissons" or fct == "fish" or fct == "plantes" or fct == "plants" or fct == "event" or fct == "événements":
+                    try:
+                        msg.add_field(name=lang_P.forge_msg(lang, "categorie", None, False, 1), value=desc["special"], inline=True)
+                        msg.add_field(name=lang_P.forge_msg(lang, "market", None, False, 2), value=desc["special prix"], inline=True)
+                        msg.add_field(name=lang_P.forge_msg(lang, "market", None, False, 4), value=desc["special info"], inline=True)
+                    except KeyError:
+                        pass
 
-                if fct == None or fct == "minerai" or fct == "minerais":
-                    msg.add_field(name=lang_P.forge_msg(lang, "categorie", None, False, 3), value=desc[10], inline=True)
-                    msg.add_field(name=lang_P.forge_msg(lang, "market", None, False, 2), value=desc[11], inline=True)
-                    msg.add_field(name=lang_P.forge_msg(lang, "market", None, False, 4), value=desc[12], inline=True)
+                if fct == None or ("minerai" in fct):
+                    try:
+                        msg.add_field(name=lang_P.forge_msg(lang, "categorie", None, False, 3), value=desc["minerai"], inline=True)
+                        msg.add_field(name=lang_P.forge_msg(lang, "market", None, False, 2), value=desc["minerai prix"], inline=True)
+                        msg.add_field(name=lang_P.forge_msg(lang, "market", None, False, 4), value=desc["minerai info"], inline=True)
+                    except KeyError:
+                        pass
 
                 if fct == None or fct == "fish" or fct == "poissons":
-                    msg.add_field(name=lang_P.forge_msg(lang, "categorie", None, False, 4), value=desc[13], inline=True)
-                    msg.add_field(name=lang_P.forge_msg(lang, "market", None, False, 2), value=desc[14], inline=True)
-                    msg.add_field(name=lang_P.forge_msg(lang, "market", None, False, 4), value=desc[15], inline=True)
+                    try:
+                        msg.add_field(name=lang_P.forge_msg(lang, "categorie", None, False, 4), value=desc["poisson"], inline=True)
+                        msg.add_field(name=lang_P.forge_msg(lang, "market", None, False, 2), value=desc["poisson prix"], inline=True)
+                        msg.add_field(name=lang_P.forge_msg(lang, "market", None, False, 4), value=desc["poisson info"], inline=True)
+                    except KeyError:
+                        pass
 
                 if fct == None or fct == "plants" or fct == "plantes":
-                    msg.add_field(name=lang_P.forge_msg(lang, "categorie", None, False, 5), value=desc[16], inline=True)
-                    msg.add_field(name=lang_P.forge_msg(lang, "market", None, False, 2), value=desc[17], inline=True)
-                    msg.add_field(name=lang_P.forge_msg(lang, "market", None, False, 4), value=desc[18], inline=True)
+                    try:
+                        msg.add_field(name=lang_P.forge_msg(lang, "categorie", None, False, 5), value=desc["plante"], inline=True)
+                        msg.add_field(name=lang_P.forge_msg(lang, "market", None, False, 2), value=desc["plante prix"], inline=True)
+                        msg.add_field(name=lang_P.forge_msg(lang, "market", None, False, 4), value=desc["plante info"], inline=True)
+                    except KeyError:
+                        pass
 
-                if fct == None or fct == "item" or fct == "items":
-                    msg.add_field(name=lang_P.forge_msg(lang, "categorie", None, False, 2), value=desc[19], inline=True)
-                    msg.add_field(name=lang_P.forge_msg(lang, "market", None, False, 2), value=desc[20], inline=True)
-                    msg.add_field(name=lang_P.forge_msg(lang, "market", None, False, 4), value=desc[21], inline=True)
+                if fct == None or ("item" in fct):
+                    try:
+                        msg.add_field(name=lang_P.forge_msg(lang, "categorie", None, False, 2), value=desc["consommable"], inline=True)
+                        msg.add_field(name=lang_P.forge_msg(lang, "market", None, False, 2), value=desc["consommable prix"], inline=True)
+                        msg.add_field(name=lang_P.forge_msg(lang, "market", None, False, 4), value=desc["consommable info"], inline=True)
+                    except KeyError:
+                        pass
 
                 if fct == None or fct == "event" or fct == "événements":
-                    msg.add_field(name=lang_P.forge_msg(lang, "categorie", None, False, 6), value=desc[22], inline=True)
-                    msg.add_field(name=lang_P.forge_msg(lang, "market", None, False, 2), value=desc[23], inline=True)
-                    msg.add_field(name=lang_P.forge_msg(lang, "market", None, False, 4), value=desc[24], inline=True)
+                    try:
+                        msg.add_field(name=lang_P.forge_msg(lang, "categorie", None, False, 6), value=desc["event"], inline=True)
+                        msg.add_field(name=lang_P.forge_msg(lang, "market", None, False, 2), value=desc["event prix"], inline=True)
+                        msg.add_field(name=lang_P.forge_msg(lang, "market", None, False, 4), value=desc["event info"], inline=True)
+                    except KeyError:
+                        pass
 
                 if fct == None or fct == "lootbox":
-                    msg.add_field(name=lang_P.forge_msg(lang, "categorie", None, False, 7), value=desc[25], inline=True)
-                    msg.add_field(name=lang_P.forge_msg(lang, "market", None, False, 3), value=desc[26], inline=True)
-                    msg.add_field(name=lang_P.forge_msg(lang, "market", None, False, 5), value=desc[27], inline=True)
+                    try:
+                        msg.add_field(name=lang_P.forge_msg(lang, "categorie", None, False, 7), value=desc["lootbox"], inline=True)
+                        msg.add_field(name=lang_P.forge_msg(lang, "market", None, False, 3), value=desc["lootbox prix"], inline=True)
+                        msg.add_field(name=lang_P.forge_msg(lang, "market", None, False, 5), value=desc["lootbox info"], inline=True)
+                    except KeyError:
+                        pass
                 await ctx.channel.send(embed = msg)
 
         else:
-            await ctx.channel.send(desc[2])
+            await ctx.channel.send(desc["desc"])
 
     @commands.command(pass_context=True)
     async def pay(self, ctx, nom, gain):
