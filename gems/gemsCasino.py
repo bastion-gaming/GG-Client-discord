@@ -37,14 +37,24 @@ class GemsCasino(commands.Cog):
         param["ID"] = ID
         param["imise"] = imise
         ge.socket.send_string(gg.std_send_command("slots", ID, ge.name_pl, param))
-        desc = GF.msg_recv()
-        lang = desc["lang"]
-        if desc["type"] == "OK":
-            msg = discord.Embed(title = lang_P.forge_msg(lang, "stats", None, False, 9), color= 13752280, description = desc["desc"])
-            msg.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
-            await ctx.channel.send(embed = msg)
+        msg = GF.msg_recv()
+        lang = msg["lang"]
+        if msg["type"] == "OK":
+            desc = "{0}\n{1}".format(lang_P.forge_msg(lang, "casino", [msg["misemax"]], False, 6), lang_P.forge_msg(lang, "casino", [msg["mise"]], False, 7))
+            e = discord.Embed(title = lang_P.forge_msg(lang, "stats", None, False, 9), color= 13752280, description = desc)
+            desc = ""
+            for i in range(0, 9):
+                if i == 3:
+                    desc += "\n"
+                elif i == 6:
+                    desc += " :arrow_backward:\n"
+                desc += msg["result"][i]
+            e.add_field(name=lang_P.forge_msg(lang, "casino", None, False, 8), value=desc, inline=False)
+            e.add_field(name=lang_P.forge_msg(lang, "casino", None, False, 3), value=msg["desc"], inline=False)
+            e.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
+            await ctx.channel.send(embed = e)
         else:
-            await ctx.channel.send(desc["desc"])
+            await ctx.channel.send(msg["desc"])
 
     @commands.command(pass_context=True)
     async def roulette(self, ctx, mise, valeur):
@@ -55,28 +65,28 @@ class GemsCasino(commands.Cog):
         param["valeur"] = valeur
         param["mise"] = mise
         ge.socket.send_string(gg.std_send_command("roulette", ID, ge.name_pl, param))
-        desc = GF.msg_recv()
-        lang = desc["lang"]
-        if desc["type"] == "OK":
-            msgD = desc["desc"]
-            msg = "{1}\n{0}".format(lang_P.forge_msg(lang, "roulette", [GF.NumberList[int(valeur)//10], GF.NumberList[int(valeur) % 10]], False, 6), lang_P.forge_msg(lang, "roulette", [int(mise)], False, 5))
-            e = discord.Embed(title = lang_P.forge_msg(lang, "roulette", None, False, 0), color= 13752280, description = msg)
+        msg = GF.msg_recv()
+        lang = msg["lang"]
+        if msg["type"] == "OK":
+            msgD = msg["desc"]
+            desc = "{1}\n{0}".format(lang_P.forge_msg(lang, "casino", [GF.NumberList[int(valeur)//10], GF.NumberList[int(valeur) % 10]], False, 5), lang_P.forge_msg(lang, "casino", [int(mise)], False, 7))
+            e = discord.Embed(title = lang_P.forge_msg(lang, "casino", None, False, 0), color= 13752280, description = desc)
 
-            msg = "| :{0}::{1}: |".format(GF.NumberList[msgD["VB"]//10], GF.NumberList[msgD["VB"] % 10])
-            e.add_field(name=lang_P.forge_msg(lang, "roulette", None, False, 1), value=msg, inline=False)
+            desc = "| :{0}::{1}: |".format(GF.NumberList[msgD["VB"]//10], GF.NumberList[msgD["VB"] % 10])
+            e.add_field(name=lang_P.forge_msg(lang, "casino", None, False, 1), value=desc, inline=False)
 
-            msg = "|"
+            desc = "|"
             for one in msgD["VM"]:
-                msg += " :{0}::{1}: |".format(GF.NumberList[one//10], GF.NumberList[one % 10])
-            e.add_field(name=lang_P.forge_msg(lang, "roulette", None, False, 2), value=msg, inline=False)
+                desc += " :{0}::{1}: |".format(GF.NumberList[one//10], GF.NumberList[one % 10])
+            e.add_field(name=lang_P.forge_msg(lang, "casino", None, False, 2), value=desc, inline=False)
 
-            msg = "{0}\n{1}".format(msgD["desc"], lang_P.forge_msg(lang, "roulette", [msgD["gain"]], False, 4))
-            e.add_field(name=lang_P.forge_msg(lang, "roulette", None, False, 3), value=msg, inline=False)
+            desc = "{0}\n{1}".format(msgD["desc"], lang_P.forge_msg(lang, "casino", [msgD["gain"]], False, 4))
+            e.add_field(name=lang_P.forge_msg(lang, "casino", None, False, 3), value=desc, inline=False)
 
             e.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
             await ctx.channel.send(embed = e)
         else:
-            await ctx.channel.send(desc["desc"])
+            await ctx.channel.send(msg["desc"])
 
 
 def setup(bot):

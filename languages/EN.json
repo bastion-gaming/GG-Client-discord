@@ -126,14 +126,16 @@
     "Information about {0}",
   "godparent":
     "You can't be your own godparent.",
-  "roulette":
+  "casino":
     [
       "Flat roulette",
       "Benevolent Value",
       "Cursed Values",
       "Result",
       "Gain: **{0}** :gem:`gems`",
+      "My number: :{0}::{1}:",
+      "Maximum bet: {0} :gem:`gems`",
       "Bet: {0} :gem:`gems`",
-      "My number: :{0}::{1}:"
+      "Display"
     ]
 }

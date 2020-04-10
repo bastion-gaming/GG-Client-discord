@@ -126,14 +126,16 @@
     "Information sur {0}",
   "godparent":
     "Tu ne peux pas être ton propre parrain.",
-  "roulette":
+  "casino":
     [
       "Roulette plate",
       "Valeur Bénite",
       "Valeurs Maudites",
       "Résultat",
       "Gain: **{0}** :gem:`gems`",
+      "Mon numéro: :{0}::{1}:",
+      "Mise maximum: {0} :gem:`gems`",
       "Mise: {0} :gem:`gems`",
-      "Mon numéro: :{0}::{1}:"
+      "Affichage"
     ]
 }
