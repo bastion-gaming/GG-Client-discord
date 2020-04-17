@@ -11,15 +11,11 @@
 
 ### async def crime(self, ctx):
 
-### async def gamble(self, ctx, valeur):
-
 ### async def mine(self, ctx):
 
 ### async def dig(self, ctx):
 
 ### async def fish(self, ctx):
-
-### async def slots(self, ctx, imise = None):
 
 ### async def open(self, ctx, name = None):
 
