@@ -23,7 +23,10 @@ class GemsCasino(commands.Cog):
         desc = GF.msg_recv()
         lang = desc["lang"]
         if desc["type"] == "OK":
-            msg = discord.Embed(title = lang_P.forge_msg(lang, "titres", None, False, 3), color= 13752280, description = desc["desc"])
+            msg = discord.Embed(
+                title = lang_P.forge_msg(lang, "titres", None, False, 3),
+                color= 13752280,
+                description = desc["desc"])
             msg.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
             await ctx.channel.send(embed = msg)
         else:
@@ -40,7 +43,9 @@ class GemsCasino(commands.Cog):
         msg = GF.msg_recv()
         lang = msg["lang"]
         if msg["type"] == "OK":
-            desc = "{0}\n{1}".format(lang_P.forge_msg(lang, "casino", [msg["misemax"]], False, 6), lang_P.forge_msg(lang, "casino", [msg["mise"]], False, 7))
+            desc = "{0}\n{1}".format(
+                lang_P.forge_msg(lang, "casino", [msg["misemax"]], False, 6),
+                lang_P.forge_msg(lang, "casino", [msg["mise"]], False, 7))
             e = discord.Embed(title = lang_P.forge_msg(lang, "stats", None, False, 9), color= 13752280, description = desc)
             desc = ""
             for i in range(0, 9):
@@ -69,7 +74,10 @@ class GemsCasino(commands.Cog):
         lang = msg["lang"]
         if msg["type"] == "OK":
             msgD = msg["desc"]
-            desc = "{1}\n{0}".format(lang_P.forge_msg(lang, "casino", [GF.NumberList[int(valeur)//10], GF.NumberList[int(valeur) % 10]], False, 5), lang_P.forge_msg(lang, "casino", [int(mise)], False, 7))
+            desc = "{2}\n{1}\n{0}".format(
+                lang_P.forge_msg(lang, "casino", [GF.NumberList[int(valeur)//10], GF.NumberList[int(valeur) % 10]], False, 5),
+                lang_P.forge_msg(lang, "casino", [int(mise)], False, 7),
+                lang_P.forge_msg(lang, "casino", [msg["misemax"]], False, 6))
             e = discord.Embed(title = lang_P.forge_msg(lang, "casino", None, False, 0), color= 13752280, description = desc)
 
             desc = "| :{0}::{1}: |".format(GF.NumberList[msgD["VB"]//10], GF.NumberList[msgD["VB"] % 10])
