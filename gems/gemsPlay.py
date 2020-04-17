@@ -197,9 +197,9 @@ class GemsPlay(commands.Cog):
             desc = lang_P.forge_msg(lang, "hothouse", [GF.get_idmoji("seed")], False, 0)
             titre = lang_P.forge_msg(lang, "hothouse", None, False, 1)
             MsgEmbed = discord.Embed(title = titre, color= 6466585, description = desc)
-            k = len(msg)
+            k = len(msg) - 3
             i = 1
-            while i <= k-3:
+            while i <= k:
                 j = i-1
                 if j % 10 == 0 and j != nbplanting and j != 0:
                     if j // 10 == 1:
@@ -231,7 +231,7 @@ class GemsPlay(commands.Cog):
             desc = lang_P.forge_msg(lang, "ferment", None, False, 0)
             titre = lang_P.forge_msg(lang, "ferment", None, False, 1)
             MsgEmbed = discord.Embed(title = titre, color= 9633863, description = desc)
-            k = len(msg)
+            k = len(msg) - 3
             i = 1
             while i <= k:
                 j = i-1
@@ -265,7 +265,7 @@ class GemsPlay(commands.Cog):
             desc = lang_P.forge_msg(lang, "cooking", [GF.get_idmoji("fries")], False, 0)
             titre = lang_P.forge_msg(lang, "cooking", None, False, 1)
             MsgEmbed = discord.Embed(title = titre, color= 14902529, description = desc)
-            k = len(msg)
+            k = len(msg) - 3
             i = 1
             while i <= k:
                 j = i-1
