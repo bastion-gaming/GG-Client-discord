@@ -88,6 +88,23 @@ class GemsCasino(commands.Cog):
         else:
             await ctx.channel.send(msg["desc"])
 
+    @commands.command(pass_context=True)
+    async def marketbet(self, ctx, item, perCent, mise):
+        ID = ctx.author.id
+        param = dict()
+        param["ID"] = ID
+        param["item"] = item
+        param["perCent"] = perCent
+        param["mise"] = mise
+        ge.socket.send_string(gg.std_send_command("marketbet", ID, ge.name_pl, param))
+        msg = GF.msg_recv()
+        lang = msg["lang"]
+        if msg["type"] == "OK":
+            e = discord.Embed(title = lang_P.forge_msg(lang, "titres", None, False, 0), color=13755260, description=msg["desc"])
+            e.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
+            await ctx.channel.send(embed = e)
+        else:
+            await ctx.channel.send(msg["desc"])
 
 def setup(bot):
     bot.add_cog(GemsCasino(bot))
