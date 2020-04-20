@@ -59,6 +59,8 @@
       "La Cuisine | Partie {0}",
       "Four n°{0}"
     ],
+  "production":
+    "Tu n'as pas assez",
   "graphbourse":
     [
       "Achat",

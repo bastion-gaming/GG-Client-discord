@@ -210,7 +210,10 @@ class GemsPlay(commands.Cog):
                     MsgEmbed.add_field(name=lang_P.forge_msg(lang, "hothouse", [i], False, 3), value=msg[i], inline=False)
                 else:
                     MsgEmbed.add_field(name=lang_P.forge_msg(lang, "hothouse", [i], False, 3), value=msg[i], inline=False)
-                i += 1
+                if lang_P.forge_msg(lang, "production") in msg[i]:
+                    i = k+1
+                else:
+                    i += 1
             await ctx.channel.send(embed = MsgEmbed)
         else:
             await ctx.channel.send(msg["desc"])
@@ -244,7 +247,10 @@ class GemsPlay(commands.Cog):
                     MsgEmbed.add_field(name=lang_P.forge_msg(lang, "ferment", [i], False, 3), value=msg[i], inline=False)
                 else:
                     MsgEmbed.add_field(name=lang_P.forge_msg(lang, "ferment", [i], False, 3), value=msg[i], inline=False)
-                i += 1
+                if lang_P.forge_msg(lang, "production") in msg[i]:
+                    i = k+1
+                else:
+                    i += 1
             await ctx.channel.send(embed = MsgEmbed)
         else:
             await ctx.channel.send(msg["desc"])
@@ -278,7 +284,10 @@ class GemsPlay(commands.Cog):
                     MsgEmbed.add_field(name=lang_P.forge_msg(lang, "cooking", [i], False, 3), value=msg[i], inline=False)
                 else:
                     MsgEmbed.add_field(name=lang_P.forge_msg(lang, "cooking", [i], False, 3), value=msg[i], inline=False)
-                i += 1
+                if lang_P.forge_msg(lang, "production") in msg[i]:
+                    i = k+1
+                else:
+                    i += 1
             await ctx.channel.send(embed = MsgEmbed)
         else:
             await ctx.channel.send(msg["desc"])

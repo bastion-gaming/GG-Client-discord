@@ -59,6 +59,8 @@
       "Kitchen | Part {0}",
       "Furnace n°{0}"
     ],
+  "production":
+    "You don't have enough",
   "graphbourse":
     [
       "Purchase",
