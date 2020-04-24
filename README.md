@@ -4,4 +4,4 @@ Client discord pour le jeu Get Gems
 
 ## Comment jouer au jeu ?
 
-Rendez vous ici: https://get-gems.topazdev.fr
+Rendez vous **_[ICI](https://get-gems.topazdev.fr)_**
