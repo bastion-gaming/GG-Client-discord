@@ -25,7 +25,10 @@ class GemsSuccess(commands.Cog):
             if Nom == None:
                 Nom = ctx.author.name
             else:
-                Nom = ctx.guild.get_member(ge.nom_ID(Nom)).name
+                try:
+                    Nom = ctx.guild.get_member(ge.nom_ID(Nom)).name
+                except:
+                    pass
         else:
             param["nom"] = "None"
             Nom = ctx.author.name

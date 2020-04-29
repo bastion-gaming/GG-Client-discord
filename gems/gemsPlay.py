@@ -48,15 +48,19 @@ class GemsPlay(commands.Cog):
         desc = GF.msg_recv()
         lang = desc["lang"]
         if ARG == "bal" and ARG2 is not None:
-            N = ctx.guild.get_member(ge.nom_ID(ARG2)).name
+            try:
+                N = ctx.guild.get_member(ge.nom_ID(ARG2)).name
+            except:
+                N = ARG2
         else:
             N = ctx.author.name
 
         if desc["type"] == "bal":
             if ARG2 != None:
-                ID = ge.nom_ID(ARG2)
-                nom = ctx.guild.get_member(ID)
-                ARG2 = nom.name
+                try:
+                    ARG2 = ctx.guild.get_member(ge.nom_ID(ARG2)).name
+                except:
+                    pass
                 title = lang_P.forge_msg(lang, "bank", [N], False)
                 # title = "Compte épargne de {}".format(ARG2)
             else:

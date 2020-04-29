@@ -63,9 +63,11 @@ class GemsBase(commands.Cog):
             param["name"] = nom
         else:
             IDname = ge.nom_ID(nom)
-            param["ID"] = IDname
-            nom = ctx.guild.get_member(IDname)
-            nom = nom.name
+            param["ID"] = nom
+            try:
+                nom = ctx.guild.get_member(IDname).name
+            except:
+                pass
             param["name"] = nom
         ge.socket.send_string(gg.std_send_command("infos", ID, ge.name_pl, param))
         desc = GF.msg_recv()
@@ -84,6 +86,17 @@ class GemsBase(commands.Cog):
             return
         else:
             await ctx.channel.send(desc["desc"])
+
+    @commands.command(pass_context=True)
+    async def username(self, ctx, NU):
+        """**{new username}** | Change your username!"""
+        ID = ctx.author.id
+        param = dict()
+        param["ID"] = ID
+        param["NU"] = NU
+        ge.socket.send_string(gg.std_send_command("username", ID, ge.name_pl, param))
+        desc = GF.msg_recv()
+        await ctx.channel.send(desc["desc"])
 
     @commands.command(pass_context=True)
     async def bal(self, ctx, nom = None):
@@ -379,8 +392,11 @@ class GemsBase(commands.Cog):
         param["ID"] = ID
         # param["IDGuild"] = ctx.guild.id
         param["nom"] = ctx.author.name
-        param["ID_recu"] = ge.nom_ID(nom)
-        param["Nom_recu"] = ctx.guild.get_member(param["ID_recu"]).name
+        param["ID_recu"] = nom
+        try:
+            param["Nom_recu"] = ctx.guild.get_member(ge.nom_ID(param["ID_recu"])).name
+        except:
+            param["Nom_recu"] = nom
         param["gain"] = gain
 
         ge.socket.send_string(gg.std_send_command("pay", ID, ge.name_pl, param))
@@ -401,8 +417,11 @@ class GemsBase(commands.Cog):
         param["ID"] = ID
         # param["IDGuild"] = ctx.guild.id
         param["nom"] = ctx.author.name
-        param["ID_recu"] = ge.nom_ID(nom)
-        param["Nom_recu"] = ctx.guild.get_member(param["ID_recu"]).name
+        param["ID_recu"] = nom
+        try:
+            param["Nom_recu"] = ctx.guild.get_member(ge.nom_ID(param["ID_recu"])).name
+        except:
+            param["Nom_recu"] = nom
         param["item"] = item
         param["nb"] = nb
 
@@ -516,11 +535,11 @@ class GemsBase(commands.Cog):
         ID = ctx.author.id
         param = dict()
         param["ID"] = ID
-        param["GPID"] = ge.nom_ID(nom)
+        param["GPID"] = nom
         ge.socket.send_string(gg.std_send_command("godparent", ID, ge.name_pl, param))
         desc = GF.msg_recv()
         lang = desc["lang"]
-        if ID == ge.nom_ID(nom):
+        if ID == ge.nom_ID(nom) or ctx.author.name == nom:
             await ctx.channel.send(lang_P.forge_msg(lang, "godparent"))
         else:
             await ctx.channel.send(desc["desc"])
