@@ -1,4 +1,4 @@
-# gemsBase 
+# gemsBase
 ## class GemsBase(commands.Cog):
 
 ### def __init__(self, ctx):
@@ -8,6 +8,8 @@
 ### async def begin(self, ctx):
 
 ### async def connect(self, ctx, PlayerID):
+
+### async def username(self, ctx, NU):
 
 ### async def bal(self, ctx, nom = None):
 
@@ -32,4 +34,3 @@
 ### async def lang(self, ctx, langue = None):
 
 ## def setup(bot):
-
