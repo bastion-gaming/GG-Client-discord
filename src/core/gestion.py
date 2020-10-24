@@ -6,8 +6,7 @@ name_pl = "get gems" # Nom de la plateforme
 
 REQUEST_TIMEOUT = 2500
 REQUEST_RETRIES = 3
-# SERVER_ENDPOINT = "tcp://zircon.topazdev.fr:5555"
-SERVER_ENDPOINT = "tcp://localhost:5555"
+SERVER_ENDPOINT = "tcp://zircon.topazdev.fr:5555"
 
 admin = 0
 Inquisiteur = 1
@@ -49,6 +48,8 @@ poll.register(socket, zmq.POLLIN)
 
 def ZMQ():
     context = zmq.Context(1)
+    nb_saison = -1
+
     #  Socket to talk to server
     print("Connecting to Get Gems server…")
     socket = context.socket(zmq.REQ)
@@ -61,14 +62,20 @@ def ZMQ():
     time.sleep(1)
     socks = dict(poll.poll(REQUEST_TIMEOUT))
     if socks.get(socket) == zmq.POLLIN:
-        msg = gg.std_receive_command(socket.recv())
-        if msg['msg']['connect'] is True:
-            print("Connected to Get Gems server")
+        msg = socket.recv()
+        msg_DEC = msg.decode().replace(']', '').replace('[', '').split(",")
+        print(msg_DEC)
+        if msg_DEC[0] == '1':
+            print("Connected to Get Gems server and we are in season {}".format(msg_DEC[1]))
+            nb_saison = msg_DEC[1]
+            date_saison = msg_DEC[2]
     else:
         print("No reply from the server")
         # Socket is confused. Close and remove it.
         socket.setsockopt(zmq.LINGER, 0)
         socket.close()
         poll.unregister(socket)
-        return False
-    return True
+        nb_saison = -1
+        date_saison = "01-01-3000"
+        return False, nb_saison, date_saison
+    return True, nb_saison, date_saison

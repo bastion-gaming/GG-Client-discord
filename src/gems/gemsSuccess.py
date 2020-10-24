@@ -34,7 +34,6 @@ class GemsSuccess(commands.Cog):
             Nom = ctx.author.name
 
         ge.socket.send_string(gg.std_send_command("stats", ID, ge.name_pl, param))
-        await ctx.channel.send(GF.msg_recv())
         tab = GF.msg_recv()
         lang = tab[1]
         if tab[0] == "NOK":
@@ -315,7 +314,7 @@ class GemsSuccess(commands.Cog):
 
         await ctx.channel.send(embed = msg)
 
-    @commands.command(pass_context=True, aliases=['succes', 'succès'])
+    @commands.command(pass_context=True)
     async def success(self, ctx):
         """View your success list"""
         ID = ctx.author.id
@@ -323,16 +322,11 @@ class GemsSuccess(commands.Cog):
         param["ID"] = ID
 
         ge.socket.send_string(gg.std_send_command("success", ID, ge.name_pl, param))
-        recv = GF.msg_recv()
-        lang = recv['lang']
-        if recv['error'] == 100:
-            await ctx.channel.send(recv['etat'])
-        elif recv['error'] == 404:
-            await ctx.channel.send(lang_P.forge_msg(lang, "WarningMsg", None, False, 0))
-        elif recv["error"] == 0:
-            lang = recv["lang"]
+        desc = GF.msg_recv()
+        if desc["type"] == "OK":
+            lang = desc["lang"]
             msg = discord.Embed(title = lang_P.forge_msg(lang, "success", None, False, 0), color= 6824352, description = "", timestamp=dt.datetime.now())
-            descS = recv["result"]
+            descS = desc["result"]
             i = 0
             while i < len(descS):
                 # print("Success >> {0} a obtenu le succes {1}".format(ctx.author.name, descS[i]))
@@ -347,10 +341,10 @@ class GemsSuccess(commands.Cog):
             # msg.set_thumbnail(url=ctx.author.avatar_url)
             msg.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
             await ctx.channel.send(embed = msg)
-        elif recv["type"] == "Error":
-            await ctx.channel.send(recv["desc"])
+        elif desc["type"] == "Error":
+            await ctx.channel.send(desc["desc"])
         else:
-            await ctx.channel.send(recv["desc"])
+            await ctx.channel.send(desc["desc"])
 
 
 def setup(bot):

@@ -31,6 +31,14 @@ class Utils(commands.Cog):
             await ctx.channel.send(msg)
 
     @commands.command(pass_context=True)
+    async def ping(self, ctx):
+            """
+            PONG.
+            """
+            msg = "**PONG**."
+            await ctx.channel.send(msg)
+
+    @commands.command(pass_context=True)
     async def github(self, ctx):
             """
             Allows to have the link of the github.

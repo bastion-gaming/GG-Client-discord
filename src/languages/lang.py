@@ -4,8 +4,8 @@ import random as ran
 
 def init():
     listL = list()
-    for li in general_dict_lang:
-        listL.append(li)
+    for l in general_dict_lang:
+        listL.append(l)
 
     print("Lang >> La liste des langues chargées "+str(listL))
 

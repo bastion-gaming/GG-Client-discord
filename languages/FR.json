@@ -1,15 +1,79 @@
 {
   "WarningMsg":
     [
-      "Aucune données n'a été trouvée!"
+      "Aucun compte utilisateur n'a été trouvé.\nCrée toi un compte avec la commande `begin`.",
+      "Commande mal formulée",
+      "Ton inventaire est plein.",
+      "La commande est mal formulée.",
+      "Bientôt disponible",
+      "Tu possède deja un compte sur cette plateforme.",
+      "Aucun compte utilisateur n'a été trouvé.",
+      "Mise incorrecte!",
+      "Valeur incorrecte!",
+      ":no_entry: Anti-cheat! Je vous met un amende de 100 :gem:`gems` pour avoir essayé de tricher !"
     ],
-  "bal":
-    "Compte principal de {0}",
-  "baltop":
+  "DiscordCop Arrestation":
     [
-      "Classement des Joueurs | :gem:`gems`",
-      "Classement des Joueurs | <:spinelle:{0}>`spinelles`",
-      "Classement des Guildes"
+      "Vous avez été attrapés par un DiscordCop vous avez donc payé une amende de **{0}** {1}`Gems`."
+    ],
+  "couldown":
+    "Il faut attendre {0} secondes entre chaque commande!",
+  "level":
+    [
+      "a atteint le niveau **{0}**",
+      "\nTu gagne {0} :gem:`gems`"
+    ],
+  "lang":
+    [
+      "Langue modifiée avec succès.",
+      "Langue non prise en charge.",
+      "Langues disponible: \n• English (EN)\n• Français (FR)"
+    ],
+  "newPlayer":
+    [
+      "Le joueur a été ajouté !",
+      "Le joueur existe déjà.",
+      "\n\nPour permettre un affichage en jeu plus clair, les informations suivantes sont collectées:\n• Votre identifiant discord\n• Votre pseudo discord\n_Aucunes données personnels n'est vendu à une entreprise_\n\nVous pouvez vous opposer au traitement des données vous concernant et disposez du droit de retirer votre consentement à tout moment en envoyant un email a l'adresse `admin@bastion-gaming.fr`"
+    ],
+  "godparent":
+    [
+      "Parrain/Marraine",
+      "Filleul",
+      "**_Parrainage_**",
+      "Votre parrain ou marraine a bien été ajouté ! Vous empochez {0} {1}`Gems` et {2} XP.",
+      "Votre parrain ou marraine gagne {0} {1}`Gems` et {2} XP.",
+      "Tu as déjà un parrain ou une marraine.",
+      "Impossible d'ajouter ce joueur comme parrain ou marraine."
+    ],
+  "infos":
+    [
+      "Information sur {0}",
+      "PlayerID: **{0}**\nNom d'utilisateur: **{1}**",
+      "**_Niveau_  {0}**"
+    ],
+  "username":
+    [
+      "Nom d'utilisateur modifié!",
+      "Nom d'utilisateur non disponible!"
+    ],
+  "inv":
+    [
+      "Inventaire de {0}",
+      "Taille",
+      "Durabilité"
+    ],
+  "success":
+    [
+      "Liste de vos succès"
+    ],
+  "titres":
+    [
+      "Récompense journalière",
+      "Voleur",
+      "Crime",
+      "Pari",
+      "Modification du compte épargne",
+      "Épargne"
     ],
   "categorie":
     [
@@ -19,63 +83,11 @@
       "Minerais",
       "Poissons",
       "Plantes",
-      "Événement",
-      "Loot Box"
-    ],
-  "inv":
-    [
-      "Inventaire de {0} | Poche principale",
-      "Liste des poches de l'inventaire"
-    ],
-  "market":
-    [
-      "Le marché",
-      "Le marché | {0}",
-      "Vente | Achat",
-      "Achat",
-      "Infos",
-      "Gain"
+      "Événements",
+      "Améliorations"
     ],
   "recette":
     "Recettes",
-  "hothouse":
-    [
-      "Voici tes plantations.\nUtilise `hothouse seed` pour planter une <:gem_seed:{0}>`seed`",
-      "La serre",
-      "La serre | Partie {0}",
-      "Plantation n°{0}"
-    ],
-  "ferment":
-    [
-      "Voici tes barrils.\nUtilise `ferment grapes` pour obtenir des :wine_glass:`wine_glass`",
-      "La cave",
-      "La cave | Partie {0}",
-      "Barril n°{0}"
-    ],
-  "cooking":
-    [
-      "Voici tes fours.\nUtilise `cooking potato` pour obtenir des <:gem_fries:{0}>`fries`",
-      "La Cuisine",
-      "La Cuisine | Partie {0}",
-      "Four n°{0}"
-    ],
-  "production":
-    "Tu n'as pas assez",
-  "graphbourse":
-    [
-      "Achat",
-      "Vente"
-    ],
-  "bank":
-    "Compte épargne de {0}",
-  "month":
-    ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"],
-  "tuto":
-    [
-      "Tutoriel Get Gems!",
-      "Le but du jeu est de gagner le plus de :gem:`gems` possible.\n",
-      "Lien"
-    ],
   "stats":
     [
       "Général",
@@ -111,33 +123,96 @@
       "Parties gagnées",
       "Parties perdues"
     ],
-  "success":
+  "forge":
     [
-      "Liste de vos succès"
+      "Bravo, tu as réussi à forger {0} {2}`{1}`!",
+      "Il te manque {0} {2}`{1}`\n",
+      "Aucun recette disponible pour forger cette item !"
     ],
-  "titres":
+  "baltop":
     [
-      "Récompense journalière",
-      "Voleur",
-      "Crime",
-      "Pari",
-      "Modification du compte épargne",
-      "Épargne"
+      "Erreur! Commande incorrect",
+      "Classement des Joueurs | {0}`Gems`",
+      "Classement des Joueurs | {0}`Spinelles`",
+      "Classement des Guildes"
     ],
-  "infos":
-    "Information sur {0}",
-  "godparent":
-    "Tu ne peux pas être ton propre parrain.",
-  "casino":
+  "graphbourse":
     [
-      "Roulette plate",
-      "Valeur Bénite",
-      "Valeurs Maudites",
-      "Résultat",
-      "Gain: **{0}** :gem:`gems`",
-      "Mon numéro: :{0}::{1}:",
-      "Mise maximum: {0} :gem:`gems`",
-      "Mise: {0} :gem:`gems`",
-      "Affichage"
+      "Achat",
+      "Vente"
+    ],
+  "month":
+    ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"],
+  "buy":
+    [
+      "Tu viens d'acquérir {0} {2}`{1}`!\nCoût: {3} {4}",
+      "Désolé, nous ne pouvons pas executer cet achat, tu n'as pas assez de {0} en banque",
+      "Désolé, nous ne pouvons pas executer cet achat, cette item n'est pas vendu au marché"
+    ],
+  "sell":
+    [
+      "Tu as vendu {0} {2}`{1}` pour {3} {4}!",
+      "Cette objet n'existe pas",
+      "Tu n'as pas assez de {1}`{0}`. Il t'en reste : {2}",
+      "Tu ne peux pas vendre tes {0}`{1}`"
+    ],
+  "market":
+    [
+      "",
+      "Ce marché n'existe pas",
+      "Permet de voir tout les objets que l'on peux acheter ou vendre!",
+      "Actualisation de la bourse dans :clock2:`{0}h {1}m {2}s`\n",
+      "Marché",
+      "Vente | Achat",
+      "Infos"
+    ],
+  "upgrade_infos":
+    [
+      "Le plafond du compte épargne"
+    ],
+  "spec":
+    [
+      "Durabilité",
+      "Poids"
+    ],
+  "pay":
+    [
+      "{0} donne {1} {3}`Gems` à {2}!",
+      "{0} n'a pas assez pour donner {1} {3}`Gems` à {2}!",
+      "Tu ne peux pas donner une somme négative ! N'importe quoi enfin!"
+    ],
+  "daily":
+    [
+      "Tu as gagné 100 {0}`Gems`",
+      "\nNouvelle série: `{0}`, Bonus: {1} {2}`Gems`",
+      "\nBravo pour ces {0} jours consécutifs :confetti_ball:! Tu as mérité {1} {2}`Gems`",
+      "Tu as déja reçu ta récompense journalière aujourd'hui. Reviens demain pour gagner plus de {0}`Gems`"
+    ],
+  "bank":
+    [
+      "bank **bal** *[nom]* | Permet de connaitre la balance d'un utilisateur",
+      "\nbank **add** *[+/- nombre]* | Permet d'ajouter ou d'enlever des {0}`Gems` de son compte épargne",
+      "\nbank **saving** | Permet de calculer son épargne (utilisable toute les 4h)",
+      "\n\nLe prix de l'améliopration {1}`{0}` dépend du plafond du compte",
+      "Plafond de {0} {1}`Gems` du compte épargne atteint\n",
+      "Le solde de ton compte épargne ne peux être négatif.\nSolde du compte: {0} {1}`Gems`",
+      "Ton compte épargne a été crédité de {0} {1}`Gems`",
+      "\nNouveau solde: {0} {1}`Gems`",
+      "Tu n'as pas assez de {0}`Gems` pour épargner cette somme",
+      "Il manque le nombre de {0}`Gems` à ajouter sur votre compte épargne",
+      "Tu as épargné {0} {1}`Gems`\n",
+      "Plafond de {0} {1}`Gems` du compte épargne atteint\nTon épargne a été tranférée sur ton compte principal\n\n",
+      "Il te faut attendre :clock2:`{0}h {1}m {2}s` avant d'épargner à nouveau !",
+      "Solde du compte: {0} {1}`Gems`",
+      "Taux d'épargne: {0}%",
+      "Compte épargne de {0}"
+    ],
+  "stealing":
+    [
+      "Il te faut attendre :clock2:`{0}h {1}m {2}s` avant de pourvoir voler des {3}`Gems` à nouveau!",
+      "Tu viens de voler {0} {2}`Gems` à {1}",
+      "Tu es un piètre voleur de {0}`Gems`",
+      "Ce joueur est introuvable!",
+      "Tu peux voler des {0}`Gems`"
     ]
 }

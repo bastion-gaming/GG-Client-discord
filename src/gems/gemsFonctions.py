@@ -14,20 +14,14 @@ def setglobalguild(guild):
 NumberList = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "keycap_ten"]
 
 
-def build_idmoji(nameElem):
-    """Version 3.0 | Permet de construire l'idmoji de l'item"""
+def get_idmoji(nameElem):
+    """Version 2.0 | Permet de connaitre l'idmoji de l'item"""
     TupleIdmoji = globalguild.emojis
     for x in TupleIdmoji:
         if x.name == "gem_{}".format(nameElem):
-            idmoji = '<:gem_{0}:{1}>'.format(nameElem, x.id)
-            return idmoji
-        elif x.name == "upgrade_{}".format(nameElem):
-            idmoji = '<:upgrade_{0}:{1}>'.format(nameElem, x.id)
-            return idmoji
+            return x.id
         elif x.name == nameElem:
-            idmoji = '<:{0}:{1}>'.format(nameElem, x.id)
-            return idmoji
-    return ':{0}:'.format(nameElem)
+            return x.id
 
 
 def msg_recv():
@@ -38,8 +32,7 @@ def msg_recv():
         msg = message['msg']
     else:
         # msg = {"type": "Error", "lang": "FR", "desc": "Aucune réponse du serveur"}
-        # msg = {"type": "Error", "lang": "EN", "desc": "No reply from the server"}
-        msg = {'error': 100, 'etat': 'No reply from the server', 'lang': 'EN'}
+        msg = {"type": "Error", "lang": "EN", "desc": "No reply from the server"}
         # Socket is confused. Close and remove it.
         ge.socket.setsockopt(zmq.LINGER, 0)
         ge.socket.close()
@@ -50,6 +43,10 @@ def msg_recv():
         ge.poll.register(ge.socket, zmq.POLLIN)
 
     msg = MEF(msg, "\\n", "\n")
+    TupleIdmoji = globalguild.emojis
+    for y in TupleIdmoji:
+        test = "{idmoji[" + y.name + "]}"
+        msg = MEF(msg, test, str(get_idmoji(y.name)))
     return msg
 
 
@@ -66,6 +63,10 @@ def MEF(msg, source, destination):
                 msg[x] = msg[x].replace(source, destination)
             else:
                 MEF(msg[x], source, destination)
-    elif type(msg) is str:
+    elif type(msg) is int:
+        pass
+    elif type(msg) is float:
+        pass
+    else:
         msg = msg.replace(source, destination)
     return msg

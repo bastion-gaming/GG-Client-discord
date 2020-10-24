@@ -1,15 +1,79 @@
 {
   "WarningMsg":
     [
-      "No data has been found!"
+      "No user account has been found.\nCreate yourself an account with the command `begin`.",
+      "Incorrectly formulated order",
+      "Your inventory is full.",
+      "The order is badly formulated.",
+      "Coming Soon",
+      "You already have an account on this platform.",
+      "No data has been found!",
+      "Wrong bet!",
+      "Wrong value!",
+      ":no_entry: Anti-cheat! I'm fining you 100 :gem:`gems` for trying to cheat!"
     ],
-  "bal":
-    "Main account of {0}",
-  "baltop":
+  "DiscordCop Arrestation":
     [
-      "Player Ranking | :gem:`gems`",
-      "Player Ranking | <:spinelle:{0}>`spinelles`",
-      "Guild Rankings"
+      "You were caught by a DiscordCop so you paid a fine of {0} {1}`Gems`."
+    ],
+  "couldown":
+    "You have to wait {0} seconds between each command!",
+  "level":
+    [
+      "reached the level **{0}**",
+      "\nYou win {0} :gem:`gems`"
+    ],
+  "lang":
+    [
+      "Language changed successfuly !",
+      "Language not supported.",
+      "Available languages: \n• English (EN)\n• Français (FR)"
+    ],
+  "newPlayer":
+    [
+      "The player has been added!",
+      "The player already exists.",
+      "\n\nIn order to allow a clearer in-game display, the following information is collected:\n• Your discord id\n• Your discord nickname\n_No personal data is sold to any company_\nYou can oppose the processing of your data and have the right to withdraw your consent at any time by sending an email to the address `admin@bastion-gaming.fr`"
+    ],
+  "godparent":
+    [
+      "Godparent",
+      "Godchild",
+      "**_Sponsorship_**",
+      "Your godparent has been added! You pocket {0} {1}`Gems` and {2} XP.",
+      "Your godparent win {0} {1}`Gems` and {2} XP.",
+      "You already have a godparent.",
+      "Impossible to add this player as godparent."
+    ],
+  "infos":
+    [
+      "Information about {0}",
+      "PlayerID: **{0}**\nUsername: **{1}**",
+      "**_Level_  {0}**"
+    ],
+  "username":
+    [
+      "Username changed!",
+      "Username not available!"
+    ],
+  "inv":
+    [
+      "Inventory of {0}",
+      "Size",
+      "Sustainability"
+    ],
+  "success":
+    [
+      "Your success list"
+    ],
+  "titres":
+    [
+      "Daily reward",
+      "Stealing",
+      "Crime",
+      "Gamble",
+      "Changing the savings account",
+      "Saving"
     ],
   "categorie":
     [
@@ -19,63 +83,11 @@
       "Minerals",
       "Fishes",
       "Plants",
-      "Event",
-      "Loot Box"
-    ],
-  "inv":
-    [
-      "Inventory of {0} | Main pocket",
-      "Inventory pocket list"
-    ],
-  "market":
-    [
-      "Market",
-      "Market | {0}",
-      "Sale | Purchase",
-      "Purchase",
-      "Information",
-      "Gain"
+      "Events",
+      "Upgrades"
     ],
   "recette":
     "Recipes",
-  "hothouse":
-    [
-      "Here are your seedlings. \nUse `hothouse seed` to plant a <:gem_seed:{0}>`seed`",
-      "Greenhouse",
-      "Greenhouse | Part {0}",
-      "Planting n°{0}"
-    ],
-  "ferment":
-    [
-      "Here are your barrels. \nUse 'ferment grapes' to make :wine_glass:`wine_glass`",
-      "Winery",
-      "Winery | Part {0}",
-      "Barrel n°{0}"
-    ],
-  "cooking":
-    [
-      "Here's your ovens. \nUse the `cooking potato` to get some <:gem_fries:{0}>`fries`",
-      "Kitchen",
-      "Kitchen | Part {0}",
-      "Furnace n°{0}"
-    ],
-  "production":
-    "You don't have enough",
-  "graphbourse":
-    [
-      "Purchase",
-      "Sale"
-    ],
-  "bank":
-    "Saving account of {0}",
-  "month":
-    ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
-  "tuto":
-    [
-      "Get Gems tutorial!",
-      "The aim of the game is to win as many :gem:`gems` as possible.\n\n",
-      "Link"
-    ],
   "stats":
     [
       "General",
@@ -111,33 +123,96 @@
       "Won games",
       "Lost games"
     ],
-  "success":
+  "forge":
     [
-      "Your success list"
+      "Bravo, you've managed to forge {0} {2}`{1}`!",
+      "You're missing {0} {2}`{1}`\n",
+      "No recipes available to forge this item !"
     ],
-  "titres":
+  "baltop":
     [
-      "Daily reward",
-      "Stealing",
-      "Crime",
-      "Gamble",
-      "Changing the savings account",
-      "Saving"
+      "Error! Incorrect command",
+      "Player Ranking | {0}`Gems`",
+      "Player Ranking | {0}`Spinelles`",
+      "Guild Rankings"
     ],
-  "infos":
-    "Information about {0}",
-  "godparent":
-    "You can't be your own godparent.",
-  "casino":
+  "graphbourse":
     [
-      "Flat roulette",
-      "Benevolent Value",
-      "Cursed Values",
-      "Result",
-      "Gain: **{0}** :gem:`gems`",
-      "My number: :{0}::{1}:",
-      "Maximum bet: {0} :gem:`gems`",
-      "Bet: {0} :gem:`gems`",
-      "Display"
+      "Purchase",
+      "Sale"
+    ],
+  "month":
+    ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+  "buy":
+    [
+      "You just acquired {0} {2}`{1}`!\nCost: {3} {4}",
+      "Sorry, we can't execute this purchase, you don't have enough {0} in the bank",
+      "Sorry, we can't execute this purchase, this item is not sold in the market."
+    ],
+  "sell":
+    [
+      "You sold {0} {2}`{1}` for {3} {4}!",
+      "This object does not exist.",
+      "You don't have enough {1}`{0}`. You have some left: {2}",
+      "You can't sell your {0}`{1}"
+    ],
+  "market":
+    [
+      "",
+      "This market does not exist.",
+      "Allow you to view items for sale !",
+      "Stock exchange update :clock2:`{0}h {1}m {2}s`\n",
+      "Market",
+      "Sale | Purchase",
+      "Information"
+    ],
+  "upgrade_infos":
+    [
+      "The savings account limit."
+    ],
+  "spec":
+    [
+      "Durability",
+      "Weight"
+    ],
+  "pay":
+    [
+      "{0} gives {1} {3}`Gems` to {2}!",
+      "{0} doesn't have enough to give {1} {3}`Gems` to {2}!",
+      "You can't give a negative amount! Anything at all!"
+    ],
+  "daily":
+    [
+      "You've won 100 {0}`Gems`",
+      "\nNew series: `{0}`, Bonus: {1} {2}`Gems`",
+      "\nCongratulations for {0} consecutive days :confetti_ball:! You deserve {1} {2}`Gems`",
+      "You've already received your daily reward today. Come back tomorrow to earn more {0}`Gems`"
+    ],
+  "bank":
+    [
+      "bank **bal** *[name]* | Allows you to know the balance of a user",
+      "\nbank **add** *[+/- number]* | Allows you to add or remove {0}`Gems` from your savings account.",
+      "\nbank **saving** | Allows you to calculate your savings (can be used every 4 hours)",
+      "\n\nThe price of <:gem_{0}:{1}>`{0}` upgrade depends on the ceiling of the account",
+      "Ceilling of {0} {1}`Gems` in the savings account reaches\n",
+      "The balance of your savings account cannot be negative.\nAccount balance: {0} {1}`Gems`",
+      "You add {0} {1}`Gems` on your saving account",
+      "\nNew balance: {0} {1}`Gems`",
+      "You don't have enough {0}`Gems` for save this amount.",
+      "It miss {0}`Gems` to add on you saving account.",
+      "You saved {0} {1}`Gems`\n",
+      "savings account ceiling of {0} {1}`Gems` reached\nYour savings have been transferred.\n\n",
+      "You need to wait :clock2:`{0}h {1}m {2}s` before saving again !",
+      "Account balance: {0} {1}`Gems`",
+      "Savings rate: {0}%",
+      "Saving account of {0}"
+    ],
+  "stealing":
+    [
+      "You need to wait :clock2:`{0}h {1}m {2}s` before steal {3}`Gems` again !",
+      "You just stole {0} {2}`Gems` from {1}",
+      "You're a lousy {0}`Gems` thief",
+      "This player can't be found",
+      "You can steal {0}`Gems`"
     ]
 }
