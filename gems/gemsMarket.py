@@ -20,7 +20,6 @@ class GemsMarket(commands.Cog):
         ID = ctx.author.id
         param = dict()
         param["ID"] = ID
-        # param["IDGuild"] = ctx.guild.id
         param["nb"] = nb
         param["item"] = item
 
@@ -68,7 +67,6 @@ class GemsMarket(commands.Cog):
         ID = ctx.author.id
         param = dict()
         param["ID"] = ID
-        # param["IDGuild"] = ctx.guild.id
         param["nb"] = nb
         param["item"] = item
 
@@ -106,7 +104,6 @@ class GemsMarket(commands.Cog):
         ID = ctx.author.id
         param = dict()
         param["ID"] = ID
-        # param["IDGuild"] = ctx.guild.id
         if fct is not None:
             fct = fct.lower()
         param["fct"] = fct
@@ -212,7 +209,6 @@ class GemsMarket(commands.Cog):
         ID = ctx.author.id
         param = dict()
         param["ID"] = ID
-        # param["IDGuild"] = ctx.guild.id
         param["nom"] = ctx.author.name
         param["ID_recu"] = nom
         try:
@@ -245,38 +241,50 @@ class GemsMarket(commands.Cog):
         elif recv['error'] == 4:
             await ctx.channel.send(lang_P.forge_msg(lang, "pay", [param["nom"], recv['don'], param["Nom_recu"], GF.build_idmoji("gem")], False, 1))
 
-    # @commands.command(pass_context=True, aliases=['donner'])
-    # async def give(self, ctx, nom, item, nb = None):
-    #     """**[name] [item] [number]** | Give items to your friends!"""
-    #     ID = ctx.author.id
-    #     param = dict()
-    #     param["ID"] = ID
-    #     # param["IDGuild"] = ctx.guild.id
-    #     param["nom"] = ctx.author.name
-    #     param["ID_recu"] = nom
-    #     try:
-    #         param["Nom_recu"] = ctx.guild.get_member(ge.nom_ID(param["ID_recu"])).name
-    #     except:
-    #         param["Nom_recu"] = nom
-    #     param["item"] = item
-    #     param["nb"] = nb
-    #
-    #     ge.socket.send_string(gg.std_send_command("give", ID, ge.name_pl, param))
-    #     recv = GF.msg_recv()
-    #     await ctx.channel.send(recv)
-    #     lang = recv['lang']
-    #     if recv['error'] == 100:
-    #         await ctx.channel.send(recv['etat'])
-    #     elif recv['error'] == 404:
-    #         await ctx.channel.send(lang_P.forge_msg(lang, "WarningMsg", None, False, 0))
-        # desc = GF.msg_recv()
-        # lang = desc["lang"]
-        # if desc["type"] == "OK":
-        #     msg = discord.Embed(title = lang_P.forge_msg(lang, "stats", None, False, 3), color= 13752280, description = desc["desc"])
-        #     msg.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
-        #     await ctx.channel.send(embed = msg)
-        # else:
-        #     await ctx.channel.send(desc["desc"])
+    @commands.command(pass_context=True, aliases=['donner'])
+    async def give(self, ctx, nom, item, nb = None):
+        """**[name] [item] [number]** | Give items to your friends!"""
+        ID = ctx.author.id
+        param = dict()
+        param["ID"] = ID
+        param["nom"] = ctx.author.name
+        param["ID_recu"] = nom
+        try:
+            param["Nom_recu"] = ctx.guild.get_member(ge.nom_ID(param["ID_recu"])).name
+        except:
+            param["Nom_recu"] = nom
+        param["item"] = item
+        param["nb"] = nb
+
+        ge.socket.send_string(gg.std_send_command("give", ID, ge.name_pl, param))
+        recv = GF.msg_recv()
+        # await ctx.channel.send(recv)
+        lang = recv['lang']
+        if recv['error'] == 100:
+            await ctx.channel.send(recv['etat'])
+        elif recv['error'] == 404:
+            await ctx.channel.send(lang_P.forge_msg(lang, "WarningMsg", None, False, 0))
+        elif recv['error'] == 405:
+            await ctx.channel.send(lang_P.forge_msg(lang, "WarningMsg", None, False, 6))
+        elif recv['error'] == 0:
+            desc = lang_P.forge_msg(lang, "give", [recv["nom"], recv['nb'], recv["nom_recu"], GF.build_idmoji(recv['item']), recv['item']], False, 0)
+            msg = discord.Embed(title = lang_P.forge_msg(lang, "stats", None, False, 3), color= 13752280, description = desc)
+            msg.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
+            await ctx.channel.send(embed = msg)
+        elif recv['error'] == 1:
+            await ctx.channel.send(lang_P.forge_msg(lang, "couldown", [str(recv['couldown'])]))
+        elif recv['error'] == 2:
+            await ctx.channel.send(lang_P.forge_msg(lang, "WarningMsg", None, False, 3))
+        elif recv['error'] == 3:
+            await ctx.channel.send(lang_P.forge_msg(lang, "give", None, False, 2))
+        elif recv['error'] == 4:
+            await ctx.channel.send(lang_P.forge_msg(lang, "give", [recv["nom"], recv['nb'], recv["nom_recu"], GF.build_idmoji(recv['item']), recv['item']], False, 1))
+        elif recv['error'] == 5:
+            await ctx.channel.send(lang_P.forge_msg(lang, "give", [recv["nom_recu"]], False, 4))
+        elif recv['error'] == 6:
+            await ctx.channel.send(lang_P.forge_msg(lang, "WarningMsg", [recv['amende']], False, 9))
+        elif recv['error'] == 7:
+            await ctx.channel.send(lang_P.forge_msg(lang, "give", None, False, 3))
 
 
 def setup(bot):

@@ -10,7 +10,7 @@
       "Aucun compte utilisateur n'a été trouvé.",
       "Mise incorrecte!",
       "Valeur incorrecte!",
-      ":no_entry: Anti-cheat! Je vous met un amende de 100 :gem:`gems` pour avoir essayé de tricher !"
+      ":no_entry: Anti-cheat! Je vous met un amende de 100 :gem:`Gems` pour avoir essayé de tricher !"
     ],
   "DiscordCop Arrestation":
     [
@@ -73,7 +73,8 @@
       "Crime",
       "Pari",
       "Modification du compte épargne",
-      "Épargne"
+      "Épargne",
+      "Succès"
     ],
   "categorie":
     [
@@ -181,6 +182,14 @@
       "{0} n'a pas assez pour donner {1} {3}`Gems` à {2}!",
       "Tu ne peux pas donner une somme négative ! N'importe quoi enfin!"
     ],
+  "give":
+    [
+      "{0} donne {1} {3}`{4}` à {2}!",
+      "{0} n'a pas assez pour donner {1} {3}`{4}` à {2}!",
+      "Tu ne peux pas donner une somme négative ! N'importe quoi enfin!",
+      "Tu ne peux pas donner cette item!",
+      "L'inventaire de {0} est plein"
+    ],
   "daily":
     [
       "Tu as gagné 100 {0}`Gems`",
@@ -214,5 +223,150 @@
       "Tu es un piètre voleur de {0}`Gems`",
       "Ce joueur est introuvable!",
       "Tu peux voler des {0}`Gems`"
+    ],
+  "crime array":
+    [
+      "Vous avez volé la Société Eltamar et vous êtes retrouvé dans un lac, mais vous avez quand même réussi à voler",
+      "Tu as volé une pomme d'une valeur de",
+      "Tu as volé une carotte ! Prend tes",
+      "Tu voles un bonbon ! Prend tes",
+      "Tu as gangé au loto ! Prends tes",
+      "J'ai plus d'idée prends ça:"
+    ],
+  "crime event":
+    "**Halloween** | Des bonbons ou un sort?\n",
+  "mine":
+    [
+      "Pas de chance tu as cassé ta {1}`{0}`!",
+      "Tu as obtenu {0} {2}`{1}`",
+      "",
+      "Il faut acheter ou forger une pioche pour miner!"
+    ],
+  "dig":
+    [
+      "Pas de chance tu as cassé ta {1}`{0}`!",
+      "Tu as obtenu {0} {2}`{1}`",
+      "Tu as creusé toute la journée pour ne trouver que de la terre.",
+      "Il faut acheter ou forger une pelle pour creuser!"
+    ],
+  "fish":
+    [
+      "Pas de chance tu as cassé ta {1}`{0}`!",
+      "Tu as obtenu {0} {2}`{1}`",
+      "",
+      "Pas de poisson pour toi aujourd'hui :cry:",
+      "Il te faut une {0}`fishingrod` pour pécher, tu en trouvera une au marché !"
+    ],
+  "hothouse":
+    [
+      "Cette plantation est vide.",
+      "",
+      "{1}`{0}` | Ta plantation aura fini de pousser dans {2}",
+      "",
+      "Tu n'as pas assez de {1}`{0}` à planter dans ton inventaire",
+      "",
+      "Pousse de {1}`{0}` en cours.",
+      "",
+      "Ta plantation à fini de pousser, en la coupant tu gagnes {2} {1}`{0}`",
+      "Ta plantation aura fini de pousser dans :{3}:`{0}h {1}m {2}s`",
+      "Tu ne peux pas faire pousser cet item.",
+      "",
+      "Voici tes plantations.\nUtilise `hothouse seed` pour planter une {0}`seed`",
+      "La serre",
+      "La serre | Partie {0}",
+      "Plantation n°{0}"
+    ],
+  "ferment":
+    [
+      "Ce barril est vide.",
+      "",
+      "Ton barril a été rempli de {1}`{0}`. L'alcool aura fini de fermenter dans {2}",
+      "",
+      "Tu n'as pas assez de {1}`{0}` dans ton inventaire! \nIl te faut {3} {1}`{0}` pour faire des {4}`{2}`",
+      "",
+      "Fermentation de {1}`{0}` en cours.",
+      "",
+      "Ton alcool à fini de fermenter, en ouvrant le barril tu gagnes {2} {1}`{0}`",
+      "Ton alcool aura fini de fermenter dans :{3}:`{0}h {1}m {2}s`",
+      "Tu ne peux pas faire fermenter cet item.",
+      "",
+      "Voici tes barrils.\nUtilise `ferment grapes` pour obtenir des {0}`wine_glass`",
+      "La cave",
+      "La cave | Partie {0}",
+      "Barril n°{0}"
+    ],
+  "cooking":
+    [
+      "Ce four est vide.",
+      "",
+      "Ton four a été rempli de <:gem_{0}:{1}>`{0}`. Le plat aura fini de cuire dans {2}",
+      "",
+      "Tu n'as pas assez de {1}`{0}` dans ton inventaire! \nIl te faut {3} {1}`{0}` pour faire des {4}`{2}`",
+      "",
+      "Cuisson de {1}`{0}` en cours.",
+      "",
+      "Ton plat à fini de cuire, en le sortant du four tu gagnes {2} {1}`{0}`",
+      "Ton plat aura fini de cuir dans :{3}:`{0}h {1}m {2}s`",
+      "Tu ne peux pas faire cuire cet item.",
+      "Cette cuisson est disponible uniquement pendant l'événement **Halloween**",
+      "Cette cuisson est disponible uniquement pendant l'événement de **Noël**",
+      "",
+      "Voici tes fours.\nUtilise `cooking potato` pour obtenir des {0}`fries`",
+      "La Cuisine",
+      "La Cuisine | Partie {0}",
+      "Four n°{0}"
+    ],
+  "production":
+    "Tu n'as pas assez",
+  "gamble array":
+    [
+      "Tu as remporté le pari! Tu obtiens",
+      "Une grande victoire! Tu gagnes",
+      "Bravo prends",
+      "Heu....",
+      "Pourquoi jouer à Fortnite quand tu peux gamble! Prends tes"
+    ],
+  "gamble":
+    [
+      "Dommage tu as perdu {0} :gem:`Gems`",
+      "\nFélicitation! Tu as l'ame d'un parieur, nous t'offrons le prix :trophy:`Gamble Jackpot`.",
+      "\nFélicitation! Tu as l'ame d'un parieur, nous t'offrons le prix :trophy::trophy:`Super Gamble Jackpot`.",
+      "\nFélicitation! Tu as l'ame d'un parieur, nous t'offrons le prix :trophy::trophy::trophy:`Hyper Gamble Jackpot`.",
+      "Tu n'as pas assez de :gem:`Gems` en banque.",
+      "La valeur rentré est incorrect"
+    ],
+  "casino":
+    [
+      "Roulette plate",
+      "Valeur Bénite",
+      "Valeurs Maudites",
+      "Résultat",
+      "Gain: **{0}** :gem:`Gems`",
+      "Mon numéro: :{0}::{1}:",
+      "Mise maximum: {0} :gem:`Gems`",
+      "Mise: {0} :gem:`Gems`",
+      "Affichage"
+    ],
+  "slots":
+    [
+      "Votre mise: {0} :gem:`Gems`\n\n",
+      "\nEn trouvant ce {0}`ruby` tu deviens un Mineur de Merveilles",
+      "\nBravo {0}! Le Super Jackpot :seven::seven::seven: est tombé :tada: ",
+      "\n{0} paye sa tournée :beer:",
+      "\nTu a trouvé {0} :cookie:`cookie`",
+      "\nTon inventaire est plein",
+      "\nTu a trouvé {0} :grapes:`grapes`",
+      "\nEn trouvant ce {0}`backpack` tu gagnes {1} points d'inventaire",
+      "\n:slot_machine: Jackpot! Tu viens de gagner {0} :gem:`Gems`",
+      "\nBravo, tu viens de gagner {0} :gem:`Gems`",
+      "\nLa machine viens d'exploser :boom:\nTu as perdu {0} :gem:`Gems`",
+      "\nBravo, voici un ticket gratuit pour relancer la machine à sous",
+      "\nLa machine à sous ne paya rien ..."
+    ],
+  "roulette":
+    [
+      "**Échec**\nTu perd ta mise.\n",
+      "**Victoire**\nTu gagne ta mise + {0}%\n",
+      "**Défaite\n**Tu perd ta mise + {0}%\n"
     ]
 }

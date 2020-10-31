@@ -10,7 +10,7 @@
       "No data has been found!",
       "Wrong bet!",
       "Wrong value!",
-      ":no_entry: Anti-cheat! I'm fining you 100 :gem:`gems` for trying to cheat!"
+      ":no_entry: Anti-cheat! I'm fining you 100 :gem:`Gems` for trying to cheat!"
     ],
   "DiscordCop Arrestation":
     [
@@ -73,7 +73,8 @@
       "Crime",
       "Gamble",
       "Changing the savings account",
-      "Saving"
+      "Saving",
+      "Success"
     ],
   "categorie":
     [
@@ -181,6 +182,14 @@
       "{0} doesn't have enough to give {1} {3}`Gems` to {2}!",
       "You can't give a negative amount! Anything at all!"
     ],
+  "give":
+    [
+      "{0} gives {1} {3}`{4}` to {2}!",
+      "{0} doesn't have enough to give {1} {3}`{4}` to {2}!",
+      "You can't give a negative amount! Anything at all!",
+      "You can't give away that item!",
+      "The inventory of {0} is full"
+    ],
   "daily":
     [
       "You've won 100 {0}`Gems`",
@@ -214,5 +223,150 @@
       "You're a lousy {0}`Gems` thief",
       "This player can't be found",
       "You can steal {0}`Gems`"
+    ],
+  "crime array":
+    [
+      "You robbed the Society of Eltamar and ended up in a lake,but still managed to steal",
+      "You stole an apple worth",
+      "You stole a carrot! Get your",
+      "You're stealing candy! Get your",
+      "You won the lottery! Get your",
+      "I'm out of ideas. Take this:"
+    ],
+  "crime event":
+    "**Halloween** | Trick or treat?\n",
+  "mine":
+    [
+      "Too bad you broke your {1}`{0}`!",
+      "You earn {0} {2}`{1}`",
+      "",
+      "You need to buy a pickaxe to mine !"
+    ],
+  "dig":
+    [
+      "Too bad you broke your {1}`{0}`!",
+      "You earn {0} {2}`{1}`",
+      "You dig all day for nothing except dust.",
+      "You need to buy or forge a shovel to dig !"
+    ],
+  "fish":
+    [
+      "Too bad you broke your {1}`{0}`!",
+      "You got {0} {2}`{1}`",
+      "",
+      "No fish for you today :cry:",
+      "You need {0}`fishingrod` to fish, you can found it in the market !"
+    ],
+  "hothouse":
+    [
+      "This plantation is empty.",
+      "",
+      "{1}`{0}` | Your plantation will be finished growing in {2}",
+      "",
+      "You don't have {1}`{0}` to plant in your inventory",
+      "",
+      "Pushing of {1}`{0}` in progress.",
+      "",
+      "Your plantation has finished growing, if you cut it down you earn {2} {1}`{0}`",
+      "Your plantation will be done growing in :{3}:`{0}h {1}m {2}s`",
+      "You can't grow this item.",
+      "",
+      "Here are your seedlings. \nUse `hothouse seed` to plant a <:gem_seed:{0}>`seed`",
+      "Greenhouse",
+      "Greenhouse | Part {0}",
+      "Planting n°{0}"
+    ],
+  "ferment":
+    [
+      "This barrel is empty.",
+      "",
+      "Your barrel has been filled with {1}`{0}`. The alcohol will be finished fermenting in {2}",
+      "",
+      "You don't have enough {1}`{0}` in your inventory! \nYou need {3} {1}`{0}` for make {4}`{2}`",
+      "",
+      "Fermentation of {1}`{0}` in progress.",
+      "",
+      "Your alcohol has finished fermenting, opening the barrel you win {2} {1}`{0}`",
+      "Your alcohol will be finished fermenting in :{3}:`{0}h {1}m {2}s`",
+      "You can't ferment this item.",
+      "",
+      "Here are your barrels. \nUse 'ferment grapes' to make :wine_glass:`wine_glass`",
+      "Winery",
+      "Winery | Part {0}",
+      "Barrel n°{0}"
+    ],
+  "cooking":
+    [
+      "This oven is empty.",
+      "",
+      "Your oven has been filled with {1}`{0}`. The dish will be done baking in {2}",
+      "",
+      "You don't have enough {1}`{0}` in your inventory! \nYou need {3} {1}`{0}` for make {4}`{2}`",
+      "",
+      "Cooking of {1}`{0}` in progress.",
+      "",
+      "Your dish has finished cooking, when you take it out of the oven you win {2} {1}`{0}`",
+      "Your dish will be done in :{3}:`{0}h {1}m {2}s`",
+      "You can't cook this item.",
+      "This cooking is only available during the **Halloween** event.",
+      "This bake is only available during the Christmas event.",
+      "",
+      "Here's your ovens. \nUse the `cooking potato` to get some <:gem_fries:{0}>`fries`",
+      "Kitchen",
+      "Kitchen | Part {0}",
+      "Furnace n°{0}"
+    ],
+  "production":
+    "You don't have enough",
+  "gamble array":
+    [
+      "You won the bet! You get",
+      "A great victory! You win.",
+      "Congratulations take",
+      "Uh....",
+      "Why play Fortnite when you can gamble! Get your"
+    ],
+  "gamble":
+    [
+      "Crap ! You lose {0} :gem: `Gems`",
+      "\nCongratulations! You have the soul of a bettor, we're offering you the prize  :trophy:`Gamble Jackpot` ! ",
+      "\nCongratulations! You have the soul of a bettor, we're offering you the prize  :trophy::trophy:`Super Gamble Jackpot` ! ",
+      "\nCongratulations! You have the soul of a bettor, we're offering you the prize  :trophy::trophy::trophy:`Hyper Gamble Jackpot`. ! ",
+      "You don't have enough :gem: `Gems` in the bank.",
+      "Incorrect value"
+    ],
+  "casino":
+    [
+      "Flat roulette",
+      "Benevolent Value",
+      "Cursed Values",
+      "Result",
+      "Gain: **{0}** :gem:`Gems`",
+      "My number: :{0}::{1}:",
+      "Maximum bet: {0} :gem:`Gems`",
+      "Bet: {0} :gem:`Gems`",
+      "Display"
+    ],
+  "slots":
+    [
+      "Your bet: {0} :gem:`Gems`\n\n",
+      "\nFinding that {0}`ruby` you become wonder miner",
+      "\nCongratulations {0}! Super jackpot :seven::seven::seven: for you :tada: ",
+      "\n{0} buy her round of :beer:",
+      "\nYou found {0} :cookie:`cookie`",
+      "\nYour inventory's full.",
+      "\nYou found {0} :grapes:`grapes`",
+      "\nFinding this {0}`backpack` you gain {1} inventory points.",
+      "\n:slot_machine: Jackpot! You just won {0} :gem:`Gems`",
+      "\nBravo, you just won {0} :gem:`Gems`",
+      "\nMachine just blow up :boom:\nYou lost {0} :gem:`Gems`",
+      "\nBravo, here's a free ticket to get the slot machine going again.",
+      "\nSlot machine paid nothing ..."
+    ],
+  "roulette":
+    [
+      "**Failure**\nYou lose your bet.\n",
+      "**Victory**\nYou win your bet + {0}%\n",
+      "**Defeat\n**You lose your bet + {0}%\n"
     ]
 }

@@ -11,7 +11,7 @@ async def checklevel(message):
     nom = message.author.name
     ge.socket.send_string(gg.std_send_command("level", ID, ge.name_pl))
     recv = GF.msg_recv()
-    await message.channel.send(recv)
+    # await message.channel.send(recv)
     lang = recv['lang']
     if recv['error'] in [100, 404]:
         print("Level Error {1} | {0} | {2}".format(recv['etat'], recv['error'], nom))
@@ -26,11 +26,10 @@ async def checklevel(message):
             msg.set_footer(text=message.author.name)
             await message.channel.send(embed = msg)
         if recv['success'] is not False:
-            title = "Success"
-            descS = ""
-            for i in range(0, len(recv['success'])-1):
-                descS += "{0}\n".format(recv['success'][i])
-            msg = discord.Embed(title = title, color= 6824352, description = descS, timestamp=dt.datetime.now())
+            for i in range(0, len(recv['success'])-1, 3):
+                descS = "{0}\n".format(recv['success'][i+1])
+                descS += "{0}\n".format(recv['success'][i+2])
+            msg = discord.Embed(title = lang_P.forge_msg(lang, "titres", None, False, 6), color= 6824352, description = descS, timestamp=dt.datetime.now())
             msg.set_thumbnail(url=message.author.avatar_url)
             msg.set_footer(text=message.author.name)
             await message.channel.send(embed = msg)

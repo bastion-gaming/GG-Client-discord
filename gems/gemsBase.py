@@ -193,7 +193,6 @@ class GemsBase(commands.Cog):
         nom = ctx.author.name
         param = dict()
         param["ID"] = ID
-        # param["IDGuild"] = ctx.guild.id
         if fct is not None:
             fct = fct.lower()
         param["fct"] = fct
@@ -206,7 +205,7 @@ class GemsBase(commands.Cog):
             await ctx.channel.send(recv['etat'])
         elif recv['error'] == 404:
             await ctx.channel.send(lang_P.forge_msg(lang, "WarningMsg", None, False, 0))
-        elif recv['etat'] == "OK":
+        elif recv['error'] == 0:
             msg_titre = lang_P.forge_msg(lang, "inv", [nom], False, 0)
             msg_desc = "\n{2}: `{0}/{1}`".format(recv['taille'][0], recv['taille'][1], lang_P.forge_msg(lang, "inv", None, False, 1))
             if recv['taille'][0] >= recv['taille'][1]:
@@ -257,6 +256,8 @@ class GemsBase(commands.Cog):
                             desc += "\n{idmoji}`{name}`: `x{stock}`".format(name=two, idmoji=GF.build_idmoji(two), stock=recv['inventory']['items'][one][two]['stock'])
                         msg.add_field(name=lang_P.forge_msg(lang, "categorie", None, False, 6), value=desc, inline=False)
             await ctx.channel.send(embed = msg)
+        elif recv['error'] == 1:
+            await ctx.channel.send(lang_P.forge_msg(lang, "couldown", [str(recv['couldown'])]))
         else:
             await ctx.channel.send('Error')
 
@@ -266,7 +267,6 @@ class GemsBase(commands.Cog):
         ID = ctx.author.id
         param = dict()
         param["ID"] = ID
-        # param["IDGuild"] = ctx.guild.id
         param["item"] = item
         param["nb"] = nb
 
@@ -410,23 +410,6 @@ class GemsBase(commands.Cog):
             await ctx.channel.send(lang_P.forge_msg(lang, "godparent", None, False, 5))
         elif recv['error'] == 3:
             await ctx.channel.send(lang_P.forge_msg(lang, "godparent", None, False, 6))
-
-    # ==============================
-    # ===== Commande désactivé =====
-    # ==============================
-    # @commands.command(pass_context=True)
-    # async def convert(self, ctx, nb = None):
-    #     """**[Nombre de spinelle]** | Convertisseur :gem:`gems` :left_right_arrow: `spinelles` (250 000 pour 1)"""
-    #     ID = ctx.author.id
-    #     param = dict()
-    #     param["ID"] = ID
-    #     param["IDGuild"] = ctx.guild.id
-    #     param["nb"] = nb
-    #
-    #     ge.socket.send_string(gg.std_send_command("convert", ID, ge.name_pl, param))
-    #     desc = GF.msg_recv()
-    #
-    #     await ctx.channel.send(desc[1])
 
 
 def setup(bot):

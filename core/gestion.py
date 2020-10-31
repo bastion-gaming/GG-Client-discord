@@ -4,7 +4,7 @@ import time
 
 name_pl = "get gems" # Nom de la plateforme
 
-REQUEST_TIMEOUT = 2500
+REQUEST_TIMEOUT = 5000
 REQUEST_RETRIES = 3
 # SERVER_ENDPOINT = "tcp://zircon.topazdev.fr:5555"
 SERVER_ENDPOINT = "tcp://localhost:5555"

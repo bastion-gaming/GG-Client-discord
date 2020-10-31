@@ -69,3 +69,26 @@ def MEF(msg, source, destination):
     elif type(msg) is str:
         msg = msg.replace(source, destination)
     return msg
+
+
+def time_aff(time):
+    # Traduit une valeur time (en secondes) en valeur HH:mm:ss
+    # (avec un emoji correspondant devant)
+    dtime = dict()
+    dtime["timeH"] = int(time / 60 / 60)
+    dtime["time"] = time - dtime["timeH"] * 3600
+    dtime["timeM"] = int(dtime["time"] / 60)
+    dtime["timeS"] = int(dtime["time"] - dtime["timeM"] * 60)
+    if dtime["timeM"] <= 30:
+        if dtime["timeH"] % 12 == 0:
+            dtime["cl"] = "12"
+        else:
+            dtime["cl"] = dtime["timeH"] % 12
+        dtime["cl"] = "clock{0}30".format(dtime["cl"])
+    else:
+        if dtime["timeH"] % 12 == 0:
+            dtime["cl"] = "12"
+        else:
+            dtime["cl"] = (dtime["timeH"] % 12)+1
+        dtime["cl"] = "clock{0}".format(dtime["cl"])
+    return dtime
