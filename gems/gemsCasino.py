@@ -91,13 +91,13 @@ class GemsCasino(commands.Cog):
             else:
                 desc += lang_P.forge_msg(lang, "slots", None, False, 12)
             if recv['slots']['cookies'] is not False:
-                desc += lang_P.forge_msg(lang, "slots", [recv['slots']['cookies']], False, 4)
+                desc += lang_P.forge_msg(lang, "slots", [recv['slots']['cookies'], GF.trad_objet("EN", "cookie"), GF.build_idmoji("cookie")], False, 4)
             if recv['slots']['grapes'] is not False:
-                desc += lang_P.forge_msg(lang, "slots", [recv['slots']['grapes']], False, 6)
+                desc += lang_P.forge_msg(lang, "slots", [recv['slots']['grapes'], GF.trad_objet("EN", "grapes"), GF.build_idmoji("grapes")], False, 4)
             if recv['slots']['backpack'] is not False:
-                desc += lang_P.forge_msg(lang, "slots", [GF.build_idmoji("backpack"), recv['slots']['backpack']], False, 7)
+                desc += lang_P.forge_msg(lang, "slots", [GF.build_idmoji("backpack"), recv['slots']['backpack'], GF.trad_objet("EN", "backpack")], False, 7)
             if recv['slots']['ruby'] is not False:
-                desc += lang_P.forge_msg(lang, "slots", [GF.build_idmoji("ruby")], False, 1)
+                desc += lang_P.forge_msg(lang, "slots", [GF.build_idmoji("ruby"), GF.trad_objet("EN", "ruby")], False, 1)
             if recv['slots']['beer'] is not False:
                 desc += lang_P.forge_msg(lang, "slots", [ctx.author.name], False, 3)
             e.add_field(name=lang_P.forge_msg(lang, "casino", None, False, 3), value=desc, inline=False)
@@ -170,7 +170,7 @@ class GemsCasino(commands.Cog):
         ID = ctx.author.id
         param = dict()
         param["ID"] = ID
-        param["item"] = item
+        param["item"] = GF.trad_objet_inv(item)
         param["perCent"] = perCent
         param["mise"] = mise
         ge.socket.send_string(gg.std_send_command("roulette", ID, ge.name_pl, param))

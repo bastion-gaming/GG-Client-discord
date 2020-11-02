@@ -12,7 +12,7 @@ def create_graphbourse(ctx, item, yearStart, monthStart, yearEnd, monthEnd):
     now = dt.datetime.now()
     param = dict()
     param["ID"] = ID
-    param["item"] = item
+    param["item"] = GF.trad_objet_inv(item)
     param["yearStart"] = yearStart
     param["monthStart"] = monthStart
     param["yearEnd"] = yearEnd

@@ -33,6 +33,10 @@ class GemsAdmin(commands.Cog):
         else:
             await ctx.channel.send("[Admin Command] Tu n'est pas autorisé à utiliser cette commande!")
 
+    @commands.command(pass_context=True)
+    async def test(self, ctx, arg):
+        await ctx.channel.send(GF.trad_objet_inv(arg))
+
 
 def setup(bot):
     bot.add_cog(GemsAdmin(bot))

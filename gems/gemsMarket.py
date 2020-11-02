@@ -21,7 +21,7 @@ class GemsMarket(commands.Cog):
         param = dict()
         param["ID"] = ID
         param["nb"] = nb
-        param["item"] = item
+        param["item"] = GF.trad_objet_inv(item)
 
         ge.socket.send_string(gg.std_send_command("buy", ID, ge.name_pl, param))
         recv = GF.msg_recv()
@@ -32,7 +32,7 @@ class GemsMarket(commands.Cog):
         elif recv['error'] == 99:
             await ctx.channel.send(lang_P.forge_msg(lang, "WarningMsg", None, False, 10))
         elif recv['error'] == 98:
-            await ctx.channel.send(lang_P.forge_msg(lang, "WarningMsg", [recv["item"]], False, 10))
+            await ctx.channel.send(lang_P.forge_msg(lang, "WarningMsg", [GF.trad_objet(lang, recv["item"])], False, 10))
         elif recv['error'] == 404:
             await ctx.channel.send(lang_P.forge_msg(lang, "WarningMsg", None, False, 0))
         elif item == None:
@@ -44,7 +44,7 @@ class GemsMarket(commands.Cog):
                 else:
                     device = "{0}`{1}`".format(GF.build_idmoji("spinelle"), "Spinelles")
                 cout = recv['perte'][p]
-            desc = lang_P.forge_msg(lang, "buy", [nb, item, GF.build_idmoji(item), cout, device], False, 0)
+            desc = lang_P.forge_msg(lang, "buy", [nb, GF.trad_objet(lang, recv["item"]), GF.build_idmoji(param["item"]), cout, device], False, 0)
             msg = discord.Embed(title = lang_P.forge_msg(lang, "stats", None, False, 1), color= 13752280, description = desc)
             msg.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
             await ctx.channel.send(embed = msg)
@@ -72,7 +72,7 @@ class GemsMarket(commands.Cog):
         param = dict()
         param["ID"] = ID
         param["nb"] = nb
-        param["item"] = item
+        param["item"] = GF.trad_objet_inv(item)
 
         ge.socket.send_string(gg.std_send_command("sell", ID, ge.name_pl, param))
         recv = GF.msg_recv()
@@ -83,7 +83,7 @@ class GemsMarket(commands.Cog):
         elif recv['error'] == 99:
             await ctx.channel.send(lang_P.forge_msg(lang, "WarningMsg", None, False, 10))
         elif recv['error'] == 98:
-            await ctx.channel.send(lang_P.forge_msg(lang, "WarningMsg", [recv["item"]], False, 10))
+            await ctx.channel.send(lang_P.forge_msg(lang, "WarningMsg", [GF.trad_objet(lang, recv["item"])], False, 10))
         elif recv['error'] == 404:
             await ctx.channel.send(lang_P.forge_msg(lang, "WarningMsg", None, False, 0))
         elif item == None:
@@ -95,14 +95,14 @@ class GemsMarket(commands.Cog):
                 else:
                     device = "{0}`{1}`".format(GF.build_idmoji("spinelle"), "Spinelles")
                 cout = recv['gain'][p]
-            desc = lang_P.forge_msg(lang, "sell", [nb, item, GF.build_idmoji(item), cout, device], False, 0)
+            desc = lang_P.forge_msg(lang, "sell", [nb, GF.trad_objet(lang, recv["item"]), GF.build_idmoji(param["item"]), cout, device], False, 0)
             msg = discord.Embed(title = lang_P.forge_msg(lang, "stats", None, False, 1), color= 13752280, description = desc)
             msg.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
             await ctx.channel.send(embed = msg)
         elif recv['error'] == 1:
             await ctx.channel.send(lang_P.forge_msg(lang, "couldown", [str(recv['couldown'])]))
         elif recv['error'] == 2:
-            await ctx.channel.send(lang_P.forge_msg(lang, "sell", [item, GF.build_idmoji(item), recv['nbItem']], False, 2))
+            await ctx.channel.send(lang_P.forge_msg(lang, "sell", [GF.trad_objet(lang, recv["item"]), GF.build_idmoji(item), recv['nbItem']], False, 2))
         elif recv['error'] == 5:
             await ctx.channel.send(lang_P.forge_msg(lang, "sell", None, False, 1))
 
@@ -134,7 +134,7 @@ class GemsMarket(commands.Cog):
                     if one == "outils" and (fct == None or ("outil" in fct)):
                         desc = desc_VA = desc_info = ""
                         for two in recv['market']['outils']:
-                            desc += "\n{idmoji}`{name}`".format(name=two, idmoji=GF.build_idmoji(two))
+                            desc += "\n{idmoji}`{name}`".format(name=GF.trad_objet(lang, two), idmoji=GF.build_idmoji(two))
                             desc_VA += "\n`{vente}`{argent}_{PV} _|`{achat}`{argent}_{PA} _".format(argent=GF.build_idmoji("gem"), vente=recv['market']['outils'][two]["vente"], achat=recv['market']['outils'][two]["achat"], PV=recv['market']['outils'][two]["PV"], PA=recv['market']['outils'][two]["PA"])
                             desc_info += "\n`{spec}:` {valeur}".format(spec=lang_P.forge_msg(lang, "spec", None, False, 0), valeur=recv['market']['outils'][two]["durability"])
                         msg.add_field(name=lang_P.forge_msg(lang, "categorie", None, False, 0), value=desc, inline=True)
@@ -143,7 +143,7 @@ class GemsMarket(commands.Cog):
                     elif one == "upgrade" and (fct == None or ("upgrade" in fct)):
                         desc = desc_A = desc_info = ""
                         for two in recv['market']['upgrade']:
-                            desc += "\n{idmoji}`{name}`".format(name=two, idmoji=GF.build_idmoji(two))
+                            desc += "\n{idmoji}`{name}`".format(name=GF.trad_objet(lang, two), idmoji=GF.build_idmoji(two))
                             desc_A += "\n`{achat}`{argent}".format(argent=GF.build_idmoji("gem"), achat=recv['market']['upgrade'][two]["achat"])
                             desc_info += "\n`{info}`".format(info=lang_P.forge_msg(lang, "upgrade_infos", None, False, recv['market']['upgrade'][two]['info']))
                         msg.add_field(name=lang_P.forge_msg(lang, "categorie", None, False, 7), value=desc, inline=True)
@@ -154,11 +154,11 @@ class GemsMarket(commands.Cog):
                     if one == "special":
                         desc = desc_VA = desc_info = ""
                         for two in recv['market']['special']:
-                            desc += "\n{idmoji}`{name}`".format(name=two, idmoji=GF.build_idmoji(two))
+                            desc += "\n{idmoji}`{name}`".format(name=GF.trad_objet(lang, two), idmoji=GF.build_idmoji(two))
                             desc_VA += "\n`{vente}`{argent}_{PV} _|`{achat}`{argent}_{PA} _".format(argent=GF.build_idmoji("gem"), vente=recv['market']['special'][two]["vente"], achat=recv['market']['special'][two]["achat"], PV=recv['market']['special'][two]["PV"], PA=recv['market']['special'][two]["PA"])
                             desc_info += "\n`{spec}:` {valeur}".format(spec=lang_P.forge_msg(lang, "spec", None, False, 0), valeur=recv['market']['special'][two]["durability"])
                         for two in recv['market']['items'][one]:
-                            desc += "\n{idmoji}`{name}`".format(name=two, idmoji=GF.build_idmoji(two))
+                            desc += "\n{idmoji}`{name}`".format(name=GF.trad_objet(lang, two), idmoji=GF.build_idmoji(two))
                             desc_VA += "\n`{vente}`{argent}_{PV} _|`{achat}`{argent}_{PA} _".format(argent=GF.build_idmoji("gem"), vente=recv['market']['items'][one][two]["vente"], achat=recv['market']['items'][one][two]["achat"], PV=recv['market']['items'][one][two]["PV"], PA=recv['market']['items'][one][two]["PA"])
                             desc_info += "\n`{spec}:` {valeur}".format(spec=lang_P.forge_msg(lang, "spec", None, False, 1), valeur=recv['market']['items'][one][two]["poids"])
                         msg.add_field(name=lang_P.forge_msg(lang, "categorie", None, False, 1), value=desc, inline=True)
@@ -167,7 +167,7 @@ class GemsMarket(commands.Cog):
                     elif one == "minerai" and (fct == None or ("mine" in fct)):
                         desc = desc_VA = desc_info = ""
                         for two in recv['market']['items'][one]:
-                            desc += "\n{idmoji}`{name}`".format(name=two, idmoji=GF.build_idmoji(two))
+                            desc += "\n{idmoji}`{name}`".format(name=GF.trad_objet(lang, two), idmoji=GF.build_idmoji(two))
                             desc_VA += "\n`{vente}`{argent}_{PV} _|`{achat}`{argent}_{PA} _".format(argent=GF.build_idmoji("gem"), vente=recv['market']['items'][one][two]["vente"], achat=recv['market']['items'][one][two]["achat"], PV=recv['market']['items'][one][two]["PV"], PA=recv['market']['items'][one][two]["PA"])
                             desc_info += "\n`{spec}:` {valeur}".format(spec=lang_P.forge_msg(lang, "spec", None, False, 1), valeur=recv['market']['items'][one][two]["poids"])
                         msg.add_field(name=lang_P.forge_msg(lang, "categorie", None, False, 3), value=desc, inline=True)
@@ -176,7 +176,7 @@ class GemsMarket(commands.Cog):
                     elif one == "poisson" and (fct == None or ("fish" in fct or "poisson" in fct)):
                         desc = desc_VA = desc_info = ""
                         for two in recv['market']['items'][one]:
-                            desc += "\n{idmoji}`{name}`".format(name=two, idmoji=GF.build_idmoji(two))
+                            desc += "\n{idmoji}`{name}`".format(name=GF.trad_objet(lang, two), idmoji=GF.build_idmoji(two))
                             desc_VA += "\n`{vente}`{argent}_{PV} _|`{achat}`{argent}_{PA} _".format(argent=GF.build_idmoji("gem"), vente=recv['market']['items'][one][two]["vente"], achat=recv['market']['items'][one][two]["achat"], PV=recv['market']['items'][one][two]["PV"], PA=recv['market']['items'][one][two]["PA"])
                             desc_info += "\n`{spec}:` {valeur}".format(spec=lang_P.forge_msg(lang, "spec", None, False, 1), valeur=recv['market']['items'][one][two]["poids"])
                         msg.add_field(name=lang_P.forge_msg(lang, "categorie", None, False, 4), value=desc, inline=True)
@@ -185,7 +185,7 @@ class GemsMarket(commands.Cog):
                     elif one == "plante" and (fct == None or ("plant" in fct)):
                         desc = desc_VA = desc_info = ""
                         for two in recv['market']['items'][one]:
-                            desc += "\n{idmoji}`{name}`".format(name=two, idmoji=GF.build_idmoji(two))
+                            desc += "\n{idmoji}`{name}`".format(name=GF.trad_objet(lang, two), idmoji=GF.build_idmoji(two))
                             desc_VA += "\n`{vente}`{argent}_{PV} _|`{achat}`{argent}_{PA} _".format(argent=GF.build_idmoji("gem"), vente=recv['market']['items'][one][two]["vente"], achat=recv['market']['items'][one][two]["achat"], PV=recv['market']['items'][one][two]["PV"], PA=recv['market']['items'][one][two]["PA"])
                             desc_info += "\n`{spec}:` {valeur}".format(spec=lang_P.forge_msg(lang, "spec", None, False, 1), valeur=recv['market']['items'][one][two]["poids"])
                         msg.add_field(name=lang_P.forge_msg(lang, "categorie", None, False, 5), value=desc, inline=True)
@@ -194,7 +194,7 @@ class GemsMarket(commands.Cog):
                     elif one == "consommable" and (fct == None or ("item" in fct or "cons" in fct)):
                         desc = desc_VA = desc_info = ""
                         for two in recv['market']['items'][one]:
-                            desc += "\n{idmoji}`{name}`".format(name=two, idmoji=GF.build_idmoji(two))
+                            desc += "\n{idmoji}`{name}`".format(name=GF.trad_objet(lang, two), idmoji=GF.build_idmoji(two))
                             desc_VA += "\n`{vente}`{argent}_{PV} _|`{achat}`{argent}_{PA} _".format(argent=GF.build_idmoji("gem"), vente=recv['market']['items'][one][two]["vente"], achat=recv['market']['items'][one][two]["achat"], PV=recv['market']['items'][one][two]["PV"], PA=recv['market']['items'][one][two]["PA"])
                             desc_info += "\n`{spec}:` {valeur}".format(spec=lang_P.forge_msg(lang, "spec", None, False, 1), valeur=recv['market']['items'][one][two]["poids"])
                         msg.add_field(name=lang_P.forge_msg(lang, "categorie", None, False, 2), value=desc, inline=True)
@@ -203,7 +203,7 @@ class GemsMarket(commands.Cog):
                     elif one == "event" and (fct == None or ("even" in fct or "évèn" in fct)):
                         desc = desc_VA = desc_info = ""
                         for two in recv['market']['items'][one]:
-                            desc += "\n{idmoji}`{name}`".format(name=two, idmoji=GF.build_idmoji(two))
+                            desc += "\n{idmoji}`{name}`".format(name=GF.trad_objet(lang, two), idmoji=GF.build_idmoji(two))
                             desc_VA += "\n`{vente}`{argent}_{PV} _|`{achat}`{argent}_{PA} _".format(argent=GF.build_idmoji("gem"), vente=recv['market']['items'][one][two]["vente"], achat=recv['market']['items'][one][two]["achat"], PV=recv['market']['items'][one][two]["PV"], PA=recv['market']['items'][one][two]["PA"])
                             desc_info += "\n`{spec}:` {valeur}".format(spec=lang_P.forge_msg(lang, "spec", None, False, 1), valeur=recv['market']['items'][one][two]["poids"])
                         msg.add_field(name=lang_P.forge_msg(lang, "categorie", None, False, 6), value=desc, inline=True)
@@ -265,7 +265,7 @@ class GemsMarket(commands.Cog):
             param["Nom_recu"] = ctx.guild.get_member(ge.nom_ID(param["ID_recu"])).name
         except:
             param["Nom_recu"] = nom
-        param["item"] = item
+        param["item"] = GF.trad_objet_inv(item)
         param["nb"] = nb
 
         ge.socket.send_string(gg.std_send_command("give", ID, ge.name_pl, param))
@@ -277,15 +277,15 @@ class GemsMarket(commands.Cog):
         elif recv['error'] == 99:
             await ctx.channel.send(lang_P.forge_msg(lang, "WarningMsg", None, False, 10))
         elif recv['error'] == 98:
-            await ctx.channel.send(lang_P.forge_msg(lang, "WarningMsg", [recv['item']], False, 11))
+            await ctx.channel.send(lang_P.forge_msg(lang, "WarningMsg", [GF.trad_objet(lang, recv["item"])], False, 11))
         elif recv['error'] == 97:
-            await ctx.channel.send(lang_P.forge_msg(lang, "WarningMsg", [recv['item'], recv['Nom_recu']], False, 12))
+            await ctx.channel.send(lang_P.forge_msg(lang, "WarningMsg", [GF.trad_objet(lang, recv["item"]), recv['Nom_recu']], False, 12))
         elif recv['error'] == 404:
             await ctx.channel.send(lang_P.forge_msg(lang, "WarningMsg", None, False, 0))
         elif recv['error'] == 405:
             await ctx.channel.send(lang_P.forge_msg(lang, "WarningMsg", None, False, 6))
         elif recv['error'] == 0:
-            desc = lang_P.forge_msg(lang, "give", [recv["nom"], recv['nb'], recv["nom_recu"], GF.build_idmoji(recv['item']), recv['item']], False, 0)
+            desc = lang_P.forge_msg(lang, "give", [recv["nom"], recv['nb'], recv["nom_recu"], GF.build_idmoji(recv['item']), GF.trad_objet(lang, recv["item"])], False, 0)
             msg = discord.Embed(title = lang_P.forge_msg(lang, "stats", None, False, 3), color= 13752280, description = desc)
             msg.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
             await ctx.channel.send(embed = msg)
@@ -296,7 +296,7 @@ class GemsMarket(commands.Cog):
         elif recv['error'] == 3:
             await ctx.channel.send(lang_P.forge_msg(lang, "give", None, False, 2))
         elif recv['error'] == 4:
-            await ctx.channel.send(lang_P.forge_msg(lang, "give", [recv["nom"], recv['nb'], recv["nom_recu"], GF.build_idmoji(recv['item']), recv['item']], False, 1))
+            await ctx.channel.send(lang_P.forge_msg(lang, "give", [recv["nom"], recv['nb'], recv["nom_recu"], GF.build_idmoji(recv['item']), GF.trad_objet(lang, recv["item"])], False, 1))
         elif recv['error'] == 5:
             await ctx.channel.send(lang_P.forge_msg(lang, "give", [recv["nom_recu"]], False, 4))
         elif recv['error'] == 6:

@@ -114,13 +114,9 @@ class GemsBase(commands.Cog):
                     desc += ' *{0}*'.format(x)
             for x in recv['info']['LevelLoot']['Objets']:
                 if recv['info']['LevelLoot']['Objets'][x] != []:
-                    i = 0
-                    desc += '\n__{0}__:'.format(x)
+                    desc += '\n'
                     for one in recv['info']['LevelLoot']['Objets'][x]:
-                        if i != 0:
-                            desc += ' |'
-                        i += 1
-                        desc += ' *{0}*'.format(one)
+                        desc += ' {0}`{1}`'.format(GF.build_idmoji(one), GF.trad_objet(lang, one))
             msg.add_field(name='{0}'.format(lang_P.forge_msg(lang, "infos", [recv['info']["Level"]], False, 2)), value=desc, inline=False)
 
             GPdesc = '{}: '.format(lang_P.forge_msg(lang, "godparent", None, False, 0))
@@ -246,44 +242,44 @@ class GemsBase(commands.Cog):
                     if one == "outils":
                         desc = ""
                         for two in recv['inventory']['outils']:
-                            desc += "\n{idmoji}`{name}`: `x{stock}` | {dname}: `{durability}/{dMax}`".format(name=two, idmoji=GF.build_idmoji(two), stock=recv['inventory'][one][two]['stock'], durability=recv['inventory']['outils'][two]['durability'], dMax=recv['inventory']['outils'][two]['durabilityMax'], dname=lang_P.forge_msg(lang, "inv", None, False, 2))
+                            desc += "\n{idmoji}`{name}`: `x{stock}` | {dname}: `{durability}/{dMax}`".format(name=GF.trad_objet(lang, two), idmoji=GF.build_idmoji(two), stock=recv['inventory'][one][two]['stock'], durability=recv['inventory']['outils'][two]['durability'], dMax=recv['inventory']['outils'][two]['durabilityMax'], dname=lang_P.forge_msg(lang, "inv", None, False, 2))
                         msg.add_field(name=lang_P.forge_msg(lang, "categorie", None, False, 0), value=desc, inline=False)
                     elif one == "upgrade":
                         desc = ""
                         for two in recv['inventory']['upgrade']:
-                            desc += "\n{idmoji}`{name}`: `x{stock}`".format(name=two, idmoji=GF.build_idmoji(two), stock=recv['inventory'][one][two]['stock'])
+                            desc += "\n{idmoji}`{name}`: `x{stock}`".format(name=GF.trad_objet(lang, two), idmoji=GF.build_idmoji(two), stock=recv['inventory'][one][two]['stock'])
                         msg.add_field(name=lang_P.forge_msg(lang, "categorie", None, False, 7), value=desc, inline=False)
             for one in recv['inventory']['items']:
                 if recv['inventory']['items'][one] != {}:
                     if one == "special":
                         desc = ""
                         for two in recv['inventory']['items']['special']:
-                            desc += "\n{idmoji}`{name}`: `x{stock}`".format(name=two, idmoji=GF.build_idmoji(two), stock=recv['inventory']['items'][one][two]['stock'])
+                            desc += "\n{idmoji}`{name}`: `x{stock}`".format(name=GF.trad_objet(lang, two), idmoji=GF.build_idmoji(two), stock=recv['inventory']['items'][one][two]['stock'])
                         msg.add_field(name=lang_P.forge_msg(lang, "categorie", None, False, 1), value=desc, inline=False)
                     elif one == "minerai":
                         desc = ""
                         for two in recv['inventory']['items']['minerai']:
-                            desc += "\n{idmoji}`{name}`: `x{stock}`".format(name=two, idmoji=GF.build_idmoji(two), stock=recv['inventory']['items'][one][two]['stock'])
+                            desc += "\n{idmoji}`{name}`: `x{stock}`".format(name=GF.trad_objet(lang, two), idmoji=GF.build_idmoji(two), stock=recv['inventory']['items'][one][two]['stock'])
                         msg.add_field(name=lang_P.forge_msg(lang, "categorie", None, False, 3), value=desc, inline=False)
                     elif one == "poisson":
                         desc = ""
                         for two in recv['inventory']['items']['poisson']:
-                            desc += "\n{idmoji}`{name}`: `x{stock}`".format(name=two, idmoji=GF.build_idmoji(two), stock=recv['inventory']['items'][one][two]['stock'])
+                            desc += "\n{idmoji}`{name}`: `x{stock}`".format(name=GF.trad_objet(lang, two), idmoji=GF.build_idmoji(two), stock=recv['inventory']['items'][one][two]['stock'])
                         msg.add_field(name=lang_P.forge_msg(lang, "categorie", None, False, 4), value=desc, inline=False)
                     elif one == "plante":
                         desc = ""
                         for two in recv['inventory']['items']['plante']:
-                            desc += "\n{idmoji}`{name}`: `x{stock}`".format(name=two, idmoji=GF.build_idmoji(two), stock=recv['inventory']['items'][one][two]['stock'])
+                            desc += "\n{idmoji}`{name}`: `x{stock}`".format(name=GF.trad_objet(lang, two), idmoji=GF.build_idmoji(two), stock=recv['inventory']['items'][one][two]['stock'])
                         msg.add_field(name=lang_P.forge_msg(lang, "categorie", None, False, 5), value=desc, inline=False)
                     elif one == "consommable":
                         desc = ""
                         for two in recv['inventory']['items']['consommable']:
-                            desc += "\n{idmoji}`{name}`: `x{stock}`".format(name=two, idmoji=GF.build_idmoji(two), stock=recv['inventory']['items'][one][two]['stock'])
+                            desc += "\n{idmoji}`{name}`: `x{stock}`".format(name=GF.trad_objet(lang, two), idmoji=GF.build_idmoji(two), stock=recv['inventory']['items'][one][two]['stock'])
                         msg.add_field(name=lang_P.forge_msg(lang, "categorie", None, False, 2), value=desc, inline=False)
                     elif one == "event":
                         desc = ""
                         for two in recv['inventory']['items']['event']:
-                            desc += "\n{idmoji}`{name}`: `x{stock}`".format(name=two, idmoji=GF.build_idmoji(two), stock=recv['inventory']['items'][one][two]['stock'])
+                            desc += "\n{idmoji}`{name}`: `x{stock}`".format(name=GF.trad_objet(lang, two), idmoji=GF.build_idmoji(two), stock=recv['inventory']['items'][one][two]['stock'])
                         msg.add_field(name=lang_P.forge_msg(lang, "categorie", None, False, 6), value=desc, inline=False)
             await ctx.channel.send(embed = msg)
         elif recv['error'] == 1:
@@ -297,7 +293,7 @@ class GemsBase(commands.Cog):
         ID = ctx.author.id
         param = dict()
         param["ID"] = ID
-        param["item"] = item
+        param["item"] = GF.trad_objet_inv(item)
         param["nb"] = nb
 
         ge.socket.send_string(gg.std_send_command("forge", ID, ge.name_pl, param))
@@ -313,17 +309,17 @@ class GemsBase(commands.Cog):
         elif item == None:
             desc = ""
             for one in recv['recettes']:
-                desc += "\n• {idmoji}`{name}` :arrow_right: ".format(name=one, idmoji=GF.build_idmoji(one))
+                desc += "\n• {idmoji}`{name}` :arrow_right: ".format(name=GF.trad_objet(lang, one), idmoji=GF.build_idmoji(one))
                 i = 0
                 for two in recv['recettes'][one]:
                     if i != 0:
                         desc += ", "
-                    desc += "x{nb} {idmoji}`{name}`".format(name=two, idmoji=GF.build_idmoji(two), nb=recv['recettes'][one][two])
+                    desc += "x{nb} {idmoji}`{name}`".format(name=GF.trad_objet(lang, two), idmoji=GF.build_idmoji(two), nb=recv['recettes'][one][two])
                     i += 1
             msg = discord.Embed(title = lang_P.forge_msg(lang, "recette"), color= 15778560, description = desc)
             await ctx.channel.send(embed = msg)
         elif recv['error'] == 0:
-            desc = lang_P.forge_msg(lang, "forge", [nb, item, GF.build_idmoji(item)], False, 0)
+            desc = lang_P.forge_msg(lang, "forge", [nb, GF.trad_objet(lang, item), GF.build_idmoji(param['item'])], False, 0)
             msg = discord.Embed(title = lang_P.forge_msg(lang, "stats", None, False, 4), color= 13752280, description = desc)
             msg.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
             await ctx.channel.send(embed = msg)
@@ -334,7 +330,7 @@ class GemsBase(commands.Cog):
         elif recv['error'] == 3:
             await ctx.channel.send(lang_P.forge_msg(lang, "forge", None, False, 2))
         elif recv['error'] == 4:
-            await ctx.channel.send(lang_P.forge_msg(lang, "forge", [recv['nbmissing'], recv['missing'], GF.build_idmoji(recv['missing'])], False, 1))
+            await ctx.channel.send(lang_P.forge_msg(lang, "forge", [recv['nbmissing'], GF.trad_objet(lang, recv['missing']), GF.build_idmoji(recv['missing'])], False, 1))
 
     @commands.command(pass_context=True)
     async def graphbourse(self, ctx, item, moisD = None, anneeD = None, moisF = None, anneeF = None, type = None):

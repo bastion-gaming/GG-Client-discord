@@ -32,13 +32,9 @@ async def checklevel(message):
                     lvl_desc += ' *{0}*'.format(x)
             for x in recv['LevelLoot']['Objets']:
                 if recv['LevelLoot']['Objets'][x] != []:
-                    i = 0
-                    lvl_desc += '\n__{0}__:'.format(x)
+                    lvl_desc += '\n'
                     for one in recv['LevelLoot']['Objets'][x]:
-                        if i != 0:
-                            lvl_desc += ' |'
-                        i += 1
-                        lvl_desc += ' *{0}*'.format(one)
+                        lvl_desc += ' {0}`{1}`'.format(GF.build_idmoji(one), GF.trad_objet(lang, one))
             msg = discord.Embed(title = title, color= 6466585, description = lvl_desc, timestamp=dt.datetime.now())
             msg.set_thumbnail(url=message.author.avatar_url)
             msg.set_footer(text=message.author.name)

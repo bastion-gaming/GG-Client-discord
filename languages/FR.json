@@ -262,7 +262,7 @@
       "Tu as obtenu {0} {2}`{1}`",
       "",
       "Pas de poisson pour toi aujourd'hui :cry:",
-      "Il te faut une {0}`fishingrod` pour pécher, tu en trouvera une au marché !"
+      "Il te faut une {0}`{1}` pour pécher, tu en trouvera une au marché !"
     ],
   "hothouse":
     [
@@ -278,7 +278,7 @@
       "Ta plantation aura fini de pousser dans :{3}:`{0}h {1}m {2}s`",
       "Tu ne peux pas faire pousser cet article.",
       "",
-      "Voici tes plantations.\nUtilise `hothouse seed` pour planter une {0}`seed`",
+      "Voici tes plantations.\nUtilise `hothouse {1}` pour planter une {0}`{1}`",
       "La serre",
       "La serre | Partie {0}",
       "Plantation n°{0}"
@@ -297,7 +297,7 @@
       "Ton alcool aura fini de fermenter dans :{3}:`{0}h {1}m {2}s`",
       "Tu ne peux pas faire fermenter cet article.",
       "",
-      "Voici tes barrils.\nUtilise `ferment grapes` pour obtenir des {0}`wine_glass`",
+      "Voici tes barrils.\nUtilise `ferment {2}` pour obtenir du {0}`{1}`",
       "La cave",
       "La cave | Partie {0}",
       "Barril n°{0}"
@@ -318,7 +318,7 @@
       "Cette cuisson est disponible uniquement pendant l'événement **Halloween**",
       "Cette cuisson est disponible uniquement pendant l'événement de **Noël**",
       "",
-      "Voici tes fours.\nUtilise `cooking potato` pour obtenir des {0}`fries`",
+      "Voici tes fours.\nUtilise `cooking {2}` pour obtenir des {0}`{1}`",
       "La Cuisine",
       "La Cuisine | Partie {0}",
       "Four n°{0}"
@@ -357,13 +357,13 @@
   "slots":
     [
       "Votre mise: {0} :gem:`Gems`\n\n",
-      "\nEn trouvant ce {0}`ruby` tu deviens un Mineur de Merveilles",
+      "\nEn trouvant ce {0}`{1}` tu deviens un Mineur de Merveilles",
       "\nBravo {0}! Le Super Jackpot :seven::seven::seven: est tombé :tada: ",
       "\n{0} paye sa tournée :beer:",
-      "\nTu a trouvé {0} :cookie:`cookie`",
+      "\nTu a trouvé {0} {2}`{1}`",
       "\nTon inventaire est plein",
-      "\nTu a trouvé {0} :grapes:`grapes`",
-      "\nEn trouvant ce {0}`backpack` tu gagnes {1} points d'inventaire",
+      "",
+      "\nEn trouvant ce {0}`{2}` tu gagnes {1} points d'inventaire",
       "\n:slot_machine: Jackpot! Tu viens de gagner {0} :gem:`Gems`",
       "\nBravo, tu viens de gagner {0} :gem:`Gems`",
       "\nLa machine viens d'exploser :boom:\nTu as perdu {0} :gem:`Gems`",
@@ -381,5 +381,66 @@
       "Mise placée ! Revenez après la prochaine mise à jour du marché !",
       "Tu n'as pas assez de :gem: `gems` !",
       "Cet item n'exsite pas ou n'autorise pas les paries."
+    ],
+  "TradItem":
+    [
+      "sac à dos",
+      "hyper sac",
+      "ameçon",
+
+      "pierre",
+      "fer",
+      "or",
+      "diamant",
+      "emeraude",
+      "rubis",
+
+      "poisson",
+      "poisson tropical",
+      "poisson globe",
+      "pieuvre",
+
+      "graine",
+      "cacao",
+      "patate",
+
+      "chêne",
+      "sapin",
+      "palmier",
+      "houblon",
+      "raisin",
+
+      "vin",
+      "bière",
+
+      "chocolat",
+      "frites",
+      "cookie",
+      "bonbon",
+      "sucette",
+
+      "citrouille",
+      "tarte à la citrouille",
+      "gateau"
+    ],
+  "TradOutil":
+    [
+      "canne à pêche",
+
+      "pioche",
+      "pioche en fer",
+      "pioche en diamant",
+
+      "pelle",
+      "pelle en fer",
+      "pelle en diamant",
+
+      "plantation",
+      "tonneau",
+      "four"
+    ],
+  "TradUpgrade":
+    [
+      "banque"
     ]
 }

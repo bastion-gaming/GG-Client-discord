@@ -262,7 +262,7 @@
       "You got {0} {2}`{1}`",
       "",
       "No fish for you today :cry:",
-      "You need {0}`fishingrod` to fish, you can found it in the market !"
+      "You need {0}`{1}` to fish, you can found it in the market !"
     ],
   "hothouse":
     [
@@ -278,7 +278,7 @@
       "Your plantation will be done growing in :{3}:`{0}h {1}m {2}s`",
       "You can't grow this item.",
       "",
-      "Here are your seedlings. \nUse `hothouse seed` to plant a <:gem_seed:{0}>`seed`",
+      "Here are your seedlings. \nUse `hothouse seed` to plant a {0}`{1}`",
       "Greenhouse",
       "Greenhouse | Part {0}",
       "Planting n°{0}"
@@ -297,7 +297,7 @@
       "Your alcohol will be finished fermenting in :{3}:`{0}h {1}m {2}s`",
       "You can't ferment this item.",
       "",
-      "Here are your barrels. \nUse 'ferment grapes' to make :wine_glass:`wine_glass`",
+      "Here are your barrels. \nUse 'ferment grapes' to make {0}`{1}`",
       "Winery",
       "Winery | Part {0}",
       "Barrel n°{0}"
@@ -318,7 +318,7 @@
       "This cooking is only available during the **Halloween** event.",
       "This bake is only available during the Christmas event.",
       "",
-      "Here's your ovens. \nUse the `cooking potato` to get some <:gem_fries:{0}>`fries`",
+      "Here's your ovens. \nUse the `cooking potato` to get some {0}`{1}`",
       "Kitchen",
       "Kitchen | Part {0}",
       "Furnace n°{0}"
@@ -357,13 +357,13 @@
   "slots":
     [
       "Your bet: {0} :gem:`Gems`\n\n",
-      "\nFinding that {0}`ruby` you become wonder miner",
+      "\nFinding that {0}`{1}` you become wonder miner",
       "\nCongratulations {0}! Super jackpot :seven::seven::seven: for you :tada: ",
       "\n{0} buy her round of :beer:",
-      "\nYou found {0} :cookie:`cookie`",
+      "\nYou found {0} {2}`{1}`",
       "\nYour inventory's full.",
-      "\nYou found {0} :grapes:`grapes`",
-      "\nFinding this {0}`backpack` you gain {1} inventory points.",
+      "",
+      "\nFinding this {0}`{2}` you gain {1} inventory points.",
       "\n:slot_machine: Jackpot! You just won {0} :gem:`Gems`",
       "\nBravo, you just won {0} :gem:`Gems`",
       "\nMachine just blow up :boom:\nYou lost {0} :gem:`Gems`",
@@ -381,5 +381,66 @@
       "Bet placed, come back after the next market update !",
       "You don't have enough :gem: `Gems` !",
       "This item doesn't exist or doesn't allow bet."
+    ],
+  "TradItem":
+    [
+      "backpack",
+      "hyperpack",
+      "fishhook",
+
+      "cobblestone",
+      "iron",
+      "gold",
+      "diamond",
+      "emerald",
+      "ruby",
+
+      "fish",
+      "tropical fish",
+      "blow fish",
+      "octopus",
+
+      "seed",
+      "cacao",
+      "potato",
+
+      "oak",
+      "spruce",
+      "palm",
+      "hops",
+      "grapes",
+
+      "wine",
+      "beer",
+
+      "chocolate",
+      "fries",
+      "cookie",
+      "candy",
+      "lollipop",
+
+      "pumpkin",
+      "pumpkinpie",
+      "cupcake"
+    ],
+  "TradOutil":
+    [
+      "fishingrod",
+
+      "pickaxe",
+      "iron pickaxe",
+      "diamond pickaxe",
+
+      "shovel",
+      "iron shovel",
+      "diamond shovel",
+
+      "planting",
+      "barrel",
+      "furnace"
+    ],
+  "TradUpgrade":
+    [
+      "bank"
     ]
 }

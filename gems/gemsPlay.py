@@ -93,7 +93,7 @@ class GemsPlay(commands.Cog):
                 desc = lang_P.forge_msg(lang, "bank", None, False, 0)
                 desc += lang_P.forge_msg(lang, "bank", [GF.build_idmoji("gem")], False, 1)
                 desc += lang_P.forge_msg(lang, "bank", None, False, 2)
-                desc += lang_P.forge_msg(lang, "bank", ["bank", GF.build_idmoji("bank")], False, 3)
+                desc += lang_P.forge_msg(lang, "bank", [GF.trad_objet(lang, "bank"), GF.build_idmoji("bank")], False, 3)
                 msg.add_field(name="Commandes", value=desc, inline=False)
                 await ctx.channel.send(embed = msg)
             elif recv['type'] == "add":
@@ -187,7 +187,7 @@ class GemsPlay(commands.Cog):
                 desc = lang_P.forge_msg(lang, "crime event")
                 desc += "{1} {0}".format(recv['result']['gain'], lang_P.forge_msg(lang, "crime array", None, True))
                 if recv['result']['event'] is not False:
-                    desc += " {0}`{1}`".format(GF.build_idmoji(recv['result']['event']), recv['result']['event'])
+                    desc += " {0}`{1}`".format(GF.build_idmoji(recv['result']['event']), GF.trad_objet(lang, recv['result']['event']))
                 else:
                     desc += " {0}`Gems`".format(GF.build_idmoji('gem'))
             msg = discord.Embed(title = lang_P.forge_msg(lang, "titres", None, False, 2), color= 13752280, description = desc)
@@ -216,9 +216,9 @@ class GemsPlay(commands.Cog):
             desc = ""
             for one in recv['gain']:
                 if one != "cobblestone":
-                    desc = lang_P.forge_msg(lang, "mine", [recv['gain'][one], one, GF.build_idmoji(one)], False, 1)
+                    desc = lang_P.forge_msg(lang, "mine", [recv['gain'][one], GF.trad_objet(lang, one), GF.build_idmoji(one)], False, 1)
                 else:
-                    desc += "\n{0}".format(lang_P.forge_msg(lang, "mine", [recv['gain'][one], one, GF.build_idmoji(one)], False, 1))
+                    desc += "\n{0}".format(lang_P.forge_msg(lang, "mine", [recv['gain'][one], GF.trad_objet(lang, one), GF.build_idmoji(one)], False, 1))
             msg = discord.Embed(title = lang_P.forge_msg(lang, "stats", None, False, 6), color= 13752280, description = desc)
             msg.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
             await ctx.channel.send(embed = msg)
@@ -227,7 +227,7 @@ class GemsPlay(commands.Cog):
         elif recv['error'] == 2:
             await ctx.channel.send(lang_P.forge_msg(lang, "WarningMsg", None, False, 2))
         elif recv['error'] == 3:
-            await ctx.channel.send(lang_P.forge_msg(lang, "mine", [recv['broken'], GF.build_idmoji(recv['broken'])], False, 0))
+            await ctx.channel.send(lang_P.forge_msg(lang, "mine", [GF.trad_objet(lang, recv['broken']), GF.build_idmoji(recv['broken'])], False, 0))
         elif recv['error'] == 4:
             await ctx.channel.send(lang_P.forge_msg(lang, "mine", None, False, 3))
 
@@ -253,7 +253,7 @@ class GemsPlay(commands.Cog):
                 desc = lang_P.forge_msg(lang, "dig", None, False, 2)
             else:
                 for one in recv['gain']:
-                    desc = lang_P.forge_msg(lang, "dig", [recv['gain'][one], one, GF.build_idmoji(one)], False, 1)
+                    desc = lang_P.forge_msg(lang, "dig", [recv['gain'][one], GF.trad_objet(lang, one), GF.build_idmoji(one)], False, 1)
             msg = discord.Embed(title = lang_P.forge_msg(lang, "stats", None, False, 8), color= 13752280, description = desc)
             msg.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
             await ctx.channel.send(embed = msg)
@@ -262,7 +262,7 @@ class GemsPlay(commands.Cog):
         elif recv['error'] == 2:
             await ctx.channel.send(lang_P.forge_msg(lang, "WarningMsg", None, False, 2))
         elif recv['error'] == 3:
-            await ctx.channel.send(lang_P.forge_msg(lang, "dig", [recv['broken'], GF.build_idmoji(recv['broken'])], False, 0))
+            await ctx.channel.send(lang_P.forge_msg(lang, "dig", [GF.trad_objet(lang, recv['broken']), GF.build_idmoji(recv['broken'])], False, 0))
         elif recv['error'] == 4:
             await ctx.channel.send(lang_P.forge_msg(lang, "dig", None, False, 3))
 
@@ -289,9 +289,9 @@ class GemsPlay(commands.Cog):
             else:
                 for one in recv['gain']:
                     if one == "fish":
-                        desc += "\n{0}".format(lang_P.forge_msg(lang, "fish", [recv['gain'][one], one, GF.build_idmoji(one)], False, 1))
+                        desc += "\n{0}".format(lang_P.forge_msg(lang, "fish", [recv['gain'][one], GF.trad_objet(lang, one), GF.build_idmoji(one)], False, 1))
                     else:
-                        desc = lang_P.forge_msg(lang, "fish", [recv['gain'][one], one, GF.build_idmoji(one)], False, 1)
+                        desc = lang_P.forge_msg(lang, "fish", [recv['gain'][one], GF.trad_objet(lang, one), GF.build_idmoji(one)], False, 1)
             msg = discord.Embed(title = lang_P.forge_msg(lang, "stats", None, False, 7), color= 13752280, description = desc)
             msg.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
             await ctx.channel.send(embed = msg)
@@ -300,9 +300,9 @@ class GemsPlay(commands.Cog):
         elif recv['error'] == 2:
             await ctx.channel.send(lang_P.forge_msg(lang, "WarningMsg", None, False, 2))
         elif recv['error'] == 3:
-            await ctx.channel.send(lang_P.forge_msg(lang, "fish", [recv['broken'], GF.build_idmoji(recv['broken'])], False, 0))
+            await ctx.channel.send(lang_P.forge_msg(lang, "fish", [GF.trad_objet(lang, recv['broken']), GF.build_idmoji(recv['broken'])], False, 0))
         elif recv['error'] == 4:
-            await ctx.channel.send(lang_P.forge_msg(lang, "fish", None, False, 3))
+            await ctx.channel.send(lang_P.forge_msg(lang, "fish", [GF.build_idmoji("fishingrod"), GF.trad_objet(lang, "fishingrod")], False, 4))
 
     @commands.command(pass_context=True, aliases=['serre', 'hh'])
     async def hothouse(self, ctx, item = None):
@@ -310,7 +310,7 @@ class GemsPlay(commands.Cog):
         ID = ctx.author.id
         param = dict()
         param["ID"] = ID
-        param["item"] = item
+        param["item"] = GF.trad_objet_inv(item)
         ge.socket.send_string(gg.std_send_command("hothouse", ID, ge.name_pl, param))
         recv = GF.msg_recv()
         # await ctx.channel.send(recv)
@@ -324,7 +324,7 @@ class GemsPlay(commands.Cog):
         elif recv['error'] == 0:
             nboutil = recv["nboutil"]
             result = recv['result']
-            desc = lang_P.forge_msg(lang, "hothouse", [GF.build_idmoji("seed")], False, 12)
+            desc = lang_P.forge_msg(lang, "hothouse", [GF.build_idmoji("seed"), GF.trad_objet(lang, "seed")], False, 12)
             titre = lang_P.forge_msg(lang, "hothouse", None, False, 13)
             MsgEmbed = discord.Embed(title = titre, color= 6466585, description = desc)
             k = len(result)
@@ -340,19 +340,19 @@ class GemsPlay(commands.Cog):
                         desc = lang_P.forge_msg(lang, "hothouse", None, False, 10)
                 elif result[i]['fct'] == 'time':
                     if result[i]['time'] <= 0:
-                        desc = lang_P.forge_msg(lang, "hothouse", [result[i]['gain'], GF.build_idmoji(result[i]['gain']), result[i]['nbgain']], False, 8)
+                        desc = lang_P.forge_msg(lang, "hothouse", [GF.trad_objet(lang, result[i]['gain']), GF.build_idmoji(result[i]['gain']), result[i]['nbgain']], False, 8)
                     else:
                         restime = GF.time_aff(result[i]['time'])
-                        desc = lang_P.forge_msg(lang, "hothouse", [result[i]['item'], GF.build_idmoji(result[i]['item'])], False, 6)
+                        desc = lang_P.forge_msg(lang, "hothouse", [GF.trad_objet(lang, result[i]['item']), GF.build_idmoji(result[i]['item'])], False, 6)
                         desc += lang_P.forge_msg(lang, "hothouse", [restime["timeH"], restime["timeM"], restime["timeS"], restime["cl"]], False, 9)
                 elif result[i]['fct'] == 'hfc':
                     if result[i]['time'] == 0:
                         if result[i]['OutilItem'] >= result[i]['nbitem']:
-                            desc = lang_P.forge_msg(lang, "hothouse", [result[i]['item'], GF.build_idmoji(result[i]['item']), result[i]['couldownMsg']], False, 2)
+                            desc = lang_P.forge_msg(lang, "hothouse", [GF.trad_objet(lang, result[i]['item']), GF.build_idmoji(result[i]['item']), result[i]['couldownMsg']], False, 2)
                         else:
-                            desc = lang_P.forge_msg(lang, "hothouse", [result[i]['item'], GF.build_idmoji(result[i]['item']), result[i]['gain'], result[i]['nbitem'], GF.build_idmoji(result[i]['gain'])], False, 4)
+                            desc = lang_P.forge_msg(lang, "hothouse", [GF.trad_objet(lang, result[i]['item']), GF.build_idmoji(result[i]['item']), GF.trad_objet(lang, result[i]['gain']), result[i]['nbitem'], GF.build_idmoji(result[i]['gain'])], False, 4)
                     else:
-                        desc = lang_P.forge_msg(lang, "hothouse", [result[i]['valueItem'], GF.build_idmoji(result[i]['valueItem'])], False, 6)
+                        desc = lang_P.forge_msg(lang, "hothouse", [GF.trad_objet(lang, result[i]['valueItem']), GF.build_idmoji(result[i]['valueItem'])], False, 6)
                 if j % 10 == 0 and j != nboutil and j != 0:
                     if j // 10 == 1:
                         await ctx.channel.send(embed = MsgEmbed)
@@ -374,7 +374,7 @@ class GemsPlay(commands.Cog):
         ID = ctx.author.id
         param = dict()
         param["ID"] = ID
-        param["item"] = item
+        param["item"] = GF.trad_objet_inv(item)
         ge.socket.send_string(gg.std_send_command("ferment", ID, ge.name_pl, param))
         recv = GF.msg_recv()
         # await ctx.channel.send(recv)
@@ -388,7 +388,7 @@ class GemsPlay(commands.Cog):
         elif recv['error'] == 0:
             nboutil = recv["nboutil"]
             result = recv['result']
-            desc = lang_P.forge_msg(lang, "ferment", [GF.build_idmoji("wine_glass")], False, 12)
+            desc = lang_P.forge_msg(lang, "ferment", [GF.build_idmoji("wine_glass"), GF.trad_objet(lang, "wine"), GF.trad_objet(lang, "grapes")], False, 12)
             titre = lang_P.forge_msg(lang, "ferment", None, False, 13)
             MsgEmbed = discord.Embed(title = titre, color= 9633863, description = desc)
             k = len(result)
@@ -403,19 +403,19 @@ class GemsPlay(commands.Cog):
                         desc = lang_P.forge_msg(lang, "ferment", None, False, 10)
                 elif result[i]['fct'] == 'time':
                     if result[i]['time'] <= 0:
-                        desc = lang_P.forge_msg(lang, "ferment", [result[i]['gain'], GF.build_idmoji(result[i]['gain']), result[i]['nbgain']], False, 8)
+                        desc = lang_P.forge_msg(lang, "ferment", [GF.trad_objet(lang, result[i]['gain']), GF.build_idmoji(result[i]['gain']), result[i]['nbgain']], False, 8)
                     else:
                         restime = GF.time_aff(result[i]['time'])
-                        desc = lang_P.forge_msg(lang, "ferment", [result[i]['item'], GF.build_idmoji(result[i]['item'])], False, 6)
+                        desc = lang_P.forge_msg(lang, "ferment", [GF.trad_objet(lang, result[i]['item']), GF.build_idmoji(result[i]['item'])], False, 6)
                         desc += lang_P.forge_msg(lang, "ferment", [restime["timeH"], restime["timeM"], restime["timeS"], restime["cl"]], False, 9)
                 elif result[i]['fct'] == 'hfc':
                     if result[i]['time'] == 0:
                         if result[i]['OutilItem'] >= result[i]['nbitem']:
-                            desc = lang_P.forge_msg(lang, "ferment", [result[i]['item'], GF.build_idmoji(result[i]['item']), result[i]['couldownMsg']], False, 2)
+                            desc = lang_P.forge_msg(lang, "ferment", [GF.trad_objet(lang, result[i]['item']), GF.build_idmoji(result[i]['item']), result[i]['couldownMsg']], False, 2)
                         else:
-                            desc = lang_P.forge_msg(lang, "ferment", [result[i]['item'], GF.build_idmoji(result[i]['item']), result[i]['gain'], result[i]['nbitem'], GF.build_idmoji(result[i]['gain'])], False, 4)
+                            desc = lang_P.forge_msg(lang, "ferment", [GF.trad_objet(lang, result[i]['item']), GF.build_idmoji(result[i]['item']), GF.trad_objet(lang, result[i]['gain']), result[i]['nbitem'], GF.build_idmoji(result[i]['gain'])], False, 4)
                     else:
-                        desc = lang_P.forge_msg(lang, "ferment", [result[i]['valueItem'], GF.build_idmoji(result[i]['valueItem'])], False, 6)
+                        desc = lang_P.forge_msg(lang, "ferment", [GF.trad_objet(lang, result[i]['valueItem']), GF.build_idmoji(result[i]['valueItem'])], False, 6)
                 if j % 10 == 0 and j != nboutil and j != 0:
                     if j // 10 == 1:
                         await ctx.channel.send(embed = MsgEmbed)
@@ -437,7 +437,7 @@ class GemsPlay(commands.Cog):
         ID = ctx.author.id
         param = dict()
         param["ID"] = ID
-        param["item"] = item
+        param["item"] = GF.trad_objet_inv(item)
         ge.socket.send_string(gg.std_send_command("cooking", ID, ge.name_pl, param))
         recv = GF.msg_recv()
         # await ctx.channel.send(recv)
@@ -451,7 +451,7 @@ class GemsPlay(commands.Cog):
         elif recv['error'] == 0:
             nboutil = recv["nboutil"]
             result = recv['result']
-            desc = lang_P.forge_msg(lang, "cooking", [GF.build_idmoji("fries")], False, 14)
+            desc = lang_P.forge_msg(lang, "cooking", [GF.build_idmoji("fries"), GF.trad_objet(lang, "fries"), GF.trad_objet(lang, "potato")], False, 14)
             titre = lang_P.forge_msg(lang, "cooking", None, False, 13)
             MsgEmbed = discord.Embed(title = titre, color= 14902529, description = desc)
             k = len(result)
@@ -466,19 +466,19 @@ class GemsPlay(commands.Cog):
                         desc = lang_P.forge_msg(lang, "cooking", None, False, 10)
                 elif result[i]['fct'] == 'time':
                     if result[i]['time'] <= 0:
-                        desc = lang_P.forge_msg(lang, "cooking", [result[i]['gain'], GF.build_idmoji(result[i]['gain']), result[i]['nbgain']], False, 8)
+                        desc = lang_P.forge_msg(lang, "cooking", [GF.trad_objet(lang, result[i]['gain']), GF.build_idmoji(result[i]['gain']), result[i]['nbgain']], False, 8)
                     else:
                         restime = GF.time_aff(result[i]['time'])
-                        desc = lang_P.forge_msg(lang, "cooking", [result[i]['item'], GF.build_idmoji(result[i]['item'])], False, 6)
+                        desc = lang_P.forge_msg(lang, "cooking", [GF.trad_objet(lang, result[i]['item']), GF.build_idmoji(result[i]['item'])], False, 6)
                         desc += lang_P.forge_msg(lang, "cooking", [restime["timeH"], restime["timeM"], restime["timeS"], restime["cl"]], False, 9)
                 elif result[i]['fct'] == 'hfc':
                     if result[i]['time'] == 0:
                         if result[i]['OutilItem'] >= result[i]['nbitem']:
-                            desc = lang_P.forge_msg(lang, "cooking", [result[i]['item'], GF.build_idmoji(result[i]['item']), result[i]['couldownMsg']], False, 2)
+                            desc = lang_P.forge_msg(lang, "cooking", [GF.trad_objet(lang, result[i]['item']), GF.build_idmoji(result[i]['item']), result[i]['couldownMsg']], False, 2)
                         else:
-                            desc = lang_P.forge_msg(lang, "cooking", [result[i]['item'], GF.build_idmoji(result[i]['item']), result[i]['gain'], result[i]['nbitem'], GF.build_idmoji(result[i]['gain'])], False, 4)
+                            desc = lang_P.forge_msg(lang, "cooking", [GF.trad_objet(lang, result[i]['item']), GF.build_idmoji(result[i]['item']), GF.trad_objet(lang, result[i]['gain']), result[i]['nbitem'], GF.build_idmoji(result[i]['gain'])], False, 4)
                     else:
-                        desc = lang_P.forge_msg(lang, "cooking", [result[i]['valueItem'], GF.build_idmoji(result[i]['valueItem'])], False, 6)
+                        desc = lang_P.forge_msg(lang, "cooking", [GF.trad_objet(lang, result[i]['valueItem']), GF.build_idmoji(result[i]['valueItem'])], False, 6)
                 if j % 10 == 0 and j != nboutil and j != 0:
                     if j // 10 == 1:
                         await ctx.channel.send(embed = MsgEmbed)
