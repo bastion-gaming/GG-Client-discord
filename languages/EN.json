@@ -375,5 +375,11 @@
       "**Failure**\nYou lose your bet.\n",
       "**Victory**\nYou win your bet + {0}%\n",
       "**Defeat\n**You lose your bet + {0}%\n"
+    ],
+  "marketbet":
+    [
+      "Bet placed, come back after the next market update !",
+      "You don't have enough :gem: `Gems` !",
+      "This item doesn't exist or doesn't allow bet."
     ]
 }

@@ -164,6 +164,41 @@ class GemsCasino(commands.Cog):
         elif recv['error'] == 4:
             await ctx.channel.send(lang_P.forge_msg(lang, "WarningMsg", None, False, 7))
 
+    @commands.command(pass_context=True)
+    async def marketbet(self, ctx, item, perCent, mise):
+        """**[item] [perCent] [mise]** | Flat roulette"""
+        ID = ctx.author.id
+        param = dict()
+        param["ID"] = ID
+        param["item"] = item
+        param["perCent"] = perCent
+        param["mise"] = mise
+        ge.socket.send_string(gg.std_send_command("roulette", ID, ge.name_pl, param))
+        recv = GF.msg_recv()
+        await ctx.channel.send(recv)
+        lang = recv['lang']
+        if recv['error'] == 100:
+            await ctx.channel.send(recv['etat'])
+        elif recv['error'] == 99:
+            await ctx.channel.send(lang_P.forge_msg(lang, "WarningMsg", None, False, 10))
+        elif recv['error'] == 404:
+            await ctx.channel.send(lang_P.forge_msg(lang, "WarningMsg", None, False, 0))
+        elif recv['error'] == 0:
+            desc = lang_P.forge_msg(lang, "marketbet", None, False, 0)
+            e = discord.Embed(title = lang_P.forge_msg(lang, "titres", None, False, 3), color=13755260, description=desc)
+            e.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
+            await ctx.channel.send(embed = e)
+        elif recv['error'] == 1:
+            await ctx.channel.send(lang_P.forge_msg(lang, "couldown", [str(recv['couldown'])]))
+        elif recv['error'] == 2:
+            await ctx.channel.send(lang_P.forge_msg(lang, "WarningMsg", [recv['amende']], False, 9))
+        elif recv['error'] == 3:
+            await ctx.channel.send(lang_P.forge_msg(lang, "gamble", None, False, 4))
+        elif recv['error'] == 4:
+            await ctx.channel.send(lang_P.forge_msg(lang, "marketbet", None, False, 2))
+        elif recv['error'] == 5:
+            await ctx.channel.send(lang_P.forge_msg(lang, "marketbet", None, False, 1))
+
 
 def setup(bot):
     bot.add_cog(GemsCasino(bot))

@@ -375,5 +375,11 @@
       "**Échec**\nTu perd ta mise.\n",
       "**Victoire**\nTu gagne ta mise + {0}%\n",
       "**Défaite\n**Tu perd ta mise + {0}%\n"
+    ],
+  "marketbet":
+    [
+      "Mise placée ! Revenez après la prochaine mise à jour du marché !",
+      "Tu n'as pas assez de :gem: `gems` !",
+      "Cet item n'exsite pas ou n'autorise pas les paries."
     ]
 }
