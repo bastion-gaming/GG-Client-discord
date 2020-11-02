@@ -29,6 +29,10 @@ class GemsMarket(commands.Cog):
         lang = recv['lang']
         if recv['error'] == 100:
             await ctx.channel.send(recv['etat'])
+        elif recv['error'] == 99:
+            await ctx.channel.send(lang_P.forge_msg(lang, "WarningMsg", None, False, 10))
+        elif recv['error'] == 98:
+            await ctx.channel.send(lang_P.forge_msg(lang, "WarningMsg", [recv["item"]], False, 10))
         elif recv['error'] == 404:
             await ctx.channel.send(lang_P.forge_msg(lang, "WarningMsg", None, False, 0))
         elif item == None:
@@ -76,6 +80,10 @@ class GemsMarket(commands.Cog):
         lang = recv['lang']
         if recv['error'] == 100:
             await ctx.channel.send(recv['etat'])
+        elif recv['error'] == 99:
+            await ctx.channel.send(lang_P.forge_msg(lang, "WarningMsg", None, False, 10))
+        elif recv['error'] == 98:
+            await ctx.channel.send(lang_P.forge_msg(lang, "WarningMsg", [recv["item"]], False, 10))
         elif recv['error'] == 404:
             await ctx.channel.send(lang_P.forge_msg(lang, "WarningMsg", None, False, 0))
         elif item == None:
@@ -113,6 +121,8 @@ class GemsMarket(commands.Cog):
         lang = recv['lang']
         if recv['error'] == 100:
             await ctx.channel.send(recv['etat'])
+        elif recv['error'] == 99:
+            await ctx.channel.send(lang_P.forge_msg(lang, "WarningMsg", None, False, 10))
         elif recv['error'] == 404:
             await ctx.channel.send(lang_P.forge_msg(lang, "WarningMsg", None, False, 0))
         elif recv['etat'] == "OK":
@@ -223,6 +233,8 @@ class GemsMarket(commands.Cog):
         lang = recv['lang']
         if recv['error'] == 100:
             await ctx.channel.send(recv['etat'])
+        elif recv['error'] == 99:
+            await ctx.channel.send(lang_P.forge_msg(lang, "WarningMsg", None, False, 10))
         elif recv['error'] == 404:
             await ctx.channel.send(lang_P.forge_msg(lang, "WarningMsg", None, False, 0))
         elif recv['error'] == 405:
@@ -262,6 +274,12 @@ class GemsMarket(commands.Cog):
         lang = recv['lang']
         if recv['error'] == 100:
             await ctx.channel.send(recv['etat'])
+        elif recv['error'] == 99:
+            await ctx.channel.send(lang_P.forge_msg(lang, "WarningMsg", None, False, 10))
+        elif recv['error'] == 98:
+            await ctx.channel.send(lang_P.forge_msg(lang, "WarningMsg", [recv['item']], False, 11))
+        elif recv['error'] == 97:
+            await ctx.channel.send(lang_P.forge_msg(lang, "WarningMsg", [recv['item'], recv['Nom_recu']], False, 12))
         elif recv['error'] == 404:
             await ctx.channel.send(lang_P.forge_msg(lang, "WarningMsg", None, False, 0))
         elif recv['error'] == 405:

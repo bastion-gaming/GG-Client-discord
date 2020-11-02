@@ -10,7 +10,10 @@
       "Aucun compte utilisateur n'a été trouvé.",
       "Mise incorrecte!",
       "Valeur incorrecte!",
-      ":no_entry: Anti-cheat! Je vous met un amende de 100 :gem:`Gems` pour avoir essayé de tricher !"
+      ":no_entry: Anti-cheat! Je vous met un amende de 100 :gem:`Gems` pour avoir essayé de tricher !",
+      "Vous n'avez pas le niveau suffisant!",
+      "Niveau insuffisant! Vous n'avez pas débloqué {0}",
+      "Niveau insuffisant! {1} n'a pas débloqué {0}"
     ],
   "DiscordCop Arrestation":
     [
@@ -33,7 +36,8 @@
     [
       "Le joueur a été ajouté !",
       "Le joueur existe déjà.",
-      "\n\nPour permettre un affichage en jeu plus clair, les informations suivantes sont collectées:\n• Votre identifiant discord\n• Votre pseudo discord\n_Aucunes données personnels n'est vendu à une entreprise_\n\nVous pouvez vous opposer au traitement des données vous concernant et disposez du droit de retirer votre consentement à tout moment en envoyant un email a l'adresse `admin@bastion-gaming.fr`"
+      "\n\nPour permettre un affichage en jeu plus clair, les informations suivantes sont collectées:\n• Votre identifiant discord\n• Votre pseudo discord\n_Aucunes données personnels n'est vendu à une entreprise_\n\nVous pouvez vous opposer au traitement des données vous concernant et disposez du droit de retirer votre consentement à tout moment en envoyant un email a l'adresse `admin@bastion-gaming.fr`",
+      "\n\nCommandes disponible: **info** | username | lang | godparent | **mine** | **daily** | success"
     ],
   "godparent":
     [
@@ -49,7 +53,9 @@
     [
       "Information sur {0}",
       "PlayerID: **{0}**\nNom d'utilisateur: **{1}**",
-      "**_Niveau_  {0}**"
+      "**_Niveau_  {0}**",
+      "Récompense du niveau supérieur",
+      "Récompenses"
     ],
   "username":
     [
@@ -80,12 +86,13 @@
     [
       "Outils",
       "Spéciaux",
-      "Items",
+      "Articles",
       "Minerais",
       "Poissons",
       "Plantes",
       "Événements",
-      "Améliorations"
+      "Améliorations",
+      "Commandes"
     ],
   "recette":
     "Recettes",
@@ -128,7 +135,7 @@
     [
       "Bravo, tu as réussi à forger {0} {2}`{1}`!",
       "Il te manque {0} {2}`{1}`\n",
-      "Aucun recette disponible pour forger cette item !"
+      "Aucun recette disponible pour forger cette outil !"
     ],
   "baltop":
     [
@@ -148,7 +155,7 @@
     [
       "Tu viens d'acquérir {0} {2}`{1}`!\nCoût: {3} {4}",
       "Désolé, nous ne pouvons pas executer cet achat, tu n'as pas assez de {0} en banque",
-      "Désolé, nous ne pouvons pas executer cet achat, cette item n'est pas vendu au marché"
+      "Désolé, nous ne pouvons pas executer cet achat, cette article n'est pas vendu au marché"
     ],
   "sell":
     [
@@ -187,7 +194,7 @@
       "{0} donne {1} {3}`{4}` à {2}!",
       "{0} n'a pas assez pour donner {1} {3}`{4}` à {2}!",
       "Tu ne peux pas donner une somme négative ! N'importe quoi enfin!",
-      "Tu ne peux pas donner cette item!",
+      "Tu ne peux pas donner cette article!",
       "L'inventaire de {0} est plein"
     ],
   "daily":
@@ -269,7 +276,7 @@
       "",
       "Ta plantation à fini de pousser, en la coupant tu gagnes {2} {1}`{0}`",
       "Ta plantation aura fini de pousser dans :{3}:`{0}h {1}m {2}s`",
-      "Tu ne peux pas faire pousser cet item.",
+      "Tu ne peux pas faire pousser cet article.",
       "",
       "Voici tes plantations.\nUtilise `hothouse seed` pour planter une {0}`seed`",
       "La serre",
@@ -288,7 +295,7 @@
       "",
       "Ton alcool à fini de fermenter, en ouvrant le barril tu gagnes {2} {1}`{0}`",
       "Ton alcool aura fini de fermenter dans :{3}:`{0}h {1}m {2}s`",
-      "Tu ne peux pas faire fermenter cet item.",
+      "Tu ne peux pas faire fermenter cet article.",
       "",
       "Voici tes barrils.\nUtilise `ferment grapes` pour obtenir des {0}`wine_glass`",
       "La cave",
@@ -307,7 +314,7 @@
       "",
       "Ton plat à fini de cuire, en le sortant du four tu gagnes {2} {1}`{0}`",
       "Ton plat aura fini de cuir dans :{3}:`{0}h {1}m {2}s`",
-      "Tu ne peux pas faire cuire cet item.",
+      "Tu ne peux pas faire cuire cet article.",
       "Cette cuisson est disponible uniquement pendant l'événement **Halloween**",
       "Cette cuisson est disponible uniquement pendant l'événement de **Noël**",
       "",

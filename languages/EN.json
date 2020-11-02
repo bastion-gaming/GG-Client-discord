@@ -10,7 +10,10 @@
       "No data has been found!",
       "Wrong bet!",
       "Wrong value!",
-      ":no_entry: Anti-cheat! I'm fining you 100 :gem:`Gems` for trying to cheat!"
+      ":no_entry: Anti-cheat! I'm fining you 100 :gem:`Gems` for trying to cheat!",
+      "You don't have the right level!",
+      "Insufficient level! You have not unlocked {0}",
+      "Insufficient level! {1} have not unlocked {0}"
     ],
   "DiscordCop Arrestation":
     [
@@ -33,7 +36,8 @@
     [
       "The player has been added!",
       "The player already exists.",
-      "\n\nIn order to allow a clearer in-game display, the following information is collected:\n• Your discord id\n• Your discord nickname\n_No personal data is sold to any company_\nYou can oppose the processing of your data and have the right to withdraw your consent at any time by sending an email to the address `admin@bastion-gaming.fr`"
+      "\n\nIn order to allow a clearer in-game display, the following information is collected:\n• Your discord id\n• Your discord nickname\n_No personal data is sold to any company_\nYou can oppose the processing of your data and have the right to withdraw your consent at any time by sending an email to the address `admin@bastion-gaming.fr`",
+      "\n\nAvailable commands: **info** | username | lang | godparent | **mine** | **daily** | success"
     ],
   "godparent":
     [
@@ -49,7 +53,9 @@
     [
       "Information about {0}",
       "PlayerID: **{0}**\nUsername: **{1}**",
-      "**_Level_  {0}**"
+      "**_Level_  {0}**",
+      "Top Level Award",
+      "Award"
     ],
   "username":
     [
@@ -85,7 +91,8 @@
       "Fishes",
       "Plants",
       "Events",
-      "Upgrades"
+      "Upgrades",
+      "Commands"
     ],
   "recette":
     "Recipes",
@@ -128,7 +135,7 @@
     [
       "Bravo, you've managed to forge {0} {2}`{1}`!",
       "You're missing {0} {2}`{1}`\n",
-      "No recipes available to forge this item !"
+      "No recipes available to forge this tool !"
     ],
   "baltop":
     [

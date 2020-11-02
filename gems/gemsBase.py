@@ -42,13 +42,17 @@ class GemsBase(commands.Cog):
         else:
             lang = recv['lang']
         if recv['error'] == 100:
-            await ctx.channel.send(recv['etat'])
+            msg = recv['etat']
+        elif recv['error'] == 99:
+            msg = lang_P.forge_msg(lang, "WarningMsg", None, False, 11)
         elif recv['error'] == 404:
             msg = lang_P.forge_msg(lang, "WarningMsg", None, False, 0)
         elif recv['etat'] == "OK":
             msg = lang_P.forge_msg(lang, "newPlayer", None, False, 0)
             # Message RGPD
             msg += lang_P.forge_msg(lang, "newPlayer", None, False, 2)
+            # Récompense niveau 0
+            msg += lang_P.forge_msg(lang, "newPlayer", None, False, 3)
         else:
             msg = lang_P.forge_msg(lang, "newPlayer", None, False, 1)
         await ctx.channel.send(msg)
@@ -84,6 +88,8 @@ class GemsBase(commands.Cog):
         lang = recv['lang']
         if recv['error'] == 100:
             await ctx.channel.send(recv['etat'])
+        elif recv['error'] == 99:
+            await ctx.channel.send(lang_P.forge_msg(lang, "WarningMsg", None, False, 10))
         elif recv['error'] == 404:
             await ctx.channel.send(lang_P.forge_msg(lang, "WarningMsg", None, False, 0))
         else:
@@ -95,7 +101,27 @@ class GemsBase(commands.Cog):
                 Bdesc += "{g} {idmoji}`Spinelles`".format(g=recv['info']["Spinelles"], idmoji=GF.build_idmoji("spinelle"))
             msg.add_field(name="**_Balance_**", value=Bdesc, inline=False)
 
-            msg.add_field(name='{0}'.format(lang_P.forge_msg(lang, "infos", [recv['info']["Level"]], False, 2)), value='XP: `{0}`'.format(recv['info']["XP"]), inline=False)
+            # Level
+            desc = 'XP: `{0}`'.format(recv['info']["XP"])
+            desc += '\n**{0}**'.format(lang_P.forge_msg(lang, "infos", None, False, 3))
+            if recv['info']['LevelLoot']['Commandes'] != []:
+                i = 0
+                desc += '\n__{0}__:'.format(lang_P.forge_msg(lang, "categorie", None, False, 8))
+                for x in recv['info']['LevelLoot']['Commandes']:
+                    if i != 0:
+                        desc += ' |'
+                    i += 1
+                    desc += ' *{0}*'.format(x)
+            for x in recv['info']['LevelLoot']['Objets']:
+                if recv['info']['LevelLoot']['Objets'][x] != []:
+                    i = 0
+                    desc += '\n__{0}__:'.format(x)
+                    for one in recv['info']['LevelLoot']['Objets'][x]:
+                        if i != 0:
+                            desc += ' |'
+                        i += 1
+                        desc += ' *{0}*'.format(one)
+            msg.add_field(name='{0}'.format(lang_P.forge_msg(lang, "infos", [recv['info']["Level"]], False, 2)), value=desc, inline=False)
 
             GPdesc = '{}: '.format(lang_P.forge_msg(lang, "godparent", None, False, 0))
             if recv['info']['Godparent'] is not False:
@@ -128,6 +154,8 @@ class GemsBase(commands.Cog):
         lang = recv['lang']
         if recv['error'] == 100:
             await ctx.channel.send(recv['etat'])
+        elif recv['error'] == 99:
+            await ctx.channel.send(lang_P.forge_msg(lang, "WarningMsg", None, False, 10))
         elif recv['error'] == 404:
             await ctx.channel.send(lang_P.forge_msg(lang, "WarningMsg", None, False, 0))
         elif recv['etat'] == "OK":
@@ -203,6 +231,8 @@ class GemsBase(commands.Cog):
         lang = recv['lang']
         if recv['error'] == 100:
             await ctx.channel.send(recv['etat'])
+        elif recv['error'] == 99:
+            await ctx.channel.send(lang_P.forge_msg(lang, "WarningMsg", None, False, 10))
         elif recv['error'] == 404:
             await ctx.channel.send(lang_P.forge_msg(lang, "WarningMsg", None, False, 0))
         elif recv['error'] == 0:
@@ -276,6 +306,8 @@ class GemsBase(commands.Cog):
         lang = recv['lang']
         if recv['error'] == 100:
             await ctx.channel.send(recv['etat'])
+        elif recv['error'] == 99:
+            await ctx.channel.send(lang_P.forge_msg(lang, "WarningMsg", None, False, 10))
         elif recv['error'] == 404:
             await ctx.channel.send(lang_P.forge_msg(lang, "WarningMsg", None, False, 0))
         elif item == None:
@@ -375,6 +407,8 @@ class GemsBase(commands.Cog):
         lang = recv['lang']
         if recv['error'] == 100:
             await ctx.channel.send(recv['etat'])
+        elif recv['error'] == 99:
+            await ctx.channel.send(lang_P.forge_msg(lang, "WarningMsg", None, False, 10))
         elif recv['error'] == 404:
             await ctx.channel.send(lang_P.forge_msg(lang, "WarningMsg", None, False, 0))
         elif langue is None:
@@ -397,6 +431,8 @@ class GemsBase(commands.Cog):
         lang = recv['lang']
         if recv['error'] == 100:
             await ctx.channel.send(recv['etat'])
+        elif recv['error'] == 99:
+            await ctx.channel.send(lang_P.forge_msg(lang, "WarningMsg", None, False, 10))
         elif recv['error'] == 404:
             await ctx.channel.send(lang_P.forge_msg(lang, "WarningMsg", None, False, 0))
         elif recv['error'] == 0:
